@@ -7,7 +7,7 @@ const Job = new Schema({
   status: String,
   declineReason: String,
   applicantEmails: [],
-  user: [{
+  users: [{
     type: Schema.Types.ObjectId,
     ref: 'User'
   }]
