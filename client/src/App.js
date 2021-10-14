@@ -1,4 +1,3 @@
-import Button from 'react-bootstrap/Button'
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,6 +5,10 @@ import {
 } from 'react-router-dom'
 import Auth from './pages/Auth'
 import Home from './pages/Home'
+import PostedJobs from './pages/PostedJobs'
+import ManageJobs from './pages/ManageJobs'
+import AppliedJobs from './pages/AppliedJobs'
+import DeclinedJobs from './pages/DeclinedJobs'
 
 const App = () => {
   return (
@@ -15,8 +18,20 @@ const App = () => {
           <Route exact path='/'>
             <Home />
           </Route>
-          <Route path='/signIn'>
+          <Route path='/auth'>
             <Auth />
+          </Route>
+          <Route path='/postedjobs'>
+            <PostedJobs />
+          </Route>
+          <Route path='/managejobs'>
+            <ManageJobs />
+          </Route>
+          <Route path='/appliedjobs'>
+            <AppliedJobs />
+          </Route>
+          <Route path='/declinedjobs'>
+            <DeclinedJobs />
           </Route>
         </Switch>
       </div>
