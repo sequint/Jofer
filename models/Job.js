@@ -6,14 +6,10 @@ const Job = new Schema({
   type: String,
   status: String,
   declineReason: String,
-  candidate: {
+  user: [{
     type: Schema.Types.ObjectId,
-    ref: 'Candidate'
-  },
-  employer: {
-    type: Schema.Types.ObjectId,
-    ref: 'Employer'
-  }
+    ref: 'User'
+  }]
 })
 
 module.exports = model('Job', Job)
