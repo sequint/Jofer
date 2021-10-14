@@ -9,8 +9,8 @@ const User = new Schema({
     match: /.+\@.+\..+/,
     unique: true
   }
-  job_type: String,
-  compnay: String,
+  user_type: String,
+  company: String,
   jobs: [{
     type: Schema.Types.ObjectId,
     ref: 'Job'
