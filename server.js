@@ -34,7 +34,7 @@ passport.use(new JwtStrategy({
   // Set var for secret.
   secretOrKey: process.env.SECRET
 }, ({ id }, cb) => User.findById(id)
-  .populate('items')
+  .populate('jobs')
   .then(user => cb(null, user))
   .catch(err => cb(err))))
 
