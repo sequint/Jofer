@@ -1,10 +1,13 @@
+import NavbarElem from '../../components/NavbarElem'
+import PageTitle from '../../components/PageTitle'
 import './Home.css'
 
 const Home = () => {
 
   return (
     <>
-      <h1>Home Page</h1>
+      <NavbarElem />
+      <PageTitle title="Welcome User" />
     </>
   )
 }

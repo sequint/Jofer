@@ -1,8 +1,11 @@
+import NavbarElem from "../../components/NavbarElem"
+import PageTitle from "../../components/PageTitle"
 
 const PostedJobs = () => {
-  return(
+  return (
     <>
-      <h1>Posted Jobs Page</h1>
+      <NavbarElem />
+      <PageTitle title="Posted Jobs" />
     </>
   )
 }
