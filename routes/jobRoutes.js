@@ -34,12 +34,19 @@ router.get('/jobs/emails', passport.authenticate('jwt'), async function (req, re
   })
   res.json({userJobs})
   })
-  
+
 //route for employers to populate their jobs
 router.get('/jobs/id', passport.authenticate('jwt'), async function (req, res) {
   res.json(req.user.jobs)
 })
 
+
+//route for updating an item located by req.params.id
+router.put('/jobs/:id', passport.authenticate('jwt'), async function (req, res) {
+  //find item by it then set the passed in p
+  await Job.findByIdAndUpdate(req.params.id, { $set: req.body })
+  res.sendStatus(200)
+})
 
 module.exports = router
 
