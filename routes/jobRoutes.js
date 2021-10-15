@@ -13,6 +13,26 @@ router.post('/jobs', passport.authenticate('jwt'), async function (req, res) {
   res.json(job)
 })
 
+//get all jobs that the candidate has been assigned to by email
+router.get('/jobs/emails', passport.authenticate('jwt'), async function (req, res){
+  const jobs = await Job.find({})
+
+  let emails = jobs.map(({_id,applicantEmails})=>({_id,applicantEmails}))
+  let userJobs = []
+  emails.forEach(job=>{
+    job.applicantEmails.forEach(email=>{
+      if(email===req.user.username){  
+        userJobs.push({
+          jobId:job._id,
+          userId:req.user._id
+        })
+      }
+    })
+  })
+  res.json({userJobs})
+  })
+
+
 
 
 module.exports = router
