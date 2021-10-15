@@ -15,7 +15,7 @@ const CreateJobForm = () => {
     status: 'Review',
     email: '',
     declineReason: '',
-    applicantEmails: []
+    applicants: []
 
   })
 
@@ -32,7 +32,7 @@ const CreateJobForm = () => {
           company: '',
           type: '',
           email:'',
-          applicantEmails:[]
+          applicants:[]
         })
       })
       .catch(err => console.error(err))
@@ -41,13 +41,13 @@ const CreateJobForm = () => {
     event.preventDefault()
     console.log("clicked")
     console.log(userState.email)
-    const applicantEmail = {
+    const applicant = {
       email:userState.email,
       status: 'Review',
       declineReason: userState.declineReason
     }
-    userState.applicantEmails.push(applicantEmail)
-    console.log(userState.applicantEmails)
+    userState.applicants.push(applicant)
+    console.log(userState.applicants)
     setUserState({
       ...userState, email:''
     })
@@ -119,7 +119,7 @@ const CreateJobForm = () => {
           <Col>
             <h3>Email Adress</h3>
 
-            {userState ? userState.applicantEmails.map(({email}) => <li>{email}</li>) : <></>}
+            {userState ? userState.applicants.map(({email}) => <li>{email}</li>) : <></>}
 
           </Col>
         </Row>
