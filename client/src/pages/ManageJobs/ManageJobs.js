@@ -3,11 +3,14 @@ import JobCard from '../../components/JobCard'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import NavbarElem from "../../components/NavbarElem"
+import PageTitle from "../../components/PageTitle"
+
 const ManageJobs = () => {
   return (
     <>
       <NavbarElem />
-      <h1>Manage Jobs Page</h1>
+      <PageTitle title="Job Manager - Job Title" />
       <Container>
         <Row>
           <Col>
@@ -30,6 +33,9 @@ const ManageJobs = () => {
       </Container>
     </>
   );
+      
+    </>
+  )
 }
 
 export default ManageJobs

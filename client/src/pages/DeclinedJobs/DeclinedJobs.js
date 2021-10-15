@@ -1,10 +1,11 @@
-import NavbarElem from '../../components/NavbarElem'
+import NavbarElem from "../../components/NavbarElem"
+import PageTitle from "../../components/PageTitle"
 
 const DeclinedJobs = () => {
   return (
     <>
       <NavbarElem />
-      <h1>Declined Jobs Page</h1>
+      <PageTitle title="Declined Jobs" />
     </>
   )
 }

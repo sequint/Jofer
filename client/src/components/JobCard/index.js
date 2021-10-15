@@ -1,1 +1,1 @@
-export { default } from './JobCard.js'
+export { default } from './JobCard'

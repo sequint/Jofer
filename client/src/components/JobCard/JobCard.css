@@ -1,4 +1,7 @@
-.JobCard {
-  max-height: 50px;
-  overflow: scroll;
+.status {
+  border: none !important;
+}
+
+.card-header {
+  margin-left: 250px;
 }
