@@ -3,12 +3,12 @@ const { Job, User } = require('../models')
 const passport = require('passport')
 
 
-//route for creating a new item
+//route for creating a new job
 router.post('/jobs', passport.authenticate('jwt'), async function (req, res) {
-  //creates a new item from the request.body, for req.user._id
+  //creates a new job from the request.body, for req.user._id
   const job = await Job.create({ ...req.body})
   await Job.findByIdAndUpdate(job._id, { $push: { users: req.user._id }})
-  //finds user and then pushes the newly created item into the items array
+  //finds user and then pushes the newly created job into the jobs array
   await User.findByIdAndUpdate(req.user._id, { $push: { jobs: job._id } })
   res.json(job)
 })
@@ -41,12 +41,23 @@ router.get('/jobs/id', passport.authenticate('jwt'), async function (req, res) {
 })
 
 
-//route for updating an item located by req.params.id
+//route for updating a job located by req.params.id
 router.put('/jobs/:id', passport.authenticate('jwt'), async function (req, res) {
   //find item by it then set the passed in p
   await Job.findByIdAndUpdate(req.params.id, { $set: req.body })
   res.sendStatus(200)
 })
+
+//route for deleting a job located by req.para.id 
+router.delete('/jobs/:id', passport.authenticate('jwt'), async function (req, res) {
+  //find item by id and delete
+  await Job.findByIdAndDelete(req.params.id)
+  //find user, then update by pulling req.params.id from the users jobs array
+  await User.findByIdAndUpdate(req.user._id, { $pull: { jobs: req.params.id } })
+  res.sendStatus(200)
+})
+
+
 
 module.exports = router
 
