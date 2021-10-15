@@ -29,6 +29,10 @@ const SignInForm = () => {
     window.location = '/auth'
   }
 
+  const handleHome = () => {
+    window.location = '/'
+  }
+
   return (
     <Form
       className="form">
@@ -40,7 +44,7 @@ const SignInForm = () => {
           type="email"
           placeholder="Enter your email"
           name="email"
-          value={userState.name} />
+          value={userState.username} />
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingPassword"
@@ -61,10 +65,17 @@ const SignInForm = () => {
         Sign In
       </Button>
       <Button
+        className="mb-3"
         variant="light"
-        type="submit"
+        type="button"
         onClick={handleRegister}>
         Don't have an account? Sign Up.
+      </Button>
+      <Button
+        variant="link"
+        type="button"
+        onClick={handleHome}>
+        Go Home
       </Button>
     </Form>
   )
