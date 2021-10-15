@@ -13,7 +13,6 @@ const SignInForm = () => {
 
   const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
 
-
   const handleLoginUser = event => {
     event.preventDefault()
     UserAPI.login(userState)

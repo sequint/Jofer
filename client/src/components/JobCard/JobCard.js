@@ -16,8 +16,6 @@ const JobCard = ({ job }) => {
 
   }
 
-  console.log(returnStatusColor(job.status))
-
   return(
     <>
       <Card className="m-2">

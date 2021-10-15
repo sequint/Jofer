@@ -8,19 +8,21 @@ const ItemForm = ({
 }) => {
   return (
     <Form>
-      <Form.Group className="mb-3" controlId="item">
+      <Form.Group className='mb-3' controlId='item'>
         <Form.Label>Item</Form.Label>
         <Form.Control
-          type="text"
-          placeholder="Enter your item"
-          name="text"
+          type='text'
+          placeholder='Enter your item'
+          name='text'
           value={text}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </Form.Group>
       <Button
-        variant="primary"
-        type="submit"
-        onClick={handleAddItem} >
+        variant='primary'
+        type='submit'
+        onClick={handleAddItem}
+      >
         Add Item
       </Button>
     </Form>
