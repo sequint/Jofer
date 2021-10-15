@@ -1,12 +1,13 @@
 import NavbarElem from "../../components/NavbarElem"
+import PageTitle from "../../components/PageTitle"
 
 const ManageJobs = () => {
   return (
     <>
       <NavbarElem />
-      <h1>Manage Jobs Page</h1>
+      <PageTitle title="Job Manager - Job Title" />
     </>
-  );
-};
+  )
+}
 
-export default ManageJobs;
+export default ManageJobs
