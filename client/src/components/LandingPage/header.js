@@ -2,10 +2,10 @@ const Header = () => {
   return (
     <header>
       <div className="intro-logo jumbo-bg">
-        <h1>Welcome to eStartups</h1>
-        <h3>Elegant Bootstrap Template for Startups, Apps & more...</h3>
+        <h1>Welcome to Rejector</h1>
+        <h3>Elegant Way to Get Declined</h3>
         <img
-          src="https://bootstrapmade.com/demo/themes/eStartup/img/hero-img.png"
+          src=""
           className=""
           alt=""
         />
