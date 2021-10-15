@@ -5,8 +5,11 @@ const Job = new Schema({
   company: String,
   type: String,
   status: String,
-  declineReason: String,
-  applicantEmails: [],
+  applicantEmails: [{
+    email: String,
+    status: String,
+    declineReason: String
+  }],
   users: [{
     type: Schema.Types.ObjectId,
     ref: 'User'

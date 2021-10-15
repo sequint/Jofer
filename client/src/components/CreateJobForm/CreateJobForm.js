@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import JobAPI from '../../utils/JobAPI.js'
 
 
@@ -10,8 +13,10 @@ const CreateJobForm = () => {
     company: '',
     type: '',
     status: 'Review',
-    applicantEmails:[]
-    
+    email: '',
+    declineReason: '',
+    applicantEmails: []
+
   })
 
   const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
@@ -22,54 +27,104 @@ const CreateJobForm = () => {
       .then(() => {
         alert('Job listing Created')
         setUserState({
-          ...userState, name: '',
+          ...userState, 
+          name: '',
           company: '',
           type: '',
-          status: 'Review',})
+          email:'',
+          applicantEmails:[]
+        })
       })
       .catch(err => console.error(err))
   }
+  const handleAddEmail = event => {
+    event.preventDefault()
+    console.log("clicked")
+    console.log(userState.email)
+    const applicantEmail = {
+      email:userState.email,
+      status: 'Review',
+      declineReason: userState.declineReason
+    }
+    userState.applicantEmails.push(applicantEmail)
+    console.log(userState.applicantEmails)
+    setUserState({
+      ...userState, email:''
+    })
+  }
+
   return (
-    <Form>
-      <Form.Group className='mb-3' controlId='name'>
-        <Form.Label>Name</Form.Label>
-        <Form.Control
-          type='text'
-          placeholder='Enter the job title'
-          name='name'
-          value={userState.name}
-          onChange={handleInputChange}
-        />
-      </Form.Group>
-      <Form.Group className='mb-3' controlId='company'>
-        <Form.Label>Company</Form.Label>
-        <Form.Control
-          type='text'
-          placeholder='Enter your company'
-          name='company'
-          value={userState.company}
-          onChange={handleInputChange}
-        />
-      </Form.Group>
-      <Form.Group className='mb-3' controlId='type'>
-        <Form.Label>Type</Form.Label>
-        <Form.Control
-          type='text'
-          placeholder='Enter the job catagory'
-          name='type'
-          value={userState.type}
-          onChange={handleInputChange}
-        />
-      </Form.Group>
-     
-      <Button
-        variant='primary'
-        type='submit'
-        onClick={handleRegisterUser}
-      >
-        Register
-      </Button>
-    </Form>
+    <>
+      <Container>
+        <Row>
+          <Col>
+            <Form>
+              <Form.Group className='mb-3' controlId='name'>
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Enter the job title'
+                  name='name'
+                  value={userState.name}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+              <Form.Group className='mb-3' controlId='company'>
+                <Form.Label>Company</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Enter your company'
+                  name='company'
+                  value={userState.company}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+              <Form.Group className='mb-3' controlId='type'>
+                <Form.Label>Type</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Enter the job catagory'
+                  name='type'
+                  value={userState.type}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+              <Form.Group className='mb-3' controlId='email'>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Enter candidates email'
+                  name='email'
+                  value={userState.email}
+                  onChange={handleInputChange}
+                />
+                <Button
+                  variant='primary'
+                  type='submit'
+                  onClick={handleAddEmail}
+                >
+                  +
+                </Button>
+              </Form.Group>
+
+              <Button
+                variant='primary'
+                type='submit'
+                onClick={handleRegisterUser}
+              >
+                Register
+              </Button>
+            </Form>
+          </Col>
+          <Col>
+            <h3>Email Adress</h3>
+
+            {userState ? userState.applicantEmails.map(({email}) => <li>{email}</li>) : <></>}
+
+          </Col>
+        </Row>
+      </Container>
+    </>
   )
 }
 
