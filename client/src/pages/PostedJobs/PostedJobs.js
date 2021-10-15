@@ -1,4 +1,4 @@
-import NavbarElem from "../../components/NavbarElem"
+import NavbarElem from '../../components/NavbarElem'
 import PageTitle from "../../components/PageTitle"
 
 const PostedJobs = () => {
