@@ -5,7 +5,7 @@ import './UserCard.css'
 const UserCard = () => {
   return (
     <>
-      <Card className="UserCard">
+      <Card className="usrCard">
         <ListItems/>
       </Card>
     </>
