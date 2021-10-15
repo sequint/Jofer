@@ -10,6 +10,7 @@ import JobAPI from '../../utils/JobAPI.js'
 const CreateJobForm = () => {
   const [userState, setUserState] = useState({
     name: '',
+    applicantName:'',
     company: '',
     type: '',
     status: 'Review',
@@ -43,13 +44,14 @@ const CreateJobForm = () => {
     console.log(userState.email)
     const applicantEmail = {
       email:userState.email,
+      applicantName:userState.applicantName,
       status: 'Review',
       declineReason: userState.declineReason
     }
     userState.applicantEmails.push(applicantEmail)
     console.log(userState.applicantEmails)
     setUserState({
-      ...userState, email:''
+      ...userState, email:'', applicantName:''
     })
   }
 
@@ -86,6 +88,16 @@ const CreateJobForm = () => {
                   placeholder='Enter the job catagory'
                   name='type'
                   value={userState.type}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+              <Form.Group className='mb-3' controlId='applicantName'>
+                <Form.Label>Applicant Name</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Enter candidates name'
+                  name='applicantName'
+                  value={userState.applicantName}
                   onChange={handleInputChange}
                 />
               </Form.Group>
