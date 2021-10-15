@@ -7,10 +7,11 @@ const ItemElem = ({
   handleIsDone
 }) => {
   return (
-    <ListGroupItem 
-      action 
-      variant={isDone ? "success" : "secondary"}
-      onClick={() => handleIsDone(id, !isDone)} >
+    <ListGroupItem
+      action
+      variant={isDone ? 'success' : 'secondary'}
+      onClick={() => handleIsDone(id, !isDone)}
+    >
       {text}
     </ListGroupItem>
   )

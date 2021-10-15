@@ -3,7 +3,6 @@ import PageTitle from '../../components/PageTitle'
 import './Home.css'
 
 const Home = () => {
-
   return (
     <>
       <NavbarElem />

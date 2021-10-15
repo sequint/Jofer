@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import NavbarElem from "../../components/NavbarElem"
 import PageTitle from "../../components/PageTitle"
-import JobCard from "../../components/JobCard"
+import JobCard from "../../components/UserCard"
 import UserAPI from "../../utils/UserAPI/UserAPI"
 
 const AppliedJobs = () => {

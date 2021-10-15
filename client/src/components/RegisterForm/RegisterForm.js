@@ -25,46 +25,51 @@ const RegisterForm = () => {
 
   return (
     <Form>
-      <Form.Group className="mb-3" controlId="name">
+      <Form.Group className='mb-3' controlId='name'>
         <Form.Label>Name</Form.Label>
         <Form.Control
-          type="text"
-          placeholder="Enter your name"
-          name="name"
+          type='text'
+          placeholder='Enter your name'
+          name='name'
           value={userState.name}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="email">
+      <Form.Group className='mb-3' controlId='email'>
         <Form.Label>Email</Form.Label>
         <Form.Control
-          type="email"
-          placeholder="Enter your email"
-          name="email"
+          type='email'
+          placeholder='Enter your email'
+          name='email'
           value={userState.email}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="username">
+      <Form.Group className='mb-3' controlId='username'>
         <Form.Label>Username</Form.Label>
         <Form.Control
-          type="text"
-          placeholder="Enter your username"
-          name="username"
+          type='text'
+          placeholder='Enter your username'
+          name='username'
           value={userState.username}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="password">
+      <Form.Group className='mb-3' controlId='password'>
         <Form.Label>Password</Form.Label>
         <Form.Control
-          type="password"
-          placeholder="Enter your password"
-          name="password"
+          type='password'
+          placeholder='Enter your password'
+          name='password'
           value={userState.password}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </Form.Group>
       <Button
-        variant="primary"
-        type="submit"
-        onClick={handleRegisterUser} >
+        variant='primary'
+        type='submit'
+        onClick={handleRegisterUser}
+      >
         Register
       </Button>
     </Form>
