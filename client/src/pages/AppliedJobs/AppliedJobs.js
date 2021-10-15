@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import NavbarElem from "../../components/NavbarElem"
 import PageTitle from "../../components/PageTitle"
+import JobCard from "../../components/JobCard"
 import UserAPI from "../../utils/UserAPI/UserAPI"
 
 const AppliedJobs = () => {
@@ -13,10 +14,13 @@ const AppliedJobs = () => {
       .catch(err => window.location = '/auth')
   }, [])
 
+  console.log(jobs)
+
   return (
     <>
       <NavbarElem />
       <PageTitle title="My Jobs" />
+      <JobCard job={jobs} />
     </>
   )
 }
