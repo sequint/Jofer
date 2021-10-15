@@ -22,7 +22,9 @@ const AppliedJobs = () => {
       <NavbarElem />
       <PageTitle title="My Jobs" />
       {jobs.map(job => <JobCard job={job} />)}
+      
     </>
+    
   )
 }
 

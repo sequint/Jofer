@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col'
 import PageTitle from "../../components/PageTitle"
 import { useLocation } from 'react-router-dom'
 
+
 const ManageJobs = () => {
   const location = useLocation()
   console.log(location.state)
@@ -34,6 +35,7 @@ const ManageJobs = () => {
           </Col>
         </Row>
       </Container>
+      
     </>
   )
 }
