@@ -2,10 +2,12 @@ import { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import UserAPI from '../../utils/UserAPI'
+import FloatingLabel from 'react-bootstrap/esm/FloatingLabel'
+import './SignInForm.css'
 
 const SignInForm = () => {
   const [userState, setUserState] = useState({
-    username: '',
+    email: '',
     password: ''
   })
 
@@ -22,34 +24,57 @@ const SignInForm = () => {
       .catch(err => console.error(err))
   }
 
+  const handleRegister = () => {
+    window.location = '/auth'
+  }
+
+  const handleHome = () => {
+    window.location = '/'
+  }
+
   return (
-    <Form>
-      <Form.Group className='mb-3' controlId='username'>
-        <Form.Label>Username</Form.Label>
+    <Form
+      className="form">
+      <FloatingLabel
+        controlId="floatingInput"
+        label="Email address"
+        className="mb-3 col-4" >
         <Form.Control
-          type='text'
-          placeholder='Enter your username'
-          name='username'
-          value={userState.username}
-          onChange={handleInputChange}
-        />
-      </Form.Group>
-      <Form.Group className='mb-3' controlId='password'>
-        <Form.Label>Password</Form.Label>
+          type="email"
+          placeholder="Enter your email"
+          name="email"
+          value={userState.username} />
+      </FloatingLabel>
+      <FloatingLabel
+        controlId="floatingPassword"
+        label="Password"
+        className="mb-3 col-4">
         <Form.Control
-          type='password'
-          placeholder='Enter your password'
-          name='password'
+          type="password"
+          placeholder="Password"
+          name="password"
           value={userState.password}
-          onChange={handleInputChange}
-        />
-      </Form.Group>
+          onChange={handleInputChange} />
+      </FloatingLabel>
       <Button
-        variant='primary'
-        type='submit'
-        onClick={handleLoginUser}
-      >
+        className="mb-2 col-2"
+        variant="primary"
+        type="submit"
+        onClick={handleLoginUser} >
         Sign In
+      </Button>
+      <Button
+        className="mb-3"
+        variant="light"
+        type="button"
+        onClick={handleRegister}>
+        Don't have an account? Sign Up.
+      </Button>
+      <Button
+        variant="link"
+        type="button"
+        onClick={handleHome}>
+        Go Home
       </Button>
     </Form>
   )

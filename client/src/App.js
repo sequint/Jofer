@@ -9,6 +9,7 @@ import PostedJobs from './pages/PostedJobs'
 import ManageJobs from './pages/ManageJobs'
 import AppliedJobs from './pages/AppliedJobs'
 import DeclinedJobs from './pages/DeclinedJobs'
+import Login from './pages/SignIn'
 
 const App = () => {
   return (
@@ -17,6 +18,9 @@ const App = () => {
         <Switch>
           <Route exact path='/'>
             <Home />
+          </Route>
+          <Route path='/login'>
+            <Login />
           </Route>
           <Route path='/auth'>
             <Auth />
