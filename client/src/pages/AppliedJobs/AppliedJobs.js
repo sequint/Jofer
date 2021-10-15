@@ -3,7 +3,7 @@ import NavbarElem from "../../components/NavbarElem"
 import PageTitle from "../../components/PageTitle"
 import JobCard from "../../components/JobCard"
 import UserAPI from "../../utils/UserAPI"
-
+import CreateJobForm from '../../components/CreateJobForm'
 const AppliedJobs = () => {
   const [jobs, setJobs] = useState([])
 
@@ -22,7 +22,9 @@ const AppliedJobs = () => {
       <NavbarElem />
       <PageTitle title="My Jobs" />
       {jobs.map(job => <JobCard job={job} />)}
+      <CreateJobForm />
     </>
+    
   )
 }
 

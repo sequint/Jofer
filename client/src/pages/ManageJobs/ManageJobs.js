@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PageTitle from "../../components/PageTitle"
 
+
 const ManageJobs = () => {
   return (
     <>
@@ -30,6 +31,7 @@ const ManageJobs = () => {
           </Col>
         </Row>
       </Container>
+      
     </>
   )
 }
