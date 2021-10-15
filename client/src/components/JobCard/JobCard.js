@@ -16,19 +16,17 @@ const JobCard = ({ job }) => {
 
   }
 
-  console.log(returnStatusColor(job[0].status))
-
   return(
     <>
       <Card className="m-2">
-        <Card.Header className="status" bg="info" as="h5">{job[0].status}</Card.Header>
+        <Card.Header className="status" bg="info" as="h5">{job.status}</Card.Header>
         <Card.Body>
-          <Card.Title>{job[0].name}</Card.Title>
+          <Card.Title>{job.name}</Card.Title>
           <Card.Text>
-            Company: {job[0].company}
+            Company: {job.company}
           </Card.Text>
           <Card.Text>
-            Department: {job[0].type}
+            Department: {job.type}
           </Card.Text>
           <Button variant="primary">View Details</Button>
         </Card.Body>
