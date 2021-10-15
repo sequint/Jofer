@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import NavbarElem from "../../components/NavbarElem"
 import PageTitle from "../../components/PageTitle"
-import JobCard from "../../components/UserCard"
-import UserAPI from "../../utils/UserAPI/UserAPI"
+import JobCard from "../../components/JobCard"
+import UserAPI from "../../utils/UserAPI"
 
 const AppliedJobs = () => {
   const [jobs, setJobs] = useState([])
@@ -12,7 +12,7 @@ const AppliedJobs = () => {
     console.log('in useEffect')
     UserAPI.getUser()
       .then(({ data }) => setJobs(data.jobs))
-      .catch(err => window.location = '/auth')
+      .catch(err => console.log('err'))
   }, [])
 
   console.log(jobs)
