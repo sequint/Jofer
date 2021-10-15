@@ -9,16 +9,17 @@ router.get('/user', passport.authenticate('jwt'), (req, res) => res.json(req.use
 
 // Create a new user.
 router.post('/users/register', (req, res) => {
-  const { first_name, last_name, email, user_type, company } = req.body
+  const { first_name, last_name, email, user_type, company, password } = req.body
+  const username = email
   // Use mongoose to create new instance of a user with passpost authentication.
-  User.register(new User({ first_name, last_name, email, user_type, company }), req.body.password, err => {
+  User.register(new User({ first_name, last_name, username, user_type, company }), password, err => {
     if (err) {
       res.json({
         err: err,
         req: {
           first_name: first_name,
           last_name: last_name,
-          email: email,
+          username: username,
           user_type: user_type,
           company: company,
           password: req.body.password
@@ -31,10 +32,9 @@ router.post('/users/register', (req, res) => {
         user: {
           first_name: first_name,
           last_name: last_name,
-          email: email,
+          username: username,
           user_type: user_type,
-          company: company,
-          password: req.body.password
+          company: company
         }
       })
     }
@@ -43,8 +43,11 @@ router.post('/users/register', (req, res) => {
 
 // Authenicate a user and sign them in if user params match. (token to secret)
 router.post('/users/login', (req, res) => {
-  User.authenticate()(req.body.email, req.body.password, (err, user) => {
+  User.authenticate()(req.body.username, req.body.password, (err, user) => {
     if (err) { console.log(err) }
     res.json(user ? jwt.sign({ id: user._id }, process.env.SECRET) : null)
   })
 })
+
+
+module.exports = router
