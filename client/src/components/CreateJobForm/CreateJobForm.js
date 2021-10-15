@@ -129,9 +129,9 @@ const CreateJobForm = () => {
             </Form>
           </Col>
           <Col>
-            <h3>Email Adress</h3>
+            <h3>Applicants</h3>
 
-            {userState ? userState.applicants.map(({email}) => <li>{email}</li>) : <></>}
+            {userState ? userState.applicants.map(({applicantName}) => <li>{applicantName}</li>) : <></>}
 
           </Col>
         </Row>

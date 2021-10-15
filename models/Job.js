@@ -6,6 +6,7 @@ const Job = new Schema({
   type: String,
   status: String,
   applicants: [{
+    applicantName: String,
     email: String,
     status: String,
     declineReason: String

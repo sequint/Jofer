@@ -4,7 +4,7 @@ const ListItems = ({ candidates }) => {
   console.log(candidates)
   return (
     <ListGroup>
-      {candidates ? candidates.map(applicant => <ListGroup.Item>{applicant.email}</ListGroup.Item>) : <></>}
+      {candidates ? candidates.map(applicant => <ListGroup.Item>{applicant.applicantName}</ListGroup.Item>) : <></>}
     </ListGroup>
   )
 }
