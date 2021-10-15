@@ -1,9 +1,8 @@
 import NavbarElem from '../../components/NavbarElem'
-import JobCard from '../../components/JobCard'
+import JobCard from '../../components/UserCard'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import NavbarElem from "../../components/NavbarElem"
 import PageTitle from "../../components/PageTitle"
 
 const ManageJobs = () => {
@@ -31,9 +30,6 @@ const ManageJobs = () => {
           </Col>
         </Row>
       </Container>
-    </>
-  );
-      
     </>
   )
 }
