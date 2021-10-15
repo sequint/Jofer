@@ -34,8 +34,7 @@ router.post('/users/register', (req, res) => {
           last_name: last_name,
           username: username,
           user_type: user_type,
-          company: company,
-          password: req.body.password
+          company: company
         }
       })
     }
