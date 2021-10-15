@@ -1,9 +1,11 @@
 import Card from 'react-bootstrap/Card'
 import ListItems from '../ListItems/ListItems.js'
+import './JobCard.css'
+
 const JobCard = () => {
   return (
     <>
-      <Card>
+      <Card ClassName="JobCard">
         <ListItems/>
       </Card>
     </>
