@@ -5,10 +5,11 @@ import JobCard from "../../components/JobCard"
 import UserAPI from "../../utils/UserAPI/UserAPI"
 
 const AppliedJobs = () => {
-  const [ jobs, setJobs ] = useState([])
+  const [jobs, setJobs] = useState([])
 
   // On page mount get the current user, extract their jobs array and set to state.
   useEffect(() => {
+    console.log('in useEffect')
     UserAPI.getUser()
       .then(({ data }) => setJobs(data.jobs))
       .catch(err => window.location = '/auth')
@@ -20,7 +21,7 @@ const AppliedJobs = () => {
     <>
       <NavbarElem />
       <PageTitle title="My Jobs" />
-      <JobCard job={jobs} />
+      {jobs.map(job => <JobCard job={job} />)}
     </>
   )
 }
