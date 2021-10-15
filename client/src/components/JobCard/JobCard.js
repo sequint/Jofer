@@ -17,7 +17,7 @@ const JobCard = ({ job }) => {
           <Card.Text>
             Department: {job.type}
           </Card.Text>
-          <Button variant="primary">View Details</Button>
+          <Button variant="primary" href="/managejobs">Manage Job</Button>
         </Card.Body>
       </Card>
     </>
