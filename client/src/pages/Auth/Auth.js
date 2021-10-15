@@ -1,4 +1,4 @@
-import NavbarElem from "../../components/NavbarElem"
+import NavbarElem from '../../components/NavbarElem'
 
 const Auth = () => {
   return (
@@ -6,7 +6,7 @@ const Auth = () => {
       <NavbarElem />
       <h1>Auth Page</h1>
     </>
-  );
-};
+  )
+}
 
-export default Auth;
+export default Auth

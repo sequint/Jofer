@@ -1,4 +1,4 @@
-import NavbarElem from "../../components/NavbarElem"
+import NavbarElem from '../../components/NavbarElem'
 
 const DeclinedJobs = () => {
   return (
@@ -6,7 +6,7 @@ const DeclinedJobs = () => {
       <NavbarElem />
       <h1>Declined Jobs Page</h1>
     </>
-  );
-};
+  )
+}
 
-export default DeclinedJobs;
+export default DeclinedJobs

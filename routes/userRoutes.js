@@ -24,8 +24,7 @@ router.post('/users/register', (req, res) => {
           password: req.body.password
         }
       })
-    }
-    else {
+    } else {
       res.json({
         status: 200,
         user: {

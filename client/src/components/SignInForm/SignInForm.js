@@ -11,7 +11,6 @@ const SignInForm = () => {
 
   const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
 
-  
   const handleLoginUser = event => {
     event.preventDefault()
     UserAPI.login(userState)
@@ -25,28 +24,31 @@ const SignInForm = () => {
 
   return (
     <Form>
-      <Form.Group className="mb-3" controlId="username">
+      <Form.Group className='mb-3' controlId='username'>
         <Form.Label>Username</Form.Label>
-        <Form.Control 
-          type="text" 
-          placeholder="Enter your username"
-          name="username"
+        <Form.Control
+          type='text'
+          placeholder='Enter your username'
+          name='username'
           value={userState.username}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="password">
+      <Form.Group className='mb-3' controlId='password'>
         <Form.Label>Password</Form.Label>
-        <Form.Control 
-          type="password" 
-          placeholder="Enter your password"
-          name="password"
+        <Form.Control
+          type='password'
+          placeholder='Enter your password'
+          name='password'
           value={userState.password}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </Form.Group>
-      <Button 
-        variant="primary" 
-        type="submit"
-        onClick={handleLoginUser} >
+      <Button
+        variant='primary'
+        type='submit'
+        onClick={handleLoginUser}
+      >
         Sign In
       </Button>
     </Form>
