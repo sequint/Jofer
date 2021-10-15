@@ -1,5 +1,5 @@
 import NavbarElem from '../../components/NavbarElem'
-import JobCard from '../../components/UserCard'
+import UserCard from '../../components/UserCard'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -9,7 +9,12 @@ import { useLocation } from 'react-router-dom'
 
 const ManageJobs = () => {
   const location = useLocation()
-  console.log(location.state)
+  const { job } = location.state
+  console.log(job)
+
+  const getReviewCandidates = _ => {
+    return job.applicants.filter(applicant => applicant.status === 'Review')
+  }
 
   return (
     <>
@@ -18,20 +23,20 @@ const ManageJobs = () => {
       <Container>
         <Row>
           <Col>
-            <h2>Skills</h2>
-            <JobCard />
+            <h2>Review</h2>
+            <UserCard candidates={getReviewCandidates()}/>
           </Col>
           <Col>
             <h2>Interviewed</h2>
-            <JobCard />
+            <UserCard />
           </Col>
           <Col>
             <h2>Declined</h2>
-            <JobCard />
+            <UserCard />
           </Col>
           <Col>
             <h2>Offered</h2>
-            <JobCard />
+            <UserCard />
           </Col>
         </Row>
       </Container>
