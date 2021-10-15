@@ -1,9 +1,10 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
 import './JobCard.css'
 
 const JobCard = ({ job }) => {
-  console.log(job)
+  console.log(job._id)
 
   return(
     <>
@@ -17,7 +18,12 @@ const JobCard = ({ job }) => {
           <Card.Text>
             Department: {job.type}
           </Card.Text>
-          <Button variant="primary" href="/managejobs">Manage Job</Button>
+          <Link to={{
+            pathname: '/managejobs',
+            state: { job }
+          }}>
+            <Button variant="primary">Manage Job</Button>
+          </Link>
         </Card.Body>
       </Card>
     </>

@@ -4,8 +4,12 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PageTitle from "../../components/PageTitle"
+import { useLocation } from 'react-router-dom'
 
 const ManageJobs = () => {
+  const location = useLocation()
+  console.log(location.state)
+
   return (
     <>
       <NavbarElem />
