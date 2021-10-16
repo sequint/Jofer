@@ -10,6 +10,7 @@ import JobAPI from '../../utils/JobAPI.js'
 const CreateJobForm = () => {
   const [userState, setUserState] = useState({
     name: '',
+    applicantName:'',
     company: '',
     type: '',
     status: 'Review',
@@ -43,13 +44,14 @@ const CreateJobForm = () => {
     console.log(userState.email)
     const applicant = {
       email:userState.email,
+      applicantName:userState.applicantName,
       status: 'Review',
       declineReason: userState.declineReason
     }
     userState.applicants.push(applicant)
     console.log(userState.applicants)
     setUserState({
-      ...userState, email:''
+      ...userState, email:'', applicantName:''
     })
   }
 
@@ -89,6 +91,16 @@ const CreateJobForm = () => {
                   onChange={handleInputChange}
                 />
               </Form.Group>
+              <Form.Group className='mb-3' controlId='applicantName'>
+                <Form.Label>Applicant Name</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Enter candidates name'
+                  name='applicantName'
+                  value={userState.applicantName}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
               <Form.Group className='mb-3' controlId='email'>
                 <Form.Label>Email</Form.Label>
                 <Form.Control
@@ -117,9 +129,9 @@ const CreateJobForm = () => {
             </Form>
           </Col>
           <Col>
-            <h3>Email Adress</h3>
+            <h3>Applicants</h3>
 
-            {userState ? userState.applicants.map(({email}) => <li>{email}</li>) : <></>}
+            {userState ? userState.applicants.map(({applicantName}) => <li>{applicantName}</li>) : <></>}
 
           </Col>
         </Row>
