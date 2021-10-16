@@ -3,7 +3,7 @@ import axios from 'axios'
 const JobAPI = {
 
   //function that makes a axios request to create a new job
-  create: job => axios.post('/api/jobs', job,{
+  create: (job) => axios.post('/api/jobs', job,{
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }

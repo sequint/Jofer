@@ -1,11 +1,30 @@
 import NavbarElem from '../../components/NavbarElem'
-import JobCard from '../../components/UserCard'
+import UserCard from '../../components/UserCard'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PageTitle from "../../components/PageTitle"
+import { useLocation } from 'react-router-dom'
+
 
 const ManageJobs = () => {
+  const location = useLocation()
+  const { job } = location.state
+  console.log(job)
+
+  const getReviewApplicants = _ => {
+    return job.applicants.filter(applicant => applicant.status === 'Review')
+  }
+  const getInterviewApplicants = _ => {
+    return job.applicants.filter(applicant => applicant.status === 'Interview')
+  }
+  const getDeclineApplicants = _ => {
+    return job.applicants.filter(applicant => applicant.status === 'Decline')
+  }
+  const getOfferApplicants = _ => {
+    return job.applicants.filter(applicant => applicant.status === 'Offer')
+  }
+
   return (
     <>
       <NavbarElem />
@@ -13,20 +32,20 @@ const ManageJobs = () => {
       <Container>
         <Row>
           <Col>
-            <h2>Skills</h2>
-            <JobCard />
+            <h2>Review</h2>
+            <UserCard applicants={getReviewApplicants()}/>
           </Col>
           <Col>
-            <h2>Interviewed</h2>
-            <JobCard />
+            <h2>Interview</h2>
+            <UserCard applicants={getInterviewApplicants()}/>
           </Col>
           <Col>
-            <h2>Declined</h2>
-            <JobCard />
+            <h2>Decline</h2>
+            <UserCard applicants={getDeclineApplicants()}/>
           </Col>
           <Col>
-            <h2>Offered</h2>
-            <JobCard />
+            <h2>Offer</h2>
+            <UserCard applicants={getOfferApplicants()}/>
           </Col>
         </Row>
       </Container>

@@ -18,15 +18,15 @@ router.get('/jobs/emails', passport.authenticate('jwt'), async function (req, re
   let emails = await Job.find({})
   let userJobs = []
   emails.forEach(job=>{
-    job.applicantEmails.forEach(email=>{
-      if(email===req.user.username){  
+    job.applicants.forEach(email=>{
+      if(email.email===req.user.username){  
         userJobs.push({
           jobId:job._id,
           name: job.name,
           company: job.company,
           type: job.type,
-          status: job.status,
-          declineReason: job.declineReason,
+          status: email.status,
+          declineReason: email.declineReason,
           userId:req.user._id
         })
       }

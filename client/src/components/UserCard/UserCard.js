@@ -2,11 +2,12 @@ import Card from 'react-bootstrap/Card'
 import ListItems from '../ListItems/ListItems.js'
 import './UserCard.css'
 
-const UserCard = () => {
+const UserCard = ({ applicants }) => {
+  console.log(applicants)
   return (
     <>
       <Card className="usrCard">
-        <ListItems/>
+        <ListItems applicants={applicants}/>
       </Card>
     </>
   )
