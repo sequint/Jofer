@@ -1,10 +1,10 @@
 import ListGroup from 'react-bootstrap/ListGroup'
 
-const ListItems = ({ candidates }) => {
-  console.log(candidates)
+const ListItems = ({ applicants }) => {
+  console.log(applicants)
   return (
     <ListGroup>
-      {candidates ? candidates.map(applicant => <ListGroup.Item>{applicant.applicantName}</ListGroup.Item>) : <></>}
+      {applicants ? applicants.map(applicant => <ListGroup.Item>{applicant.applicantName}</ListGroup.Item>) : <></>}
     </ListGroup>
   )
 }

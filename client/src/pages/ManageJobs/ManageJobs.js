@@ -12,7 +12,7 @@ const ManageJobs = () => {
   const { job } = location.state
   console.log(job)
 
-  const getReviewCandidates = _ => {
+  const getReviewApplicants = _ => {
     return job.applicants.filter(applicant => applicant.status === 'Review')
   }
 
@@ -24,7 +24,7 @@ const ManageJobs = () => {
         <Row>
           <Col>
             <h2>Review</h2>
-            <UserCard candidates={getReviewCandidates()}/>
+            <UserCard applicants={getReviewApplicants()}/>
           </Col>
           <Col>
             <h2>Interviewed</h2>
