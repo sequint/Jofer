@@ -12,8 +12,17 @@ const ManageJobs = () => {
   const { job } = location.state
   console.log(job)
 
-  const getReviewCandidates = _ => {
+  const getReviewApplicants = _ => {
     return job.applicants.filter(applicant => applicant.status === 'Review')
+  }
+  const getInterviewApplicants = _ => {
+    return job.applicants.filter(applicant => applicant.status === 'Interview')
+  }
+  const getDeclineApplicants = _ => {
+    return job.applicants.filter(applicant => applicant.status === 'Decline')
+  }
+  const getOfferApplicants = _ => {
+    return job.applicants.filter(applicant => applicant.status === 'Offer')
   }
 
   return (
@@ -24,23 +33,22 @@ const ManageJobs = () => {
         <Row>
           <Col>
             <h2>Review</h2>
-            <UserCard candidates={getReviewCandidates()}/>
+            <UserCard applicants={getReviewApplicants()}/>
           </Col>
           <Col>
-            <h2>Interviewed</h2>
-            <UserCard />
+            <h2>Interview</h2>
+            <UserCard applicants={getInterviewApplicants()}/>
           </Col>
           <Col>
-            <h2>Declined</h2>
-            <UserCard />
+            <h2>Decline</h2>
+            <UserCard applicants={getDeclineApplicants()}/>
           </Col>
           <Col>
-            <h2>Offered</h2>
-            <UserCard />
+            <h2>Offer</h2>
+            <UserCard applicants={getOfferApplicants()}/>
           </Col>
         </Row>
       </Container>
-      
     </>
   )
 }
