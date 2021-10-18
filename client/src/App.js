@@ -11,6 +11,7 @@ import AppliedJobs from './pages/AppliedJobs'
 import DeclinedJobs from './pages/DeclinedJobs'
 import Login from './pages/SignIn'
 import LandingPage from './pages/LandingPage'
+import EmployerAuth from './pages/EmployerAuth'
 
 const App = () => {
   return (
@@ -28,6 +29,9 @@ const App = () => {
           </Route>
           <Route path='/auth'>
             <Auth />
+          </Route>
+          <Route path='/employerauth'>
+            <EmployerAuth />
           </Route>
           <Route path='/postedjobs'>
             <PostedJobs />
