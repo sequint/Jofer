@@ -10,13 +10,17 @@ import ManageJobs from './pages/ManageJobs'
 import AppliedJobs from './pages/AppliedJobs'
 import DeclinedJobs from './pages/DeclinedJobs'
 import Login from './pages/SignIn'
+import LandingPage from './pages/LandingPage'
 
 const App = () => {
   return (
     <Router>
       <div>
         <Switch>
-          <Route exact path='/'>
+          <Route exact path = '/'>
+            <LandingPage />
+          </Route>
+          <Route exact path='/home'>
             <Home />
           </Route>
           <Route path='/login'>
