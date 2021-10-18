@@ -19,6 +19,7 @@ const RegisterForm = () => {
 
   const handleRegisterUser = event => {
     event.preventDefault()
+    console.log(userState)
     UserAPI.register(userState)
       .then(({ data: token }) => {
         alert('User Registered!')
