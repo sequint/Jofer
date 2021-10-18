@@ -17,6 +17,7 @@ const SignInForm = () => {
     event.preventDefault()
     UserAPI.login(userState)
       .then(({ data: token }) => {
+        console.log(token)
         localStorage.setItem('token', token)
         setUserState({ ...userState, name: '', email: '', username: '', password: '' })
         window.location = '/'
