@@ -7,7 +7,7 @@ import './SignInForm.css'
 
 const SignInForm = () => {
   const [userState, setUserState] = useState({
-    email: '',
+    username: '',
     password: ''
   })
 
@@ -17,6 +17,7 @@ const SignInForm = () => {
     event.preventDefault()
     UserAPI.login(userState)
       .then(({ data: token }) => {
+        console.log(token)
         localStorage.setItem('token', token)
         setUserState({ ...userState, name: '', email: '', username: '', password: '' })
         window.location = '/'
@@ -43,7 +44,7 @@ const SignInForm = () => {
         <Form.Control
           type="email"
           placeholder="Enter your email"
-          name="email"
+          name="username"
           value={userState.username}
           onChange={handleInputChange} />
       </FloatingLabel>
