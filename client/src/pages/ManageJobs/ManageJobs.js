@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PageTitle from "../../components/PageTitle"
 import { useLocation } from 'react-router-dom'
+import ApplicantFilter from '../../components/ApplicantFilter/ApplicantFilter'
 
 
 const ManageJobs = () => {
@@ -33,6 +34,7 @@ const ManageJobs = () => {
         <Row>
           <Col>
             <h2>Review</h2>
+            <ApplicantFilter />
             <UserCard applicants={getReviewApplicants()}/>
           </Col>
           <Col>
