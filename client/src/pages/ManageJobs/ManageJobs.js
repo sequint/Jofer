@@ -7,11 +7,9 @@ import PageTitle from "../../components/PageTitle"
 import { useLocation } from 'react-router-dom'
 import ApplicantFilter from '../../components/ApplicantFilter/ApplicantFilter'
 
-
 const ManageJobs = () => {
   const location = useLocation()
   const { job } = location.state
-  console.log(job)
 
   const getReviewApplicants = _ => {
     return job.applicants.filter(applicant => applicant.status === 'Review')
@@ -34,8 +32,7 @@ const ManageJobs = () => {
         <Row>
           <Col>
             <h2>Review</h2>
-            <ApplicantFilter />
-            <UserCard applicants={getReviewApplicants()}/>
+            <ApplicantFilter applicants={getReviewApplicants()} />
           </Col>
           <Col>
             <h2>Interview</h2>
