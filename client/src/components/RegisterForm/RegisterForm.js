@@ -2,76 +2,116 @@ import { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import UserAPI from '../../utils/UserAPI'
+import FloatingLabel from 'react-bootstrap/esm/FloatingLabel'
 
 const RegisterForm = () => {
   const [userState, setUserState] = useState({
-    name: '',
+    first_name: '',
+    last_name: '',
     email: '',
-    username: '',
-    password: ''
+    password: '',
+    user_type: '',
+    company: ''
   })
 
   const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
 
   const handleRegisterUser = event => {
     event.preventDefault()
+    console.log(userState)
     UserAPI.register(userState)
-      .then(() => {
+      .then(({ data: token }) => {
         alert('User Registered!')
-        setUserState({ ...userState, name: '', email: '', username: '', password: '' })
+        localStorage.setItem('token', token)
+        setUserState({ ...userState, first_name: '', last_name: '', email: '', password: '' })
+        window.location = '/login'
       })
       .catch(err => console.error(err))
   }
 
+  const handleLogin = () => {
+    window.location = '/login'
+  }
+
+  const handleHome = () => {
+    window.location = '/'
+  }
+
   return (
-    <Form>
-      <Form.Group className='mb-3' controlId='name'>
-        <Form.Label>Name</Form.Label>
+    <Form
+      className="form">
+
+      <FloatingLabel
+        controlId="floatingInput"
+        label="First Name"
+        className="mb-3 col-4" >
         <Form.Control
-          type='text'
-          placeholder='Enter your name'
-          name='name'
-          value={userState.name}
-          onChange={handleInputChange}
-        />
-      </Form.Group>
-      <Form.Group className='mb-3' controlId='email'>
-        <Form.Label>Email</Form.Label>
+          type="text"
+          placeholder="Enter your Fist Name"
+          name="first_name"
+          value={userState.first_name}
+          onChange={handleInputChange} />
+      </FloatingLabel>
+
+      <FloatingLabel
+        controlId="floatingInput"
+        label="Last Name"
+        className="mb-3 col-4" >
         <Form.Control
-          type='email'
-          placeholder='Enter your email'
-          name='email'
-          value={userState.email}
-          onChange={handleInputChange}
-        />
-      </Form.Group>
-      <Form.Group className='mb-3' controlId='username'>
-        <Form.Label>Username</Form.Label>
+          type="text"
+          placeholder="Enter your Last Name"
+          name="last_name"
+          value={userState.last_name}
+          onChange={handleInputChange} />
+      </FloatingLabel>
+
+      <FloatingLabel
+        controlId="floatingInput"
+        label="Email Address"
+        className="mb-3 col-4" >
         <Form.Control
-          type='text'
-          placeholder='Enter your username'
-          name='username'
+          type="email"
+          placeholder="Enter your email"
+          name="email"
           value={userState.username}
-          onChange={handleInputChange}
-        />
-      </Form.Group>
-      <Form.Group className='mb-3' controlId='password'>
-        <Form.Label>Password</Form.Label>
+          onChange={handleInputChange} />
+      </FloatingLabel>
+
+      <FloatingLabel
+        controlId="floatingPassword"
+        label="Password"
+        className="mb-3 col-4">
         <Form.Control
-          type='password'
-          placeholder='Enter your password'
-          name='password'
+          type="password"
+          placeholder="Password"
+          name="password"
           value={userState.password}
-          onChange={handleInputChange}
-        />
-      </Form.Group>
+          onChange={handleInputChange} />
+      </FloatingLabel>
+
       <Button
-        variant='primary'
-        type='submit'
-        onClick={handleRegisterUser}
-      >
+        className="mb-2 col-2"
+        variant="primary"
+        type="submit"
+        onClick={handleRegisterUser} >
         Register
       </Button>
+
+      <Button
+        className="mb-3"
+        variant="light"
+        type="button"
+        onClick={handleLogin}>
+        Already have an account? Sign In.
+      </Button>
+
+      <Button
+        variant="link"
+        type="button"
+        onClick={handleHome}>
+        Home Page
+      </Button>
+
     </Form>
   )
 }

@@ -35,6 +35,7 @@ const SignInForm = () => {
   return (
     <Form
       className="form">
+
       <FloatingLabel
         controlId="floatingInput"
         label="Email address"
@@ -43,8 +44,10 @@ const SignInForm = () => {
           type="email"
           placeholder="Enter your email"
           name="email"
-          value={userState.username} />
+          value={userState.username}
+          onChange={handleInputChange} />
       </FloatingLabel>
+
       <FloatingLabel
         controlId="floatingPassword"
         label="Password"
@@ -56,6 +59,7 @@ const SignInForm = () => {
           value={userState.password}
           onChange={handleInputChange} />
       </FloatingLabel>
+
       <Button
         className="mb-2 col-2"
         variant="primary"
@@ -63,6 +67,7 @@ const SignInForm = () => {
         onClick={handleLoginUser} >
         Sign In
       </Button>
+
       <Button
         className="mb-3"
         variant="light"
@@ -70,12 +75,14 @@ const SignInForm = () => {
         onClick={handleRegister}>
         Don't have an account? Sign Up.
       </Button>
+
       <Button
         variant="link"
         type="button"
         onClick={handleHome}>
         Go Home
       </Button>
+
     </Form>
   )
 }
