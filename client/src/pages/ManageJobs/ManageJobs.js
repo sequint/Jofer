@@ -10,6 +10,7 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { useState } from 'react'
 import JobAPI from '../../utils/JobAPI'
+import './ManageJobs.css'
 
 const ManageJobs = () => {
   const location = useLocation()
@@ -94,7 +95,7 @@ const ManageJobs = () => {
     })
 
     destClone.splice(droppableDestination.index, 0, removed);
-    const newState = [...state];
+    const newState = [...filteredApplicants];
     newState[sInd] = sourceClone
     newState[dInd] = destClone;
 
@@ -147,37 +148,37 @@ const ManageJobs = () => {
 
     if (sInd === dInd) {
       
-      const items = reorder(state[sInd], source.index, destination.index);
-      const newState = [...state];
+      const items = reorder(filteredApplicants[sInd], source.index, destination.index);
+      const newState = [...filteredApplicants];
       newState[sInd] = items;
       setState(newState);
+      setFilteredApplicants(newState)
     } else {
-      const result = move(state[sInd], state[dInd], source, destination,sInd, dInd);
+      const result = move(filteredApplicants[sInd], filteredApplicants[dInd], source, destination,sInd, dInd);
      
       
       setState(result)
-      
-      // setState(newState.filter(group => group.length));
+      setFilteredApplicants(result)
     }
   }
 
 
 
   return (
-    <>
+    <div className="manageJobsContainer">
       <NavbarElem />
       <PageTitle title="Job Manager - Job Title" />
+      <input
+        type="text"
+        className="filter"
+        placeholder="Filter Applicants"
+        onChange={handleInputChange}
+      />
       <Container>
         <DragDropContext onDragEnd={onDragEnd}>
           <Row>
             <Col>
               <h2>Review</h2>
-              <input
-                type="text"
-                className="filter"
-                placeholder="Filter Applicants"
-                onChange={handleInputChange}
-              />
               <Card className="usrCard">
 
                 <Droppable droppableId='Review' >
@@ -266,7 +267,7 @@ const ManageJobs = () => {
           </Row>
         </DragDropContext>
       </Container>
-    </>
+    </div>
   )
 }
 
