@@ -3,7 +3,6 @@ import ListItems from '../ListItems/ListItems.js'
 import './UserCard.css'
 
 const UserCard = ({ applicants }) => {
-  console.log(applicants)
   return (
     <>
       <Card className="usrCard">
