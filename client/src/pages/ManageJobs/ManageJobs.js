@@ -1,15 +1,14 @@
 import NavbarElem from '../../components/NavbarElem'
-import ReactDOM from 'react-dom';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PageTitle from "../../components/PageTitle"
 import { useLocation } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
-import ListGroup from 'react-bootstrap/ListGroup'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { useState } from 'react'
 import JobAPI from '../../utils/JobAPI'
+import './ManageJobs.css'
 
 const ManageJobs = () => {
   const location = useLocation()
@@ -34,6 +33,22 @@ const ManageJobs = () => {
   let declinedApplicants = getDeclineApplicants()
   let offeredApplicants = getOfferApplicants()
 
+  const [state, setState] = useState([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
+
+  const [filteredApplicants, setFilteredApplicants] = useState([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
+
+  const handleInputChange = ({ target: { value } }) => {
+    let review = state[0].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
+
+    let interview = state[1].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
+
+    let decline = state[2].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
+
+    let offer = state[3].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
+
+    setFilteredApplicants([review, interview, decline, offer])
+    console.log(filteredApplicants)
+  }
 
   //used to reorder items in same col
   const reorder = (list, startIndex, endIndex) => {
@@ -78,16 +93,15 @@ const ManageJobs = () => {
     })
 
     destClone.splice(droppableDestination.index, 0, removed);
-    const newState = [...state];
+    const newState = [...filteredApplicants];
     newState[sInd] = sourceClone
     newState[dInd] = destClone;
 
    
 
     return newState;
-  };
+  }
 
-  const [state, setState] = useState([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
   function onDragEnd(result) {
     const { source, destination } = result;
 
@@ -132,26 +146,32 @@ const ManageJobs = () => {
 
     if (sInd === dInd) {
       
-      const items = reorder(state[sInd], source.index, destination.index);
-      const newState = [...state];
+      const items = reorder(filteredApplicants[sInd], source.index, destination.index);
+      const newState = [...filteredApplicants];
       newState[sInd] = items;
       setState(newState);
+      setFilteredApplicants(newState)
     } else {
-      const result = move(state[sInd], state[dInd], source, destination,sInd, dInd);
+      const result = move(filteredApplicants[sInd], filteredApplicants[dInd], source, destination,sInd, dInd);
      
       
       setState(result)
-      
-      // setState(newState.filter(group => group.length));
+      setFilteredApplicants(result)
     }
   }
 
 
 
   return (
-    <>
+    <div className="manageJobsContainer">
       <NavbarElem />
       <PageTitle title="Job Manager - Job Title" />
+      <input
+        type="text"
+        className="filter"
+        placeholder="Filter Applicants"
+        onChange={handleInputChange}
+      />
       <Container>
         <DragDropContext onDragEnd={onDragEnd}>
           <Row>
@@ -162,12 +182,9 @@ const ManageJobs = () => {
                 <Droppable droppableId='Review' >
                   {(provided, snapshot) => (
 
-
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
-                      {true ? state[0].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
+                      {true ? filteredApplicants[0].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
                         {(provided, snapshot) => (
-
-
                           <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>{applicant.applicantName}</li>
                         )}</Draggable>) : <></>}
                       {provided.placeholder}
@@ -186,7 +203,7 @@ const ManageJobs = () => {
 
 
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
-                      {true? state[1].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
+                      {true? filteredApplicants[1].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
                         {(provided, snapshot) => (
 
 
@@ -208,7 +225,7 @@ const ManageJobs = () => {
 
 
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
-                      {true ? state[2].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
+                      {true ? filteredApplicants[2].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
                         {(provided, snapshot) => (
 
 
@@ -230,7 +247,7 @@ const ManageJobs = () => {
 
 
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
-                      {true ? state[3].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
+                      {true ? filteredApplicants[3].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
                         {(provided, snapshot) => (
 
 
@@ -248,7 +265,7 @@ const ManageJobs = () => {
           </Row>
         </DragDropContext>
       </Container>
-    </>
+    </div>
   )
 }
 
