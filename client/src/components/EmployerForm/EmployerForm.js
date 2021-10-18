@@ -3,9 +3,9 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import UserAPI from '../../utils/UserAPI'
 import FloatingLabel from 'react-bootstrap/esm/FloatingLabel'
-import './RegisterForm.css'
+import './EmployerForm.css'
 
-const RegisterForm = () => {
+const EmployerForm = () => {
   const [userState, setUserState] = useState({
     first_name: '',
     last_name: '',
@@ -19,12 +19,11 @@ const RegisterForm = () => {
 
   const handleRegisterUser = event => {
     event.preventDefault()
-    console.log(userState)
     UserAPI.register(userState)
       .then(({ data: token }) => {
         alert('User Registered!')
         localStorage.setItem('token', token)
-        setUserState({ ...userState, first_name: '', last_name: '', email: '', password: '' })
+        setUserState({ ...userState, first_name: '', last_name: '', company: '', email: '', password: '' })
         window.location = '/login'
       })
       .catch(err => console.error(err))
@@ -63,6 +62,18 @@ const RegisterForm = () => {
           placeholder="Enter your Last Name"
           name="last_name"
           value={userState.last_name}
+          onChange={handleInputChange} />
+      </FloatingLabel>
+
+      <FloatingLabel
+        controlId="floatingInput"
+        label="Company Name"
+        className="mb-3 col-4" >
+        <Form.Control
+          type="text"
+          placeholder="Enter your Company Name"
+          name="company"
+          value={userState.company}
           onChange={handleInputChange} />
       </FloatingLabel>
 
@@ -117,4 +128,4 @@ const RegisterForm = () => {
   )
 }
 
-export default RegisterForm
+export default EmployerForm
