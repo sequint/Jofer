@@ -10,9 +10,7 @@ const ApplicantFilter = ({ applicants }) => {
   }, [])
 
   const handleInputChange = ({ target: { value } }) => {
-    let tempAppArray = applicants.map(applicant => applicant.applicantName.substring(0, value.length))
-    console.log(tempAppArray)
-    // setFilteredApplicants(applicants.filter(applicant => applicant))
+    setFilteredApplicants(applicants.filter(applicant => applicant.applicantName.substring(0, value.length) === value))
   }
 
   return(
