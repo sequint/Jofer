@@ -67,7 +67,7 @@ const EmployerForm = () => {
 
       <FloatingLabel
         controlId="floatingInput"
-        label="Company Name"
+        label="Company"
         className="mb-3 col-4" >
         <Form.Control
           type="text"
@@ -79,7 +79,7 @@ const EmployerForm = () => {
 
       <FloatingLabel
         controlId="floatingInput"
-        label="Email Address"
+        label="Email"
         className="mb-3 col-4" >
         <Form.Control
           type="email"

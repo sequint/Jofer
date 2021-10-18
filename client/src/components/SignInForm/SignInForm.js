@@ -26,7 +26,7 @@ const SignInForm = () => {
   }
 
   const handleRegister = () => {
-    window.location = '/auth'
+    window.location = '/register'
   }
 
   const handleHome = () => {

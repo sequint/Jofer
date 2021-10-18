@@ -12,13 +12,14 @@ import DeclinedJobs from './pages/DeclinedJobs'
 import Login from './pages/SignIn'
 import LandingPage from './pages/LandingPage'
 import EmployerAuth from './pages/EmployerAuth'
+import RegisterAuth from './pages/RegisterAuth'
 
 const App = () => {
   return (
     <Router>
       <div>
         <Switch>
-          <Route exact path = '/'>
+          <Route exact path='/'>
             <LandingPage />
           </Route>
           <Route exact path='/home'>
@@ -27,10 +28,13 @@ const App = () => {
           <Route path='/login'>
             <Login />
           </Route>
+          <Route path='/register'>
+            <RegisterAuth />
+          </Route>
           <Route path='/auth'>
             <Auth />
           </Route>
-          <Route path='/employerauth'>
+          <Route path='/employer'>
             <EmployerAuth />
           </Route>
           <Route path='/postedjobs'>
