@@ -9,7 +9,7 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { useState } from 'react'
-import JobAPI from '../../utils/JobAPI.js'
+import JobAPI from '../../utils/JobAPI'
 
 const ManageJobs = () => {
   const location = useLocation()
