@@ -2,3 +2,12 @@
   max-height: 275px;
   overflow: scroll;
 }
+
+.manageJobsContainer {
+  width: 100%;
+}
+
+.filter {
+  display: block;
+  margin: auto;
+}
