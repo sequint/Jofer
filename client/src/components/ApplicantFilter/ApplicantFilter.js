@@ -9,9 +9,20 @@ const ApplicantFilter = ({ applicants }) => {
     setFilteredApplicants(applicants)
   }, [])
 
+  const handleInputChange = ({ target: { value } }) => {
+    let tempAppArray = applicants.map(applicant => applicant.applicantName.substring(0, value.length))
+    console.log(tempAppArray)
+    // setFilteredApplicants(applicants.filter(applicant => applicant))
+  }
+
   return(
     <>
-      <input type="text" className="filter" placeholder="Filter Applicants" />
+      <input
+        type="text"
+        className="filter"
+        placeholder="Filter Applicants"
+        onChange={handleInputChange}
+      />
       <UserCard applicants={filteredApplicants} />
     </>
   )
