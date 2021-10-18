@@ -1,10 +1,10 @@
-import NavbarElem from '../../components/NavbarElem'
+import RegisterForm from "../../components/RegisterForm/RegisterForm"
 
 const Auth = () => {
   return (
     <>
-      <NavbarElem />
       <h1>Auth Page</h1>
+      <RegisterForm />
     </>
   )
 }
