@@ -7,7 +7,7 @@ import './SignInForm.css'
 
 const SignInForm = () => {
   const [userState, setUserState] = useState({
-    email: '',
+    username: '',
     password: ''
   })
 
@@ -43,7 +43,7 @@ const SignInForm = () => {
         <Form.Control
           type="email"
           placeholder="Enter your email"
-          name="email"
+          name="username"
           value={userState.username}
           onChange={handleInputChange} />
       </FloatingLabel>
