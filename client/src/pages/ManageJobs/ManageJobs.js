@@ -9,7 +9,7 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { useState } from 'react'
-import JobAPI from '../../utils/JobAPI.js'
+import JobAPI from '../../utils/JobAPI'
 
 const ManageJobs = () => {
   const location = useLocation()
@@ -34,6 +34,22 @@ const ManageJobs = () => {
   let declinedApplicants = getDeclineApplicants()
   let offeredApplicants = getOfferApplicants()
 
+  const [state, setState] = useState([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
+
+  const [filteredApplicants, setFilteredApplicants] = useState([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
+
+  const handleInputChange = ({ target: { value } }) => {
+    let review = state[0].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
+
+    let interview = state[1].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
+
+    let decline = state[2].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
+
+    let offer = state[3].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
+
+    setFilteredApplicants([review, interview, decline, offer])
+    console.log(filteredApplicants)
+  }
 
   //used to reorder items in same col
   const reorder = (list, startIndex, endIndex) => {
@@ -85,9 +101,8 @@ const ManageJobs = () => {
    
 
     return newState;
-  };
+  }
 
-  const [state, setState] = useState([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
   function onDragEnd(result) {
     const { source, destination } = result;
 
@@ -157,17 +172,20 @@ const ManageJobs = () => {
           <Row>
             <Col>
               <h2>Review</h2>
+              <input
+                type="text"
+                className="filter"
+                placeholder="Filter Applicants"
+                onChange={handleInputChange}
+              />
               <Card className="usrCard">
 
                 <Droppable droppableId='Review' >
                   {(provided, snapshot) => (
 
-
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
-                      {true ? state[0].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
+                      {true ? filteredApplicants[0].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
                         {(provided, snapshot) => (
-
-
                           <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>{applicant.applicantName}</li>
                         )}</Draggable>) : <></>}
                       {provided.placeholder}
@@ -186,7 +204,7 @@ const ManageJobs = () => {
 
 
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
-                      {true? state[1].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
+                      {true? filteredApplicants[1].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
                         {(provided, snapshot) => (
 
 
@@ -208,7 +226,7 @@ const ManageJobs = () => {
 
 
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
-                      {true ? state[2].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
+                      {true ? filteredApplicants[2].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
                         {(provided, snapshot) => (
 
 
@@ -230,7 +248,7 @@ const ManageJobs = () => {
 
 
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
-                      {true ? state[3].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
+                      {true ? filteredApplicants[3].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
                         {(provided, snapshot) => (
 
 
