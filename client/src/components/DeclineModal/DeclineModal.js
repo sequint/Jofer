@@ -7,7 +7,10 @@ import './DeclineModal.css'
 
 const DeclineModal = ({ showState }) => {
   const [ show, setShow ] = useState(showState.state)
-  const [ delineReasons, setDeclineReasons ] = useState([])
+  const [ delineReasons, setDeclineReasons ] = useState({
+    reason:[],
+    actionItems:[]
+  })
 
   console.log('hello')
   console.log(show)
