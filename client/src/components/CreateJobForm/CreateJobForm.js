@@ -24,7 +24,10 @@ const CreateJobForm = () => {
 
   const handleRegisterUser = event => {
     event.preventDefault()
-    JobAPI.create(userState)
+    let{name,company,type}= userState
+    if(name!==''&&company!==''&&type !==''){
+
+      JobAPI.create(userState)
       .then(() => {
         alert('Job listing Created')
         setUserState({
@@ -37,6 +40,7 @@ const CreateJobForm = () => {
         })
       })
       .catch(err => console.error(err))
+    }
   }
   const handleAddEmail = event => {
     event.preventDefault()
