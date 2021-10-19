@@ -66,8 +66,8 @@ const ManageJobs = () => {
   const move = (source, destination, droppableSource, droppableDestination,sInd, dInd) => {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
-    const [removed] = sourceClone.splice(droppableSource.index, 1);
-   
+    const [removed] = filteredApplicants[sInd].splice(droppableSource.index, 1);
+    console.log(removed)
     removed.status= droppableDestination.droppableId
     
     JobAPI.getEmployerJobs()
@@ -93,8 +93,8 @@ const ManageJobs = () => {
     })
 
     destClone.splice(droppableDestination.index, 0, removed);
-    const newState = [...filteredApplicants];
-    newState[sInd] = sourceClone
+    const newState = [...state];
+    newState[sInd] = sourceClone.filter(applicant => applicant !== removed)
     newState[dInd] = destClone;
 
    
@@ -104,6 +104,7 @@ const ManageJobs = () => {
 
   function onDragEnd(result) {
     const { source, destination } = result;
+    const allInfo = result
 
     // dropped outside the list
     if (!destination) {
@@ -152,11 +153,14 @@ const ManageJobs = () => {
       setState(newState);
       setFilteredApplicants(newState)
     } else {
-      const result = move(filteredApplicants[sInd], filteredApplicants[dInd], source, destination,sInd, dInd);
+      console.log(allInfo)
+      console.log(state[sInd])
+      const result = move(state[sInd], state[dInd], source, destination,sInd, dInd);
      
       
       setState(result)
       setFilteredApplicants(result)
+      
     }
   }
 
@@ -168,6 +172,7 @@ const ManageJobs = () => {
       <PageTitle title="Job Manager - Job Title" />
       <input
         type="text"
+        name="filter"
         className="filter"
         placeholder="Filter Applicants"
         onChange={handleInputChange}
