@@ -6,18 +6,31 @@ import FormControl from 'react-bootstrap/FormControl'
 import './DeclineModal.css'
 
 const DeclineModal = ({ showState, setParentState }) => {
-  const [ show, setShow ] = useState(showState.state)
-  const [ delineReasons, setDeclineReasons ] = useState({
-    reason:[],
-    actionItems:[]
+  const [show, setShow] = useState(showState.state)
+  const [delineReasons, setDeclineReasons] = useState({
+    reason: [],
+    actionItems: []
   })
 
-  console.log('hello')
-  console.log(show)
+  const handleClose = (action) => {
+    switch (action) {
+      case 'revert':
 
-  const handleClose = () => {
-    setShow(false)
-    setParentState(false)
+        setShow(false)
+        setParentState(false)
+        console.log("revert clicked")
+        break
+      case 'declined':
+        setShow(false)
+        setParentState(false)
+        console.log('close clicked')
+        break
+      default:
+        setShow(false)
+        setParentState(false)
+        break
+    }
+   
   }
 
   const handleReasonAddClick = _ => {
@@ -63,10 +76,10 @@ const DeclineModal = ({ showState, setParentState }) => {
           <p>Please list a minimum of 3 skill sets the applicant can imporove on to be better prepared for a similar position in the future.</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="warning" onClick={handleClose}>
+          <Button variant="warning" onClick={()=>handleClose('revert')}>
             Revert Decline Status
           </Button>
-          <Button variant="danger" onClick={handleClose}>Decline</Button>
+          <Button variant="danger" onClick={()=>handleClose('declined')}>Decline</Button>
         </Modal.Footer>
       </Modal>
     </>
