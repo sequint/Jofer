@@ -125,6 +125,7 @@ const DeclineModal = ({ showState, setParentState }) => {
               />
             </svg>
           </InputGroup>
+          {declineReasons.actionItems ? declineReasons.actionItems.map(item => <li>{item}</li>) : <></>}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="warning" onClick={()=>handleClose('revert')}>
