@@ -19,7 +19,7 @@ const RegisterCard = () => {
         <Card.Title>Who are you signing up as?</Card.Title>
         <Row>
           <Col>
-            Are you an Applicate? Sign Up Below.
+            Are you an Applicant? Sign Up Below.
             <br />
             <Button
               className="mt-3"

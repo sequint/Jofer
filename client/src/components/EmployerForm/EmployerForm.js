@@ -11,7 +11,7 @@ const EmployerForm = () => {
     last_name: '',
     email: '',
     password: '',
-    user_type: '',
+    user_type: 'employer',
     company: ''
   })
 
