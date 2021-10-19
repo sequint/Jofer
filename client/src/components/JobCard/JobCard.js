@@ -1,6 +1,5 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import { Link } from 'react-router-dom'
 import './JobCard.css'
 
 const JobCard = ({ job }) => {
@@ -26,12 +25,7 @@ const JobCard = ({ job }) => {
           <Card.Text>
             Department: {job.type}
           </Card.Text>
-          <Link to={{
-            pathname: '/managejobs',
-            state: { job }
-          }}>
-            <Button variant="primary" onClick={saveToLocal}>Manage Job</Button>
-          </Link>
+          <Button variant="primary" onClick={saveToLocal}>Manage Job</Button>
         </Card.Body>
       </Card>
     </>
