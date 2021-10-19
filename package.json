@@ -11,6 +11,7 @@
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
+    
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,7 @@
     "passport": "0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.1.0",
-    "react-beautiful-dnd": "^13.1.0"
-  }
+    "passport-local-mongoose": "^6.1.0"
+  },
+  "devDependencies": {}
 }

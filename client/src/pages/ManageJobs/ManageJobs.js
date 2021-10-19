@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { useState } from 'react'
 import JobAPI from '../../utils/JobAPI'
+import DeclineModal from '../../components/DeclineModal/DeclineModal'
 import './ManageJobs.css'
 
 const ManageJobs = () => {
@@ -157,6 +158,7 @@ const ManageJobs = () => {
 
   return (
     <div className="manageJobsContainer">
+      <DeclineModal />
       <NavbarElem />
       <PageTitle title="Job Manager - Job Title" />
       <input
