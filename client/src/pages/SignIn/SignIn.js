@@ -4,12 +4,12 @@ import './SignIn.css'
 
 const Login = () => {
   return (
-    <>
-      <h1>LogIn Page</h1>
+    <main className="log">
       <Container className="login">
-          <SignInForm />
+        <h1 className="text-center mb-4 mt-5 Text">Log In</h1>
+        <SignInForm />
       </Container>
-    </>
+    </main>
   )
 }
 

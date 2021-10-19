@@ -44,8 +44,8 @@ const RegisterForm = () => {
 
       <FloatingLabel
         controlId="floatingInput"
-        label="First Name"
-        className="mb-3 col-4" >
+        label="👤 First Name"
+        className="mb-3 col-5 style" >
         <Form.Control
           type="text"
           placeholder="Enter your Fist Name"
@@ -56,8 +56,8 @@ const RegisterForm = () => {
 
       <FloatingLabel
         controlId="floatingInput"
-        label="Last Name"
-        className="mb-3 col-4" >
+        label="👥 Last Name"
+        className="mb-3 col-5 style" >
         <Form.Control
           type="text"
           placeholder="Enter your Last Name"
@@ -68,8 +68,8 @@ const RegisterForm = () => {
 
       <FloatingLabel
         controlId="floatingInput"
-        label="Email"
-        className="mb-3 col-4" >
+        label="📧 Email"
+        className="mb-3 col-5 style" >
         <Form.Control
           type="email"
           placeholder="Enter your email"
@@ -80,8 +80,8 @@ const RegisterForm = () => {
 
       <FloatingLabel
         controlId="floatingPassword"
-        label="Password"
-        className="mb-3 col-4">
+        label="🔐 Password"
+        className="mb-3 col-5 style">
         <Form.Control
           type="password"
           placeholder="Password"
@@ -91,8 +91,8 @@ const RegisterForm = () => {
       </FloatingLabel>
 
       <Button
-        className="mb-2 col-2"
-        variant="primary"
+        className="mb-2 col-5"
+        variant="primary style"
         type="submit"
         onClick={handleRegisterUser} >
         Register
