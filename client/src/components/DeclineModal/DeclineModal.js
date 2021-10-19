@@ -15,19 +15,20 @@ const DeclineModal = ({ showState, setParentState }) => {
   const handleClose = (action) => {
     switch (action) {
       case 'revert':
-
+        
         setShow(false)
-        setParentState(false)
+        setParentState(false,showState.applicant)
         console.log("revert clicked")
+        
         break
       case 'declined':
         setShow(false)
-        setParentState(false)
+        setParentState(false,false)
         console.log('close clicked')
         break
       default:
         setShow(false)
-        setParentState(false)
+        setParentState(false,false)
         break
     }
    
