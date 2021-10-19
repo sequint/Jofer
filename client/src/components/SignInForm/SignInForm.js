@@ -39,8 +39,8 @@ const SignInForm = () => {
 
       <FloatingLabel
         controlId="floatingInput"
-        label="Email address"
-        className="mb-3 col-4" >
+        label="📧 Email"
+        className="mb-3 col-5 style">
         <Form.Control
           type="email"
           placeholder="Enter your email"
@@ -51,8 +51,8 @@ const SignInForm = () => {
 
       <FloatingLabel
         controlId="floatingPassword"
-        label="Password"
-        className="mb-3 col-4">
+        label="🔐 Password"
+        className="mb-3 col-5 style">
         <Form.Control
           type="password"
           placeholder="Password"
@@ -62,7 +62,7 @@ const SignInForm = () => {
       </FloatingLabel>
 
       <Button
-        className="mb-2 col-2"
+        className="mb-2 col-5 style"
         variant="primary"
         type="submit"
         onClick={handleLoginUser} >
