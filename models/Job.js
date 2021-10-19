@@ -9,7 +9,14 @@ const Job = new Schema({
     applicantName: String,
     email: String,
     status: String,
-    declineReason: String
+    declined: [{
+      reason: [{
+        type: String
+      }],
+      actionItems: [{
+        type: String
+      }]
+    }]
   }],
   users: [{
     type: Schema.Types.ObjectId,

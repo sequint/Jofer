@@ -77,6 +77,7 @@ const ManageJobs = () => {
             elem.applicants.forEach((applicant, index)=>{
               if(applicant.email===removed.email){
                 applicant.status = droppableDestination.droppableId
+                
                 localStorage.setItem('clickedManageJob', JSON.stringify(elem))
                 JobAPI.update(job._id, elem)
                   .then(({ data }) => console.log(data))
