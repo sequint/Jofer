@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import NavbarElem from '../../components/NavbarElem'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -12,7 +13,21 @@ import './ManageJobs.css'
 
 const ManageJobs = () => {
   const location = useLocation()
-  const { job } = location.state
+  let { job } = location.state
+
+  console.log(job)
+
+
+  // JobAPI.getEmployerJobs()
+  //   .then(({ data }) => {
+  //     data.forEach(elem => {
+  //       if (elem._id === job._id) {
+  //         job = elem
+  //       }
+  //     })
+  //   })
+  //   .catch(err => console.log(err))
+
   
 
   const getReviewApplicants = _ => {
@@ -22,10 +37,10 @@ const ManageJobs = () => {
     return job.applicants.filter(applicant => applicant.status === 'Interview')
   }
   const getDeclineApplicants = _ => {
-    return job.applicants.filter(applicant => applicant.status === 'Decline')
+    return job.applicants.filter(applicant => applicant.status === 'Declined')
   }
   const getOfferApplicants = _ => {
-    return job.applicants.filter(applicant => applicant.status === 'Offer')
+    return job.applicants.filter(applicant => applicant.status === 'Offered')
   }
 
   let reviewApplicants = getReviewApplicants()
@@ -74,19 +89,17 @@ const ManageJobs = () => {
     .then(({data})=>{
       data.forEach(elem =>{
         if(elem._id===job._id){ 
-          elem.applicants.forEach(applicant=>{
+          elem.applicants.forEach((applicant, index)=>{
             if(applicant.email===removed.email){
               console.log(applicant.email)
+              console.log(droppableDestination.droppableId)
               applicant.status = droppableDestination.droppableId
-              
+              console.log(job)
+              console.log(elem)
+              JobAPI.update(job._id, elem)
+                .then(({ data }) => console.log(data))
+                .catch(err => console.log(err))
             }
-            
-            
-          })
-          
-          JobAPI.update(elem._id,{elem})
-          .then(()=>{
-            console.log('I think it worked')
           })
         }
       })
