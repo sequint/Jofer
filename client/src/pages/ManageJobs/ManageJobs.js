@@ -142,8 +142,7 @@ const ManageJobs = () => {
       setState(newState);
       setFilteredApplicants(newState)
     } else {
-      console.log(allInfo)
-      console.log(state[sInd])
+      
       const result = move(state[sInd], state[dInd], source, destination,sInd, dInd);
      
       
@@ -151,6 +150,37 @@ const ManageJobs = () => {
       setFilteredApplicants(result)
       
     }
+
+
+    // localStorage.setItem('clickedManageJob', JSON.stringify(elem))
+    if(dInd===2)
+    {
+      const declined = allInfo.draggableId
+      let declinedUsers = JSON.parse(localStorage.getItem('declined'))
+      if(declinedUsers){
+
+        let flag = declinedUsers.filter(email => email=== declined)
+        if(flag.length !=0){
+          console.log("dont do anything")
+
+        }else{
+          console.log("not in array")
+          //execute modal here
+
+
+          declinedUsers.push(declined)
+          localStorage.setItem('declined', JSON.stringify(declinedUsers))
+        }
+      }
+      else{
+        const declined = allInfo.draggableId
+        let declinedUsers = []
+        declinedUsers.push(declined)
+        console.log("no users in declined")
+        localStorage.setItem('declined', JSON.stringify(declinedUsers))
+      }
+    }
+
   }
 
 
