@@ -182,12 +182,12 @@ const ManageJobs = () => {
         localStorage.setItem(storage, JSON.stringify(declinedUsers))
 
         //execute modal here, since its the first instance of declined
-        setShowModal({ ...showModal, state: true,applicant:allInfo })
+        setShowModal({ ...showModal, state: true, applicant: allInfo })
       }
     }
   }
 
-  const setParentModalState = (theState,revert) => {
+  const setParentModalState = (theState, revert) => {
     setShowModal({ ...showModal, state: theState })
     if(revert)
     {
@@ -248,7 +248,7 @@ const ManageJobs = () => {
 
   return (
     <div className="manageJobsContainer">
-      {showModal.state === true ? <DeclineModal showState={showModal} setParentState={setParentModalState} /> : <></>}
+      {showModal.state === true ? <DeclineModal showState={showModal} setParentState={setParentModalState} job={job} /> : <></>}
       <NavbarElem />
       <PageTitle title="Job Manager - Job Title" />
       <input
