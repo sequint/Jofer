@@ -74,19 +74,17 @@ const ManageJobs = () => {
     .then(({data})=>{
       data.forEach(elem =>{
         if(elem._id===job._id){ 
-          elem.applicants.forEach(applicant=>{
+          elem.applicants.forEach((applicant, index)=>{
             if(applicant.email===removed.email){
               console.log(applicant.email)
+              console.log(droppableDestination.droppableId)
               applicant.status = droppableDestination.droppableId
-              
+              console.log(job)
+              console.log(elem)
+              JobAPI.update(job._id, elem)
+                .then(({ data }) => console.log(data))
+                .catch(err => console.log(err))
             }
-            
-            
-          })
-          
-          JobAPI.update(elem._id,{elem})
-          .then(()=>{
-            console.log('I think it worked')
           })
         }
       })
