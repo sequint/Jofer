@@ -25,10 +25,6 @@ const SignInForm = () => {
       .catch(err => console.error(err))
   }
 
-  const handleRegister = () => {
-    window.location = '/register'
-  }
-
   const handleHome = () => {
     window.location = '/'
   }
@@ -62,19 +58,11 @@ const SignInForm = () => {
       </FloatingLabel>
 
       <Button
-        className="mb-2 col-5 style"
+        className="mb-3 col-5 style"
         variant="primary"
         type="submit"
         onClick={handleLoginUser} >
         Sign In
-      </Button>
-
-      <Button
-        className="mb-3"
-        variant="light"
-        type="button"
-        onClick={handleRegister}>
-        Don't have an account? Sign Up.
       </Button>
 
       <Button
