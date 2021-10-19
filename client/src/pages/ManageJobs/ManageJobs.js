@@ -1,10 +1,8 @@
-import { useEffect } from 'react'
 import NavbarElem from '../../components/NavbarElem'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PageTitle from "../../components/PageTitle"
-import { useLocation } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { useState } from 'react'
@@ -12,23 +10,8 @@ import JobAPI from '../../utils/JobAPI'
 import './ManageJobs.css'
 
 const ManageJobs = () => {
-  const location = useLocation()
-  let { job } = location.state
 
-  console.log(job)
-
-
-  // JobAPI.getEmployerJobs()
-  //   .then(({ data }) => {
-  //     data.forEach(elem => {
-  //       if (elem._id === job._id) {
-  //         job = elem
-  //       }
-  //     })
-  //   })
-  //   .catch(err => console.log(err))
-
-  
+  let job = JSON.parse(localStorage.getItem('clickedManageJob'))
 
   const getReviewApplicants = _ => {
     return job.applicants.filter(applicant => applicant.status === 'Review')
@@ -62,7 +45,6 @@ const ManageJobs = () => {
     let offer = state[3].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
 
     setFilteredApplicants([review, interview, decline, offer])
-    console.log(filteredApplicants)
   }
 
   //used to reorder items in same col
@@ -81,36 +63,30 @@ const ManageJobs = () => {
   const move = (source, destination, droppableSource, droppableDestination,sInd, dInd) => {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
-    const [removed] = filteredApplicants[sInd].splice(droppableSource.index, 1);
-    console.log(removed)
+    const [removed] = filteredApplicants[sInd].splice(droppableSource.index, 1)
     removed.status= droppableDestination.droppableId
     
     JobAPI.getEmployerJobs()
-    .then(({data})=>{
-      data.forEach(elem =>{
-        if(elem._id===job._id){ 
-          elem.applicants.forEach((applicant, index)=>{
-            if(applicant.email===removed.email){
-              console.log(applicant.email)
-              console.log(droppableDestination.droppableId)
-              applicant.status = droppableDestination.droppableId
-              console.log(job)
-              console.log(elem)
-              JobAPI.update(job._id, elem)
-                .then(({ data }) => console.log(data))
-                .catch(err => console.log(err))
-            }
-          })
-        }
+      .then(({data})=>{
+        data.forEach(elem =>{
+          if(elem._id===job._id){ 
+            elem.applicants.forEach((applicant, index)=>{
+              if(applicant.email===removed.email){
+                applicant.status = droppableDestination.droppableId
+                localStorage.setItem('clickedManageJob', JSON.stringify(elem))
+                JobAPI.update(job._id, elem)
+                  .then(({ data }) => console.log(data))
+                  .catch(err => console.log(err))
+              }
+            })
+          }
+        })
       })
-    })
 
     destClone.splice(droppableDestination.index, 0, removed);
     const newState = [...state];
     newState[sInd] = sourceClone.filter(applicant => applicant !== removed)
     newState[dInd] = destClone;
-
-   
 
     return newState;
   }
