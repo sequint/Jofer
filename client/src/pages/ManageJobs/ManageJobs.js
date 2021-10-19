@@ -155,8 +155,10 @@ const ManageJobs = () => {
     // localStorage.setItem('clickedManageJob', JSON.stringify(elem))
     if(dInd===2)
     {
+      let storage = 'declined' + job._id 
+      console.log(storage)
       const declined = allInfo.draggableId
-      let declinedUsers = JSON.parse(localStorage.getItem('declined'))
+      let declinedUsers = JSON.parse(localStorage.getItem(storage))
       if(declinedUsers){
 
         let flag = declinedUsers.filter(email => email=== declined)
@@ -169,7 +171,7 @@ const ManageJobs = () => {
 
 
           declinedUsers.push(declined)
-          localStorage.setItem('declined', JSON.stringify(declinedUsers))
+          localStorage.setItem(storage, JSON.stringify(declinedUsers))
         }
       }
       else{
@@ -177,7 +179,9 @@ const ManageJobs = () => {
         let declinedUsers = []
         declinedUsers.push(declined)
         console.log("no users in declined")
-        localStorage.setItem('declined', JSON.stringify(declinedUsers))
+        localStorage.setItem(storage, JSON.stringify(declinedUsers))
+
+        //execute modal here, since its the first instance of declined
       }
     }
 
