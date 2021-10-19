@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import './DeclineModal.css'
 
-const DeclineModal = () => {
-  const [ show, setShow ] = useState(true)
+const DeclineModal = ({ showState }) => {
+  const [ show, setShow ] = useState(showState.state)
   const [ delineReasons, setDeclineReasons ] = useState([])
+
+  console.log('hello')
+  console.log(show)
 
   const handleClose = () => setShow(false)
 
