@@ -12,7 +12,8 @@ import './ManageJobs.css'
 
 const ManageJobs = () => {
   const [showModal, setShowModal] = useState({
-    state: false
+    state: false,
+    applicant:[]
   })
 
   let job = JSON.parse(localStorage.getItem('clickedManageJob'))
@@ -168,7 +169,7 @@ const ManageJobs = () => {
         let flag = declinedUsers.filter(email => email=== declined)
         if(flag.length !== 0){
         }else{
-          setShowModal({ ...showModal, state: true })
+          setShowModal({ ...showModal, state: true,applicant:allInfo })
           declinedUsers.push(declined)
           localStorage.setItem(storage, JSON.stringify(declinedUsers))
         }
@@ -181,13 +182,60 @@ const ManageJobs = () => {
         localStorage.setItem(storage, JSON.stringify(declinedUsers))
 
         //execute modal here, since its the first instance of declined
-        setShowModal({ ...showModal, state: true })
+        setShowModal({ ...showModal, state: true,applicant:allInfo })
       }
     }
   }
 
-  const setParentModalState = theState => {
+  const setParentModalState = (theState,revert) => {
     setShowModal({ ...showModal, state: theState })
+    if(revert)
+    {
+      console.log(revert)
+      const { source, destination } = revert;
+      let sInd = 0
+      let dInd = 0
+      switch (source.droppableId) {
+        case 'Review':
+          sInd = 0
+          break
+        case 'Interview':
+          sInd = 1
+          break
+        case 'Declined':
+          sInd = 2
+          break
+        case 'Offered':
+          sInd = 3
+          break
+        default:
+          break
+      }
+      switch (destination.droppableId) {
+        case 'Review':
+          dInd = 0
+          break
+        case 'Interview':
+          dInd = 1
+          break
+        case 'Declined':
+          dInd = 2
+          break
+        case 'Offered':
+          dInd = 3
+          break
+        default:
+          break
+      }
+
+      const result = move(state[dInd], state[sInd], destination, source,  dInd, sInd);
+
+
+      setState(result)
+      setFilteredApplicants(result)
+      
+
+    }
   }
 
   return (
