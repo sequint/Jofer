@@ -192,7 +192,7 @@ const ManageJobs = () => {
     if(revert)
     {
       console.log(revert)
-      const { source, destination } = revert;
+      const { source, destination,draggableId } = revert;
       let sInd = 0
       let dInd = 0
       switch (source.droppableId) {
@@ -229,12 +229,20 @@ const ManageJobs = () => {
       }
 
       const result = move(state[dInd], state[sInd], destination, source,  dInd, sInd);
-
-
       setState(result)
       setFilteredApplicants(result)
-      
 
+      let storage = 'declined' + job._id
+      console.log(draggableId)
+      let declinedUsers = JSON.parse(localStorage.getItem(storage))
+      
+      console.log(declinedUsers)
+      if (declinedUsers) {
+
+        let flag = declinedUsers.filter(email => email !== draggableId)
+        localStorage.setItem(storage, JSON.stringify(flag))
+           
+      }
     }
   }
 
