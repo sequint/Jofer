@@ -159,27 +159,15 @@ const ManageJobs = () => {
     // localStorage.setItem('clickedManageJob', JSON.stringify(elem))
     if(dInd===2)
     {
-      // setShowModal(false)
-      setShowModal({ ...showModal, state: false })
-      console.log('passing set statement')
-      console.log(showModal)
       let storage = 'declined' + job._id 
-      console.log(storage)
       const declined = allInfo.draggableId
       let declinedUsers = JSON.parse(localStorage.getItem(storage))
       if(declinedUsers){
 
         let flag = declinedUsers.filter(email => email=== declined)
         if(flag.length !== 0){
-          console.log("dont do anything")
-
         }else{
-          console.log("not in array")
-          //execute modal here
-          console.log('NEW MOTION 2')
-          console.log(showModal)
           setShowModal({ ...showModal, state: true })
-          console.log(showModal)
           declinedUsers.push(declined)
           localStorage.setItem(storage, JSON.stringify(declinedUsers))
         }
@@ -192,19 +180,18 @@ const ManageJobs = () => {
         localStorage.setItem(storage, JSON.stringify(declinedUsers))
 
         //execute modal here, since its the first instance of declined
-        console.log('NEW MOTION')
-        console.log(showModal)
         setShowModal({ ...showModal, state: true })
-        console.log(showModal)
       }
     }
   }
 
-
+  const setParentModalState = theState => {
+    setShowModal({ ...showModal, state: theState })
+  }
 
   return (
     <div className="manageJobsContainer">
-      {showModal.state === true ? <DeclineModal showState={showModal} /> : <></>}
+      {showModal.state === true ? <DeclineModal showState={showModal} setParentState={setParentModalState} /> : <></>}
       <NavbarElem />
       <PageTitle title="Job Manager - Job Title" />
       <input
