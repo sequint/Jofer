@@ -8,9 +8,10 @@ import './DeclineModal.css'
 const DeclineModal = ({ showState, setParentState }) => {
   const [show, setShow] = useState(showState.state)
   const [delineReasons, setDeclineReasons] = useState({
-    reason: [],
+    reasons: [],
     actionItems: []
   })
+  const [ input, setInput ] = useState()
 
   const handleClose = (action) => {
     switch (action) {
@@ -33,8 +34,12 @@ const DeclineModal = ({ showState, setParentState }) => {
    
   }
 
-  const handleReasonAddClick = _ => {
-    console.log('here')
+  const onReasonChange = ({ target: { value } }) => {
+    setInput(value)
+  }
+
+  const handleReasonAddClick = event => {
+    
   }
 
   return (
@@ -53,9 +58,11 @@ const DeclineModal = ({ showState, setParentState }) => {
           <p>Please add at least one decline reason below.</p>
           <InputGroup className="mb-3">
             <FormControl
-              placeholder="Recipient's username"
-              aria-label="Recipient's username"
+              placeholder="Enter Decline Reason"
+              aria-label="Decline reason"
               aria-describedby="basic-addon2"
+              value={input}
+              onChange={onReasonChange}
             />
             <svg className="addReason" onClick={handleReasonAddClick} fill="none" viewBox="0 0 24 24" height="40px" width="40px">
               <path
