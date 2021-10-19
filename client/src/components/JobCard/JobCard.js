@@ -6,6 +6,14 @@ import './JobCard.css'
 const JobCard = ({ job }) => {
   console.log(job._id)
 
+  const saveToLocal = event => {
+    event.preventDefault()
+
+    localStorage.setItem('clickedManageJob', JSON.stringify(job))
+    window.location = '/managejobs'
+
+  }
+
   return(
     <>
       <Card className="m-2">
@@ -22,7 +30,7 @@ const JobCard = ({ job }) => {
             pathname: '/managejobs',
             state: { job }
           }}>
-            <Button variant="primary">Manage Job</Button>
+            <Button variant="primary" onClick={saveToLocal}>Manage Job</Button>
           </Link>
         </Card.Body>
       </Card>
