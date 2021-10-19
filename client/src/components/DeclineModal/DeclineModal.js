@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -27,6 +27,7 @@ const DeclineModal = ({ showState, setParentState }) => {
         setParentState(false)
         console.log('close clicked')
         console.log(declineReasons)
+
         break
       default:
         setShow(false)
