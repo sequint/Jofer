@@ -43,8 +43,8 @@ const EmployerForm = () => {
 
       <FloatingLabel
         controlId="floatingInput"
-        label="First Name"
-        className="mb-3 col-4" >
+        label="👤 First Name"
+        className="mb-3 col-5 style" >
         <Form.Control
           type="text"
           placeholder="Enter your Fist Name"
@@ -55,8 +55,8 @@ const EmployerForm = () => {
 
       <FloatingLabel
         controlId="floatingInput"
-        label="Last Name"
-        className="mb-3 col-4" >
+        label="👥 Last Name"
+        className="mb-3 col-5 style" >
         <Form.Control
           type="text"
           placeholder="Enter your Last Name"
@@ -67,8 +67,8 @@ const EmployerForm = () => {
 
       <FloatingLabel
         controlId="floatingInput"
-        label="Company"
-        className="mb-3 col-4" >
+        label="🏢 Company"
+        className="mb-3 col-5 style" >
         <Form.Control
           type="text"
           placeholder="Enter your Company Name"
@@ -79,8 +79,8 @@ const EmployerForm = () => {
 
       <FloatingLabel
         controlId="floatingInput"
-        label="Email"
-        className="mb-3 col-4" >
+        label="📧 Email"
+        className="mb-3 col-5 style" >
         <Form.Control
           type="email"
           placeholder="Enter your email"
@@ -91,8 +91,8 @@ const EmployerForm = () => {
 
       <FloatingLabel
         controlId="floatingPassword"
-        label="Password"
-        className="mb-3 col-4">
+        label="🔐 Password"
+        className="mb-3 col-5 style">
         <Form.Control
           type="password"
           placeholder="Password"
@@ -102,7 +102,7 @@ const EmployerForm = () => {
       </FloatingLabel>
 
       <Button
-        className="mb-2 col-2"
+        className="mb-2 col-5"
         variant="primary"
         type="submit"
         onClick={handleRegisterUser} >

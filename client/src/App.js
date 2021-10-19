@@ -17,40 +17,38 @@ import RegisterAuth from './pages/RegisterAuth'
 const App = () => {
   return (
     <Router>
-      <div>
-        <Switch>
-          <Route exact path='/'>
-            <LandingPage />
-          </Route>
-          <Route exact path='/home'>
-            <Home />
-          </Route>
-          <Route path='/login'>
-            <Login />
-          </Route>
-          <Route path='/register'>
-            <RegisterAuth />
-          </Route>
-          <Route path='/auth'>
-            <Auth />
-          </Route>
-          <Route path='/employer'>
-            <EmployerAuth />
-          </Route>
-          <Route path='/postedjobs'>
-            <PostedJobs />
-          </Route>
-          <Route path='/managejobs'>
-            <ManageJobs />
-          </Route>
-          <Route path='/appliedjobs'>
-            <AppliedJobs />
-          </Route>
-          <Route path='/declinedjobs'>
-            <DeclinedJobs />
-          </Route>
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path='/'>
+          <LandingPage />
+        </Route>
+        <Route exact path='/home'>
+          <Home />
+        </Route>
+        <Route path='/login'>
+          <Login />
+        </Route>
+        <Route path='/register'>
+          <RegisterAuth />
+        </Route>
+        <Route path='/auth'>
+          <Auth />
+        </Route>
+        <Route path='/employer'>
+          <EmployerAuth />
+        </Route>
+        <Route path='/postedjobs'>
+          <PostedJobs />
+        </Route>
+        <Route path='/managejobs'>
+          <ManageJobs />
+        </Route>
+        <Route path='/appliedjobs'>
+          <AppliedJobs />
+        </Route>
+        <Route path='/declinedjobs'>
+          <DeclinedJobs />
+        </Route>
+      </Switch>
     </Router>
   )
 }

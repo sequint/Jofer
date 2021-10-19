@@ -23,7 +23,7 @@ const NavbarElem = () => {
             <NavDropdown.Item href='/managejobs'>Manage Jobs</NavDropdown.Item>
             <NavDropdown.Item href='/postedjobs'>Posted Jobs</NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link href='/auth'>Login</Nav.Link>
+          <Nav.Link href='/login'>Login</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
