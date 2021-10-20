@@ -25,29 +25,44 @@ const DeclineModal = ({ showState, setParentState, job }) => {
 
         break
       case 'declined':
-        setShow(false)
-        setParentState(false, false)
-        console.log('close clicked')
-        console.log(declineReasons)
-        console.log(job)
-        console.log(showState.applicant.draggableId)
-        JobAPI.getEmployerJobs()
-          .then(({ data }) => {
-            data.forEach(elem => {
-              if (elem._id === job._id) {
-                elem.applicants.forEach((applicant, index) => {
-                  if (applicant.email === showState.applicant.draggableId) {
-                    job.applicants[index].declined.reasons = declineReasons.reasons
-                    job.applicants[index].declined.actionItems = declineReasons.actionItems
-                    console.log(job)
-                    JobAPI.update(job._id, job)
-                      .then(({ data }) => console.log(data))
-                      .catch(err => console.log(err))
-                  }
-                })
-              }
+        if (declineReasons.reasons > 0 && declineReasons.actionItems > 0) {
+          setShow(false)
+          setParentState(false, false)
+          console.log('close clicked')
+          console.log(declineReasons)
+          console.log(job)
+          console.log(showState.applicant.draggableId)
+          JobAPI.getEmployerJobs()
+            .then(({ data }) => {
+              data.forEach(elem => {
+                if (elem._id === job._id) {
+                  elem.applicants.forEach((applicant, index) => {
+                    if (applicant.email === showState.applicant.draggableId) {
+                      job.applicants[index].declined.reasons = declineReasons.reasons
+                      job.applicants[index].declined.actionItems = declineReasons.actionItems
+                      console.log(job)
+                      JobAPI.update(job._id, job)
+                        .then(({ data }) => console.log(data))
+                        .catch(err => console.log(err))
+                    }
+                  })
+                }
+              })
             })
-          })
+        }
+        else {
+          if (declineReasons.reasons < 1 && declineReasons.actionItems < 1) {
+            console.log('both missing')
+          }
+          else {
+            if (declineReasons.reasons < 1) {
+              console.log('reasons missing')
+            }
+            else {
+              console.log('action items missing')
+            }
+          }
+        }
         break
       default:
         setShow(false)
@@ -58,7 +73,6 @@ const DeclineModal = ({ showState, setParentState, job }) => {
 
   const onReasonChange = ({ target: { value } }) => {
     setReasonInput(value)
-    // console.log(input)
   }
 
   const handleReasonAddClick = event => {
@@ -71,7 +85,6 @@ const DeclineModal = ({ showState, setParentState, job }) => {
 
   const onActionChange = ({ target: { value } }) => {
     setActionInput(value)
-    // console.log(input)
   }
 
   const handleActionAddClick = event => {
@@ -79,7 +92,6 @@ const DeclineModal = ({ showState, setParentState, job }) => {
     tempActionItems.push(actionInput)
     setDeclineReasons({ ...declineReasons, actionItems: tempActionItems })
     setActionInput('')
-    console.log(declineReasons.actionItems)
   }
 
   return (
