@@ -38,7 +38,7 @@ const NavbarElem = () => {
               </NavDropdown.Item>
               <NavDropdown.Item href="/postedjobs">Posted Jobs</NavDropdown.Item>
             </NavDropdown> */}
-          {true
+          {isEmployer
             ? (
               <Nav.Link href='/postedjobs'>Posted Jobs</Nav.Link>
             )
