@@ -2,25 +2,31 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import logo from '../../assets/jobrejectorlogo.png'
 import UserAPI from './../../utils/UserAPI'
-
+import { useState, useEffect } from 'react'
 const NavbarElem = () => {
 
+  const [isEmployer, setIsEmployer] = useState()
   const IsLoggedIn = localStorage.getItem('token')
-  let isEmployer
+  useEffect(() => {
+
+    UserAPI.getUser().then(({ data: { user_type } }) => {
+      console.log(user_type)
+      if (user_type === 'applicant') {
+        setIsEmployer(false)
+      } else {
+        setIsEmployer(true)
+      }
+    })
+  }, [])
+
 
   const handleSignOut = () => {
     localStorage.removeItem('token')
     window.loation = '/login'
   }
 
-  UserAPI.getUser().then(({ data: { user_type } }) => {
-    console.log(user_type)
-    if (user_type === 'applicant') {
-      isEmployer = false
-    } else {
-      isEmployer = true
-    }
-  })
+  
+  console.log(isEmployer)
 
   return (
     <Navbar bg='dark' variant='dark' expand='lg'>
