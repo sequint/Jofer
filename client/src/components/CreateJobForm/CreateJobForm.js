@@ -1,20 +1,19 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import JobAPI from '../../utils/JobAPI/index.js'
+import UserAPI from '../../utils/UserAPI/index.js'
 
 
-const CreateJobForm = (user) => {
-  
-  let company =user.user.company
-  console.log(company)
+const CreateJobForm = () => {
+
   const [userState, setUserState] = useState({
     name: '',
     applicantName:'',
-    company: company,
+    company: "",
     type: '',
     status: 'Review',
     email: '',
@@ -22,6 +21,11 @@ const CreateJobForm = (user) => {
     applicants: []
 
   })
+
+  UserAPI.getUser()
+    .then(({ data }) => setUserState({ ...userState, company: data.company }))
+
+
 
   const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
 
