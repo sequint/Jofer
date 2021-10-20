@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import JobAPI from '../../utils/JobAPI'
+import UserAPI from '../../utils/UserAPI/index.js'
 import Row from 'react-bootstrap/esm/Row'
 // import Col from 'react-bootstrap/esm/Col'
 import Form from 'react-bootstrap/Form'
 import './CreateJobModal.css'
 
-const CreateJob = () => {
+const CreateJob = ({ setParentState }) => {
   const [show, setShow] = useState(false)
   // const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -21,6 +22,12 @@ const CreateJob = () => {
     declineReason: '',
     applicants: []
   })
+
+  useEffect(() => {
+    UserAPI.getUser()
+      .then(({ data }) => setUserState({ ...userState, company: data.company }))
+  }, [])
+
 
   const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
 
@@ -38,11 +45,12 @@ const CreateJob = () => {
           setUserState({
             ...userState,
             name: '',
-            company: '',
             type: '',
             email: '',
             applicants: []
           })
+          UserAPI.getUser()
+            .then(({ data }) => setParentState(data))
         })
         .catch(err => console.error(err))
     }

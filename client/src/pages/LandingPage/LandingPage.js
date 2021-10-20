@@ -1,10 +1,8 @@
 import Header from '../../components/LandingPage/header'
-import NavbarElem from '../../components/NavbarElem'
 
-function LandingPage() {
+function LandingPage () {
   return (
-    <div className="app-wrapper">
-      <NavbarElem />
+    <div className='app-wrapper'>
       <Header />
       <style jsx global>{`
         .app-wrapper {
@@ -34,7 +32,8 @@ function LandingPage() {
             background-attachment: fixed;
           }
         }
-      `}</style>
+      `}
+      </style>
     </div>
   )
 }

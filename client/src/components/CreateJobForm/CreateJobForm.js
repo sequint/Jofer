@@ -1,17 +1,18 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import JobAPI from '../../utils/JobAPI/index.js'
+import UserAPI from '../../utils/UserAPI/index.js'
 
+const CreateJobForm = ({setParentState}) => {
 
-const CreateJobForm = () => {
   const [userState, setUserState] = useState({
     name: '',
     applicantName:'',
-    company: '',
+    company: "",
     type: '',
     status: 'Review',
     email: '',
@@ -19,43 +20,50 @@ const CreateJobForm = () => {
     applicants: []
 
   })
+  useEffect(() => {
+    UserAPI.getUser()
+      .then(({ data }) => setUserState({ ...userState, company: data.company }))
+  }, [])
 
   const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
 
   const handleRegisterUser = event => {
     event.preventDefault()
-    let{name,company,type}= userState
-    if(name!==''&&company!==''&&type !==''){
+
+    let { name, company, type } = userState
+    if (name !== '' && company !== '' && type !== '') {
 
       JobAPI.create(userState)
-      .then(() => {
-        alert('Job listing Created')
-        setUserState({
-          ...userState, 
-          name: '',
-          company: '',
-          type: '',
-          email:'',
-          applicants:[]
+        .then(() => {
+          alert('Job listing Created')
+          setUserState({
+            ...userState,
+            name: '',
+            type: '',
+            email: '',
+            applicants: []
+          })
         })
-      })
-      .catch(err => console.error(err))
+
+      UserAPI.getUser()
+        .then(({ data }) => setParentState(data))
     }
   }
+  
   const handleAddEmail = event => {
     event.preventDefault()
     console.log("clicked")
     console.log(userState.email)
     const applicant = {
-      email:userState.email,
-      applicantName:userState.applicantName,
+      email: userState.email,
+      applicantName: userState.applicantName,
       status: 'Review',
       declineReason: userState.declineReason
     }
     userState.applicants.push(applicant)
     console.log(userState.applicants)
     setUserState({
-      ...userState, email:'', applicantName:''
+      ...userState, email: '', applicantName: ''
     })
   }
 
@@ -135,7 +143,7 @@ const CreateJobForm = () => {
           <Col>
             <h3>Applicants</h3>
 
-            {userState ? userState.applicants.map(({applicantName}) => <li>{applicantName}</li>) : <></>}
+            {userState ? userState.applicants.map(({ applicantName }) => <li>{applicantName}</li>) : <></>}
 
           </Col>
         </Row>
