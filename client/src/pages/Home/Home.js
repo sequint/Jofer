@@ -10,7 +10,6 @@ import './Home.css'
 const Home = () => {
   
   useEffect(() => {
-    console.log('HELLO!!!!!!!')
     if (!localStorage.getItem("token")) {
       window.location = "/login"
     }
