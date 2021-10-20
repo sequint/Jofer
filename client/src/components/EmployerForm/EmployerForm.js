@@ -39,88 +39,102 @@ const EmployerForm = () => {
 
   return (
     <Form
-      className="form">
+      className='form'
+    >
 
       <FloatingLabel
-        controlId="floatingInput"
-        label="👤 First Name"
-        className="mb-3 col-5 style" >
+        controlId='floatingInput'
+        label='👤 First Name'
+        className='mb-3 col-5 style'
+      >
         <Form.Control
-          type="text"
-          placeholder="Enter your Fist Name"
-          name="first_name"
+          type='text'
+          placeholder='Enter your Fist Name'
+          name='first_name'
           value={userState.first_name}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </FloatingLabel>
 
       <FloatingLabel
-        controlId="floatingInput"
-        label="👥 Last Name"
-        className="mb-3 col-5 style" >
+        controlId='floatingInput'
+        label='👥 Last Name'
+        className='mb-3 col-5 style'
+      >
         <Form.Control
-          type="text"
-          placeholder="Enter your Last Name"
-          name="last_name"
+          type='text'
+          placeholder='Enter your Last Name'
+          name='last_name'
           value={userState.last_name}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </FloatingLabel>
 
       <FloatingLabel
-        controlId="floatingInput"
-        label="🏢 Company"
-        className="mb-3 col-5 style" >
+        controlId='floatingInput'
+        label='🏢 Company'
+        className='mb-3 col-5 style'
+      >
         <Form.Control
-          type="text"
-          placeholder="Enter your Company Name"
-          name="company"
+          type='text'
+          placeholder='Enter your Company Name'
+          name='company'
           value={userState.company}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </FloatingLabel>
 
       <FloatingLabel
-        controlId="floatingInput"
-        label="📧 Email"
-        className="mb-3 col-5 style" >
+        controlId='floatingInput'
+        label='📧 Email'
+        className='mb-3 col-5 style'
+      >
         <Form.Control
-          type="email"
-          placeholder="Enter your email"
-          name="email"
+          type='email'
+          placeholder='Enter your email'
+          name='email'
           value={userState.username}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </FloatingLabel>
 
       <FloatingLabel
-        controlId="floatingPassword"
-        label="🔐 Password"
-        className="mb-3 col-5 style">
+        controlId='floatingPassword'
+        label='🔐 Password'
+        className='mb-3 col-5 style'
+      >
         <Form.Control
-          type="password"
-          placeholder="Password"
-          name="password"
+          type='password'
+          placeholder='Password'
+          name='password'
           value={userState.password}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </FloatingLabel>
 
       <Button
-        className="mb-2 col-5"
-        variant="primary"
-        type="submit"
-        onClick={handleRegisterUser} >
+        className='mb-2 col-5'
+        variant='primary'
+        type='submit'
+        onClick={handleRegisterUser}
+      >
         Register
       </Button>
 
       <Button
-        className="mb-3"
-        variant="light"
-        type="button"
-        onClick={handleLogin}>
+        className='mb-3'
+        variant='light'
+        type='button'
+        onClick={handleLogin}
+      >
         Already have an account? Sign In.
       </Button>
 
       <Button
-        variant="link"
-        type="button"
-        onClick={handleHome}>
+        variant='link'
+        type='button'
+        onClick={handleHome}
+      >
         Home Page
       </Button>
 

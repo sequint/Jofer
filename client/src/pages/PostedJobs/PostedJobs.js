@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react"
-import NavbarElem from "../../components/NavbarElem"
-import PageTitle from "../../components/PageTitle"
-import JobCard from "../../components/JobCard"
-import UserAPI from "../../utils/UserAPI"
+import { useState, useEffect } from 'react'
+import NavbarElem from '../../components/NavbarElem'
+import PageTitle from '../../components/PageTitle'
+import JobCard from '../../components/JobCard'
+import UserAPI from '../../utils/UserAPI'
 import CreateJobForm from '../../components/CreateJobForm'
 
 const PostedJobs = () => {
-  const [ user, setUser ] = useState()
+  const [user, setUser] = useState()
 
   useEffect(() => {
     UserAPI.getUser()

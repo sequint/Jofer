@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
-import NavbarElem from "../../components/NavbarElem"
-import PageTitle from "../../components/PageTitle"
-import JobAPI from "../../utils/JobAPI"
+import { useState, useEffect } from 'react'
+import NavbarElem from '../../components/NavbarElem'
+import PageTitle from '../../components/PageTitle'
+import JobAPI from '../../utils/JobAPI'
 import JobCard from '../../components/JobCard/JobCard'
 
 const AppliedJobs = () => {
@@ -19,11 +19,11 @@ const AppliedJobs = () => {
   return (
     <>
       <NavbarElem />
-      <PageTitle title="My Jobs" />
+      <PageTitle title='My Jobs' />
       {jobs.map(job => <JobCard job={job} />)}
-      
+
     </>
-    
+
   )
 }
 
