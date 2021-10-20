@@ -3,9 +3,10 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
+import JobAPI from '../../utils/JobAPI'
 import './DeclineModal.css'
 
-const DeclineModal = ({ showState, setParentState }) => {
+const DeclineModal = ({ showState, setParentState, job }) => {
   const [show, setShow] = useState(showState.state)
   const [declineReasons, setDeclineReasons] = useState({
     reasons: [],
@@ -28,7 +29,25 @@ const DeclineModal = ({ showState, setParentState }) => {
         setParentState(false,false)
         console.log('close clicked')
         console.log(declineReasons)
-
+        console.log(job)
+        console.log(showState.applicant.draggableId)
+        JobAPI.getEmployerJobs()
+          .then(({ data }) => {
+            data.forEach(elem => {
+              if (elem._id === job._id) {
+                elem.applicants.forEach((applicant, index) => {
+                  if (applicant.email === showState.applicant.draggableId) {
+                    job.applicants[index].declined.reasons = declineReasons.reasons
+                    job.applicants[index].declined.actionItems = declineReasons.actionItems
+                    console.log(job)
+                    JobAPI.update(job._id, job)
+                      .then(({ data }) => console.log(data))
+                      .catch(err => console.log(err))
+                  }
+                })
+              }
+            })
+          })
         break
       default:
         setShow(false)
