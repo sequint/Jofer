@@ -9,15 +9,15 @@ import './Home.css'
 
 const Home = () => {
   
-  if (localStorage.getItem("token")) {
-      window.location = "/home";
-  } else {
-    window.location = "/login"
-  }
+  useEffect(() => {
+    console.log('HELLO!!!!!!!')
+    if (!localStorage.getItem("token")) {
+      window.location = "/login"
+    }
+  }, [])
 
   return (
     <>
-      {}
       <NavbarElem />
       <PageTitle title='Welcome User' />
     </>
