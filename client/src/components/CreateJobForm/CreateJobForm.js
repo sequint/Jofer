@@ -25,14 +25,11 @@ const CreateJobForm = ({setParentState}) => {
       .then(({ data }) => setUserState({ ...userState, company: data.company }))
   }, [])
 
- 
-
-
-
   const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
 
   const handleRegisterUser = event => {
     event.preventDefault()
+
     let { name, company, type } = userState
     if (name !== '' && company !== '' && type !== '') {
 
@@ -47,12 +44,12 @@ const CreateJobForm = ({setParentState}) => {
             applicants: []
           })
         })
-        UserAPI.getUser()
-          .then(({ data }) => setParentState(data))
-      })
-      .catch(err => console.error(err))
+
+      UserAPI.getUser()
+        .then(({ data }) => setParentState(data))
     }
   }
+  
   const handleAddEmail = event => {
     event.preventDefault()
     console.log("clicked")

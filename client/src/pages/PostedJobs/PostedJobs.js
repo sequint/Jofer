@@ -3,7 +3,7 @@ import NavbarElem from '../../components/NavbarElem'
 import PageTitle from '../../components/PageTitle'
 import JobCard from '../../components/JobCard'
 import UserAPI from '../../utils/UserAPI'
-import CreateJobForm from '../../components/CreateJobForm'
+import CreateJob from '../../components/CreateJobModal'
 
 const PostedJobs = () => {
 
