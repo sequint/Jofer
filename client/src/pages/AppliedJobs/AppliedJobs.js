@@ -5,6 +5,13 @@ import JobAPI from '../../utils/JobAPI'
 import JobCard from '../../components/JobCard/JobCard'
 
 const AppliedJobs = () => {
+
+  if (localStorage.getItem("token")) {
+    
+  } else {
+    window.location = "/login";
+  }
+
   const [jobs, setJobs] = useState([])
 
   // On page mount get the current user, extract their jobs array and set to state.
