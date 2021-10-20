@@ -14,11 +14,16 @@ const EmployerForm = () => {
     user_type: 'employer',
     company: ''
   })
+  function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
 
   const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
 
   const handleRegisterUser = event => {
     event.preventDefault()
+    if (validateEmail(userState.email)) {
     UserAPI.register(userState)
       .then(({ data: token }) => {
         alert('User Registered!')
@@ -27,6 +32,9 @@ const EmployerForm = () => {
         window.location = '/login'
       })
       .catch(err => console.error(err))
+    }else{
+      console.log("email not valid")
+    }
   }
 
   const handleLogin = () => {
