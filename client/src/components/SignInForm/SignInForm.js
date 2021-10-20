@@ -20,13 +20,13 @@ const SignInForm = () => {
         console.log(token)
         localStorage.setItem('token', token)
         setUserState({ ...userState, name: '', email: '', username: '', password: '' })
-        window.location = '/'
+        window.location = '/home'
       })
       .catch(err => console.error(err))
   }
 
   const handleHome = () => {
-    window.location = '/'
+    window.location = '/home'
   }
 
   return (
