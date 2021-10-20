@@ -25,7 +25,8 @@ const DeclineModal = ({ showState, setParentState, job }) => {
 
         break
       case 'declined':
-        if (declineReasons.reasons > 0 && declineReasons.actionItems > 0) {
+        if (declineReasons.reasons.length > 0 && declineReasons.actionItems.length > 0) {
+          console.log(declineReasons)
           setShow(false)
           setParentState(false, false)
           console.log('close clicked')
@@ -51,14 +52,17 @@ const DeclineModal = ({ showState, setParentState, job }) => {
             })
         }
         else {
-          if (declineReasons.reasons < 1 && declineReasons.actionItems < 1) {
+          if (declineReasons.reasons.length < 1 && declineReasons.actionItems.length < 1) {
+            console.log(declineReasons)
             console.log('both missing')
           }
           else {
-            if (declineReasons.reasons < 1) {
+            if (declineReasons.reasons.length < 1) {
+              console.log(declineReasons)
               console.log('reasons missing')
             }
             else {
+              console.log(declineReasons)
               console.log('action items missing')
             }
           }
