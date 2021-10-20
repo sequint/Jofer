@@ -6,6 +6,12 @@ import UserAPI from '../../utils/UserAPI'
 import CreateJobForm from '../../components/CreateJobForm'
 
 const PostedJobs = () => {
+
+  if (localStorage.getItem("token")) {
+  } else {
+    window.location = "/login";
+  }
+
   const [user, setUser] = useState()
 
   useEffect(() => {

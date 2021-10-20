@@ -11,6 +11,12 @@ import DeclineModal from '../../components/DeclineModal/DeclineModal'
 import './ManageJobs.css'
 
 const ManageJobs = () => {
+
+  if (localStorage.getItem("token")) {
+  } else {
+    window.location = "/login";
+  }
+
   const [showModal, setShowModal] = useState({
     state: false,
     applicant: []
