@@ -2,3 +2,12 @@
   cursor: pointer;
   color: lightskyblue;
 }
+
+.decline {
+  align-items: center !important;
+}
+
+.err {
+  color: red;
+
+}
