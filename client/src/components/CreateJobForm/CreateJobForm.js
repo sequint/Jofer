@@ -8,7 +8,7 @@ import JobAPI from '../../utils/JobAPI/index.js'
 import UserAPI from '../../utils/UserAPI/index.js'
 
 
-const CreateJobForm = () => {
+const CreateJobForm = ({setParentState}) => {
 
   const [userState, setUserState] = useState({
     name: '',
@@ -21,9 +21,12 @@ const CreateJobForm = () => {
     applicants: []
 
   })
+  useEffect(() => {
+    UserAPI.getUser()
+      .then(({ data }) => setUserState({ ...userState, company: data.company }))
+  }, [])
 
-  UserAPI.getUser()
-    .then(({ data }) => setUserState({ ...userState, company: data.company }))
+ 
 
 
 
@@ -44,6 +47,10 @@ const CreateJobForm = () => {
           email:'',
           applicants:[]
         })
+        UserAPI.getUser()
+          .then(({ data }) => setParentState(data))
+        
+
       })
       .catch(err => console.error(err))
     }

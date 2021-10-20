@@ -18,6 +18,10 @@ const PostedJobs = () => {
     return `Jobs Posted by ${user.first_name}`
   }
 
+  const setParentState = (data)=>{
+    setUser(data)
+  }
+
   console.log(user)
   
 
@@ -27,7 +31,7 @@ const PostedJobs = () => {
       {user ? <PageTitle title={displayTitle()} /> : <h1>Jobs Posted</h1>}
       {user ? user.jobs.map(job => <JobCard job={job} />) : <h1>You don't have any posted jobs</h1>}
       <CreateJobForm
-        user={user}
+        setParentState={setParentState}
        />
     </>
   )
