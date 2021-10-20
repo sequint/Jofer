@@ -3,24 +3,25 @@ import Nav from 'react-bootstrap/Nav'
 import logo from '../../assets/jobrejectorlogo.png'
 import UserAPI from './../../utils/UserAPI'
 
-const IsLoggedIn = localStorage.getItem('token')
-let isEmployer
-
-const handleSignOut = () => {
-  localStorage.removeItem('token')
-  window.loation = '/login'
-}
-
-UserAPI.getUser().then(({ data: { user_type } }) => {
-  console.log(user_type)
-  if (user_type === 'applicant') {
-    isEmployer = false
-  } else {
-    isEmployer = true
-  }
-})
-
 const NavbarElem = () => {
+
+  const IsLoggedIn = localStorage.getItem('token')
+  let isEmployer
+
+  const handleSignOut = () => {
+    localStorage.removeItem('token')
+    window.loation = '/login'
+  }
+
+  UserAPI.getUser().then(({ data: { user_type } }) => {
+    console.log(user_type)
+    if (user_type === 'applicant') {
+      isEmployer = false
+    } else {
+      isEmployer = true
+    }
+  })
+
   return (
     <Navbar bg='dark' variant='dark' expand='lg'>
       <img src={logo} alt='' width='70' />
