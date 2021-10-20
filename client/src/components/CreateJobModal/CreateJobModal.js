@@ -1,38 +1,40 @@
 import { useState,useEffect } from 'react'
-import Form from 'react-bootstrap/Form'
+import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import JobAPI from '../../utils/JobAPI/index.js'
+import JobAPI from '../../utils/JobAPI'
 import UserAPI from '../../utils/UserAPI/index.js'
+import Row from 'react-bootstrap/esm/Row'
+// import Col from 'react-bootstrap/esm/Col'
+import Form from 'react-bootstrap/Form'
 
-const CreateJobForm = ({setParentState}) => {
-
+const CreateJob = ({ setParentState }) => {
+  const [show, setShow] = useState(false)
+  // const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
   const [userState, setUserState] = useState({
     name: '',
-    applicantName:'',
-    company: "",
+    applicantName: '',
+    company: '',
     type: '',
     status: 'Review',
     email: '',
     declineReason: '',
     applicants: []
-
   })
+
   useEffect(() => {
     UserAPI.getUser()
       .then(({ data }) => setUserState({ ...userState, company: data.company }))
   }, [])
 
- 
-
-
 
   const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
 
   const handleRegisterUser = event => {
-    event.preventDefault()
+    if (event) {
+      event.preventDefault()
+    }
+    setShow(false)
     let { name, company, type } = userState
     if (name !== '' && company !== '' && type !== '') {
 
@@ -46,11 +48,10 @@ const CreateJobForm = ({setParentState}) => {
             email: '',
             applicants: []
           })
+          UserAPI.getUser()
+            .then(({ data }) => setParentState(data))
         })
-        UserAPI.getUser()
-          .then(({ data }) => setParentState(data))
-      })
-      .catch(err => console.error(err))
+        .catch(err => console.error(err))
     }
   }
   const handleAddEmail = event => {
@@ -72,9 +73,26 @@ const CreateJobForm = ({setParentState}) => {
 
   return (
     <>
-      <Container>
-        <Row>
-          <Col>
+      <Button
+        varient="primary"
+        onClick={handleShow}>
+        Post Job
+      </Button>
+
+      <Modal
+        show={show}
+        onHide={handleRegisterUser}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            Post A New Job
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <Row>
             <Form>
               <Form.Group className='mb-3' controlId='name'>
                 <Form.Label>Name</Form.Label>
@@ -126,33 +144,38 @@ const CreateJobForm = ({setParentState}) => {
                   onChange={handleInputChange}
                 />
                 <Button
+                  className="mt-3"
                   variant='primary'
                   type='submit'
                   onClick={handleAddEmail}
                 >
-                  +
+                  Add Applicant
                 </Button>
               </Form.Group>
-
-              <Button
-                variant='primary'
-                type='submit'
-                onClick={handleRegisterUser}
-              >
-                Register
-              </Button>
             </Form>
-          </Col>
-          <Col>
+          </Row>
+
+          <hr />
+
+          <Row>
             <h3>Applicants</h3>
 
             {userState ? userState.applicants.map(({ applicantName }) => <li>{applicantName}</li>) : <></>}
+          </Row>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant='primary'
+            type='submit'
+            onClick={handleRegisterUser}
+          >
+            Post Job
+          </Button>
+        </Modal.Footer>
 
-          </Col>
-        </Row>
-      </Container>
+      </Modal>
     </>
   )
 }
 
-export default CreateJobForm
+export default CreateJob

@@ -17,17 +17,27 @@ const RegisterForm = () => {
 
   const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
 
+  function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
   const handleRegisterUser = event => {
     event.preventDefault()
     console.log(userState)
-    UserAPI.register(userState)
-      .then(({ data: token }) => {
-        alert('User Registered!')
-        localStorage.setItem('token', token)
-        setUserState({ ...userState, first_name: '', last_name: '', email: '', password: '' })
-        window.location = '/login'
-      })
-      .catch(err => console.error(err))
+    if(validateEmail(userState.email)){
+      console.log(userState.email)
+      UserAPI.register(userState)
+        .then(() => {
+          alert('User Registered!')
+          setUserState({ ...userState, first_name: '', last_name: '', email: '', password: '' })
+          window.location = '/login'
+        })
+        .catch(err => console.error(err))
+    }else{
+      console.log("email not valid")
+    }
+   
   }
 
   const handleLogin = () => {
