@@ -1,8 +1,8 @@
 
 const PageTitle = ({ title }) => {
-  return(
+  return (
     <>
-      <h1 className="text-center pt-3 pb-3">{title}</h1>
+      <h1 className='text-center pt-3 pb-3'>{title}</h1>
     </>
   )
 }

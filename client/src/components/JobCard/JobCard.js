@@ -10,13 +10,12 @@ const JobCard = ({ job }) => {
 
     localStorage.setItem('clickedManageJob', JSON.stringify(job))
     window.location = '/managejobs'
-
   }
 
-  return(
+  return (
     <>
-      <Card className="m-2">
-        <Card.Header className="status" as="h5">{job.status}</Card.Header>
+      <Card className='m-2'>
+        <Card.Header className='status' as='h5'>{job.status}</Card.Header>
         <Card.Body>
           <Card.Title>{job.name}</Card.Title>
           <Card.Text>
@@ -25,7 +24,7 @@ const JobCard = ({ job }) => {
           <Card.Text>
             Department: {job.type}
           </Card.Text>
-          <Button variant="primary" onClick={saveToLocal}>Manage Job</Button>
+          <Button variant='primary' onClick={saveToLocal}>Manage Job</Button>
         </Card.Body>
       </Card>
     </>

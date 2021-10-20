@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <NavbarElem />
-      <PageTitle title="Welcome User" />
+      <PageTitle title='Welcome User' />
     </>
   )
 }

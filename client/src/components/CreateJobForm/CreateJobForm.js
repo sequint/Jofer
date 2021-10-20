@@ -6,7 +6,6 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import JobAPI from '../../utils/JobAPI/index.js'
 
-
 const CreateJobForm = (user) => {
   
   let company =user.user.company
@@ -27,37 +26,35 @@ const CreateJobForm = (user) => {
 
   const handleRegisterUser = event => {
     event.preventDefault()
-    let{name,company,type}= userState
-    if(name!==''&&company!==''&&type !==''){
-
+    const { name, company, type } = userState
+    if (name !== '' && company !== '' && type !== '') {
       JobAPI.create(userState)
-      .then(() => {
-        alert('Job listing Created')
-        setUserState({
-          ...userState, 
-          name: '',
-          type: '',
-          email:'',
-          applicants:[]
+        .then(() => {
+          alert('Job listing Created')
+          setUserState({
+            ...userState, 
+            name: '',
+            type: '',
+            email:'',
+            applicants:[]
         })
-      })
-      .catch(err => console.error(err))
+        .catch(err => console.error(err))
     }
   }
   const handleAddEmail = event => {
     event.preventDefault()
-    console.log("clicked")
+    console.log('clicked')
     console.log(userState.email)
     const applicant = {
-      email:userState.email,
-      applicantName:userState.applicantName,
+      email: userState.email,
+      applicantName: userState.applicantName,
       status: 'Review',
       declineReason: userState.declineReason
     }
     userState.applicants.push(applicant)
     console.log(userState.applicants)
     setUserState({
-      ...userState, email:'', applicantName:''
+      ...userState, email: '', applicantName: ''
     })
   }
 
@@ -137,7 +134,7 @@ const CreateJobForm = (user) => {
           <Col>
             <h3>Applicants</h3>
 
-            {userState ? userState.applicants.map(({applicantName}) => <li>{applicantName}</li>) : <></>}
+            {userState ? userState.applicants.map(({ applicantName }) => <li>{applicantName}</li>) : <></>}
 
           </Col>
         </Row>
