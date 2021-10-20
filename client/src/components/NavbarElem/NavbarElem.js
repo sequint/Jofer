@@ -32,22 +32,28 @@ const NavbarElem = () => {
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='me-auto'>
           <Nav.Link href='/home'>Home</Nav.Link>
-          {isEmployer
+          {/* <NavDropdown title="Jobs" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/appliedjobs">
+                Applied Jobs
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/postedjobs">Posted Jobs</NavDropdown.Item>
+            </NavDropdown> */}
+          {true
             ? (
               <Nav.Link href='/postedjobs'>Posted Jobs</Nav.Link>
-              )
-              : (
+            )
+            : (
               <Nav.Link href='/appliedjobs'>Applied Jobs</Nav.Link>
-              )}
+            )}
           {IsLoggedIn
             ? (
               <Nav.Link onClick={handleSignOut} href='/login'>
                 Log Out
               </Nav.Link>
-              )
+            )
             : (
               <Nav.Link href='/login'>Log In</Nav.Link>
-              )}
+            )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
