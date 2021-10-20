@@ -93,7 +93,6 @@ const ManageJobs = () => {
     const newState = [...state];
     newState[sInd] = sourceClone.filter(applicant => applicant !== removed)
     newState[dInd] = destClone;
-
     return newState;
   }
 
