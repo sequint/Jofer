@@ -7,7 +7,6 @@ import Col from 'react-bootstrap/Col'
 import JobAPI from '../../utils/JobAPI/index.js'
 import UserAPI from '../../utils/UserAPI/index.js'
 
-
 const CreateJobForm = ({setParentState}) => {
 
   const [userState, setUserState] = useState({
@@ -34,23 +33,22 @@ const CreateJobForm = ({setParentState}) => {
 
   const handleRegisterUser = event => {
     event.preventDefault()
-    let{name,company,type}= userState
-    if(name!==''&&company!==''&&type !==''){
+    let { name, company, type } = userState
+    if (name !== '' && company !== '' && type !== '') {
 
       JobAPI.create(userState)
-      .then(() => {
-        alert('Job listing Created')
-        setUserState({
-          ...userState, 
-          name: '',
-          type: '',
-          email:'',
-          applicants:[]
+        .then(() => {
+          alert('Job listing Created')
+          setUserState({
+            ...userState,
+            name: '',
+            type: '',
+            email: '',
+            applicants: []
+          })
         })
         UserAPI.getUser()
           .then(({ data }) => setParentState(data))
-        
-
       })
       .catch(err => console.error(err))
     }
@@ -60,15 +58,15 @@ const CreateJobForm = ({setParentState}) => {
     console.log("clicked")
     console.log(userState.email)
     const applicant = {
-      email:userState.email,
-      applicantName:userState.applicantName,
+      email: userState.email,
+      applicantName: userState.applicantName,
       status: 'Review',
       declineReason: userState.declineReason
     }
     userState.applicants.push(applicant)
     console.log(userState.applicants)
     setUserState({
-      ...userState, email:'', applicantName:''
+      ...userState, email: '', applicantName: ''
     })
   }
 
@@ -148,7 +146,7 @@ const CreateJobForm = ({setParentState}) => {
           <Col>
             <h3>Applicants</h3>
 
-            {userState ? userState.applicants.map(({applicantName}) => <li>{applicantName}</li>) : <></>}
+            {userState ? userState.applicants.map(({ applicantName }) => <li>{applicantName}</li>) : <></>}
 
           </Col>
         </Row>

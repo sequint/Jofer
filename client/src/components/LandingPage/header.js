@@ -1,28 +1,28 @@
 const Header = () => {
   return (
     <header>
-      <div className="intro-logo jumbo-bg">
+      <div className='intro-logo jumbo-bg'>
         <h1>Welcome to Rejector</h1>
         <h3>Elegant Way to Get Declined</h3>
         <img
-          src=""
-          className=""
-          alt=""
+          src=''
+          className=''
+          alt=''
         />
-        <div className="intro-button">
-          <a href="">Get Started</a>
+        <div className='intro-button'>
+          <a href='/home'>Get Started</a>
         </div>
-        <div className="company-icons">
-          <span className="company-icons__item">
-            <i className="fab fa-apple" />
+        <div className='company-icons'>
+          <span className='company-icons__item'>
+            <i className='fab fa-apple' />
             app store
           </span>
-          <span className="company-icons__item">
-            <i className="fab fa-google-play" />
+          <span className='company-icons__item'>
+            <i className='fab fa-google-play' />
             google play
           </span>
-          <span className="company-icons__item">
-            <i className="fab fa-windows" />
+          <span className='company-icons__item'>
+            <i className='fab fa-windows' />
             windows
           </span>
         </div>
@@ -107,7 +107,8 @@ const Header = () => {
           color: var(--brand-color);
           cursor: pointer;
         }
-      `}</style>
+      `}
+      </style>
     </header>
   )
 }

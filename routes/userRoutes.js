@@ -48,5 +48,4 @@ router.post('/users/login', (req, res) => {
   })
 })
 
-
 module.exports = router

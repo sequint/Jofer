@@ -1,11 +1,17 @@
-import { useState, useEffect } from "react"
-import NavbarElem from "../../components/NavbarElem"
-import PageTitle from "../../components/PageTitle"
-import JobCard from "../../components/JobCard"
-import UserAPI from "../../utils/UserAPI"
-import CreateJob from "../../components/CreateJobModal"
+import { useState, useEffect } from 'react'
+import NavbarElem from '../../components/NavbarElem'
+import PageTitle from '../../components/PageTitle'
+import JobCard from '../../components/JobCard'
+import UserAPI from '../../utils/UserAPI'
+import CreateJobForm from '../../components/CreateJobForm'
 
 const PostedJobs = () => {
+
+  if (localStorage.getItem("token")) {
+  } else {
+    window.location = "/login";
+  }
+  
   const [user, setUser] = useState()
 
   useEffect(() => {

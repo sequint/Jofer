@@ -31,44 +31,51 @@ const SignInForm = () => {
 
   return (
     <Form
-      className="form">
+      className='form'
+    >
 
       <FloatingLabel
-        controlId="floatingInput"
-        label="📧 Email"
-        className="mb-3 col-5 style">
+        controlId='floatingInput'
+        label='📧 Email'
+        className='mb-3 col-5 style'
+      >
         <Form.Control
-          type="email"
-          placeholder="Enter your email"
-          name="username"
+          type='email'
+          placeholder='Enter your email'
+          name='username'
           value={userState.username}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </FloatingLabel>
 
       <FloatingLabel
-        controlId="floatingPassword"
-        label="🔐 Password"
-        className="mb-3 col-5 style">
+        controlId='floatingPassword'
+        label='🔐 Password'
+        className='mb-3 col-5 style'
+      >
         <Form.Control
-          type="password"
-          placeholder="Password"
-          name="password"
+          type='password'
+          placeholder='Password'
+          name='password'
           value={userState.password}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
       </FloatingLabel>
 
       <Button
-        className="mb-3 col-5 style"
-        variant="primary"
-        type="submit"
-        onClick={handleLoginUser} >
+        className='mb-3 col-5 style'
+        variant='primary'
+        type='submit'
+        onClick={handleLoginUser}
+      >
         Sign In
       </Button>
 
       <Button
-        variant="link"
-        type="button"
-        onClick={handleHome}>
+        variant='link'
+        type='button'
+        onClick={handleHome}
+      >
         Go Home
       </Button>
 

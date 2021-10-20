@@ -1,10 +1,17 @@
-import { useState, useEffect } from "react"
-import NavbarElem from "../../components/NavbarElem"
-import PageTitle from "../../components/PageTitle"
-import JobAPI from "../../utils/JobAPI"
+import { useState, useEffect } from 'react'
+import NavbarElem from '../../components/NavbarElem'
+import PageTitle from '../../components/PageTitle'
+import JobAPI from '../../utils/JobAPI'
 import JobCard from '../../components/JobCard/JobCard'
 
 const AppliedJobs = () => {
+
+  if (localStorage.getItem("token")) {
+    
+  } else {
+    window.location = "/login";
+  }
+
   const [jobs, setJobs] = useState([])
 
   // On page mount get the current user, extract their jobs array and set to state.
@@ -19,11 +26,11 @@ const AppliedJobs = () => {
   return (
     <>
       <NavbarElem />
-      <PageTitle title="My Jobs" />
+      <PageTitle title='My Jobs' />
       {jobs.map(job => <JobCard job={job} />)}
-      
+
     </>
-    
+
   )
 }
 
