@@ -71,15 +71,15 @@ const ManageJobs = () => {
 
   const move = (source, destination, droppableSource, droppableDestination, sInd, dInd) => {
 
-    if(sInd==='Declined'){
-      console.log('it is in declined')
-
-    }
+    
 
     const sourceClone = Array.from(source)
     const destClone = Array.from(destination)
     const [removed] = filteredApplicants[sInd].splice(droppableSource.index, 1)
-    removed.status = droppableDestination.droppableId
+    // removed.status = droppableDestination.droppableId
+    console.log(droppableDestination.droppableId)
+
+    
 
     JobAPI.getEmployerJobs()
       .then(({ data }) => {
@@ -88,7 +88,6 @@ const ManageJobs = () => {
             elem.applicants.forEach((applicant, index) => {
               if (applicant.email === removed.email) {
                 applicant.status = droppableDestination.droppableId
-
                 localStorage.setItem('clickedManageJob', JSON.stringify(elem))
                 JobAPI.update(job._id, elem)
                   .then(({ data }) => console.log(data))
@@ -148,6 +147,7 @@ const ManageJobs = () => {
       default:
         break
     }
+    console.log(allInfo)
 
     if (sInd === dInd) {
       const items = reorder(filteredApplicants[sInd], source.index, destination.index)
@@ -155,7 +155,38 @@ const ManageJobs = () => {
       newState[sInd] = items
       setState(newState)
       setFilteredApplicants(newState)
-    } else {
+    }
+     else if(sInd===2) {
+      JobAPI.getEmployerJobs()
+        .then(({ data }) => {
+          data.forEach(elem => {
+            if (elem._id === job._id) {
+              elem.applicants.forEach((applicant, index) => {
+                if (applicant.email === allInfo.email) {
+                 
+                    console.log('it was in declined')
+                    let reason = applicant.declined.reasons[0]
+                    if (reason !== "im not sure why") {
+
+                      console.log("user has been declined already")
+                      revertDecline(allInfo)
+                      
+
+                    }else{
+                      const result = move(state[sInd], state[dInd], source, destination, sInd, dInd)
+
+                      setState(result)
+                      setFilteredApplicants(result)
+                    }
+                }
+              })
+            }
+          })
+        })
+
+     
+    }
+    else{
       const result = move(state[sInd], state[dInd], source, destination, sInd, dInd)
 
       setState(result)
@@ -188,49 +219,56 @@ const ManageJobs = () => {
     }
   }
 
+  const revertDecline=(object)=>{
+  
+    const { source, destination,  } = object
+    let sInd = 0
+    let dInd = 0
+    switch (source.droppableId) {
+      case 'Review':
+        sInd = 0
+        break
+      case 'Interview':
+        sInd = 1
+        break
+      case 'Declined':
+        sInd = 2
+        break
+      case 'Offered':
+        sInd = 3
+        break
+      default:
+        break
+    }
+    switch (destination.droppableId) {
+      case 'Review':
+        dInd = 0
+        break
+      case 'Interview':
+        dInd = 1
+        break
+      case 'Declined':
+        dInd = 2
+        break
+      case 'Offered':
+        dInd = 3
+        break
+      default:
+        break
+    }
+
+    const result = move(state[dInd], state[sInd], destination, source, dInd, sInd)
+    setState(result)
+    setFilteredApplicants(result)
+    
+  }
+
   const setParentModalState = (theState, revert) => {
     setShowModal({ ...showModal, state: theState })
     if (revert) {
-      console.log(revert)
-      const { source, destination, draggableId } = revert
-      let sInd = 0
-      let dInd = 0
-      switch (source.droppableId) {
-        case 'Review':
-          sInd = 0
-          break
-        case 'Interview':
-          sInd = 1
-          break
-        case 'Declined':
-          sInd = 2
-          break
-        case 'Offered':
-          sInd = 3
-          break
-        default:
-          break
-      }
-      switch (destination.droppableId) {
-        case 'Review':
-          dInd = 0
-          break
-        case 'Interview':
-          dInd = 1
-          break
-        case 'Declined':
-          dInd = 2
-          break
-        case 'Offered':
-          dInd = 3
-          break
-        default:
-          break
-      }
-
-      const result = move(state[dInd], state[sInd], destination, source, dInd, sInd)
-      setState(result)
-      setFilteredApplicants(result)
+      revertDecline(revert)
+      const {draggableId } = revert
+      
 
       const storage = 'declined' + job._id
       console.log(draggableId)
