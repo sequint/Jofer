@@ -10,7 +10,7 @@ const Header = () => {
           alt=''
         />
         <div className='intro-button'>
-          <a href=''>Get Started</a>
+          <a href='/home'>Get Started</a>
         </div>
         <div className='company-icons'>
           <span className='company-icons__item'>
