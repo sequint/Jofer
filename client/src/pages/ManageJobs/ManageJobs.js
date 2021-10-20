@@ -70,6 +70,12 @@ const ManageJobs = () => {
   // Moves an item from one list to another list.
 
   const move = (source, destination, droppableSource, droppableDestination, sInd, dInd) => {
+
+    if(sInd==='Declined'){
+      console.log('it is in declined')
+
+    }
+
     const sourceClone = Array.from(source)
     const destClone = Array.from(destination)
     const [removed] = filteredApplicants[sInd].splice(droppableSource.index, 1)
