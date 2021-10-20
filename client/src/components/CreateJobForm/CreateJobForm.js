@@ -6,11 +6,14 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import JobAPI from '../../utils/JobAPI/index.js'
 
-const CreateJobForm = () => {
+const CreateJobForm = (user) => {
+  
+  let company =user.user.company
+  console.log(company)
   const [userState, setUserState] = useState({
     name: '',
-    applicantName: '',
-    company: '',
+    applicantName:'',
+    company: company,
     type: '',
     status: 'Review',
     email: '',
@@ -29,13 +32,11 @@ const CreateJobForm = () => {
         .then(() => {
           alert('Job listing Created')
           setUserState({
-            ...userState,
+            ...userState, 
             name: '',
-            company: '',
             type: '',
-            email: '',
-            applicants: []
-          })
+            email:'',
+            applicants:[]
         })
         .catch(err => console.error(err))
     }

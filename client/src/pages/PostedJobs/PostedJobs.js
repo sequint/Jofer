@@ -19,13 +19,16 @@ const PostedJobs = () => {
   }
 
   console.log(user)
+  
 
   return (
     <>
       <NavbarElem />
       {user ? <PageTitle title={displayTitle()} /> : <h1>Jobs Posted</h1>}
       {user ? user.jobs.map(job => <JobCard job={job} />) : <h1>You don't have any posted jobs</h1>}
-      <CreateJobForm />
+      <CreateJobForm
+        user={user}
+       />
     </>
   )
 }

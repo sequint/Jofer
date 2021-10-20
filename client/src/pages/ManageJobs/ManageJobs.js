@@ -90,9 +90,8 @@ const ManageJobs = () => {
     destClone.splice(droppableDestination.index, 0, removed)
     const newState = [...state]
     newState[sInd] = sourceClone.filter(applicant => applicant !== removed)
-    newState[dInd] = destClone
-
-    return newState
+    newState[dInd] = destClone;
+    return newState;
   }
 
   function onDragEnd (result) {
