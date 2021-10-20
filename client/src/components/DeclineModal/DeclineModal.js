@@ -14,6 +14,10 @@ const DeclineModal = ({ showState, setParentState, job }) => {
   })
   const [reasonInput, setReasonInput] = useState()
   const [actionInput, setActionInput] = useState()
+  const [ missingInput, setMissingInput ] =useState({
+    reasons: false,
+    actionItems: false
+  })
 
   const handleClose = (action) => {
     switch (action) {
@@ -25,7 +29,9 @@ const DeclineModal = ({ showState, setParentState, job }) => {
 
         break
       case 'declined':
-        if (declineReasons.reasons > 0 && declineReasons.actionItems > 0) {
+
+        if (declineReasons.reasons.length > 0 && declineReasons.actionItems.length > 0) {
+          console.log(declineReasons)
           setShow(false)
           setParentState(false, false)
           console.log('close clicked')
@@ -51,15 +57,19 @@ const DeclineModal = ({ showState, setParentState, job }) => {
             })
         }
         else {
-          if (declineReasons.reasons < 1 && declineReasons.actionItems < 1) {
-            console.log('both missing')
+          if (declineReasons.reasons.length < 1 && declineReasons.actionItems.length < 1) {
+            console.log(declineReasons)
+            setMissingInput({ reasons: true, actionItems: true })
           }
           else {
-            if (declineReasons.reasons < 1) {
-              console.log('reasons missing')
+            if (declineReasons.reasons.length < 1) {
+              console.log(declineReasons)
+              setMissingInput({ ...missingInput, reasons: true })
             }
             else {
-              console.log('action items missing')
+              console.log(declineReasons)
+              console.log('in missing action items conditional')
+              setMissingInput({ ...missingInput, actionItems: true })
             }
           }
         }
@@ -80,7 +90,7 @@ const DeclineModal = ({ showState, setParentState, job }) => {
     tempReasons.push(reasonInput)
     setDeclineReasons({ ...declineReasons, reasons: tempReasons })
     setReasonInput('')
-    console.log(declineReasons.reasons)
+    setMissingInput({ ...missingInput, reasons: false })
   }
 
   const onActionChange = ({ target: { value } }) => {
@@ -92,6 +102,7 @@ const DeclineModal = ({ showState, setParentState, job }) => {
     tempActionItems.push(actionInput)
     setDeclineReasons({ ...declineReasons, actionItems: tempActionItems })
     setActionInput('')
+    setMissingInput({ ...missingInput, actionItems: false })
   }
 
   return (
@@ -130,6 +141,7 @@ const DeclineModal = ({ showState, setParentState, job }) => {
                 clipRule='evenodd'
               />
             </svg>
+            {missingInput.reasons ? <h4>Please enter at least one decline reason</h4> : <></>}
           </InputGroup>
           {declineReasons.reasons ? declineReasons.reasons.map(reason => <li>{reason}</li>) : <></>}
           <h3>Action Items</h3>
@@ -156,6 +168,7 @@ const DeclineModal = ({ showState, setParentState, job }) => {
                 clipRule='evenodd'
               />
             </svg>
+            {missingInput.actionItems ? <h4>Please enter at least one action item</h4> : <></>}
           </InputGroup>
           {declineReasons.actionItems ? declineReasons.actionItems.map(item => <li>{item}</li>) : <></>}
         </Modal.Body>
