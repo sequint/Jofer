@@ -24,19 +24,13 @@ const NavbarElem = () => {
   return (
     <Navbar bg='dark' variant='dark' expand='lg'>
       <img src={logo} alt='' width='70' />
-      <Navbar.Brand alt='' href='/'>
+      <Navbar.Brand alt='' href='/home'>
         Job Rejector
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='me-auto'>
-          <Nav.Link href='/'>Home</Nav.Link>
-          {/* <NavDropdown title="Jobs" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/appliedjobs">
-                Applied Jobs
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/postedjobs">Posted Jobs</NavDropdown.Item>
-            </NavDropdown> */}
+          <Nav.Link href='/home'>Home</Nav.Link>
           {isEmployer
             ? (
               <Nav.Link href='/postedjobs'>Posted Jobs</Nav.Link>
