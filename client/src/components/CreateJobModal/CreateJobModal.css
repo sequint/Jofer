@@ -1,4 +1,13 @@
-.post {
+.createNewJob {
   display: flex;
   justify-content: center;
+}
+
+.createBtn {
+  width: 150px !important;
+  margin-bottom: 20px;
+}
+
+.err {
+  color: red;
 }
