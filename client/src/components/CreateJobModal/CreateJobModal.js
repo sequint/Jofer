@@ -13,7 +13,7 @@ const CreateJob = ({ setParentState }) => {
   const [show, setShow] = useState(false)
   // const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
-  const [userState, setUserState] = useState({
+  const [jobState, setJobState] = useState({
     name: '',
     applicantName: '',
     company: '',
@@ -24,27 +24,37 @@ const CreateJob = ({ setParentState }) => {
     applicants: []
   })
 
+  const [missingInput, setMissingInput] = useState({
+    missingName: false,
+    missingCompany: false,
+    missingType: false
+  })
+
   useEffect(() => {
     UserAPI.getUser()
-      .then(({ data }) => setUserState({ ...userState, company: data.company }))
+      .then(({ data }) => setJobState({ ...jobState, company: data.company }))
   }, [])
 
 
-  const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
+  const handleInputChange = ({ target: { name, value } }) => setJobState({ ...jobState, [name]: value })
 
-  const handleRegisterUser = event => {
+  const handleCreateJob = event => {
+
     if (event) {
       event.preventDefault()
     }
-    setShow(false)
-    let { name, company, type } = userState
+
+    let { name, company, type } = jobState
+
+    setMissingInput({ missingName: false, missingCompany: false, missingType: false })
+
     if (name !== '' && company !== '' && type !== '') {
 
-      JobAPI.create(userState)
+      JobAPI.create(jobState)
         .then(() => {
           alert('Job listing Created')
-          setUserState({
-            ...userState,
+          setJobState({
+            ...jobState,
             name: '',
             type: '',
             email: '',
@@ -54,46 +64,77 @@ const CreateJob = ({ setParentState }) => {
             .then(({ data }) => setParentState(data))
         })
         .catch(err => console.error(err))
+
+        console.log(event)
+        setShow(false)
+
+    }
+    else {
+
+      let newJobInput = [ name, company, type ]
+
+      newJobInput.forEach((input, index) => {
+        if (input.length === 0) {
+          switch (index) {
+            case 0:
+              missingInput.missingName = true
+              setMissingInput({ ...missingInput })
+              break
+            case 1:
+              missingInput.missingCompany = true
+              setMissingInput({ ...missingInput })
+              break
+            case 2:
+              missingInput.missingType = true
+              setMissingInput({ ...missingInput })
+              break
+            default:
+              break
+          }
+        }
+      })
+
     }
   }
+
   const handleAddEmail = event => {
     event.preventDefault()
     console.log("clicked")
-    console.log(userState.email)
+    console.log(jobState.email)
     const applicant = {
-      email: userState.email,
-      applicantName: userState.applicantName,
+      email: jobState.email,
+      applicantName: jobState.applicantName,
       status: 'Review',
-      declineReason: userState.declineReason
+      declineReason: jobState.declineReason
     }
-    userState.applicants.push(applicant)
-    console.log(userState.applicants)
-    setUserState({
-      ...userState, email: '', applicantName: ''
+    jobState.applicants.push(applicant)
+    console.log(jobState.applicants)
+    setJobState({
+      ...jobState, email: '', applicantName: ''
     })
   }
 
   return (
     <>
       <div
-        className="mt-2 mb-2 post">
+        className="mt-2 mb-2 createNewJob">
         <Button
-          className="col-2"
+          className="col-2 createBtn"
           varient="primary"
           onClick={handleShow}>
-          Post Job
+          Create New Job
         </Button>
       </div>
 
       <Modal
         show={show}
-        onHide={handleRegisterUser}
+        onHide={handleCreateJob}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered>
         <Modal.Header closeButton>
           <Modal.Title>
-            Post A New Job
+            Create A New Job
           </Modal.Title>
         </Modal.Header>
 
@@ -106,9 +147,10 @@ const CreateJob = ({ setParentState }) => {
                   type='text'
                   placeholder='Enter the job title'
                   name='name'
-                  value={userState.name}
+                  value={jobState.name}
                   onChange={handleInputChange}
                 />
+                {missingInput.missingName ? <p className="err">⚠️ Please enter a job title</p> : <></>}
               </Form.Group>
               <Form.Group className='mb-3' controlId='company'>
                 <Form.Label>Company</Form.Label>
@@ -116,19 +158,21 @@ const CreateJob = ({ setParentState }) => {
                   type='text'
                   placeholder='Enter your company'
                   name='company'
-                  value={userState.company}
+                  value={jobState.company}
                   onChange={handleInputChange}
                 />
+                {missingInput.missingCompany ? <p className="err">⚠️ Please enter a company name</p> : <></>}
               </Form.Group>
               <Form.Group className='mb-3' controlId='type'>
-                <Form.Label>Type</Form.Label>
+                <Form.Label>Department</Form.Label>
                 <Form.Control
                   type='text'
                   placeholder='Enter the job catagory'
                   name='type'
-                  value={userState.type}
+                  value={jobState.type}
                   onChange={handleInputChange}
                 />
+                {missingInput.missingType ? <p className="err">⚠️ Please enter a department for the job</p> : <></>}
               </Form.Group>
               <Form.Group className='mb-3' controlId='applicantName'>
                 <Form.Label>Applicant Name</Form.Label>
@@ -136,7 +180,7 @@ const CreateJob = ({ setParentState }) => {
                   type='text'
                   placeholder='Enter candidates name'
                   name='applicantName'
-                  value={userState.applicantName}
+                  value={jobState.applicantName}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -146,7 +190,7 @@ const CreateJob = ({ setParentState }) => {
                   type='text'
                   placeholder='Enter candidates email'
                   name='email'
-                  value={userState.email}
+                  value={jobState.email}
                   onChange={handleInputChange}
                 />
                 <Button
@@ -165,7 +209,6 @@ const CreateJob = ({ setParentState }) => {
 
           <Row>
             <h3>Applicants</h3>
-
             {userState ? userState.applicants.map(({ applicantName }) => <Card><Card.Body>{applicantName}</Card.Body></Card>) : <></>}
           </Row>
         </Modal.Body>
@@ -173,9 +216,9 @@ const CreateJob = ({ setParentState }) => {
           <Button
             variant='primary'
             type='submit'
-            onClick={handleRegisterUser}
+            onClick={handleCreateJob}
           >
-            Post Job
+            Create Job
           </Button>
         </Modal.Footer>
 
