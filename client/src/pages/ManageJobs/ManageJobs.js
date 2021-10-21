@@ -310,10 +310,7 @@ const ManageJobs = () => {
               <Card className="usrCard review">
                 <Droppable droppableId="Review">
                   {(provided, snapshot) => (
-                    <ul
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                    >
+                    <ul {...provided.droppableProps} ref={provided.innerRef}>
                       {true ? (
                         filteredApplicants[0].map((applicant, index) => (
                           <Draggable
@@ -322,7 +319,7 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card>
+                              <Card className="mb-2 text-center">
                                 <Card.Body
                                   {...provided.draggableProps}
                                   {...provided.dragHandleProps}
@@ -346,9 +343,9 @@ const ManageJobs = () => {
             <Col>
               <h2>Interviewed</h2>
               <Card className="usrCard interviewed">
-                <Droppable  droppableId="Interview">
+                <Droppable droppableId="Interview">
                   {(provided, snapshot) => (
-                    <ul {...provided.droppableProps} ref={provided.innerRef} >
+                    <ul {...provided.droppableProps} ref={provided.innerRef}>
                       {true ? (
                         filteredApplicants[1].map((applicant, index) => (
                           <Draggable
@@ -357,7 +354,7 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card>
+                              <Card className="mb-2 text-center">
                                 <Card.Body
                                   {...provided.draggableProps}
                                   {...provided.dragHandleProps}
@@ -392,7 +389,7 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card>
+                              <Card className="mb-2 text-center">
                                 <Card.Body
                                   {...provided.draggableProps}
                                   {...provided.dragHandleProps}
@@ -427,7 +424,7 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card>
+                              <Card className="mb-2 text-center">
                                 <Card.Body
                                   {...provided.draggableProps}
                                   {...provided.dragHandleProps}
