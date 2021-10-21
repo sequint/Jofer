@@ -6,6 +6,7 @@ import UserAPI from '../../utils/UserAPI/index.js'
 import Row from 'react-bootstrap/esm/Row'
 // import Col from 'react-bootstrap/esm/Col'
 import Form from 'react-bootstrap/Form'
+import Card from 'react-bootstrap/Card'
 import './CreateJobModal.css'
 
 const CreateJob = ({ setParentState }) => {
@@ -165,7 +166,7 @@ const CreateJob = ({ setParentState }) => {
           <Row>
             <h3>Applicants</h3>
 
-            {userState ? userState.applicants.map(({ applicantName }) => <li>{applicantName}</li>) : <></>}
+            {userState ? userState.applicants.map(({ applicantName }) => <Card><Card.Body>{applicantName}</Card.Body></Card>) : <></>}
           </Row>
         </Modal.Body>
         <Modal.Footer>
