@@ -71,15 +71,11 @@ const ManageJobs = () => {
 
   const move = (source, destination, droppableSource, droppableDestination, sInd, dInd) => {
 
-    
-
     const sourceClone = Array.from(source)
     const destClone = Array.from(destination)
     const [removed] = filteredApplicants[sInd].splice(droppableSource.index, 1)
     // removed.status = droppableDestination.droppableId
     console.log(droppableDestination.droppableId)
-
-    
 
     JobAPI.getEmployerJobs()
       .then(({ data }) => {
