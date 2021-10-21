@@ -80,7 +80,7 @@ const CreateJob = ({ setParentState }) => {
           className="col-2"
           varient="primary"
           onClick={handleShow}>
-          Post Job
+          Create Job
         </Button>
       </div>
 
