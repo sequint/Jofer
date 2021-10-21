@@ -307,13 +307,12 @@ const ManageJobs = () => {
           <Row>
             <Col>
               <h2>Review</h2>
-              <Card className="usrCard">
+              <Card className="usrCard review">
                 <Droppable droppableId="Review">
                   {(provided, snapshot) => (
                     <ul
                       {...provided.droppableProps}
                       ref={provided.innerRef}
-                      className="review"
                     >
                       {true ? (
                         filteredApplicants[0].map((applicant, index) => (
@@ -381,7 +380,7 @@ const ManageJobs = () => {
             </Col>
             <Col>
               <h2>Declined</h2>
-              <Card className="usrCard">
+              <Card className="usrCard declined">
                 <Droppable droppableId="Declined">
                   {(provided, snapshot) => (
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
