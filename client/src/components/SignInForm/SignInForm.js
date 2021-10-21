@@ -26,7 +26,7 @@ const SignInForm = () => {
   }
 
   const handleHome = () => {
-    window.location = '/home'
+    window.location = '/'
   }
 
   return (
