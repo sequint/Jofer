@@ -11,7 +11,7 @@ import './CreateJobModal.css'
 
 const CreateJob = ({ setParentState }) => {
   const [show, setShow] = useState(false)
-  // const handleClose = () => setShow(false)
+  const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
   const [jobState, setJobState] = useState({
     name: '',
@@ -69,7 +69,7 @@ const CreateJob = ({ setParentState }) => {
         .catch(err => console.error(err))
 
         console.log(event)
-        setShow(false)
+        handleClose()
 
     }
     else {
@@ -98,6 +98,7 @@ const CreateJob = ({ setParentState }) => {
       })
 
     }
+
   }
 
   const handleAddApplicant = event => {
@@ -153,7 +154,7 @@ const CreateJob = ({ setParentState }) => {
 
       <Modal
         show={show}
-        onHide={handleCreateJob}
+        onHide={handleClose}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered>
