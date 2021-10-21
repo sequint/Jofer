@@ -3,8 +3,8 @@ import NavbarElem from '../../components/NavbarElem'
 import PageTitle from '../../components/PageTitle'
 import JobAPI from '../../utils/JobAPI'
 import JobCard from '../../components/JobCard/JobCard'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import DropdownButton from 'react-bootstrap/DropDownButton'
+import './AppliedJobs.css'
 
 const AppliedJobs = () => {
 
@@ -15,7 +15,7 @@ const AppliedJobs = () => {
   }
 
   const [jobs, setJobs] = useState([])
-  const[filteredJobs, setFilteredJobs]= useState([])
+  const [filteredJobs, setFilteredJobs] = useState([])
   const [form, setFormValue] = useState({
     filter: 'none',
   });
@@ -34,7 +34,7 @@ const AppliedJobs = () => {
 
 
 
- 
+
   const Radio = ({ label, id, handleChange, name, form }) => (
     <>
       <input
@@ -49,7 +49,7 @@ const AppliedJobs = () => {
       <br />
     </>
   );
- 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     //console.log({...e.target});
@@ -59,11 +59,11 @@ const AppliedJobs = () => {
     }))
 
     switch (value) {
-      case 'none':
+      case 'all':
         setFilteredJobs(jobs)
         break
       case 'review':
-        let review = jobs.filter(status=>status.status==='Review')
+        let review = jobs.filter(status => status.status === 'Review')
         setFilteredJobs(review)
         break
       case 'interviewed':
@@ -89,44 +89,54 @@ const AppliedJobs = () => {
     <>
       <NavbarElem />
       <PageTitle title='My Jobs' />
-      <>
-        <h3>Filter</h3>
-        <Radio
-          form={form}
-          name="filter"
-          label="None"
-          id="none"
-          handleChange={handleChange}
-        />
-        <Radio
-          form={form}
-          name="filter"
-          label="In Review"
-          id="review"
-          handleChange={handleChange}
-        />
-        <Radio
-          form={form}
-          name="filter"
-          label="Interviewed"
-          id="interviewed"
-          handleChange={handleChange}
-        />
-        <Radio
-          form={form}
-          name="filter"
-          label="Declined"
-          id="declined"
-          handleChange={handleChange}
-        />
-        <Radio
-          form={form}
-          name="filter"
-          label="Offered"
-          id="offered"
-          handleChange={handleChange}
-        />
-      </>
+      <row
+        className="mt-2 mb-2 createNewJob">
+        <col className='col-10'></col>
+        <DropdownButton className='col-2 filterBtn' id="dropdown-basic-button" title="Filter">
+          <Radio
+            form={form}
+            name="filter"
+            label="All"
+            id="all"
+            handleChange={handleChange}
+          />
+          <Radio
+            form={form}
+            name="filter"
+            label="In Review"
+            id="review"
+            handleChange={handleChange}
+          />
+          <Radio
+            form={form}
+            name="filter"
+            label="Interviewed"
+            id="interviewed"
+            handleChange={handleChange}
+          />
+          <Radio
+            form={form}
+            name="filter"
+            label="Declined"
+            id="declined"
+            handleChange={handleChange}
+          />
+          <Radio
+            form={form}
+            name="filter"
+            label="Offered"
+            id="offered"
+            handleChange={handleChange}
+          />
+        </DropdownButton>
+      </row>
+
+
+
+
+
+
+
       {filteredJobs.map(job => <JobCard job={job} />)}
 
     </>
