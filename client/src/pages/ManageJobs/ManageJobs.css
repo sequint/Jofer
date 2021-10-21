@@ -11,3 +11,30 @@
   display: block;
   margin: auto;
 }
+
+.review {
+  background-color: #F7CB73 !important;
+}
+
+.interviewed {
+  background-color: rgb(131, 140, 188) !important;
+}
+
+.declined {
+  background-color: #F2886D !important;
+}
+
+.offered {
+  background-color: #009F93 !important;
+}
+
+.usrCard {
+  min-height: 200px;
+}
+
+ul {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  padding-top: 20px !important;
+  padding-bottom: 10px !important;
+}

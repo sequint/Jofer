@@ -31,7 +31,9 @@ const JobAPI = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
-  })
+  }),
+
+  getAllJobs: _ => axios.get('/api/jobs')
 
 }
 

@@ -72,15 +72,11 @@ const ManageJobs = () => {
 
   const move = (source, destination, droppableSource, droppableDestination, sInd, dInd) => {
 
-    
-
     const sourceClone = Array.from(source)
     const destClone = Array.from(destination)
     const [removed] = filteredApplicants[sInd].splice(droppableSource.index, 1)
     // removed.status = droppableDestination.droppableId
     console.log(droppableDestination.droppableId)
-
-    
 
     JobAPI.getEmployerJobs()
       .then(({ data }) => {
@@ -284,16 +280,23 @@ const ManageJobs = () => {
   }
 
   return (
-    <div className='manageJobsContainer'>
-      {showModal.state === true ? <DeclineModal showState={showModal} 
-      State={setParentModalState} job={job} /> : <></>}
+    <div className="manageJobsContainer">
+      {showModal.state === true ? (
+        <DeclineModal
+          showState={showModal}
+          setParentState={setParentModalState}
+          job={job}
+        />
+      ) : (
+        <></>
+      )}
       <NavbarElem />
-      <PageTitle title='Job Manager - Job Title' />
+      <PageTitle title="Job Manager - Job Title" />
       <input
-        type='text'
-        name='filter'
-        className='filter'
-        placeholder='Filter Applicants'
+        type="text"
+        name="filter"
+        className="filter"
+        placeholder="Filter Applicants"
         onChange={handleInputChange}
       />
       <Container>
@@ -302,101 +305,149 @@ const ManageJobs = () => {
             <AddApplicant job={job} />
             <Col>
               <h2>Review</h2>
-              <Card className='usrCard'>
-
-                <Droppable droppableId='Review'>
+              <Card className="usrCard review">
+                <Droppable droppableId="Review">
                   {(provided, snapshot) => (
-
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
-                      {true
-                        ? filteredApplicants[0].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
-                          {(provided, snapshot) => (
-                            <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>{applicant.applicantName}</li>
-                          )}
-                        </Draggable>)
-                        : <></>}
+                      {true ? (
+                        filteredApplicants[0].map((applicant, index) => (
+                          <Draggable
+                            key={applicant.email}
+                            draggableId={applicant.email}
+                            index={index}
+                          >
+                            {(provided, snapshot) => (
+                              <Card className="mb-2 text-center">
+                                <Card.Body
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  ref={provided.innerRef}
+                                >
+                                  {applicant.applicantName}
+                                </Card.Body>
+                              </Card>
+                            )}
+                          </Draggable>
+                        ))
+                      ) : (
+                        <></>
+                      )}
                       {provided.placeholder}
                     </ul>
                   )}
                 </Droppable>
-
               </Card>
             </Col>
             <Col>
               <h2>Interviewed</h2>
-              <Card className='usrCard'>
-
-                <Droppable droppableId='Interview'>
+              <Card className="usrCard interviewed">
+                <Droppable droppableId="Interview">
                   {(provided, snapshot) => (
-
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
-                      {true
-                        ? filteredApplicants[1].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
-                          {(provided, snapshot) => (
-
-                            <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>{applicant.applicantName}</li>
-                          )}
-                        </Draggable>)
-                        : <></>}
+                      {true ? (
+                        filteredApplicants[1].map((applicant, index) => (
+                          <Draggable
+                            key={applicant.email}
+                            draggableId={applicant.email}
+                            index={index}
+                          >
+                            {(provided, snapshot) => (
+                              <Card className="mb-2 text-center">
+                                <Card.Body
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  ref={provided.innerRef}
+                                >
+                                  {applicant.applicantName}
+                                </Card.Body>
+                              </Card>
+                            )}
+                          </Draggable>
+                        ))
+                      ) : (
+                        <></>
+                      )}
                       {provided.placeholder}
                     </ul>
                   )}
                 </Droppable>
-
               </Card>
             </Col>
             <Col>
               <h2>Declined</h2>
-              <Card className='usrCard'>
-
-                <Droppable droppableId='Declined'>
+              <Card className="usrCard declined">
+                <Droppable droppableId="Declined">
                   {(provided, snapshot) => (
-
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
-                      {true
-                        ? filteredApplicants[2].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
-                          {(provided, snapshot) => (
-
-                            <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>{applicant.applicantName}</li>
-                          )}
-                        </Draggable>)
-                        : <></>}
+                      {true ? (
+                        filteredApplicants[2].map((applicant, index) => (
+                          <Draggable
+                            key={applicant.email}
+                            draggableId={applicant.email}
+                            index={index}
+                          >
+                            {(provided, snapshot) => (
+                              <Card className="mb-2 text-center">
+                                <Card.Body
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  ref={provided.innerRef}
+                                >
+                                  {applicant.applicantName}
+                                </Card.Body>
+                              </Card>
+                            )}
+                          </Draggable>
+                        ))
+                      ) : (
+                        <></>
+                      )}
                       {provided.placeholder}
                     </ul>
                   )}
                 </Droppable>
-
               </Card>
             </Col>
             <Col>
               <h2>Offered</h2>
-              <Card className='usrCard'>
-
-                <Droppable droppableId='Offered'>
+              <Card className="usrCard offered">
+                <Droppable droppableId="Offered">
                   {(provided, snapshot) => (
-
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
-                      {true
-                        ? filteredApplicants[3].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
-                          {(provided, snapshot) => (
-
-                            <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>{applicant.applicantName}</li>
-                          )}
-                        </Draggable>)
-                        : <></>}
+                      {true ? (
+                        filteredApplicants[3].map((applicant, index) => (
+                          <Draggable
+                            key={applicant.email}
+                            draggableId={applicant.email}
+                            index={index}
+                          >
+                            {(provided, snapshot) => (
+                              <Card className="mb-2 text-center">
+                                <Card.Body
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  ref={provided.innerRef}
+                                >
+                                  {applicant.applicantName}
+                                </Card.Body>
+                              </Card>
+                            )}
+                          </Draggable>
+                        ))
+                      ) : (
+                        <></>
+                      )}
                       {provided.placeholder}
                     </ul>
                   )}
                 </Droppable>
-
               </Card>
             </Col>
-
           </Row>
         </DragDropContext>
       </Container>
     </div>
-  )
+  );
 }
 
 export default ManageJobs

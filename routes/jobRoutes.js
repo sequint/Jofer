@@ -24,6 +24,7 @@ router.get('/jobs/emails', passport.authenticate('jwt'), async function (req, re
           name: job.name,
           company: job.company,
           type: job.type,
+          email: email.email,
           status: email.status,
           declineReason: email.declineReason,
           userId: req.user._id
@@ -32,6 +33,12 @@ router.get('/jobs/emails', passport.authenticate('jwt'), async function (req, re
     })
   })
   res.json({ userJobs })
+})
+
+router.get('/jobs', async function (req, res) {
+
+  const jobs = await Job.find({})
+  res.json(jobs)
 })
 
 // route for employers to populate their jobs
