@@ -308,7 +308,7 @@ const ManageJobs = () => {
                       {true
                         ? filteredApplicants[0].map((applicant, index) => <Draggable key={applicant.email} draggableId={applicant.email} index={index}>
                           {(provided, snapshot) => (
-                            <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>{applicant.applicantName}</li>
+                            <Card><Card.Body {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>{applicant.applicantName}</Card.Body></Card>
                           )}
                         </Draggable>)
                         : <></>}
