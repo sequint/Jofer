@@ -10,7 +10,7 @@ import './CreateJobModal.css'
 
 const CreateJob = ({ setParentState }) => {
   const [show, setShow] = useState(false)
-  // const handleClose = () => setShow(false)
+  const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
   const [jobState, setJobState] = useState({
     name: '',
@@ -97,6 +97,9 @@ const CreateJob = ({ setParentState }) => {
       })
 
     }
+
+    handleClose()
+    
   }
 
   const handleAddApplicant = event => {
