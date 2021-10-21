@@ -23,6 +23,12 @@ const CreateJob = ({ setParentState }) => {
     applicants: []
   })
 
+  const [missingInput, setMissingInput] = useState({
+    missingName: false,
+    missingCompany: false,
+    missingType: false
+  })
+
   useEffect(() => {
     UserAPI.getUser()
       .then(({ data }) => setJobState({ ...jobState, company: data.company }))
@@ -32,11 +38,15 @@ const CreateJob = ({ setParentState }) => {
   const handleInputChange = ({ target: { name, value } }) => setJobState({ ...jobState, [name]: value })
 
   const handleCreateJob = event => {
+
     if (event) {
       event.preventDefault()
     }
-    setShow(false)
+
     let { name, company, type } = jobState
+
+    setMissingInput({ missingName: false, missingCompany: false, missingType: false })
+
     if (name !== '' && company !== '' && type !== '') {
 
       JobAPI.create(jobState)
@@ -53,8 +63,39 @@ const CreateJob = ({ setParentState }) => {
             .then(({ data }) => setParentState(data))
         })
         .catch(err => console.error(err))
+
+        console.log(event)
+        setShow(false)
+
+    }
+    else {
+
+      let newJobInput = [ name, company, type ]
+
+      newJobInput.forEach((input, index) => {
+        if (input.length === 0) {
+          switch (index) {
+            case 0:
+              missingInput.missingName = true
+              setMissingInput({ ...missingInput })
+              break
+            case 1:
+              missingInput.missingCompany = true
+              setMissingInput({ ...missingInput })
+              break
+            case 2:
+              missingInput.missingType = true
+              setMissingInput({ ...missingInput })
+              break
+            default:
+              break
+          }
+        }
+      })
+
     }
   }
+
   const handleAddEmail = event => {
     event.preventDefault()
     console.log("clicked")
@@ -108,6 +149,7 @@ const CreateJob = ({ setParentState }) => {
                   value={jobState.name}
                   onChange={handleInputChange}
                 />
+                {missingInput.missingName ? <p className="err">⚠️ Please enter a job title</p> : <></>}
               </Form.Group>
               <Form.Group className='mb-3' controlId='company'>
                 <Form.Label>Company</Form.Label>
@@ -118,6 +160,7 @@ const CreateJob = ({ setParentState }) => {
                   value={jobState.company}
                   onChange={handleInputChange}
                 />
+                {missingInput.missingCompany ? <p className="err">⚠️ Please enter a company name</p> : <></>}
               </Form.Group>
               <Form.Group className='mb-3' controlId='type'>
                 <Form.Label>Department</Form.Label>
@@ -128,6 +171,7 @@ const CreateJob = ({ setParentState }) => {
                   value={jobState.type}
                   onChange={handleInputChange}
                 />
+                {missingInput.missingType ? <p className="err">⚠️ Please enter a department for the job</p> : <></>}
               </Form.Group>
               <Form.Group className='mb-3' controlId='applicantName'>
                 <Form.Label>Applicant Name</Form.Label>
