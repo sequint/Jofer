@@ -14,7 +14,7 @@ const DeclineModal = ({ showState, setParentState, job }) => {
   })
   const [reasonInput, setReasonInput] = useState()
   const [actionInput, setActionInput] = useState()
-  const [ missingInput, setMissingInput ] =useState({
+  const [missingInput, setMissingInput] = useState({
     reasons: false,
     actionItems: false
   })
@@ -123,14 +123,14 @@ const DeclineModal = ({ showState, setParentState, job }) => {
           <p>Please add at least one decline reason below.</p>
           <InputGroup className='mb-3 decline'>
             <div>
-            <FormControl
-              className="col-5 mb-2 me-5"
-              placeholder='Enter Decline Reason'
-              aria-label='Decline reason'
-              aria-describedby='basic-addon2'
-              value={reasonInput}
-              onChange={onReasonChange}
-            />
+              <FormControl
+                className="col-5 mb-2 me-5"
+                placeholder='Enter Decline Reason'
+                aria-label='Decline reason'
+                aria-describedby='basic-addon2'
+                value={reasonInput}
+                onChange={onReasonChange}
+              />
             </div>
             <svg className='addReason ms-4 mb-2' onClick={handleReasonAddClick} fill='none' viewBox='0 0 24 24' height='30px' width='30px'>
               <path
@@ -146,7 +146,7 @@ const DeclineModal = ({ showState, setParentState, job }) => {
                 clipRule='evenodd'
               />
             </svg>
-            
+
             {missingInput.reasons ? <p className="err">⚠️ Please enter at least one declined reason</p> : <></>}
           </InputGroup>
           {declineReasons.reasons ? declineReasons.reasons.map(reason => <li>{reason}</li>) : <></>}
@@ -155,14 +155,14 @@ const DeclineModal = ({ showState, setParentState, job }) => {
           <p>Please list a minimum of 3 skill sets the applicant can improve.</p>
           <InputGroup className='mb-3 decline'>
             <div>
-            <FormControl
-              className="col-5 mb-2 me-5"
-              placeholder='Enter Action Item'
-              aria-label='Action item'
-              aria-describedby='basic-addon2'
-              value={actionInput}
-              onChange={onActionChange}
-            />
+              <FormControl
+                className="col-5 mb-2 me-5"
+                placeholder='Enter Action Item'
+                aria-label='Action item'
+                aria-describedby='basic-addon2'
+                value={actionInput}
+                onChange={onActionChange}
+              />
             </div>
             <svg className='addReason ms-4 mb-2' onClick={handleActionAddClick} fill='none' viewBox='0 0 24 24' height='30px' width='30px'>
               <path

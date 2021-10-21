@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import NavbarElem from '../../components/NavbarElem'
 import PageTitle from '../../components/PageTitle'
 import JobAPI from '../../utils/JobAPI'
-import JobCard from '../../components/JobCard/JobCard'
+import AppliedJobCard from '../../components/AppliedJobCard'
 
 const AppliedJobs = () => {
 
   if (localStorage.getItem("token")) {
-    
+
   } else {
     window.location = "/login";
   }
@@ -27,7 +27,7 @@ const AppliedJobs = () => {
     <>
       <NavbarElem />
       <PageTitle title='My Jobs' />
-      {jobs.map(job => <JobCard job={job} />)}
+      {jobs.map(job => <AppliedJobCard job={job} />)}
 
     </>
 
