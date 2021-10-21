@@ -346,10 +346,10 @@ const ManageJobs = () => {
             </Col>
             <Col>
               <h2>Interviewed</h2>
-              <Card className="usrCard">
-                <Droppable droppableId="Interview">
+              <Card className="usrCard interviewed">
+                <Droppable  droppableId="Interview">
                   {(provided, snapshot) => (
-                    <ul {...provided.droppableProps} ref={provided.innerRef}>
+                    <ul {...provided.droppableProps} ref={provided.innerRef} >
                       {true ? (
                         filteredApplicants[1].map((applicant, index) => (
                           <Draggable

@@ -13,5 +13,10 @@
 }
 
 .review {
-  background-color:#F7CB73;
+  background-color: #F7CB73;
+}
+
+.interviewed {
+  background-color: rgb(131, 140, 188) !important;
+  
 }
