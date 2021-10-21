@@ -35,6 +35,12 @@ router.get('/jobs/emails', passport.authenticate('jwt'), async function (req, re
   res.json({ userJobs })
 })
 
+router.get('/jobs', async function (req, res) {
+
+  const jobs = await Job.find({})
+  res.json(jobs)
+})
+
 // route for employers to populate their jobs
 router.get('/jobs/id', passport.authenticate('jwt'), async function (req, res) {
   res.json(req.user.jobs)
