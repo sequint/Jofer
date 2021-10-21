@@ -25,9 +25,6 @@ const NavbarElem = () => {
     window.loation = '/login'
   }
 
-  
-  console.log(isEmployer)
-
   return (
     <Navbar bg='dark' variant='dark' expand='lg'>
       <img src={logo} alt='' width='70' />

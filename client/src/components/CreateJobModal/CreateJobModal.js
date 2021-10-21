@@ -6,6 +6,7 @@ import UserAPI from '../../utils/UserAPI/index.js'
 import Row from 'react-bootstrap/esm/Row'
 // import Col from 'react-bootstrap/esm/Col'
 import Form from 'react-bootstrap/Form'
+import Card from 'react-bootstrap/Card'
 import './CreateJobModal.css'
 
 const CreateJob = ({ setParentState }) => {
