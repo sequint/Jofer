@@ -310,7 +310,11 @@ const ManageJobs = () => {
               <Card className="usrCard">
                 <Droppable droppableId="Review">
                   {(provided, snapshot) => (
-                    <ul {...provided.droppableProps} ref={provided.innerRef}>
+                    <ul
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                      className="review"
+                    >
                       {true ? (
                         filteredApplicants[0].map((applicant, index) => (
                           <Draggable
