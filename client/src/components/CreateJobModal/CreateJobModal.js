@@ -68,7 +68,7 @@ const CreateJob = ({ setParentState }) => {
         .catch(err => console.error(err))
 
         console.log(event)
-        setShow(false)
+        handleClose()
 
     }
     else {
@@ -98,8 +98,6 @@ const CreateJob = ({ setParentState }) => {
 
     }
 
-    handleClose()
-    
   }
 
   const handleAddApplicant = event => {
@@ -155,7 +153,7 @@ const CreateJob = ({ setParentState }) => {
 
       <Modal
         show={show}
-        onHide={handleCreateJob}
+        onHide={handleClose}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered>
