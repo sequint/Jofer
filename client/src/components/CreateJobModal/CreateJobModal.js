@@ -235,7 +235,6 @@ const CreateJob = ({ setParentState }) => {
 
           <Row>
             <h3>Applicants</h3>
-
             {jobState ? jobState.applicants.map(({ applicantName }) => <li>{applicantName}</li>) : <></>}
           </Row>
         </Modal.Body>
