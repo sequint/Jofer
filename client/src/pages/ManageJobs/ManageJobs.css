@@ -27,3 +27,14 @@
 .offered {
   background-color: #009F93 !important;
 }
+
+.usrCard {
+  min-height: 200px;
+}
+
+ul {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  padding-top: 20px !important;
+  padding-bottom: 10px !important;
+}

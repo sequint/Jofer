@@ -58,16 +58,13 @@ const DeclineModal = ({ showState, setParentState, job }) => {
         }
         else {
           if (declineReasons.reasons.length < 1 && declineReasons.actionItems.length < 1) {
-            console.log(declineReasons)
             setMissingInput({ reasons: true, actionItems: true })
           }
           else {
             if (declineReasons.reasons.length < 1) {
-              console.log(declineReasons)
               setMissingInput({ ...missingInput, reasons: true })
             }
             else {
-              console.log(declineReasons)
               console.log('in missing action items conditional')
               setMissingInput({ ...missingInput, actionItems: true })
             }
