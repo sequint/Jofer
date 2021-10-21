@@ -11,3 +11,19 @@
   display: block;
   margin: auto;
 }
+
+.review {
+  background-color: #F7CB73 !important;
+}
+
+.interviewed {
+  background-color: rgb(131, 140, 188) !important;
+}
+
+.declined {
+  background-color: #F2886D !important;
+}
+
+.offered {
+  background-color: #009F93 !important;
+}
