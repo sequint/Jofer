@@ -112,22 +112,27 @@ const DeclineModal = ({ showState, setParentState, job }) => {
         onHide={handleClose}
         backdrop='static'
         keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
       >
         <Modal.Header>
           <Modal.Title>Decline Rational</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h3>Decline Reasons</h3>
+          <h5>Decline Reasons:</h5>
           <p>Please add at least one decline reason below.</p>
-          <InputGroup className='mb-3'>
+          <InputGroup className='mb-3 decline'>
+            <div>
             <FormControl
+              className="col-5 mb-2 me-5"
               placeholder='Enter Decline Reason'
               aria-label='Decline reason'
               aria-describedby='basic-addon2'
               value={reasonInput}
               onChange={onReasonChange}
             />
-            <svg className='addReason' onClick={handleReasonAddClick} fill='none' viewBox='0 0 24 24' height='40px' width='40px'>
+            </div>
+            <svg className='addReason ms-4 mb-2' onClick={handleReasonAddClick} fill='none' viewBox='0 0 24 24' height='30px' width='30px'>
               <path
                 fill='currentColor'
                 fillRule='evenodd'
@@ -141,20 +146,25 @@ const DeclineModal = ({ showState, setParentState, job }) => {
                 clipRule='evenodd'
               />
             </svg>
-            {missingInput.reasons ? <h4>Please enter at least one decline reason</h4> : <></>}
+            
+            {missingInput.reasons ? <p className="err">⚠️ Please enter at least one declined reason</p> : <></>}
           </InputGroup>
           {declineReasons.reasons ? declineReasons.reasons.map(reason => <li>{reason}</li>) : <></>}
-          <h3>Action Items</h3>
-          <p>Please list a minimum of 3 skill sets the applicant can imporove on to be better prepared for a similar position in the future.</p>
-          <InputGroup className='mb-3'>
+          <hr />
+          <h5 className="mt-3">Action Items</h5>
+          <p>Please list a minimum of 3 skill sets the applicant can improve.</p>
+          <InputGroup className='mb-3 decline'>
+            <div>
             <FormControl
+              className="col-5 mb-2 me-5"
               placeholder='Enter Action Item'
               aria-label='Action item'
               aria-describedby='basic-addon2'
               value={actionInput}
               onChange={onActionChange}
             />
-            <svg className='addReason' onClick={handleActionAddClick} fill='none' viewBox='0 0 24 24' height='40px' width='40px'>
+            </div>
+            <svg className='addReason ms-4 mb-2' onClick={handleActionAddClick} fill='none' viewBox='0 0 24 24' height='30px' width='30px'>
               <path
                 fill='currentColor'
                 fillRule='evenodd'
@@ -168,7 +178,7 @@ const DeclineModal = ({ showState, setParentState, job }) => {
                 clipRule='evenodd'
               />
             </svg>
-            {missingInput.actionItems ? <h4>Please enter at least one action item</h4> : <></>}
+            {missingInput.actionItems ? <p className="err">⚠️ Please enter at least one action item</p> : <></>}
           </InputGroup>
           {declineReasons.actionItems ? declineReasons.actionItems.map(item => <li>{item}</li>) : <></>}
         </Modal.Body>

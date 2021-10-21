@@ -6,6 +6,7 @@ import UserAPI from '../../utils/UserAPI/index.js'
 import Row from 'react-bootstrap/esm/Row'
 // import Col from 'react-bootstrap/esm/Col'
 import Form from 'react-bootstrap/Form'
+import './CreateJobModal.css'
 
 const CreateJob = ({ setParentState }) => {
   const [show, setShow] = useState(false)
@@ -73,11 +74,15 @@ const CreateJob = ({ setParentState }) => {
 
   return (
     <>
-      <Button
-        varient="primary"
-        onClick={handleShow}>
-        Post Job
-      </Button>
+      <div
+        className="mt-2 mb-2 post">
+        <Button
+          className="col-2"
+          varient="primary"
+          onClick={handleShow}>
+          Post Job
+        </Button>
+      </div>
 
       <Modal
         show={show}
