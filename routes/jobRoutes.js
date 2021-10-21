@@ -24,6 +24,7 @@ router.get('/jobs/emails', passport.authenticate('jwt'), async function (req, re
           name: job.name,
           company: job.company,
           type: job.type,
+          email: email.email,
           status: email.status,
           declineReason: email.declineReason,
           userId: req.user._id
