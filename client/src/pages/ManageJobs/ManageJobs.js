@@ -415,7 +415,7 @@ const ManageJobs = () => {
             </Col>
             <Col>
               <h2>Offered</h2>
-              <Card className="usrCard">
+              <Card className="usrCard offered">
                 <Droppable droppableId="Offered">
                   {(provided, snapshot) => (
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
