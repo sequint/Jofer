@@ -44,6 +44,7 @@ const DeclineModal = ({ showState, setParentState, job }) => {
                 if (elem._id === job._id) {
                   elem.applicants.forEach((applicant, index) => {
                     if (applicant.email === showState.applicant.draggableId) {
+                      job.applicants[index].status = "Declined"
                       job.applicants[index].declined.reasons = declineReasons.reasons
                       job.applicants[index].declined.actionItems = declineReasons.actionItems
                       console.log(job)
