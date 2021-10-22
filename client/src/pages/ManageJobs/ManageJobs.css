@@ -17,15 +17,15 @@
 }
 
 .interviewed {
-  background-color: rgb(131, 140, 188) !important;
+  background-color: #8173de !important;
 }
 
 .declined {
-  background-color: #F2886D !important;
+  background-color: #e85e6c !important;
 }
 
 .offered {
-  background-color: #009F93 !important;
+  background-color: #68cac2 !important;
 }
 
 .usrCard {

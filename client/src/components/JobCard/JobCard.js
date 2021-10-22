@@ -13,21 +13,30 @@ const JobCard = ({ job }) => {
   }
 
   return (
-    <>
-      <Card className='m-2'>
-        <Card.Header className='status' as='h5'>{job.status}</Card.Header>
-        <Card.Body>
+    <main className="cardCenter media">
+      <Card className='m-2 col-5'>
+        <Card.Header
+          className='status'
+          as='h5'>
+          {job.status}
+        </Card.Header>
+        <Card.Body
+          className="body">
           <Card.Title>{job.name}</Card.Title>
           <Card.Text>
-            Company: {job.company}
+            <strong>Company: </strong> {job.company}
           </Card.Text>
           <Card.Text>
-            Department: {job.type}
+            <strong>Department: </strong> {job.type}
           </Card.Text>
-          <Button variant='primary' onClick={saveToLocal}>Manage Job</Button>
+          <Button
+            variant='outline-secondary'
+            onClick={saveToLocal}>
+            Manage Job
+          </Button>
         </Card.Body>
       </Card>
-    </>
+    </main>
   )
 }
 
