@@ -8,13 +8,25 @@ import DropdownButton from 'react-bootstrap/DropDownButton'
 import './AppliedJobs.css'
 
 const AppliedJobs = () => {
+
+  if (localStorage.getItem("token")) {
+
+    UserAPI.getUser()
+      .then(({ data }) => {
+        console.log(data)
+        if (data.user_type !== 'applicant') {
+          window.location = '/home'
+        }
+      })
+
+  } else {
+    window.location = "/login";
+  }
+
   const [jobs, setJobs] = useState([])
   const [filteredJobs, setFilteredJobs] = useState([])
   const [form, setFormValue] = useState({
     filter: 'none',
-  })
-  const [userType, setUserType] = useState({
-    type: ''
   })
 
 
@@ -26,17 +38,7 @@ const AppliedJobs = () => {
         setFilteredJobs(data.userJobs)
       })
       .catch(err => console.log('err'))
-
-    UserAPI.getUser()
-      .then(({ data }) => {
-        console.log(data.user_type)
-        setUserType({ type: data.user_type })
-      })
   }, [])
-
-
-
-
 
   const Radio = ({ label, id, handleChange, name, form }) => (
     <>
@@ -87,84 +89,58 @@ const AppliedJobs = () => {
     console.log(value)
   }
 
-  const checkUserBeforeRender = _ => {
+  return (
+    <>
+      <NavbarElem />
+      <PageTitle title='My Jobs' />
+      <row
+        className="mt-2 mb-2 createNewJob">
+        <col className='col-10'></col>
+        <DropdownButton className='col-2 filterBtn' id="dropdown-basic-button" title="Filter">
+          <Radio
+            form={form}
+            name="filter"
+            label="All"
+            id="all"
+            handleChange={handleChange}
+          />
+          <Radio
+            form={form}
+            name="filter"
+            label="In Review"
+            id="review"
+            handleChange={handleChange}
+          />
+          <Radio
+            form={form}
+            name="filter"
+            label="Interviewed"
+            id="interviewed"
+            handleChange={handleChange}
+          />
+          <Radio
+            form={form}
+            name="filter"
+            label="Declined"
+            id="declined"
+            handleChange={handleChange}
+          />
+          <Radio
+            form={form}
+            name="filter"
+            label="Offered"
+            id="offered"
+            handleChange={handleChange}
+          />
+        </DropdownButton>
+      </row>
 
-    console.log('in function')
+      {filteredJobs.map(job => <AppliedJobCard job={job} />)}
 
-    if (localStorage.getItem("token")) {
-      console.log('token verified')
+    </>
 
-      console.log(UserAPI.getUser())
-      console.log(userType)
-
-      if (userType.type !== 'applicant') {
-        // window.location = '/home'
-        console.log('not a user')
-      }
-      else {
-        console.log('about to throw return')
-        return (
-          <>
-            <NavbarElem />
-            <PageTitle title='My Jobs' />
-            <row
-              className="mt-2 mb-2 createNewJob">
-              <col className='col-10'></col>
-              <DropdownButton className='col-2 filterBtn' id="dropdown-basic-button" title="Filter">
-                <Radio
-                  form={form}
-                  name="filter"
-                  label="All"
-                  id="all"
-                  handleChange={handleChange}
-                />
-                <Radio
-                  form={form}
-                  name="filter"
-                  label="In Review"
-                  id="review"
-                  handleChange={handleChange}
-                />
-                <Radio
-                  form={form}
-                  name="filter"
-                  label="Interviewed"
-                  id="interviewed"
-                  handleChange={handleChange}
-                />
-                <Radio
-                  form={form}
-                  name="filter"
-                  label="Declined"
-                  id="declined"
-                  handleChange={handleChange}
-                />
-                <Radio
-                  form={form}
-                  name="filter"
-                  label="Offered"
-                  id="offered"
-                  handleChange={handleChange}
-                />
-              </DropdownButton>
-            </row>
-
-            {filteredJobs.map(job => <AppliedJobCard job={job} />)}
-
-          </>
-
-        )
-      }
-
-    }
-    else {
-      window.location = "/login";
-    }
-
-  }
-
-  return userType.type ? checkUserBeforeRender() : <></>
-
+  )
+  
 }
 
 export default AppliedJobs
