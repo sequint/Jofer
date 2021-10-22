@@ -13,15 +13,13 @@ const JobCard = ({ job, setParentState }) => {
     window.location = '/managejobs'
   }
 
-  const runSetParentState = (state) => {
-    setParentState(state)
-  }
+ 
 
   return (
     <div className="cardContainer">
       <Card className="jobCard">
         <Card.Body>
-          <ConfirmDeleteModal runSetParentState={runSetParentState} job={job} />
+          <ConfirmDeleteModal setParentState= {setParentState} job={job} />
           <Card.Title>{job.name}</Card.Title>
           <Card.Text>Company: {job.company}</Card.Text>
           <Card.Text>Department: {job.type}</Card.Text>

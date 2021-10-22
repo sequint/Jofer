@@ -13,7 +13,6 @@ const AppliedJobs = () => {
 
     UserAPI.getUser()
       .then(({ data }) => {
-        console.log(data)
         if (data.user_type !== 'applicant') {
           window.location = '/home'
         }
@@ -94,8 +93,21 @@ const AppliedJobs = () => {
   };
 
   const setParentState = (state) => {
-    setJobs(state)
-    setFilteredJobs(jobs)
+    if(state.jobId){
+      JobAPI.getCandidateJobs()
+        .then(({ data }) => {
+          setJobs(data.userJobs)
+          setFilteredJobs(data.userJobs)
+        })
+        .catch(err => console.log('err'))
+      
+      
+    }else{
+      setJobs(state)
+      setFilteredJobs(jobs)
+      console.log("running")
+    }
+    
   }
 
   return (

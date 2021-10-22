@@ -2,20 +2,53 @@ import Modal from 'react-bootstrap/Modal'
 import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import JobAPI from '../../utils/JobAPI'
+import UserAPI from '../../utils/UserAPI'
 
-const ConfirmDeleteModal = ({job, runSetParentState}) => {
+const ConfirmDeleteModal = ({job, setParentState}) => {
+
   const [show, setShow] = useState(false)
+
   const handleShow = () => setShow(true)
+
   const handleConfirmDelete = () => {
-    JobAPI.delete(job._id)
-      .then(() => {
-        console.log('deleted')
-        setShow(false)
-        JobAPI.getCandidateJobs()
-          .then(({data}) => {
-            runSetParentState(data.userJobs)
-          })
+    if(job._id){
+      JobAPI.delete(job._id)
+        .then(() => {
+          console.log('deleted')
+          setShow(false)
+          UserAPI.getUser()
+            .then(({ data }) => setParentState(data))
+
+        })
+
+    }else{
+      console.log("deleting")
+      console.log(job)
+      JobAPI.getAllJobs()
+      .then(({data}) =>{
+        
+       let applicants = data[0].applicants
+       console.log(applicants)
+       applicants = applicants.filter(applicant =>applicant.email !== job.email)
+       console.log(applicants)
+       data[0].applicants = applicants
+       JobAPI.update(data[0]._id,data[0])
+       .then(()=>{
+         console.log('updated')
+         setParentState(job)
+         
+
+       })
+
       })
+
+
+
+      // setShow(false)
+    
+      // setParentState(job)
+    }
+   
   }
   const handleClose = () => {
     setShow(false)
