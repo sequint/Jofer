@@ -6,18 +6,18 @@
   text-align: center !important;
 }
 
-/* .cardCenter {
-  display: flex;
-  justify-content: center;
-} */
-
-.body {
-  display: flex;
-  flex-direction: column;
+.cardContainer {
+  width: 100%
 }
 
-/* @media (max-width: 500px) and (min-width: 300px) {
-  .media {
-    width: 500px;
+.jobCard {
+  margin: 10px 10px 0px 10px !important;
+}
+
+@media screen and (min-width: 575px) {
+  .jobCard {
+    max-width: 500px;
+    display: block !important;
+    margin: 10px auto 0px auto !important;
   }
-} */
+}
