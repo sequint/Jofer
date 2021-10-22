@@ -53,7 +53,7 @@ const AppliedJobCard = ({ job }) => {
 
   return (
     <>
-      <Card className='m-2'>
+      <Card className='jobCard'>
         <Card.Header className='status' as='h5'>{job.status}</Card.Header>
         <Card.Body>
           <Card.Title>{job.name}</Card.Title>
