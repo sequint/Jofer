@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { useState } from 'react'
 import JobAPI from '../../utils/JobAPI'
+import UserAPI from '../../utils/UserAPI'
 import DeclineModal from '../../components/DeclineModal/DeclineModal'
 import AddApplicant from '../../components/AddApplicant/AddApplicant'
 import './ManageJobs.css'
@@ -14,6 +15,15 @@ import './ManageJobs.css'
 const ManageJobs = () => {
 
   if (localStorage.getItem("token")) {
+
+    UserAPI.getUser()
+      .then(({ data }) => {
+        console.log(data)
+        if (data.user_type !== 'employer') {
+          window.location = '/home'
+        }
+      })
+
   } else {
     window.location = "/login";
   }
