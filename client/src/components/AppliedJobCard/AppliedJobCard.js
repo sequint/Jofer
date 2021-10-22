@@ -5,7 +5,9 @@ import Button from 'react-bootstrap/Button'
 import './AppliedJobCard.css'
 
 const AppliedJobCard = ({ job }) => {
-  console.log(job._id)
+  console.log(job.id)
+  console.log(job.applicants)
+  console.log(job);
 
   const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
@@ -51,6 +53,7 @@ const AppliedJobCard = ({ job }) => {
         <Modal.Body>
           <p><strong>Status:</strong> {job.status}</p>
           <p><strong>Company:</strong> {job.company}</p>
+          <p><strong>Department:</strong> {job.type}</p>
           <p><strong>Department:</strong> {job.type}</p>
         </Modal.Body>
       </Modal>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import NavbarElem from '../../components/NavbarElem'
 import PageTitle from '../../components/PageTitle'
 import JobAPI from '../../utils/JobAPI'
-import JobCard from '../../components/JobCard/JobCard'
+import AppliedJobCard from '../../components/AppliedJobCard/AppliedJobCard'
 import DropdownButton from 'react-bootstrap/DropDownButton'
 import './AppliedJobs.css'
 
@@ -132,12 +132,7 @@ const AppliedJobs = () => {
       </row>
 
 
-
-
-
-
-
-      {filteredJobs.map(job => <JobCard job={job} />)}
+      {filteredJobs.map(job => <AppliedJobCard job={job} />)}
 
     </>
 
