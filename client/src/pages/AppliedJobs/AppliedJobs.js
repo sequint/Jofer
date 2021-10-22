@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import NavbarElem from '../../components/NavbarElem'
 import PageTitle from '../../components/PageTitle'
 import JobAPI from '../../utils/JobAPI'
+import AppliedJobCard from '../../components/AppliedJobCard/AppliedJobCard'
 import UserAPI from '../../utils/UserAPI'
-import JobCard from '../../components/JobCard/JobCard'
 import DropdownButton from 'react-bootstrap/DropDownButton'
 import './AppliedJobs.css'
 
@@ -155,7 +155,7 @@ const AppliedJobs = () => {
 
         )
       }
-
+ 
     }
     else {
       window.location = "/login";

@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import JobAPI from '../../utils/JobAPI'
+import './AddApplicant.css'
 
 const AddApplicant = ({ job, setParentState }) => {
   const [show, setShow] = useState(false)
@@ -145,7 +146,7 @@ const AddApplicant = ({ job, setParentState }) => {
         className="mt-2 mb-2 createNewJob">
         <Button
           className="col-2 createBtn"
-          varient="primary"
+          // varient="primary"
           onClick={handleShow}>
           + Applicants
         </Button>
@@ -168,6 +169,7 @@ const AddApplicant = ({ job, setParentState }) => {
               <Form.Group className='mb-3' controlId='applicantName'>
                 <Form.Label>Applicant Name</Form.Label>
                 <Form.Control
+                  className="gray"
                   type='text'
                   placeholder='Enter candidates name'
                   name='applicantName'
@@ -179,6 +181,7 @@ const AddApplicant = ({ job, setParentState }) => {
               <Form.Group className='mb-3' controlId='email'>
                 <Form.Label>Email</Form.Label>
                 <Form.Control
+                  className="gray"
                   type='text'
                   placeholder='Enter candidates email'
                   name='email'
@@ -187,7 +190,7 @@ const AddApplicant = ({ job, setParentState }) => {
                 />
                 {(missingInput.missingEmail || !correctFormat) ? <p className="err">⚠️ Please enter a valid email address</p> : <></>}
                 <Button
-                  className="mt-3"
+                  className="mt-3 createBtn"
                   variant='primary'
                   type='submit'
                   onClick={handleAddApplicant}
@@ -208,6 +211,7 @@ const AddApplicant = ({ job, setParentState }) => {
         <Modal.Footer>
           {missingInput.missingApplicants ? <p className="err">⚠️ No applicants added yet</p> : <></>}
           <Button
+            className="createBtn"
             variant='primary'
             type='submit'
             onClick={handleAddAllApplicants}
