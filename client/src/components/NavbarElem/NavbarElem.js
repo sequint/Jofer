@@ -3,6 +3,9 @@ import Nav from 'react-bootstrap/Nav'
 import logo from '../../assets/jobrejectorlogo.png'
 import UserAPI from './../../utils/UserAPI'
 import { useState, useEffect } from 'react'
+import './NavbarElem.css'
+
+
 const NavbarElem = () => {
 
   const [isEmployer, setIsEmployer] = useState()
@@ -27,7 +30,7 @@ const NavbarElem = () => {
 
   return (
     <Navbar bg='dark' variant='dark' expand='lg'>
-      <img className="ms-2" src={logo} alt='' width='70' />
+      <img className="ms-2 Nav" src={logo} alt='' width='70' />
       <Navbar.Brand className="ms-3" alt='' href='/home'>
         Job Rejector
       </Navbar.Brand>

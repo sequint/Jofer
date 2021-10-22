@@ -6,10 +6,10 @@
   text-align: center !important;
 }
 
-.cardCenter {
+/* .cardCenter {
   display: flex;
   justify-content: center;
-}
+} */
 
 .body {
   display: flex;
