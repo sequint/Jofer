@@ -1,3 +1,7 @@
+/* .manageJobsContainer {
+  background-color: #8ECAE6;
+} */
+
 .usrCard {
   max-height: 275px;
   overflow: scroll;
@@ -12,24 +16,37 @@
   margin: auto;
 }
 
-.review {
-  background-color: #F7CB73 !important;
+/* .review {
+  background-color: rgb(223, 223, 223) !important;
+  box-shadow: 5px 5px #8ECAE6;
 }
 
 .interviewed {
-  background-color: #8173de !important;
+  background-color: rgb(223, 223, 223) !important;
+  box-shadow: 5px 5px #8ECAE6;
 }
 
 .declined {
-  background-color: #e85e6c !important;
+  background-color: rgb(223, 223, 223) !important;
+  box-shadow: 5px 5px #8ECAE6;
 }
 
 .offered {
-  background-color: #68cac2 !important;
-}
+  background-color: rgb(223, 223, 223) !important;
+  box-shadow: 5px 5px #8ECAE6;
+} */
 
 .usrCard {
   min-height: 200px;
+  background-color: rgb(223, 223, 223) !important;
+}
+
+.uCard {
+  box-shadow: 5px 5px #8ECAE6;
+}
+
+.uCard:hover {
+  box-shadow: 10px 10px #8ECAE6;
 }
 
 ul {
