@@ -20,7 +20,10 @@ const AddApplicant = ({ job }) => {
 
   const [correctFormat, setCorrectFormat] = useState(true)
 
-  const handleInputChange = ({ target: { name, value } }) => setJobState({ ...jobState, [name]: value })
+  const handleInputChange = ({ target: { name, value } }) => {
+    setMissingInput({ ...missingInput, missingApplicants: false })
+    setJobState({ ...jobState, [name]: value })
+  } 
 
   const handleAddApplicant = event => {
     if (event) {
