@@ -6,6 +6,11 @@
   width: 100%
 }
 
+.bttn {
+  display: grid;
+  justify-content: end;
+}
+
 @media screen and (min-width: 575px) {
   .jobCard {
     max-width: 500px;

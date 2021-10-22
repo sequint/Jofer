@@ -52,7 +52,8 @@ const AppliedJobCard = ({ job }) => {
     <>
       <Card className='jobCard'>
         <Card.Header className='status' as='h5'>{job.status}</Card.Header>
-        <Card.Body>
+        <Card.Body
+          className="appJob">
           <Card.Title>{job.name}</Card.Title>
           <Card.Text>
             Company: {job.company}
@@ -60,11 +61,13 @@ const AppliedJobCard = ({ job }) => {
           <Card.Text>
             Department: {job.type}
           </Card.Text>
-          <Button
-            variant='outline-secondary'
-            onClick={handleShow}>
-            View More
-          </Button>
+          <div className="bttn">
+            <Button
+              variant='outline-secondary'
+              onClick={handleShow}>
+              View More
+            </Button>
+          </div>
         </Card.Body>
       </Card>
       <Modal
@@ -83,10 +86,11 @@ const AppliedJobCard = ({ job }) => {
           <p><strong>Status:</strong> {job.status}</p>
           <p><strong>Company:</strong> {job.company}</p>
           <p><strong>Department:</strong> {job.type}</p>
-          <p><strong>Department:</strong> {job.type}</p>
-          {declinedReasons.reasons ? <p><strong>Reasons:</strong></p> : <></>}
+          <hr />
+          <h3>Declined Reason</h3>
+          {declinedReasons.reasons ? <p className="mb-1"><strong>Reasons:</strong></p> : <></>}
           {declinedReasons.reasons ? listReasons() : <></>}
-          {declinedReasons.reasons ? <p><strong>Action Items:</strong></p> : <></>}
+          {declinedReasons.reasons ? <p className="mt-3"><strong>Action Items:</strong></p> : <></>}
           {declinedReasons.reasons ? listActionItems() : <></>}
         </Modal.Body>
       </Modal>

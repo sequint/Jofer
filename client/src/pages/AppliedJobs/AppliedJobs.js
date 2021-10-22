@@ -93,10 +93,12 @@ const AppliedJobs = () => {
     <>
       <NavbarElem />
       <PageTitle title='My Jobs' />
-      <row
-        className="mt-2 mb-2 createNewJob">
-        <col className='col-10'></col>
-        <DropdownButton className='col-2 filterBtn' id="dropdown-basic-button" title="Filter">
+      <row>
+        <DropdownButton
+          className='col-2 filterBtn'
+          variant="outline"
+          id="dropdown-basic-button"
+          title="Filter">
           <Radio
             form={form}
             name="filter"
@@ -140,7 +142,7 @@ const AppliedJobs = () => {
     </>
 
   )
-  
+
 }
 
 export default AppliedJobs
