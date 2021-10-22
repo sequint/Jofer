@@ -13,8 +13,8 @@ const JobCard = ({ job }) => {
   }
 
   return (
-    <>
-      <Card className='m-2'>
+    <div className="cardContainer">
+      <Card className='jobCard'>
         <Card.Body>
           <Card.Title>{job.name}</Card.Title>
           <Card.Text>
@@ -26,7 +26,7 @@ const JobCard = ({ job }) => {
           <Button variant='primary' onClick={saveToLocal}>Manage Job</Button>
         </Card.Body>
       </Card>
-    </>
+    </div>
   )
 }
 
