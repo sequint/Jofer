@@ -76,8 +76,13 @@ const AddApplicant = ({ job }) => {
     setMissingInput({ missingApplicants: false })
 
     if (jobState.applicants.length > 0) {
+      console.log(jobState.applicants)
+      console.log(job.applicants)
 
-      job.applicants.push(jobState.applicants)
+      // job.applicants.push(jobState.applicants)
+      jobState.applicants.forEach(applicant => job.applicants.push(applicant))
+
+      console.log(job.applicants)
 
       JobAPI.update(job._id, job)
         .then(() => handleClose())
