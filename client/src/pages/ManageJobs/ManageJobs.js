@@ -25,27 +25,40 @@ const ManageJobs = () => {
 
   const job = JSON.parse(localStorage.getItem('clickedManageJob'))
 
-  const getReviewApplicants = _ => {
+  const getReviewApplicants = (job) => {
     return job.applicants.filter(applicant => applicant.status === 'Review')
   }
-  const getInterviewApplicants = _ => {
+  const getInterviewApplicants = (job) => {
     return job.applicants.filter(applicant => applicant.status === 'Interview')
   }
-  const getDeclineApplicants = _ => {
+  const getDeclineApplicants = (job) => {
     return job.applicants.filter(applicant => applicant.status === 'Declined')
   }
-  const getOfferApplicants = _ => {
+  const getOfferApplicants = (job) => {
     return job.applicants.filter(applicant => applicant.status === 'Offered')
   }
 
-  const reviewApplicants = getReviewApplicants()
-  const interviewApplicants = getInterviewApplicants()
-  const declinedApplicants = getDeclineApplicants()
-  const offeredApplicants = getOfferApplicants()
+  const reviewApplicants = getReviewApplicants(job)
+  const interviewApplicants = getInterviewApplicants(job)
+  const declinedApplicants = getDeclineApplicants(job)
+  const offeredApplicants = getOfferApplicants(job)
 
   const [state, setState] = useState([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
 
   const [filteredApplicants, setFilteredApplicants] = useState([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
+
+  const setParentState = (state) => {
+    const reviewApplicants = getReviewApplicants(job)
+    const interviewApplicants = getInterviewApplicants(job)
+    const declinedApplicants = getDeclineApplicants(job)
+    const offeredApplicants = getOfferApplicants(job)
+
+    setState([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
+    setFilteredApplicants([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
+    localStorage.setItem('clickedManageJob',JSON.stringify(state))
+
+
+  }
 
   const handleInputChange = ({ target: { value } }) => {
     const review = state[0].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
@@ -102,7 +115,7 @@ const ManageJobs = () => {
     return newState;
   }
 
-  function onDragEnd (result) {
+  function onDragEnd(result) {
     const { source, destination } = result
     const allInfo = result
 
@@ -153,37 +166,37 @@ const ManageJobs = () => {
       setState(newState)
       setFilteredApplicants(newState)
     }
-     else if(sInd===2) {
+    else if (sInd === 2) {
       JobAPI.getEmployerJobs()
         .then(({ data }) => {
           data.forEach(elem => {
             if (elem._id === job._id) {
               elem.applicants.forEach((applicant, index) => {
                 if (applicant.email === allInfo.email) {
-                 
-                    console.log('it was in declined')
-                    let reason = applicant.declined.reasons[0]
-                    if (reason !== "im not sure why") {
 
-                      console.log("user has been declined already")
-                      revertDecline(allInfo)
-                      
+                  console.log('it was in declined')
+                  let reason = applicant.declined.reasons[0]
+                  if (reason !== "im not sure why") {
 
-                    }else{
-                      const result = move(state[sInd], state[dInd], source, destination, sInd, dInd)
+                    console.log("user has been declined already")
+                    revertDecline(allInfo)
 
-                      setState(result)
-                      setFilteredApplicants(result)
-                    }
+
+                  } else {
+                    const result = move(state[sInd], state[dInd], source, destination, sInd, dInd)
+
+                    setState(result)
+                    setFilteredApplicants(result)
+                  }
                 }
               })
             }
           })
         })
 
-     
+
     }
-    else{
+    else {
       const result = move(state[sInd], state[dInd], source, destination, sInd, dInd)
 
       setState(result)
@@ -216,9 +229,9 @@ const ManageJobs = () => {
     }
   }
 
-  const revertDecline=(object)=>{
-  
-    const { source, destination,  } = object
+  const revertDecline = (object) => {
+
+    const { source, destination, } = object
     let sInd = 0
     let dInd = 0
     switch (source.droppableId) {
@@ -257,15 +270,15 @@ const ManageJobs = () => {
     const result = move(state[dInd], state[sInd], destination, source, dInd, sInd)
     setState(result)
     setFilteredApplicants(result)
-    
+
   }
 
   const setParentModalState = (theState, revert) => {
     setShowModal({ ...showModal, state: theState })
     if (revert) {
       revertDecline(revert)
-      const {draggableId } = revert
-      
+      const { draggableId } = revert
+
 
       const storage = 'declined' + job._id
       console.log(draggableId)
@@ -278,6 +291,20 @@ const ManageJobs = () => {
       }
     }
   }
+  let grid = 1
+
+  const getItemStyle = (isDragging, draggableStyle) => ({
+    // some basic styles to make the items look a bit nicer
+    userSelect: "none",
+    padding: grid * 2,
+    margin: `0 0 ${grid}px 0`,
+
+    // change background colour if dragging
+    background: isDragging ? "lightgreen" : "white",
+
+    // styles we need to apply on draggables
+    ...draggableStyle
+  });
 
   return (
     <div className="manageJobsContainer">
@@ -302,7 +329,7 @@ const ManageJobs = () => {
       <Container>
         <DragDropContext onDragEnd={onDragEnd}>
           <Row>
-            <AddApplicant job={job} />
+            <AddApplicant job={job} setParentState={setParentState} />
             <Col>
               <h2>Review</h2>
               <Card className="usrCard review">
@@ -317,14 +344,26 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card className="mb-2 text-center">
-                                <Card.Body
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  ref={provided.innerRef}
+                              <Card className="mb-2 text-center"
+
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={getItemStyle(
+                                  snapshot.isDragging,
+                                  provided.draggableProps.style
+                                )}
+                              >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-around"
+                                  }}
                                 >
-                                  {applicant.applicantName}
-                                </Card.Body>
+                                  <Card.Body>
+                                    {applicant.applicantName}
+                                  </Card.Body>
+                                </div>
                               </Card>
                             )}
                           </Draggable>
@@ -352,14 +391,26 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card className="mb-2 text-center">
-                                <Card.Body
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  ref={provided.innerRef}
-                                >
+                              <Card className="mb-2 text-center"
+                              
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={getItemStyle(
+                            snapshot.isDragging,
+                            provided.draggableProps.style
+                          )}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-around"
+                            }}
+                          >
+                                <Card.Body>
                                   {applicant.applicantName}
                                 </Card.Body>
+                                </div>
                               </Card>
                             )}
                           </Draggable>
@@ -387,14 +438,26 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card className="mb-2 text-center">
-                                <Card.Body
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  ref={provided.innerRef}
+                              <Card className="mb-2 text-center"
+
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={getItemStyle(
+                                  snapshot.isDragging,
+                                  provided.draggableProps.style
+                                )}
+                              >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-around"
+                                  }}
                                 >
-                                  {applicant.applicantName}
-                                </Card.Body>
+                                  <Card.Body>
+                                    {applicant.applicantName}
+                                  </Card.Body>
+                                </div>
                               </Card>
                             )}
                           </Draggable>
@@ -422,14 +485,26 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card className="mb-2 text-center">
-                                <Card.Body
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  ref={provided.innerRef}
+                              <Card className="mb-2 text-center"
+
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={getItemStyle(
+                                  snapshot.isDragging,
+                                  provided.draggableProps.style
+                                )}
+                              >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-around"
+                                  }}
                                 >
-                                  {applicant.applicantName}
-                                </Card.Body>
+                                  <Card.Body>
+                                    {applicant.applicantName}
+                                  </Card.Body>
+                                </div>
                               </Card>
                             )}
                           </Draggable>
