@@ -8,6 +8,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { useState } from 'react'
 import JobAPI from '../../utils/JobAPI'
 import DeclineModal from '../../components/DeclineModal/DeclineModal'
+import AddApplicant from '../../components/AddApplicant/AddApplicant'
 import './ManageJobs.css'
 
 const ManageJobs = () => {
@@ -71,15 +72,11 @@ const ManageJobs = () => {
 
   const move = (source, destination, droppableSource, droppableDestination, sInd, dInd) => {
 
-    
-
     const sourceClone = Array.from(source)
     const destClone = Array.from(destination)
     const [removed] = filteredApplicants[sInd].splice(droppableSource.index, 1)
     // removed.status = droppableDestination.droppableId
     console.log(droppableDestination.droppableId)
-
-    
 
     JobAPI.getEmployerJobs()
       .then(({ data }) => {
@@ -305,6 +302,7 @@ const ManageJobs = () => {
       <Container>
         <DragDropContext onDragEnd={onDragEnd}>
           <Row>
+            <AddApplicant job={job} />
             <Col>
               <h2>Review</h2>
               <Card className="usrCard review">
