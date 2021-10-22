@@ -24,6 +24,7 @@ const JobCard = ({ job }) => {
             <strong>Department: </strong> {job.type}
           </Card.Text>
           <Button
+            className="bbtn"
             variant='outline-secondary'
             onClick={saveToLocal}>
             Manage Job
