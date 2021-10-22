@@ -20,36 +20,33 @@ const AppliedJobCard = ({ job }) => {
     actionItems: []
   })
 
+  console.log(declinedReasons)
+
   useEffect(() => {
-    JobAPI.getEmployerJobs()
+    JobAPI.getAllJobs()
       .then(({ data }) => {
         data.forEach(elem => {
-          if (elem._id === job.jobID) {
-            console.log(elem)
+          if (elem._id === job.jobId) {
+            console.log('hello')
             UserAPI.getUser()
               .then(({ data }) => {
+                console.log(elem)
+                console.log(data)
                 elem.applicants.forEach(applicant => {
-                  if (applicant.email === data.email) {
-                    console.log(applicant.email)
+                  if (applicant.email === data.username) {
                     setDeclinedReasons({ reasons: applicant.declined.reasons, actionItems: applicant.declined.actionItems })
                   }
                 })
               })
-            // let tempJob = elem.applicants.filter(applicant => applicant.email === job)
-            // setDeclinedReasons({ ...declinedReasons, reasons: elem.applicants.declined.reasons, actionItems: elem.applicants.declined.actionItems })
           }
         })
       })
   }, [])
 
+  const listReasons = _ => declinedReasons.reasons.map(reason => <li>{reason}</li>)
+  const listActionItems = _ => declinedReasons.actionItems.map(item => <li>{item}</li>)
 
 
-
-  // const saveToLocal = event => {
-  //   event.preventDefault()
-
-  //   localStorage.setItem('clickedManageJob', JSON.stringify(job))
-  // }
 
   return (
     <>
@@ -87,6 +84,10 @@ const AppliedJobCard = ({ job }) => {
           <p><strong>Company:</strong> {job.company}</p>
           <p><strong>Department:</strong> {job.type}</p>
           <p><strong>Department:</strong> {job.type}</p>
+          {declinedReasons.reasons ? <p><strong>Reasons:</strong></p> : <></>}
+          {declinedReasons.reasons ? listReasons() : <></>}
+          {declinedReasons.reasons ? <p><strong>Action Items:</strong></p> : <></>}
+          {declinedReasons.reasons ? listActionItems() : <></>}
         </Modal.Body>
       </Modal>
     </>
