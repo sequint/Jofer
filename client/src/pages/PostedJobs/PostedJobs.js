@@ -8,6 +8,15 @@ import CreateJob from '../../components/CreateJobModal'
 const PostedJobs = () => {
 
   if (localStorage.getItem("token")) {
+
+    UserAPI.getUser()
+      .then(({ data }) => {
+        console.log(data)
+        if (data.user_type !== 'employer') {
+          window.location = '/home'
+        }
+      })
+
   } else {
     window.location = "/login";
   }

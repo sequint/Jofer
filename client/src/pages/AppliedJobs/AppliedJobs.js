@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import NavbarElem from '../../components/NavbarElem'
 import PageTitle from '../../components/PageTitle'
 import JobAPI from '../../utils/JobAPI'
+import UserAPI from '../../utils/UserAPI'
 import JobCard from '../../components/JobCard/JobCard'
 import DropdownButton from 'react-bootstrap/DropDownButton'
 import './AppliedJobs.css'
@@ -9,6 +10,14 @@ import './AppliedJobs.css'
 const AppliedJobs = () => {
 
   if (localStorage.getItem("token")) {
+
+    UserAPI.getUser()
+      .then(({ data }) => {
+        console.log(data)
+        if (data.user_type !== 'applicant') {
+          window.location = '/home'
+        }
+      })
 
   } else {
     window.location = "/login";
