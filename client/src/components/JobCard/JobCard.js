@@ -21,9 +21,15 @@ const JobCard = ({ job, setParentState }) => {
         <Card.Body>
           <ConfirmDeleteModal setParentState= {setParentState} job={job} />
           <Card.Title>{job.name}</Card.Title>
-          <Card.Text>Company: {job.company}</Card.Text>
-          <Card.Text>Department: {job.type}</Card.Text>
-          <Button variant="primary" onClick={saveToLocal}>
+          <Card.Text>
+            <strong>Company: </strong> {job.company}
+          </Card.Text>
+          <Card.Text>
+            <strong>Department: </strong> {job.type}
+          </Card.Text>
+          <Button
+            variant='outline-secondary'
+            onClick={saveToLocal}>
             Manage Job
           </Button>
         </Card.Body>

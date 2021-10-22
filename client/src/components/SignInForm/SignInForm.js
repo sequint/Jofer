@@ -18,15 +18,22 @@ const SignInForm = () => {
     UserAPI.login(userState)
       .then(({ data: token }) => {
         console.log(token)
-        localStorage.setItem('token', token)
+        if (token) {
+          localStorage.setItem('token', token)
         setUserState({ ...userState, name: '', email: '', username: '', password: '' })
         window.location = '/home'
+        }
+        else {
+          alert('Invalid username or password.')
+          setUserState({ ...userState, name: '', email: '', username: '', password: '' })
+        }
+        
       })
       .catch(err => console.error(err))
   }
 
   const handleHome = () => {
-    window.location = '/home'
+    window.location = '/'
   }
 
   return (

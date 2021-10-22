@@ -35,8 +35,8 @@ const ConfirmDeleteModal = ({job, setParentState}) => {
        JobAPI.update(data[0]._id,data[0])
        .then(()=>{
          console.log('updated')
-         setParentState(job)
-         
+         setParentState()
+         setShow(false)
 
        })
 
@@ -44,7 +44,7 @@ const ConfirmDeleteModal = ({job, setParentState}) => {
 
 
 
-      // setShow(false)
+      
     
       // setParentState(job)
     }

@@ -3,6 +3,9 @@ import Nav from 'react-bootstrap/Nav'
 import logo from '../../assets/jobrejectorlogo.png'
 import UserAPI from './../../utils/UserAPI'
 import { useState, useEffect } from 'react'
+import './NavbarElem.css'
+
+
 const NavbarElem = () => {
 
   const [isEmployer, setIsEmployer] = useState()
@@ -27,14 +30,14 @@ const NavbarElem = () => {
 
   return (
     <Navbar bg='dark' variant='dark' expand='lg'>
-      <img src={logo} alt='' width='70' />
-      <Navbar.Brand alt='' href='/home'>
+      <img className="ms-2 Nav" src={logo} alt='' width='70' />
+      <Navbar.Brand className="ms-3" alt='' href='/home'>
         Job Rejector
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='me-auto'>
-          <Nav.Link href='/home'>Home</Nav.Link>
+          <Nav.Link className="ms-3" href='/home'>Home</Nav.Link>
           {/* <NavDropdown title="Jobs" id="basic-nav-dropdown">
               <NavDropdown.Item href="/appliedjobs">
                 Applied Jobs
@@ -43,19 +46,19 @@ const NavbarElem = () => {
             </NavDropdown> */}
           {isEmployer
             ? (
-              <Nav.Link href='/postedjobs'>Posted Jobs</Nav.Link>
+              <Nav.Link className="ms-3" href='/postedjobs'>Posted Jobs</Nav.Link>
             )
             : (
-              <Nav.Link href='/appliedjobs'>Applied Jobs</Nav.Link>
+              <Nav.Link className="ms-3" href='/appliedjobs'>Applied Jobs</Nav.Link>
             )}
           {IsLoggedIn
             ? (
-              <Nav.Link onClick={handleSignOut} href='/login'>
+              <Nav.Link className="ms-3" onClick={handleSignOut} href='/login'>
                 Log Out
               </Nav.Link>
             )
             : (
-              <Nav.Link href='/login'>Log In</Nav.Link>
+              <Nav.Link className="ms-3" href='/login'>Log In</Nav.Link>
             )}
         </Nav>
       </Navbar.Collapse>

@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import NavbarElem from '../../components/NavbarElem'
 import PageTitle from '../../components/PageTitle'
 import JobAPI from '../../utils/JobAPI'
+import AppliedJobCard from '../../components/AppliedJobCard/AppliedJobCard'
 import UserAPI from '../../utils/UserAPI'
-import JobCard from '../../components/JobCard/JobCard'
 import DropdownButton from 'react-bootstrap/DropDownButton'
 import './AppliedJobs.css'
+import JobCard from '../../components/JobCard'
 
 const AppliedJobs = () => {
 
@@ -26,7 +27,7 @@ const AppliedJobs = () => {
   const [filteredJobs, setFilteredJobs] = useState([])
   const [form, setFormValue] = useState({
     filter: 'none',
-  });
+  })
 
 
   // On page mount get the current user, extract their jobs array and set to state.
@@ -35,13 +36,10 @@ const AppliedJobs = () => {
       .then(({ data }) => {
         setJobs(data.userJobs)
         setFilteredJobs(data.userJobs)
+        console.log(jobs)
       })
       .catch(err => console.log('err'))
   }, [])
-
-
-
-
 
   const Radio = ({ label, id, handleChange, name, form }) => (
     <>
@@ -92,21 +90,14 @@ const AppliedJobs = () => {
     console.log(value)
   };
 
-  const setParentState = (state) => {
-    if(state.jobId){
-      JobAPI.getCandidateJobs()
-        .then(({ data }) => {
-          setJobs(data.userJobs)
-          setFilteredJobs(data.userJobs)
-        })
-        .catch(err => console.log('err'))
-      
-      
-    }else{
-      setJobs(state)
-      setFilteredJobs(jobs)
-      console.log("running")
-    }
+  const setParentState = () => {
+    JobAPI.getCandidateJobs()
+      .then(({ data }) => {
+        setJobs(data.userJobs)
+        setFilteredJobs(data.userJobs)
+        console.log(jobs)
+      })
+      .catch(err => console.log('err'))
     
   }
 
@@ -162,11 +153,13 @@ const AppliedJobs = () => {
 
 
 
-      {filteredJobs.map(job => <JobCard job={job} setParentState={setParentState} />)}
+     
+      {filteredJobs.map(job => <AppliedJobCard job={job} setParentState={setParentState}  />)}
 
     </>
 
   )
+  
 }
 
 export default AppliedJobs

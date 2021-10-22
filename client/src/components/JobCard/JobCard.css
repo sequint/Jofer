@@ -3,7 +3,23 @@
 }
 
 .card-header {
-  margin-left: 250px;
+  text-align: center !important;
+}
+
+.cardContainer {
+  width: 100%
+}
+
+.jobCard {
+  margin: 10px 10px 0px 10px !important;
+}
+
+@media screen and (min-width: 575px) {
+  .jobCard {
+    max-width: 500px;
+    display: block !important;
+    margin: 10px auto 0px auto !important;
+  }
 }
 
 .cardContainer {
