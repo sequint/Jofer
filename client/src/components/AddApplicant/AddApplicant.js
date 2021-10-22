@@ -104,20 +104,20 @@ const AddApplicant = ({ job, setParentState }) => {
     setMissingInput({ missingApplicants: false })
 
     if (jobState.applicants.length > 0) {
-      console.log(jobState.applicants)
-      console.log(job.applicants)
-
-      job.applicants.push(jobState.applicants)
-      console.log(job)
-      console.log(jobState.applicants)
+      
       jobState.applicants.forEach(applicant=>{
-        applicant= {
-          ...applicant,
-          declined:{
-            reasons:[],
-            actionItems:[]
-        } }
-        job.applicants.push(applicant)
+        if(applicant.email){
+          applicant = {
+            ...applicant,
+            declined: {
+              reasons: [],
+              actionItems: []
+            }
+          }
+
+          job.applicants.push(applicant)
+        }
+       
 
       })
       
