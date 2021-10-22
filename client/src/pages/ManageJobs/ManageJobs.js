@@ -291,6 +291,20 @@ const ManageJobs = () => {
       }
     }
   }
+  let grid = 1
+
+  const getItemStyle = (isDragging, draggableStyle) => ({
+    // some basic styles to make the items look a bit nicer
+    userSelect: "none",
+    padding: grid * 2,
+    margin: `0 0 ${grid}px 0`,
+
+    // change background colour if dragging
+    background: isDragging ? "lightgreen" : "white",
+
+    // styles we need to apply on draggables
+    ...draggableStyle
+  });
 
   return (
     <div className="manageJobsContainer">
@@ -330,14 +344,26 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card className="mb-2 text-center">
-                                <Card.Body
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  ref={provided.innerRef}
+                              <Card className="mb-2 text-center"
+
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={getItemStyle(
+                                  snapshot.isDragging,
+                                  provided.draggableProps.style
+                                )}
+                              >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-around"
+                                  }}
                                 >
-                                  {applicant.applicantName}
-                                </Card.Body>
+                                  <Card.Body>
+                                    {applicant.applicantName}
+                                  </Card.Body>
+                                </div>
                               </Card>
                             )}
                           </Draggable>
@@ -365,14 +391,26 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card className="mb-2 text-center">
-                                <Card.Body
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  ref={provided.innerRef}
-                                >
+                              <Card className="mb-2 text-center"
+                              
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={getItemStyle(
+                            snapshot.isDragging,
+                            provided.draggableProps.style
+                          )}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-around"
+                            }}
+                          >
+                                <Card.Body>
                                   {applicant.applicantName}
                                 </Card.Body>
+                                </div>
                               </Card>
                             )}
                           </Draggable>
@@ -400,14 +438,26 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card className="mb-2 text-center">
-                                <Card.Body
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  ref={provided.innerRef}
+                              <Card className="mb-2 text-center"
+
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={getItemStyle(
+                                  snapshot.isDragging,
+                                  provided.draggableProps.style
+                                )}
+                              >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-around"
+                                  }}
                                 >
-                                  {applicant.applicantName}
-                                </Card.Body>
+                                  <Card.Body>
+                                    {applicant.applicantName}
+                                  </Card.Body>
+                                </div>
                               </Card>
                             )}
                           </Draggable>
@@ -435,14 +485,26 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card className="mb-2 text-center">
-                                <Card.Body
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  ref={provided.innerRef}
+                              <Card className="mb-2 text-center"
+
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={getItemStyle(
+                                  snapshot.isDragging,
+                                  provided.draggableProps.style
+                                )}
+                              >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-around"
+                                  }}
                                 >
-                                  {applicant.applicantName}
-                                </Card.Body>
+                                  <Card.Body>
+                                    {applicant.applicantName}
+                                  </Card.Body>
+                                </div>
                               </Card>
                             )}
                           </Draggable>
