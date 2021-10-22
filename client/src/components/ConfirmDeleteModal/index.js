@@ -1,1 +1,1 @@
-export { default } from 'ConfirmDeleteModal.js'
+export { default } from './ConfirmDeleteModal'

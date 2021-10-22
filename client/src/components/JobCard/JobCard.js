@@ -1,7 +1,7 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import './JobCard.css'
-import ConfirmDeleteModal from '../ConfirmDeleteModal/'
+import ConfirmDeleteModal from '../ConfirmDeleteModal'
 
 const JobCard = ({ job }) => {
   console.log(job._id)
