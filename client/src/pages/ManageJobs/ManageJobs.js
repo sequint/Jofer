@@ -318,7 +318,7 @@ const ManageJobs = () => {
         <></>
       )}
       <NavbarElem />
-      <PageTitle title="Job Manager - Job Title" />
+      <PageTitle title={`Job Manager - ${job.name}`} />
       <input
         type="text"
         name="filter"
