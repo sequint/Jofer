@@ -93,6 +93,10 @@ const AppliedJobs = () => {
     console.log(value)
   };
 
+  const setParentState = (state) => {
+    setJobs(state)
+    setFilteredJobs(jobs)
+  }
 
   return (
     <>
@@ -146,7 +150,7 @@ const AppliedJobs = () => {
 
 
 
-      {filteredJobs.map(job => <JobCard job={job} />)}
+      {filteredJobs.map(job => <JobCard job={job} setParentState={setParentState} />)}
 
     </>
 

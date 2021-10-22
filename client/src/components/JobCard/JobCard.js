@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button'
 import './JobCard.css'
 import ConfirmDeleteModal from '../ConfirmDeleteModal'
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, setParentState }) => {
   console.log(job._id)
 
   const saveToLocal = event => {
@@ -13,11 +13,15 @@ const JobCard = ({ job }) => {
     window.location = '/managejobs'
   }
 
+  const runSetParentState = (state) => {
+    setParentState(state)
+  }
+
   return (
     <div className="cardContainer">
       <Card className="jobCard">
         <Card.Body>
-          <ConfirmDeleteModal job={job} />
+          <ConfirmDeleteModal runSetParentState={runSetParentState} job={job} />
           <Card.Title>{job.name}</Card.Title>
           <Card.Text>Company: {job.company}</Card.Text>
           <Card.Text>Department: {job.type}</Card.Text>

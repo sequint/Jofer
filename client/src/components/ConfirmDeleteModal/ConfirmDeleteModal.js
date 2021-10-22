@@ -3,8 +3,7 @@ import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import JobAPI from '../../utils/JobAPI'
 
-const ConfirmDeleteModal = ({job}) => {
-  
+const ConfirmDeleteModal = ({job, runSetParentState}) => {
   const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
   const handleConfirmDelete = () => {
@@ -12,7 +11,10 @@ const ConfirmDeleteModal = ({job}) => {
       .then(() => {
         console.log('deleted')
         setShow(false)
-        
+        JobAPI.getCandidateJobs()
+          .then(({data}) => {
+            runSetParentState(data.userJobs)
+          })
       })
   }
   const handleClose = () => {
