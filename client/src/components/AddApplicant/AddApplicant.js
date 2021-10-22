@@ -21,6 +21,8 @@ const AddApplicant = ({ job, setParentState }) => {
     missingEmail: false
   })
 
+  const [correctFormat, setCorrectFormat] = useState(true)
+
   const handleClose = () => {
     setMissingInput({
       missingApplicants: false,
@@ -32,9 +34,9 @@ const AddApplicant = ({ job, setParentState }) => {
       applicantName: '',
       applicants: []
     })
+    setCorrectFormat(true)
     setShow(false)
   }
-  const [correctFormat, setCorrectFormat] = useState(true)
 
   const handleInputChange = ({ target: { name, value } }) => {
     setMissingInput({ ...missingInput, missingApplicants: false })
