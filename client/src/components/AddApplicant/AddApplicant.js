@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import JobAPI from '../../utils/JobAPI'
 
-const AddApplicant = ({ job }) => {
+const AddApplicant = ({ job, setParentState }) => {
   const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
@@ -39,8 +39,7 @@ const AddApplicant = ({ job }) => {
       const applicant = {
         email: jobState.email,
         applicantName: jobState.applicantName,
-        status: 'Review',
-        declineReason: jobState.declineReason
+        status: 'Review'
       }
 
       jobState.applicants.push(applicant)
@@ -71,7 +70,7 @@ const AddApplicant = ({ job }) => {
       event.preventDefault()
     }
 
-    let { name, company, type } = jobState
+    
 
     setMissingInput({ missingApplicants: false })
 
@@ -79,13 +78,31 @@ const AddApplicant = ({ job }) => {
       console.log(jobState.applicants)
       console.log(job.applicants)
 
-      // job.applicants.push(jobState.applicants)
-      jobState.applicants.forEach(applicant => job.applicants.push(applicant))
+      job.applicants.push(jobState.applicants)
+      console.log(job)
+      console.log(jobState.applicants)
+      jobState.applicants.forEach(applicant=>{
+        applicant= {
+          ...applicant,
+          declined:{
+            reasons:[],
+            actionItems:[]
+        } }
+        job.applicants.push(applicant)
 
-      console.log(job.applicants)
-
+      })
+      
+      setJobState({...jobState, applicants:[]})
       JobAPI.update(job._id, job)
-        .then(() => handleClose())
+        .then(({data}) => {
+          console.log("hello")
+
+          setParentState(job)
+          handleClose()
+        })
+        .catch(err=>{
+          console.log(err)
+        })
 
     }
     else {
