@@ -6,6 +6,7 @@ import AppliedJobCard from '../../components/AppliedJobCard/AppliedJobCard'
 import UserAPI from '../../utils/UserAPI'
 import DropdownButton from 'react-bootstrap/DropDownButton'
 import './AppliedJobs.css'
+import JobCard from '../../components/JobCard'
 
 const AppliedJobs = () => {
 
@@ -13,7 +14,6 @@ const AppliedJobs = () => {
 
     UserAPI.getUser()
       .then(({ data }) => {
-        console.log(data)
         if (data.user_type !== 'applicant') {
           window.location = '/home'
         }
@@ -36,6 +36,7 @@ const AppliedJobs = () => {
       .then(({ data }) => {
         setJobs(data.userJobs)
         setFilteredJobs(data.userJobs)
+        console.log(jobs)
       })
       .catch(err => console.log('err'))
   }, [])
@@ -87,6 +88,17 @@ const AppliedJobs = () => {
         break
     }
     console.log(value)
+  };
+
+  const setParentState = () => {
+    JobAPI.getCandidateJobs()
+      .then(({ data }) => {
+        setJobs(data.userJobs)
+        setFilteredJobs(data.userJobs)
+        console.log(jobs)
+      })
+      .catch(err => console.log('err'))
+    
   }
 
   return (
@@ -137,7 +149,14 @@ const AppliedJobs = () => {
         </DropdownButton>
       </row>
 
-      {filteredJobs.map(job => <AppliedJobCard job={job} />)}
+
+
+
+
+
+
+     
+      {filteredJobs.map(job => <AppliedJobCard job={job} setParentState={setParentState}  />)}
 
     </>
 
