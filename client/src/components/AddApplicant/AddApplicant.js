@@ -39,8 +39,18 @@ const AddApplicant = ({ job, setParentState }) => {
   }
 
   const handleInputChange = ({ target: { name, value } }) => {
-    setMissingInput({ ...missingInput, missingApplicants: false })
+
+    // Change the state of missing input dynamically on input change.
+    if (name === 'applicantName') {
+      setMissingInput({ ...missingInput, missingApplicantName: false })
+    }
+    else if (name === 'email') {
+      setMissingInput({ ...missingInput, missingEmail: false })
+      setCorrectFormat(true)
+    }
+
     setJobState({ ...jobState, [name]: value })
+
   } 
 
   const handleAddApplicant = event => {
