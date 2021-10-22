@@ -8,16 +8,32 @@ import JobAPI from '../../utils/JobAPI'
 const AddApplicant = ({ job, setParentState }) => {
   const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false)
+  
   const [jobState, setJobState] = useState({
+    email: '',
+    applicantName: '',
     applicants: []
   })
 
   const [missingInput, setMissingInput] = useState({
     missingApplicants: false,
-    missingApplicantName: false
+    missingApplicantName: false,
+    missingEmail: false
   })
 
+  const handleClose = () => {
+    setMissingInput({
+      missingApplicants: false,
+      missingApplicantName: false,
+      missingEmail: false
+    })
+    setJobState({
+      email: '',
+      applicantName: '',
+      applicants: []
+    })
+    setShow(false)
+  }
   const [correctFormat, setCorrectFormat] = useState(true)
 
   const handleInputChange = ({ target: { name, value } }) => {
@@ -31,11 +47,11 @@ const AddApplicant = ({ job, setParentState }) => {
     }
 
     setCorrectFormat(true)
-    setMissingInput({ ...missingInput, missingApplicantName: false })
+    setMissingInput({ ...missingInput, missingApplicantName: false, missingEmail: false })
 
     const emailFormat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-    if (emailFormat.test(jobState.email) && jobState.applicantName !== '') {
+    if (emailFormat.test(jobState.email) && jobState.email !== '' && jobState.applicantName !== '') {
       const applicant = {
         email: jobState.email,
         applicantName: jobState.applicantName,
@@ -49,17 +65,17 @@ const AddApplicant = ({ job, setParentState }) => {
       })
     }
     else {
-      if (!(emailFormat.test(jobState.email)) && jobState.applicantName === '') {
+
+      if (!(emailFormat.test(jobState.email))) {
         setCorrectFormat(false)
-        setMissingInput({ ...missingInput, missingApplicantName: true })
       }
-      else {
-        if (!(emailFormat.test(jobState.email))) {
-          setCorrectFormat(false)
-        }
-        else {
-          setMissingInput({ ...missingInput, missingApplicantName: true })
-        }
+
+      if (jobState.email === '') {
+        setMissingInput({ ...missingInput, missingEmail: true })
+      }
+
+      if (jobState.applicantName === '') {
+        setMissingInput({ ...missingInput, missingApplicantName: true })
       }
     }
   }
@@ -146,6 +162,7 @@ const AddApplicant = ({ job, setParentState }) => {
                   value={jobState.applicantName}
                   onChange={handleInputChange}
                 />
+                {missingInput.missingApplicantName ? <p className="err">⚠️ Please enter a name</p> : <></>}
               </Form.Group>
               <Form.Group className='mb-3' controlId='email'>
                 <Form.Label>Email</Form.Label>
@@ -156,7 +173,7 @@ const AddApplicant = ({ job, setParentState }) => {
                   value={jobState.email}
                   onChange={handleInputChange}
                 />
-                {(jobState.email && !correctFormat) ? <p className="err">⚠️ Please enter a valid email address</p> : <></>}
+                {(missingInput.missingEmail || !correctFormat) ? <p className="err">⚠️ Please enter a valid email address</p> : <></>}
                 <Button
                   className="mt-3"
                   variant='primary'
