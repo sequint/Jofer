@@ -310,7 +310,8 @@ const ManageJobs = () => {
     margin: `0 0 ${grid}px 0`,
 
     // change background colour if dragging
-    background: isDragging ? "lightgreen" : "white",
+    background: isDragging ? "white" : "white",
+    boxShadow: isDragging ? "10px 10px #8ECAE6" : null,
 
     // styles we need to apply on draggables
     ...draggableStyle
@@ -336,7 +337,7 @@ const ManageJobs = () => {
         placeholder="Filter Applicants"
         onChange={handleInputChange}
       />
-      <Container>
+      <Container className="manageJobContainer">
         <DragDropContext onDragEnd={onDragEnd}>
           <Row>
             <AddApplicant job={job} setParentState={setParentState} />
@@ -354,7 +355,7 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card className="mb-2 text-center"
+                              <Card className="mb-2 text-center uCard"
 
                                 ref={provided.innerRef}
                                 {...provided.draggableProps}
@@ -401,7 +402,7 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card className="mb-2 text-center"
+                              <Card className="mb-2 text-center uCard"
                               
                           ref={provided.innerRef}
                           {...provided.draggableProps}
@@ -448,7 +449,7 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card className="mb-2 text-center"
+                              <Card className="mb-2 text-center uCard"
 
                                 ref={provided.innerRef}
                                 {...provided.draggableProps}
@@ -495,7 +496,7 @@ const ManageJobs = () => {
                             index={index}
                           >
                             {(provided, snapshot) => (
-                              <Card className="mb-2 text-center"
+                              <Card className="mb-2 text-center uCard"
 
                                 ref={provided.innerRef}
                                 {...provided.draggableProps}
