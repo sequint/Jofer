@@ -34,10 +34,6 @@ const AppliedJobs = () => {
       })
   }, [])
 
-
-
-
-
   const Radio = ({ label, id, handleChange, name, form }) => (
     <>
       <input
@@ -149,7 +145,7 @@ const AppliedJobs = () => {
               </DropdownButton>
             </row>
 
-            {filteredJobs.map(job => <JobCard job={job} />)}
+            {filteredJobs.map(job => <AppliedJobCard job={job} />)}
 
           </>
 
