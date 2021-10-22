@@ -1,12 +1,19 @@
 import Modal from 'react-bootstrap/Modal'
 import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
+import JobAPI from '../../utils/JobAPI'
 
-const ConfirmDeleteModal = () => {
+const ConfirmDeleteModal = ({job}) => {
+  
   const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
   const handleConfirmDelete = () => {
-    console.log('delete')
+    JobAPI.delete(job._id)
+      .then(() => {
+        console.log('deleted')
+        setShow(false)
+        
+      })
   }
   const handleClose = () => {
     setShow(false)

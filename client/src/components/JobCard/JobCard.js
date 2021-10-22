@@ -15,21 +15,19 @@ const JobCard = ({ job }) => {
 
   return (
     <div className="cardContainer">
-      <Card className='jobCard'>
+      <Card className="jobCard">
         <Card.Body>
+          <ConfirmDeleteModal job={job} />
           <Card.Title>{job.name}</Card.Title>
-          <ConfirmDeleteModal/>
-          <Card.Text>
-            Company: {job.company}
-          </Card.Text>
-          <Card.Text>
-            Department: {job.type}
-          </Card.Text>
-          <Button variant='primary' onClick={saveToLocal}>Manage Job</Button>
+          <Card.Text>Company: {job.company}</Card.Text>
+          <Card.Text>Department: {job.type}</Card.Text>
+          <Button variant="primary" onClick={saveToLocal}>
+            Manage Job
+          </Button>
         </Card.Body>
       </Card>
     </div>
-  )
+  );
 }
 
 export default JobCard
