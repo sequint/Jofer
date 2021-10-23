@@ -8,10 +8,6 @@ import ConfirmDeleteModal from '../ConfirmDeleteModal'
 import './AppliedJobCard.css'
 
 const AppliedJobCard = ({ job, setParentState }) => {
-  console.log(job.id)
-  console.log(job.applicants)
-  console.log(job);
-
   const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
@@ -21,18 +17,13 @@ const AppliedJobCard = ({ job, setParentState }) => {
     actionItems: []
   })
 
-  console.log(declinedReasons)
-
   useEffect(() => {
     JobAPI.getAllJobs()
       .then(({ data }) => {
         data.forEach(elem => {
           if (elem._id === job.jobId) {
-            console.log('hello')
             UserAPI.getUser()
               .then(({ data }) => {
-                console.log(elem)
-                console.log(data)
                 elem.applicants.forEach(applicant => {
                   if (applicant.email === data.username) {
                     setDeclinedReasons({ reasons: applicant.declined.reasons, actionItems: applicant.declined.actionItems })
@@ -94,11 +85,11 @@ const AppliedJobCard = ({ job, setParentState }) => {
           <p><strong>Company:</strong> {job.company}</p>
           <p><strong>Department:</strong> {job.type}</p>
           <hr />
-          <h3>Declined Reason</h3>
-          {declinedReasons.reasons ? <p className="mb-1"><strong>Reasons:</strong></p> : <></>}
-          {declinedReasons.reasons ? listReasons() : <></>}
-          {declinedReasons.reasons ? <p className="mt-3"><strong>Action Items:</strong></p> : <></>}
-          {declinedReasons.reasons ? listActionItems() : <></>}
+          {(declinedReasons.reasons.length > 0 || declinedReasons.actionItems.length > 0) ?<h3>Declined Reason</h3> : <></>}
+          {declinedReasons.reasons.length > 0 ? <p className="mb-1"><strong>Reasons:</strong></p> : <></>}
+          {declinedReasons.reasons.length > 0 ? listReasons() : <></>}
+          {declinedReasons.reasons.length > 0 ? <p className="mt-3"><strong>Action Items:</strong></p> : <></>}
+          {declinedReasons.reasons.length > 0 ? listActionItems() : <></>}
         </Modal.Body>
       </Modal>
     </>
