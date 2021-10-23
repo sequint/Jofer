@@ -26,21 +26,25 @@ const ConfirmDeleteModal = ({job, setParentState}) => {
       console.log(job)
       JobAPI.getAllJobs()
       .then(({data}) =>{
-        
-       let applicants = data[0].applicants
-       console.log(applicants)
-       applicants = applicants.filter(applicant =>applicant.email !== job.email)
-       console.log(applicants)
-       data[0].applicants = applicants
-       JobAPI.update(data[0]._id,data[0])
-       .then(()=>{
-         console.log('updated')
-         setParentState()
-         setShow(false)
+        data.forEach(application=>{
+          if(application._id===job.jobId){
+            let applicants = application.applicants
+            console.log(applicants)
+            applicants = applicants.filter(applicant => applicant.email !== job.email)
+            console.log(applicants)
+            application.applicants = applicants
+            JobAPI.update(application._id, application)
+              .then(() => {
+                console.log('updated')
+                setParentState()
+                setShow(false)
 
-       })
-
-      })
+              })
+          }
+          })
+          
+        })
+      
 
 
 
