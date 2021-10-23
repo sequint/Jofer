@@ -47,9 +47,9 @@ const PostedJobs = () => {
     <>
       <NavbarElem />
       {user ? <PageTitle title={displayTitle()} /> :<></>}
-      <CreateJob 
+      {user ? <CreateJob 
         setParentState={setParentState}
-      />
+      />:<></>}
       {user ? user.jobs.map(job => <JobCard setParentState={setParentState} job={job} />) : <></>}
       
     </>
