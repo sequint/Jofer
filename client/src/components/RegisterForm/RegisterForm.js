@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import UserAPI from '../../utils/UserAPI'
 import FloatingLabel from 'react-bootstrap/esm/FloatingLabel'
+import SuccessMessage from '../SuccessMessage'
 import './RegisterForm.css'
 
 const RegisterForm = () => {
@@ -22,6 +23,7 @@ const RegisterForm = () => {
   })
   const [correctFormat, setCorrectFormat] = useState(true)
   const [usernameExists, setUsernameExists] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   const handleInputChange = ({ target: { name, value } }) => {
 
@@ -71,10 +73,11 @@ const RegisterForm = () => {
           if (token === null) {
             UserAPI.register(userState)
               .then(({ data }) => {
-                console.log(data)
-                alert('User Registered!')
+                setSuccess(true)
                 setUserState({ ...userState, first_name: '', last_name: '', username: '', password: '' })
-                window.location = '/login'
+                setTimeout(() => {
+                  window.location = '/login'
+                }, 2000)
               })
               .catch(err => console.error(err))
           }
@@ -127,7 +130,7 @@ const RegisterForm = () => {
     <Form
       className='form'
     >
-
+      {success ? <SuccessMessage /> : <></>}
       <FloatingLabel
         controlId='floatingInput'
         label='👤 First Name'

@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import UserAPI from '../../utils/UserAPI'
 import FloatingLabel from 'react-bootstrap/esm/FloatingLabel'
+import SuccessMessage from '../SuccessMessage'
 import './EmployerForm.css'
 
 const EmployerForm = () => {
@@ -23,6 +24,7 @@ const EmployerForm = () => {
   })
   const [correctFormat, setCorrectFormat] = useState(true)
   const [usernameExists, setUsernameExists] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   const handleInputChange = ({ target: { name, value } }) => {
 
@@ -77,9 +79,11 @@ const EmployerForm = () => {
           if (!token) {
             UserAPI.register(userState)
               .then(() => {
-                alert('User Registered!')
+                setSuccess(true)
                 setUserState({ ...userState, first_name: '', last_name: '', username: '', password: '', company: '' })
-                window.location = '/login'
+                setTimeout(() => {
+                  window.location = '/login'
+                }, 2000)
               })
               .catch(err => console.error(err))
           }
@@ -136,7 +140,7 @@ const EmployerForm = () => {
     <Form
       className='form'
     >
-
+      {success ? <SuccessMessage /> : <></>}
       <FloatingLabel
         controlId='floatingInput'
         label='👤 First Name'
