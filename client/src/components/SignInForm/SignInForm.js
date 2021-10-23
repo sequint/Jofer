@@ -10,26 +10,68 @@ const SignInForm = () => {
     username: '',
     password: ''
   })
+  const [ missingInput, setMissingInput ] = useState({
+    missingEmail: false,
+    missingPassword: false
+  })
+  const [correctFormat, setCorrectFormat] = useState(true)
+  const [ usernameExists, setUsernameExists ] = useState(true)
 
-  const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
+  const handleInputChange = ({ target: { name, value } }) => {
+
+    // Change the state of missing input dynamically on input change.
+    if (name === 'password') {
+      setMissingInput({ ...missingInput, missingPassword: false })
+    }
+    else if (name === 'username') {
+      setMissingInput({ ...missingInput, missingEmail: false })
+      setCorrectFormat(true)
+    }
+
+    setUserState({ ...userState, [name]: value })
+
+  }
 
   const handleLoginUser = event => {
     event.preventDefault()
-    UserAPI.login(userState)
-      .then(({ data: token }) => {
-        console.log(token)
-        if (token) {
-          localStorage.setItem('token', token)
-        setUserState({ ...userState, name: '', email: '', username: '', password: '' })
-        window.location = '/home'
-        }
-        else {
-          alert('Invalid username or password.')
-          setUserState({ ...userState, name: '', email: '', username: '', password: '' })
-        }
-        
-      })
-      .catch(err => console.error(err))
+
+    setMissingInput({ missingEmail: false, missingPassword: false })
+    setCorrectFormat(true)
+    setUsernameExists(true)
+
+    const emailFormat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+    if (emailFormat.test(userState.username) && userState.email !== '' && userState.password !== '') {
+      UserAPI.login(userState)
+        .then(({ data: token }) => {
+          console.log(token)
+          if (token) {
+            localStorage.setItem('token', token)
+            setUserState({ ...userState, name: '', email: '', username: '', password: '' })
+            window.location = '/home'
+          }
+          else {
+            setUsernameExists(false)
+            setUserState({ ...userState, password: '' })
+          }
+        })
+        .catch(err => console.error(err))
+    }
+    else {
+
+      if (!(emailFormat.test(userState.email))) {
+        setCorrectFormat(false)
+      }
+
+      if (userState.email === '') {
+        setMissingInput({ ...missingInput, missingEmail: true })
+      }
+
+      if (userState.password === '') {
+        setMissingInput({ ...missingInput, missingPassword: true })
+      }
+    }
+      
   }
 
   const handleHome = () => {
@@ -53,6 +95,8 @@ const SignInForm = () => {
           value={userState.username}
           onChange={handleInputChange}
         />
+        {(missingInput.missingEmail || !correctFormat) ? <p className="err mt-2">⚠️ Please enter a valid email address</p> : <></>}
+        {!usernameExists ? <p className="err mt-2">⚠️ Email not registered</p> : <></>}
       </FloatingLabel>
 
       <FloatingLabel
@@ -67,6 +111,7 @@ const SignInForm = () => {
           value={userState.password}
           onChange={handleInputChange}
         />
+        {missingInput.missingPassword ? <p className="err mt-2">⚠️ Please enter a password</p> : <></>}
       </FloatingLabel>
 
       <Button
