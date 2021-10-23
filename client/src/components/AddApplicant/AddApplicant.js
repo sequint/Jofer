@@ -143,8 +143,7 @@ const AddApplicant = ({ job, setParentState }) => {
       <div
         className="mt-2 mb-2 createNewJob">
         <Button
-          className="col-2 createBtn"
-          // varient="primary"
+          className="createBtn"
           onClick={handleShow}>
           + Applicants
         </Button>
@@ -152,6 +151,7 @@ const AddApplicant = ({ job, setParentState }) => {
       <Modal
         show={show}
         onHide={handleClose}
+        backdrop="static"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered>

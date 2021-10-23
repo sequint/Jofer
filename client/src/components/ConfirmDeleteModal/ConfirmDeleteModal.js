@@ -64,23 +64,27 @@ const ConfirmDeleteModal = ({ job, setParentState }) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Are you sure you want to delete this job?</Modal.Title>
+        <Modal.Header className="center" closeButton>
+          <Modal.Title>
+            Are you sure you want to delete this job?
+          </Modal.Title>
         </Modal.Header>
+        <Modal.Body>
+          <h5 className="text-center">⚠️ Once you delete this job you will no longer be able to acess the listing ⚠️</h5>
+        </Modal.Body>
         <Modal.Footer>
-          <p>⚠️ Once you delete this job you will no longer be able to acess the listing.</p>
           <Button
-            variant="primary"
+            variant="danger"
             type="submit"
             onClick={handleConfirmDelete}>
             Confirm
           </Button>
-          <Button
+          {/* <Button
             variant="primary"
             type="submit"
             onClick={handleClose}>
             Cancel
-          </Button>
+          </Button> */}
         </Modal.Footer>
       </Modal>
     </>

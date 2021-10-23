@@ -148,6 +148,7 @@ const CreateJob = ({ setParentState }) => {
       <Modal
         show={show}
         onHide={handleClose}
+        backdrop="static"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered>

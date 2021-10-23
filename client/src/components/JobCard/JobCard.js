@@ -16,8 +16,8 @@ const JobCard = ({ job, setParentState }) => {
 
 
   return (
-    <div className="cardContainer">
-      <Card className="jobCard pCard mt-3 mb-2">
+    <div className="cardContainer pb-2">
+      <Card className="jobCard pCard mt-3">
         <Card.Body>
           <ConfirmDeleteModal setParentState={setParentState} job={job} />
           <Card.Title>{job.name}</Card.Title>
