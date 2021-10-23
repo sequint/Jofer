@@ -10,12 +10,12 @@ const SignInForm = () => {
     username: '',
     password: ''
   })
-  const [ missingInput, setMissingInput ] = useState({
+  const [missingInput, setMissingInput] = useState({
     missingEmail: false,
     missingPassword: false
   })
   const [correctFormat, setCorrectFormat] = useState(true)
-  const [ usernameExists, setUsernameExists ] = useState(true)
+  const [usernameExists, setUsernameExists] = useState(true)
 
   const handleInputChange = ({ target: { name, value } }) => {
 
@@ -71,7 +71,7 @@ const SignInForm = () => {
         setMissingInput({ ...missingInput, missingPassword: true })
       }
     }
-      
+
   }
 
   const handleHome = () => {
@@ -79,22 +79,20 @@ const SignInForm = () => {
   }
 
   return (
-    <Form
-      className='form'
-    >
+    <Form className='form'>
 
       <FloatingLabel
         controlId='floatingInput'
         label='📧 Email'
-        className='mb-3 col-5 style'
-      >
+        className='mb-3 col-5 style'>
+
         <Form.Control
           type='email'
           placeholder='Enter your email'
           name='username'
           value={userState.username}
-          onChange={handleInputChange}
-        />
+          onChange={handleInputChange}/>
+
         {(missingInput.missingEmail || !correctFormat) ? <p className="err mt-2">⚠️ Please enter a valid email address</p> : <></>}
         {!usernameExists ? <p className="err mt-2">⚠️ Email not registered</p> : <></>}
       </FloatingLabel>
@@ -102,31 +100,29 @@ const SignInForm = () => {
       <FloatingLabel
         controlId='floatingPassword'
         label='🔐 Password'
-        className='mb-3 col-5 style'
-      >
+        className='mb-3 col-5 style'>
+
         <Form.Control
           type='password'
           placeholder='Password'
           name='password'
           value={userState.password}
-          onChange={handleInputChange}
-        />
+          onChange={handleInputChange}/>
+
         {missingInput.missingPassword ? <p className="err mt-2">⚠️ Please enter a password</p> : <></>}
       </FloatingLabel>
 
       <Button
         className='mb-3 col-5 signInBtn'
-        type='submit'
-        onClick={handleLoginUser}
-      >
+        type='submit style'
+        onClick={handleLoginUser}>
         Sign In
       </Button>
 
       <Button
         variant='link'
         type='button'
-        onClick={handleHome}
-      >
+        onClick={handleHome}>
         Go Home
       </Button>
 
