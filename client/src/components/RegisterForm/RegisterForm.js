@@ -70,7 +70,8 @@ const RegisterForm = () => {
 
           if (token === null) {
             UserAPI.register(userState)
-              .then(() => {
+              .then(({ data }) => {
+                console.log(data)
                 alert('User Registered!')
                 setUserState({ ...userState, first_name: '', last_name: '', username: '', password: '' })
                 window.location = '/login'
