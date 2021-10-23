@@ -5,9 +5,12 @@ import Button from 'react-bootstrap/Button'
 import JobAPI from '../../utils/JobAPI'
 import UserAPI from '../../utils/UserAPI'
 import './AppliedJobCard.css'
-import ConfirmDeleteModal from '../ConfirmDeleteModal'
 
-const AppliedJobCard = ({ job,setParentState }) => {
+const AppliedJobCard = ({ job }) => {
+  console.log(job.id)
+  console.log(job.applicants)
+  console.log(job);
+
   const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
@@ -17,7 +20,7 @@ const AppliedJobCard = ({ job,setParentState }) => {
     actionItems: []
   })
 
- 
+  console.log(declinedReasons)
 
   useEffect(() => {
     JobAPI.getAllJobs()
@@ -43,31 +46,30 @@ const AppliedJobCard = ({ job,setParentState }) => {
   const listReasons = _ => declinedReasons.reasons.map(reason => <li>{reason}</li>)
   const listActionItems = _ => declinedReasons.actionItems.map(item => <li>{item}</li>)
 
-  
+
 
   return (
     <>
-      
-      <div className="cardContainer">
-        <Card className="jobCard">
-          <Card.Header className='status' as='h5'>{job.status}<ConfirmDeleteModal setParentState={setParentState} job={job} /></Card.Header>
-          <Card.Body>
-         
-            <Card.Title>{job.name}</Card.Title>
-            <Card.Text>
-              <strong>Company: </strong> {job.company}
-            </Card.Text>
-            <Card.Text>
-              <strong>Department: </strong> {job.type}
-            </Card.Text>
+      <Card className='jobCard'>
+        <Card.Header className='status' as='h5'>{job.status}</Card.Header>
+        <Card.Body
+          className="appJob">
+          <Card.Title>{job.name}</Card.Title>
+          <Card.Text>
+            Company: {job.company}
+          </Card.Text>
+          <Card.Text>
+            Department: {job.type}
+          </Card.Text>
+          <div className="bttn">
             <Button
               variant='outline-secondary'
               onClick={handleShow}>
               View More
             </Button>
-          </Card.Body>
-        </Card>
-      </div>
+          </div>
+        </Card.Body>
+      </Card>
       <Modal
         show={show}
         onHide={handleClose}
