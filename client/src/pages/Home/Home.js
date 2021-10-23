@@ -3,6 +3,7 @@ import NavbarElem from '../../components/NavbarElem'
 import PageTitle from '../../components/PageTitle'
 import JobAPI from '../../utils/JobAPI'
 import './Home.css'
+import HomeCard from '../../components/HomeCard'
 
 const Home = () => {
 
@@ -14,14 +15,28 @@ const Home = () => {
    
   }])
 
-  useEffect(() => {
-
-
-
-    
+  useEffect(() => { 
     JobAPI.getAllJobs()
       .then(({ data }) => {
-        setJobs(data)     
+        let jobs = []
+        let applicants =[]
+        data.forEach(job=>{
+          job.applicants.forEach(applicant=>{
+            if(applicant.status=='Declined')
+            {           
+              applicants.push(applicant)
+            }
+          })
+          if(applicants.length!==0){
+            job.status= "Declined"
+            job.applicants = applicants
+            applicants = []
+            jobs.push(job)
+          }
+        
+        })
+        setJobs(jobs)
+        setFilteredJobs(jobs)     
       })
       .catch(err => console.log('err'))
 
@@ -30,10 +45,27 @@ const Home = () => {
     }
     
     if (jobs.length > 0) {
-      setFilteredJobs({ ...jobs })
+      setFilteredJobs(jobs)
     }
 
   }, [])
+
+  const handleInputChange = ({ target: { value,name } }) => {
+    
+    switch(name){
+      case "filterCompany":
+        const company = jobs.filter(department => department.company.substring(0, value.length).toUpperCase() === value.toUpperCase())
+        setFilteredJobs(company)
+        break
+      case "filterDepartment":
+        const department = jobs.filter(department => department.type.substring(0, value.length).toUpperCase() === value.toUpperCase())
+        setFilteredJobs(department)
+        break
+        default:
+          break
+    }   
+  }
+
 
 
   return (
@@ -41,7 +73,22 @@ const Home = () => {
       <NavbarElem />
       
       <PageTitle title='Welcome User' />
-      {jobs ? jobs.map(job => <h1>its working</h1>) : <h1>You don't have any posted jobs</h1>}
+
+      <input
+        type="text"
+        name="filterCompany"
+        className="filter"
+        placeholder="Search company"
+        onChange={handleInputChange}
+      />
+      <input
+        type="text"
+        name="filterDepartment"
+        className="filter"
+        placeholder="Search department"
+        onChange={handleInputChange}
+      />
+      {filteredJobs ? filteredJobs.map(job => <HomeCard job={job}></HomeCard>) : <h1>You don't have any posted jobs</h1>}
     </>
   )
 }
