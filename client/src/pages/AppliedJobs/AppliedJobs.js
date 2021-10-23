@@ -5,8 +5,8 @@ import JobAPI from '../../utils/JobAPI'
 import AppliedJobCard from '../../components/AppliedJobCard/AppliedJobCard'
 import UserAPI from '../../utils/UserAPI'
 import DropdownButton from 'react-bootstrap/DropDownButton'
+import Container from 'react-bootstrap/esm/Container'
 import './AppliedJobs.css'
-import JobCard from '../../components/JobCard'
 
 const AppliedJobs = () => {
 
@@ -98,7 +98,7 @@ const AppliedJobs = () => {
         console.log(jobs)
       })
       .catch(err => console.log('err'))
-    
+
   }
 
   return (
@@ -106,57 +106,54 @@ const AppliedJobs = () => {
       <NavbarElem />
       <PageTitle title='My Jobs' />
       <row>
-        <DropdownButton
-          className='col-2 filterBtn'
-          variant="outline"
-          id="dropdown-basic-button"
-          title="Filter">
-          <Radio
-            form={form}
-            name="filter"
-            label="All"
-            id="all"
-            handleChange={handleChange}
-          />
-          <Radio
-            form={form}
-            name="filter"
-            label="In Review"
-            id="review"
-            handleChange={handleChange}
-          />
-          <Radio
-            form={form}
-            name="filter"
-            label="Interviewed"
-            id="interviewed"
-            handleChange={handleChange}
-          />
-          <Radio
-            form={form}
-            name="filter"
-            label="Declined"
-            id="declined"
-            handleChange={handleChange}
-          />
-          <Radio
-            form={form}
-            name="filter"
-            label="Offered"
-            id="offered"
-            handleChange={handleChange}
-          />
-        </DropdownButton>
+        <div className="filterBtn me-5">
+          <DropdownButton
+            className='col-2'
+            variant="outline"
+            id="dropdown-basic-button"
+            title="Filter">
+            <Radio
+              form={form}
+              name="filter"
+              label="All"
+              id="all"
+              handleChange={handleChange}
+            />
+            <Radio
+              form={form}
+              name="filter"
+              label="In Review"
+              id="review"
+              handleChange={handleChange}
+            />
+            <Radio
+              form={form}
+              name="filter"
+              label="Interviewed"
+              id="interviewed"
+              handleChange={handleChange}
+            />
+            <Radio
+              form={form}
+              name="filter"
+              label="Declined"
+              id="declined"
+              handleChange={handleChange}
+            />
+            <Radio
+              form={form}
+              name="filter"
+              label="Offered"
+              id="offered"
+              handleChange={handleChange}
+            />
+          </DropdownButton>
+        </div>
       </row>
 
-
-
-
-
-
-
-     
-      {filteredJobs.map(job => <AppliedJobCard job={job} setParentState={setParentState}  />)}
+      <Container>
+        {filteredJobs.map(job => <AppliedJobCard job={job} setParentState={setParentState} />)}
+      </Container>
 
     </>
 

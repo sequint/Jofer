@@ -13,13 +13,13 @@ const JobCard = ({ job, setParentState }) => {
     window.location = '/managejobs'
   }
 
- 
+
 
   return (
     <div className="cardContainer">
-      <Card className="jobCard">
+      <Card className="jobCard pCard mt-3 mb-2">
         <Card.Body>
-          <ConfirmDeleteModal setParentState= {setParentState} job={job} />
+          <ConfirmDeleteModal setParentState={setParentState} job={job} />
           <Card.Title>{job.name}</Card.Title>
           <Card.Text>
             <strong>Company: </strong> {job.company}
@@ -27,12 +27,13 @@ const JobCard = ({ job, setParentState }) => {
           <Card.Text>
             <strong>Department: </strong> {job.type}
           </Card.Text>
-          <Button
-            className="bbtn"
-            variant='outline-secondary'
-            onClick={saveToLocal}>
-            Manage Job
-          </Button>
+          <div className="bttn">
+            <Button
+              variant='outline-secondary'
+              onClick={saveToLocal}>
+              Manage Job
+            </Button>
+          </div>
         </Card.Body>
       </Card>
     </div>

@@ -4,9 +4,10 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import JobAPI from '../../utils/JobAPI'
 import UserAPI from '../../utils/UserAPI'
+import ConfirmDeleteModal from '../ConfirmDeleteModal'
 import './AppliedJobCard.css'
 
-const AppliedJobCard = ({ job }) => {
+const AppliedJobCard = ({ job, setParentState }) => {
   console.log(job.id)
   console.log(job.applicants)
   console.log(job);
@@ -51,7 +52,13 @@ const AppliedJobCard = ({ job }) => {
   return (
     <>
       <Card className='jobCard'>
-        <Card.Header className='status' as='h5'>{job.status}</Card.Header>
+        <Card.Header
+          className='status'
+          as='h5'>{job.status}
+          <ConfirmDeleteModal
+            setParentState={setParentState}
+            job={job} />
+        </Card.Header>
         <Card.Body
           className="appJob">
           <Card.Title>{job.name}</Card.Title>
