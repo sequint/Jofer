@@ -121,7 +121,7 @@ const EmployerForm = () => {
       </FloatingLabel>
 
       <Button
-        className='mb-2 col-5'
+        className='mb-2 col-5 registerBtn'
         variant='primary'
         type='submit'
         onClick={handleRegisterUser}
@@ -130,7 +130,7 @@ const EmployerForm = () => {
       </Button>
 
       <Button
-        className='mb-3'
+        className='mb-3 toSignIn'
         variant='light'
         type='button'
         onClick={handleLogin}

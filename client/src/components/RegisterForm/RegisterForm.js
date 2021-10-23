@@ -110,7 +110,7 @@ const RegisterForm = () => {
       </FloatingLabel>
 
       <Button
-        className='mb-2 col-5'
+        className='mb-2 col-5 registerBtn'
         variant='primary style'
         type='submit'
         onClick={handleRegisterUser}
@@ -119,7 +119,7 @@ const RegisterForm = () => {
       </Button>
 
       <Button
-        className='mb-3'
+        className='mb-3 toSignIn'
         variant='light'
         type='button'
         onClick={handleLogin}

@@ -5,11 +5,26 @@
 }
 
 .style {
-  box-shadow: rgb(25 4 69 / 6%) 0px 4px;
-  border: 1px solid rgb(25 4 69 / 0.1);
-  border-radius: .25rem;
-  -webkit-border-radius: .25rem;
-  -moz-border-radius: .25rem;
-  -ms-border-radius: .25rem;
-  -o-border-radius: .25rem;
+  width: 300px !important;
+  border-radius: 10px !important;
+  margin: auto;
+}
+
+.registerBtn {
+  text-decoration: none;
+  background-color: #023047 !important;
+  box-shadow: 5px 5px #8ECAE6 !important;
+  width: 300px !important;
+  border-radius: 10px;
+}
+
+.registerBtn:hover {
+  color: #8ECAE6 !important;
+  background-color: transparent !important;
+  border: #8ECAE6 solid 2px !important;
+  box-shadow: 10px 10px #023047 !important;
+}
+
+.toSignIn {
+  margin-top: 20px;
 }
