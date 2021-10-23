@@ -3,3 +3,28 @@
   flex-direction: column;
   align-items: center;
 }
+
+.style {
+  width: 300px !important;
+  border-radius: 10px !important;
+  margin: auto;
+}
+
+.registerBtn {
+  text-decoration: none;
+  background-color: #023047 !important;
+  box-shadow: 5px 5px #8ECAE6 !important;
+  width: 300px !important;
+  border-radius: 10px;
+}
+
+.registerBtn:hover {
+  color: #8ECAE6 !important;
+  background-color: transparent !important;
+  border: #8ECAE6 solid 2px !important;
+  box-shadow: 10px 10px #023047 !important;
+}
+
+.toSignIn {
+  margin-top: 20px;
+}
