@@ -2,6 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import 'bootstrap/dist/css/bootstrap.min.css' // Import react bootstrap cdn.
+import { initializeApp } from 'firebase/app'
+
+const firebaseApp = initializeApp({})
 
 ReactDOM.render(
   <React.StrictMode>

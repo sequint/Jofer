@@ -10,10 +10,25 @@
   border-color: #023047 !important;
 }
 
+.CreateJobBtn:hover {
+  background-color: transparent !important;
+  color: #023047 !important;
+}
+
 .err {
   color: red;
 }
 
 .gray {
   background-color: #f2f2f2 !important;
+}
+
+.createBtn {
+  background-color: #023047 !important;
+  border-color: #023047 !important;
+}
+
+.createBtn:hover {
+  background-color: transparent !important;
+  color: #023047 !important;
 }

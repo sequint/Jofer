@@ -9,7 +9,6 @@
 }
 
 .style {
-
   width: 300px !important;
   border-radius: 10px !important;
   margin: auto;
@@ -20,7 +19,11 @@
   background-color: #023047 !important;
   box-shadow: 5px 5px #8ECAE6 !important;
   width: 300px !important;
-  border-radius: 10px;
+  border-radius: 10px !important;
+  -webkit-border-radius: 10px !important;
+  -moz-border-radius: 10px !important;
+  -ms-border-radius: 10px !important;
+  -o-border-radius: 10px !important;
 }
 
 .signInBtn:hover {
