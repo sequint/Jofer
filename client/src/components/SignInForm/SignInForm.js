@@ -70,8 +70,7 @@ const SignInForm = () => {
       </FloatingLabel>
 
       <Button
-        className='mb-3 col-5 style'
-        variant='primary'
+        className='mb-3 col-5 signInBtn'
         type='submit'
         onClick={handleLoginUser}
       >
