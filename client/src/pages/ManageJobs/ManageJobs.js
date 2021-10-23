@@ -311,7 +311,7 @@ const ManageJobs = () => {
 
     // change background colour if dragging
     background: isDragging ? "white" : "white",
-    boxShadow: isDragging ? "10px 10px #8ECAE6" : null,
+    boxShadow: isDragging ? "10px 10px #FFBA0A" : null,
 
     // styles we need to apply on draggables
     ...draggableStyle
@@ -341,7 +341,7 @@ const ManageJobs = () => {
         <DragDropContext onDragEnd={onDragEnd}>
           <Row>
             <AddApplicant job={job} setParentState={setParentState} />
-            <Col>
+            <Col className="column">
               <h2>Review</h2>
               <Card className="usrCard review">
                 <Droppable droppableId="Review">
@@ -388,7 +388,7 @@ const ManageJobs = () => {
                 </Droppable>
               </Card>
             </Col>
-            <Col>
+            <Col className="column">
               <h2>Interviewed</h2>
               <Card className="usrCard interviewed">
                 <Droppable droppableId="Interview">
@@ -435,7 +435,7 @@ const ManageJobs = () => {
                 </Droppable>
               </Card>
             </Col>
-            <Col>
+            <Col className="column">
               <h2>Declined</h2>
               <Card className="usrCard declined">
                 <Droppable droppableId="Declined">
@@ -482,7 +482,7 @@ const ManageJobs = () => {
                 </Droppable>
               </Card>
             </Col>
-            <Col>
+            <Col className="column">
               <h2>Offered</h2>
               <Card className="usrCard offered">
                 <Droppable droppableId="Offered">
