@@ -51,9 +51,9 @@ const AppliedJobCard = ({ job, setParentState }) => {
 
   return (
     <>
-      <Card className='jobCard'>
+      <Card className='jobCard aCard'>
         <Card.Header
-          className='status'
+          className='status header'
           as='h5'>{job.status}
           <ConfirmDeleteModal
             setParentState={setParentState}

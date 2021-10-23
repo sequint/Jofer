@@ -11,6 +11,14 @@
   justify-content: end;
 }
 
+.header {
+  background-color: #8ECAE6 !important;
+}
+
+.aCard {
+  box-shadow: 5px 5px #023047 !important;
+}
+
 @media screen and (min-width: 575px) {
   .jobCard {
     max-width: 500px;
