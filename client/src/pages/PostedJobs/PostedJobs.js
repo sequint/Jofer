@@ -28,8 +28,11 @@ const PostedJobs = () => {
 
   useEffect(() => {
     UserAPI.getUser()
-      .then(({ data }) => setUser(data))
-      .catch(err => window.location = '/auth')
+      .then(({ data }) => {  
+        
+        setUser(data)
+      })
+      // .catch(err => window.location = '/auth')
   }, [])
 
   const displayTitle = _ => {
@@ -39,8 +42,10 @@ const PostedJobs = () => {
   const setParentState = (data)=>{
     setUser(data)
   }
+  
+  
 
-  console.log(user)
+  
   
   
   return (
@@ -50,7 +55,7 @@ const PostedJobs = () => {
       {user ? <CreateJob 
         setParentState={setParentState}
       />:<></>}
-      {user ? user.jobs.map(job => <JobCard setParentState={setParentState} job={job} />) : <></>}
+      {user ? user.jobs.slice(0).reverse().map(job => <JobCard setParentState={setParentState} job={job} />) : <></>}
       
     </>
   )

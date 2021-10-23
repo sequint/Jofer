@@ -71,13 +71,13 @@ const ManageJobs = () => {
   }
 
   const handleInputChange = ({ target: { value } }) => {
-    const review = state[0].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
+    const review = state[0].filter(applicant => applicant.applicantName.substring(0, value.length).toUpperCase() === value.toUpperCase())
 
-    const interview = state[1].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
+    const interview = state[1].filter(applicant => applicant.applicantName.substring(0, value.length).toUpperCase() === value.toUpperCase())
 
-    const decline = state[2].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
+    const decline = state[2].filter(applicant => applicant.applicantName.substring(0, value.length).toUpperCase() === value.toUpperCase())
 
-    const offer = state[3].filter(applicant => applicant.applicantName.substring(0, value.length) === value)
+    const offer = state[3].filter(applicant => applicant.applicantName.substring(0, value.length).toUpperCase() === value.toUpperCase())
 
     setFilteredApplicants([review, interview, decline, offer])
   }

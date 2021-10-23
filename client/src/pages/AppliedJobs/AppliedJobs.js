@@ -152,7 +152,7 @@ const AppliedJobs = () => {
       </row>
 
       <Container>
-        {filteredJobs.map(job => <AppliedJobCard job={job} setParentState={setParentState} />)}
+        {filteredJobs.slice(0).reverse().map(job => <AppliedJobCard job={job} setParentState={setParentState} />)}
       </Container>
 
     </>
