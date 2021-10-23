@@ -1,4 +1,29 @@
 .filterBtn {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  justify-content: end;
+}
+
+#all {
+  margin-left: 5px;
+  margin-right: 7px;
+}
+
+#review {
+  margin-left: 5px;
+  margin-right: 7px;
+}
+
+#interviewed {
+  margin-left: 5px;
+  margin-right: 7px;
+}
+
+#declined {
+  margin-left: 5px;
+  margin-right: 7px;
+}
+
+#offered {
+  margin-left: 5px;
+  margin-right: 7px;
 }

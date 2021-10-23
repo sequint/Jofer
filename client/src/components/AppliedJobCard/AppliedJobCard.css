@@ -1,0 +1,20 @@
+.jobCard {
+  margin: 10px 10px 0px 10px !important;
+}
+
+.cardContainer {
+  width: 100%
+}
+
+.bttn {
+  display: grid;
+  justify-content: end;
+}
+
+@media screen and (min-width: 575px) {
+  .jobCard {
+    max-width: 500px;
+    display: block !important;
+    margin: 10px auto 0px auto !important;
+  }
+}

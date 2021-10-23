@@ -1,8 +1,9 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import './JobCard.css'
+import ConfirmDeleteModal from '../ConfirmDeleteModal'
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, setParentState }) => {
   console.log(job._id)
 
   const saveToLocal = event => {
@@ -12,10 +13,13 @@ const JobCard = ({ job }) => {
     window.location = '/managejobs'
   }
 
+ 
+
   return (
     <div className="cardContainer">
-      <Card className='jobCard'>
+      <Card className="jobCard">
         <Card.Body>
+          <ConfirmDeleteModal setParentState= {setParentState} job={job} />
           <Card.Title>{job.name}</Card.Title>
           <Card.Text>
             <strong>Company: </strong> {job.company}
@@ -24,6 +28,7 @@ const JobCard = ({ job }) => {
             <strong>Department: </strong> {job.type}
           </Card.Text>
           <Button
+            className="bbtn"
             variant='outline-secondary'
             onClick={saveToLocal}>
             Manage Job
@@ -31,7 +36,7 @@ const JobCard = ({ job }) => {
         </Card.Body>
       </Card>
     </div>
-  )
+  );
 }
 
 export default JobCard

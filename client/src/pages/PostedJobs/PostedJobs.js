@@ -47,7 +47,7 @@ const PostedJobs = () => {
       <CreateJob 
         setParentState={setParentState}
       />
-      {user ? user.jobs.map(job => <JobCard job={job} />) : <h1>You don't have any posted jobs</h1>}
+      {user ? user.jobs.map(job => <JobCard setParentState={setParentState} job={job} />) : <h1>You don't have any posted jobs</h1>}
       
     </>
   )
