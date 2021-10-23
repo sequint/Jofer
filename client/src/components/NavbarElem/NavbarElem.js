@@ -5,7 +5,6 @@ import UserAPI from './../../utils/UserAPI'
 import { useState, useEffect } from 'react'
 import './NavbarElem.css'
 
-
 const NavbarElem = () => {
 
   const [isEmployer, setIsEmployer] = useState()
@@ -22,44 +21,42 @@ const NavbarElem = () => {
     })
   }, [])
 
-
   const handleSignOut = () => {
     localStorage.removeItem('token')
     window.loation = '/login'
   }
 
   return (
-    <Navbar bg='dark' variant='dark' expand='lg'>
-      <img className="ms-2 Nav" src={logo} alt='' width='70' />
-      <Navbar.Brand className="ms-3" alt='' href='/home'>
+    <Navbar
+      className="Nav"
+      variant='dark'
+      expand='lg'>
+      <img
+        className="ms-2"
+        src={logo} alt=''
+        width='70' />
+      <Navbar.Brand
+        className="ms-3"
+        alt=''
+        href='/home'>
         Job Rejector
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='me-auto'>
-          <Nav.Link className="ms-3" href='/home'>Home</Nav.Link>
-          {/* <NavDropdown title="Jobs" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/appliedjobs">
-                Applied Jobs
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/postedjobs">Posted Jobs</NavDropdown.Item>
-            </NavDropdown> */}
+          <Nav.Link
+            className="ms-3 navLink"
+            href='/home'>
+            Home
+          </Nav.Link>
           {isEmployer
-            ? (
-              <Nav.Link className="ms-3" href='/postedjobs'>Posted Jobs</Nav.Link>
-            )
-            : (
-              <Nav.Link className="ms-3" href='/appliedjobs'>Applied Jobs</Nav.Link>
-            )}
+            ? (<Nav.Link className="ms-3 navLink" href='/postedjobs'>Posted Jobs</Nav.Link>)
+            : (<Nav.Link className="ms-3 navLink" href='/appliedjobs'>Applied Jobs</Nav.Link>)}
+
           {IsLoggedIn
-            ? (
-              <Nav.Link className="ms-3" onClick={handleSignOut} href='/login'>
-                Log Out
-              </Nav.Link>
-            )
-            : (
-              <Nav.Link className="ms-3" href='/login'>Log In</Nav.Link>
-            )}
+            ? (<Nav.Link className="ms-3 navLink" onClick={handleSignOut} href='/login'>Log Out</Nav.Link>)
+            : (<Nav.Link className="ms-3 navLink" href='/login'>Log In</Nav.Link>)}
+
         </Nav>
       </Navbar.Collapse>
     </Navbar>

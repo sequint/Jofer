@@ -9,7 +9,7 @@ import './AddApplicant.css'
 const AddApplicant = ({ job, setParentState }) => {
   const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
-  
+
   const [jobState, setJobState] = useState({
     email: '',
     applicantName: '',
@@ -52,7 +52,7 @@ const AddApplicant = ({ job, setParentState }) => {
 
     setJobState({ ...jobState, [name]: value })
 
-  } 
+  }
 
   const handleAddApplicant = event => {
     if (event) {
@@ -99,14 +99,12 @@ const AddApplicant = ({ job, setParentState }) => {
       event.preventDefault()
     }
 
-    
-
     setMissingInput({ missingApplicants: false })
 
     if (jobState.applicants.length > 0) {
-      
-      jobState.applicants.forEach(applicant=>{
-        if(applicant.email){
+
+      jobState.applicants.forEach(applicant => {
+        if (applicant.email) {
           applicant = {
             ...applicant,
             declined: {
@@ -117,19 +115,19 @@ const AddApplicant = ({ job, setParentState }) => {
 
           job.applicants.push(applicant)
         }
-       
+
 
       })
-      
-      setJobState({...jobState, applicants:[]})
+
+      setJobState({ ...jobState, applicants: [] })
       JobAPI.update(job._id, job)
-        .then(({data}) => {
+        .then(({ data }) => {
           console.log("hello")
 
           setParentState(job)
           handleClose()
         })
-        .catch(err=>{
+        .catch(err => {
           console.log(err)
         })
 
@@ -140,13 +138,12 @@ const AddApplicant = ({ job, setParentState }) => {
 
   }
 
-  return(
+  return (
     <>
       <div
         className="mt-2 mb-2 createNewJob">
         <Button
-          className="col-2 createBtn"
-          // varient="primary"
+          className="createBtn"
           onClick={handleShow}>
           + Applicants
         </Button>
@@ -154,6 +151,7 @@ const AddApplicant = ({ job, setParentState }) => {
       <Modal
         show={show}
         onHide={handleClose}
+        backdrop="static"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered>

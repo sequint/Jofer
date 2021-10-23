@@ -3,11 +3,17 @@
   justify-content: center;
 }
 
-.createBtn {
+.CreateJobBtn {
   width: 150px !important;
   margin-bottom: 20px;
+  background-color: #023047 !important;
+  border-color: #023047 !important;
 }
 
 .err {
   color: red;
+}
+
+.gray {
+  background-color: #f2f2f2 !important;
 }

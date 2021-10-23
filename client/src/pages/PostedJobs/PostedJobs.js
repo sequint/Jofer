@@ -14,6 +14,9 @@ const PostedJobs = () => {
         console.log(data)
         if (data.user_type !== 'employer') {
           window.location = '/home'
+        }else{
+
+          
         }
       })
 
@@ -39,15 +42,15 @@ const PostedJobs = () => {
 
   console.log(user)
   
-
+  
   return (
     <>
       <NavbarElem />
-      {user ? <PageTitle title={displayTitle()} /> : <h1>Jobs Posted</h1>}
-      <CreateJob 
+      {user ? <PageTitle title={displayTitle()} /> :<></>}
+      {user ? <CreateJob 
         setParentState={setParentState}
-      />
-      {user ? user.jobs.map(job => <JobCard setParentState={setParentState} job={job} />) : <h1>You don't have any posted jobs</h1>}
+      />:<></>}
+      {user ? user.jobs.map(job => <JobCard setParentState={setParentState} job={job} />) : <></>}
       
     </>
   )

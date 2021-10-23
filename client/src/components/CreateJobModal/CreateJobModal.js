@@ -1,12 +1,10 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import JobAPI from '../../utils/JobAPI'
 import UserAPI from '../../utils/UserAPI/index.js'
 import Row from 'react-bootstrap/esm/Row'
-// import Col from 'react-bootstrap/esm/Col'
 import Form from 'react-bootstrap/Form'
-import Card from 'react-bootstrap/Card'
 import './CreateJobModal.css'
 
 const CreateJob = ({ setParentState }) => {
@@ -31,7 +29,7 @@ const CreateJob = ({ setParentState }) => {
     missingApplicantName: false
   })
 
-  const [ correctFormat, setCorrectFormat ] = useState(true)
+  const [correctFormat, setCorrectFormat] = useState(true)
 
   useEffect(() => {
     UserAPI.getUser()
@@ -55,7 +53,6 @@ const CreateJob = ({ setParentState }) => {
 
       JobAPI.create(jobState)
         .then(() => {
-          alert('Job listing Created')
           setJobState({
             ...jobState,
             name: '',
@@ -68,13 +65,12 @@ const CreateJob = ({ setParentState }) => {
         })
         .catch(err => console.error(err))
 
-        console.log(event)
-        handleClose()
-
+      console.log(event)
+      handleClose()
     }
     else {
 
-      let newJobInput = [ name, company, type ]
+      let newJobInput = [name, company, type]
 
       newJobInput.forEach((input, index) => {
         if (input.length === 0) {
@@ -96,9 +92,7 @@ const CreateJob = ({ setParentState }) => {
           }
         }
       })
-
     }
-
   }
 
   const handleAddApplicant = event => {
@@ -111,10 +105,10 @@ const CreateJob = ({ setParentState }) => {
 
     if (emailFormat.test(jobState.email) && jobState.applicantName !== '') {
       const applicant = {
-      email: jobState.email,
-      applicantName: jobState.applicantName,
-      status: 'Review',
-      declineReason: jobState.declineReason
+        email: jobState.email,
+        applicantName: jobState.applicantName,
+        status: 'Review',
+        declineReason: jobState.declineReason
       }
 
       jobState.applicants.push(applicant)
@@ -136,7 +130,6 @@ const CreateJob = ({ setParentState }) => {
           setMissingInput({ ...missingInput, missingApplicantName: true })
         }
       }
-
     }
   }
 
@@ -145,8 +138,8 @@ const CreateJob = ({ setParentState }) => {
       <div
         className="mt-2 mb-2 createNewJob">
         <Button
-          className="col-2 createBtn"
-          varient="primary"
+          className="col-2 CreateJobBtn"
+          varient="outline-secondary"
           onClick={handleShow}>
           Create New Job
         </Button>
@@ -155,6 +148,7 @@ const CreateJob = ({ setParentState }) => {
       <Modal
         show={show}
         onHide={handleClose}
+        backdrop="static"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered>
@@ -167,9 +161,12 @@ const CreateJob = ({ setParentState }) => {
         <Modal.Body>
           <Row>
             <Form>
-              <Form.Group className='mb-3' controlId='name'>
-                <Form.Label>Name</Form.Label>
+              <Form.Group
+                className='mb-3'
+                controlId='name'>
+                <Form.Label>Title</Form.Label>
                 <Form.Control
+                  className="gray"
                   type='text'
                   placeholder='Enter the job title'
                   name='name'
@@ -178,9 +175,12 @@ const CreateJob = ({ setParentState }) => {
                 />
                 {missingInput.missingName ? <p className="err">⚠️ Please enter a job title</p> : <></>}
               </Form.Group>
-              <Form.Group className='mb-3' controlId='company'>
+              <Form.Group
+                className='mb-3'
+                controlId='company'>
                 <Form.Label>Company</Form.Label>
                 <Form.Control
+                  className="gray"
                   type='text'
                   placeholder='Enter your company'
                   name='company'
@@ -189,9 +189,12 @@ const CreateJob = ({ setParentState }) => {
                 />
                 {missingInput.missingCompany ? <p className="err">⚠️ Please enter a company name</p> : <></>}
               </Form.Group>
-              <Form.Group className='mb-3' controlId='type'>
+              <Form.Group
+                className='mb-3'
+                controlId='type'>
                 <Form.Label>Department</Form.Label>
                 <Form.Control
+                  className="gray"
                   type='text'
                   placeholder='Enter the job catagory'
                   name='type'
@@ -200,9 +203,12 @@ const CreateJob = ({ setParentState }) => {
                 />
                 {missingInput.missingType ? <p className="err">⚠️ Please enter a department for the job</p> : <></>}
               </Form.Group>
-              <Form.Group className='mb-3' controlId='applicantName'>
+              <Form.Group
+                className='mb-3'
+                controlId='applicantName'>
                 <Form.Label>Applicant Name</Form.Label>
                 <Form.Control
+                  className="gray"
                   type='text'
                   placeholder='Enter candidates name'
                   name='applicantName'
@@ -211,9 +217,12 @@ const CreateJob = ({ setParentState }) => {
                 />
                 {missingInput.missingApplicantName ? <p className="err">⚠️ Please enter an applicant name</p> : <></>}
               </Form.Group>
-              <Form.Group className='mb-3' controlId='email'>
+              <Form.Group
+                className='mb-3'
+                controlId='email'>
                 <Form.Label>Email</Form.Label>
                 <Form.Control
+                  className="gray"
                   type='text'
                   placeholder='Enter candidates email'
                   name='email'
@@ -222,7 +231,7 @@ const CreateJob = ({ setParentState }) => {
                 />
                 {(jobState.email && !correctFormat) ? <p className="err">⚠️ Please enter a valid email address</p> : <></>}
                 <Button
-                  className="mt-3"
+                  className="mt-4"
                   variant='primary'
                   type='submit'
                   onClick={handleAddApplicant}

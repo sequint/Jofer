@@ -3,8 +3,22 @@
 } */
 
 .usrCard {
-  max-height: 275px;
+  max-height: 350px;
   overflow: scroll;
+  min-height: 200px;
+  height: 100%;
+  background-color: #8ECAE6 !important;
+}
+
+@media (max-width: 1000px) and (min-width: 200px) {
+  .usrCard {
+    height: 200px;
+    min-height: 200px;
+  }
+
+  .column {
+    height: 250px !important;
+  }
 }
 
 .manageJobsContainer {
@@ -16,37 +30,17 @@
   margin: auto;
 }
 
-/* .review {
-  background-color: rgb(223, 223, 223) !important;
-  box-shadow: 5px 5px #8ECAE6;
-}
-
-.interviewed {
-  background-color: rgb(223, 223, 223) !important;
-  box-shadow: 5px 5px #8ECAE6;
-}
-
-.declined {
-  background-color: rgb(223, 223, 223) !important;
-  box-shadow: 5px 5px #8ECAE6;
-}
-
-.offered {
-  background-color: rgb(223, 223, 223) !important;
-  box-shadow: 5px 5px #8ECAE6;
-} */
-
-.usrCard {
-  min-height: 200px;
-  background-color: rgb(223, 223, 223) !important;
+.column {
+  height: 400px;
+  min-height: 210px;
 }
 
 .uCard {
-  box-shadow: 5px 5px #8ECAE6;
+  box-shadow: 5px 5px #FFBA0A;
 }
 
 .uCard:hover {
-  box-shadow: 10px 10px #8ECAE6;
+  box-shadow: 10px 10px #FFBA0A;
 }
 
 ul {

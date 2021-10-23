@@ -1,3 +1,7 @@
 .Nav {
   background-color: #023047 !important;
 }
+
+.navLink {
+  font-size: 18px;
+}
