@@ -145,7 +145,7 @@ const DeclineModal = ({ showState, setParentState, job }) => {
               />
             </svg>
 
-            {missingInput.reasons ? <p className="err">⚠️ Please enter at least one declined reason</p> : <></>}
+            {missingInput.reasons ? <p className="err mt-2">⚠️ Please enter at least one declined reason</p> : <></>}
           </InputGroup>
           {declineReasons.reasons ? declineReasons.reasons.map(reason => <li>{reason}</li>) : <></>}
           <hr />
@@ -176,7 +176,7 @@ const DeclineModal = ({ showState, setParentState, job }) => {
                 clipRule='evenodd'
               />
             </svg>
-            {missingInput.actionItems ? <p className="err">⚠️ Please enter at least one action item</p> : <></>}
+            {missingInput.actionItems ? <p className="err mt-2">⚠️ Please enter at least one action item</p> : <></>}
           </InputGroup>
           {declineReasons.actionItems ? declineReasons.actionItems.map(item => <li>{item}</li>) : <></>}
         </Modal.Body>

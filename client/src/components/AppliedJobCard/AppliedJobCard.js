@@ -63,10 +63,10 @@ const AppliedJobCard = ({ job, setParentState }) => {
           className="appJob">
           <Card.Title>{job.name}</Card.Title>
           <Card.Text>
-            Company: {job.company}
+            <strong>Company: </strong> {job.company}
           </Card.Text>
           <Card.Text>
-            Department: {job.type}
+            <strong>Department: </strong> {job.type}
           </Card.Text>
           <div className="bttn">
             <Button
