@@ -31,13 +31,8 @@ const DeclineModal = ({ showState, setParentState, job }) => {
       case 'declined':
 
         if (declineReasons.reasons.length > 0 && declineReasons.actionItems.length > 0) {
-          console.log(declineReasons)
           setShow(false)
           setParentState(false, false)
-          console.log('close clicked')
-          console.log(declineReasons)
-          console.log(job)
-          console.log(showState.applicant.draggableId)
           JobAPI.getEmployerJobs()
             .then(({ data }) => {
               data.forEach(elem => {
@@ -47,7 +42,6 @@ const DeclineModal = ({ showState, setParentState, job }) => {
                       job.applicants[index].status = "Declined"
                       job.applicants[index].declined.reasons = declineReasons.reasons
                       job.applicants[index].declined.actionItems = declineReasons.actionItems
-                      console.log(job)
                       JobAPI.update(job._id, job)
                         .then(({ data }) => console.log(data))
                         .catch(err => console.log(err))

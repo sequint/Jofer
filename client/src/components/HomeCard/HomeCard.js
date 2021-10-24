@@ -4,10 +4,9 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import JobAPI from '../../utils/JobAPI'
 import UserAPI from '../../utils/UserAPI'
-import ConfirmDeleteModal from '../ConfirmDeleteModal'
-import './AppliedJobCard.css'
 
-const AppliedJobCard = ({ job, setParentState }) => {
+
+const HomeCard = ({ job }) => {
   const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
@@ -16,28 +15,24 @@ const AppliedJobCard = ({ job, setParentState }) => {
     reasons: [],
     actionItems: []
   })
-
-  useEffect(() => {
-    JobAPI.getAllJobs()
-      .then(({ data }) => {
-        data.forEach(elem => {
-          if (elem._id === job.jobId) {
-            UserAPI.getUser()
-              .then(({ data }) => {
-                elem.applicants.forEach(applicant => {
-                  if (applicant.email === data.username) {
-                    setDeclinedReasons({ reasons: applicant.declined.reasons, actionItems: applicant.declined.actionItems })
-                  }
-                })
-              })
-          }
-        })
-      })
-  }, [])
-
   const listReasons = _ => declinedReasons.reasons.map(reason => <li>{reason}</li>)
   const listActionItems = _ => declinedReasons.actionItems.map(item => <li>{item}</li>)
 
+
+  useEffect(() => {
+
+    if (job._id) {
+      job.applicants.forEach(applicant => {
+
+        declinedReasons.reasons.push(...applicant.declined.reasons)
+        declinedReasons.reasons = Array.from(new Set(declinedReasons.reasons))
+        declinedReasons.actionItems.push(...applicant.declined.actionItems)
+        declinedReasons.actionItems = Array.from(new Set(declinedReasons.actionItems)) 
+      })
+    }
+  }, [job])
+
+  
 
 
   return (
@@ -45,25 +40,22 @@ const AppliedJobCard = ({ job, setParentState }) => {
       <Card className='jobCard aCard'>
         <Card.Header
           className='status header'
-          as='h5'>{job.status}
-          <ConfirmDeleteModal
-            setParentState={setParentState}
-            job={job} />
+          as='h5'><strong>{job.status}</strong>
         </Card.Header>
         <Card.Body
           className="appJob">
-          <Card.Title>{job.name}</Card.Title>
+          <Card.Title><strong>{job.name}</strong></Card.Title>
           <Card.Text>
-            <strong>Company: </strong> {job.company}
+            <p><strong>Company:</strong> {job.company}</p>
           </Card.Text>
           <Card.Text>
-            <strong>Department: </strong> {job.type}
+            <p><strong>Department:</strong> {job.type}</p>
           </Card.Text>
           <div className="bttn">
             <Button
               variant='outline-secondary'
               onClick={handleShow}>
-              View More
+              View Declined Reasons
             </Button>
           </div>
         </Card.Body>
@@ -81,11 +73,8 @@ const AppliedJobCard = ({ job, setParentState }) => {
         </Modal.Header>
 
         <Modal.Body>
-          <p><strong>Status:</strong> {job.status}</p>
-          <p><strong>Company:</strong> {job.company}</p>
-          <p><strong>Department:</strong> {job.type}</p>
-          <hr />
-          {(declinedReasons.reasons.length > 0 || declinedReasons.actionItems.length > 0) ?<h3>Declined Reason</h3> : <></>}
+          
+          {(declinedReasons.reasons.length > 0 || declinedReasons.actionItems.length > 0) ? <h3>Declined Reasons</h3> : <></>}
           {declinedReasons.reasons.length > 0 ? <p className="mb-1"><strong>Reasons:</strong></p> : <></>}
           {declinedReasons.reasons.length > 0 ? listReasons() : <></>}
           {declinedReasons.reasons.length > 0 ? <p className="mt-3"><strong>Action Items:</strong></p> : <></>}
@@ -96,4 +85,4 @@ const AppliedJobCard = ({ job, setParentState }) => {
   )
 }
 
-export default AppliedJobCard
+export default HomeCard
