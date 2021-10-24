@@ -10,3 +10,23 @@
 .err {
   color: red;
 }
+
+.revert {
+  background-color: #219EBC !important;
+  border-color: #219EBC !important;
+}
+
+.revert:hover {
+  background-color: transparent !important;
+  color: #219EBC !important;
+}
+
+.declinedCard {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+}
+
+.declinedCard:hover {
+  background-color: transparent !important;
+  color: #dc3545 !important;
+}
