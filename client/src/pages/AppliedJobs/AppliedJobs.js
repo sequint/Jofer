@@ -4,7 +4,7 @@ import PageTitle from '../../components/PageTitle'
 import JobAPI from '../../utils/JobAPI'
 import AppliedJobCard from '../../components/AppliedJobCard/AppliedJobCard'
 import UserAPI from '../../utils/UserAPI'
-import {DropdownButton} from 'react-bootstrap/Dropdown'
+import {DropdownButton} from 'react-bootstrap'
 import Container from 'react-bootstrap/esm/Container'
 import './AppliedJobs.css'
 
