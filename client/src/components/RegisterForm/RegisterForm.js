@@ -3,39 +3,117 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import UserAPI from '../../utils/UserAPI'
 import FloatingLabel from 'react-bootstrap/esm/FloatingLabel'
+import SuccessMessage from '../SuccessMessage'
 import './RegisterForm.css'
 
 const RegisterForm = () => {
   const [userState, setUserState] = useState({
     first_name: '',
     last_name: '',
-    email: '',
+    username: '',
     password: '',
     user_type: 'applicant',
     company: ''
   })
+  const [missingInput, setMissingInput] = useState({
+    missingFirstName: false,
+    missingLastName: false,
+    missingEmail: false,
+    missingPassword: false
+  })
+  const [correctFormat, setCorrectFormat] = useState(true)
+  const [usernameExists, setUsernameExists] = useState(false)
+  const [success, setSuccess] = useState(false)
 
-  const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
+  const handleInputChange = ({ target: { name, value } }) => {
 
-  function validateEmail(email) {
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+    if (name === 'first_name') {
+      setMissingInput({ ...missingInput, missingFirstName: false })
+    }
+    else if (name === 'last_name') {
+      setMissingInput({ ...missingInput, missingLastName: false })
+    }
+    else if (name === 'password') {
+      setMissingInput({ ...missingInput, missingPassword: false })
+    }
+    else if (name === 'username') {
+      setMissingInput({ ...missingInput, missingEmail: false })
+      setCorrectFormat(true)
+    }
+
+    setUserState({ ...userState, [name]: value })
+
   }
 
   const handleRegisterUser = event => {
     event.preventDefault()
-    console.log(userState)
-    if(validateEmail(userState.email)){
-      console.log(userState.email)
-      UserAPI.register(userState)
-        .then(() => {
-          alert('User Registered!')
-          setUserState({ ...userState, first_name: '', last_name: '', email: '', password: '' })
-          window.location = '/login'
+
+    setMissingInput({
+      missingFirstName: false,
+      missingLastName: false,
+      missingEmail: false,
+      missingPassword: false
+    })
+    setCorrectFormat(true)
+    setUsernameExists(false)
+
+    const emailFormat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+    if (
+      emailFormat.test(userState.username) &&
+      userState.first_name !== '' &&
+      userState.last_name !== '' &&
+      userState.username !== '' &&
+      userState.password !== ''
+      ) {
+
+      UserAPI.login(userState)
+        .then(({ data: token }) => {
+
+          if (token === null) {
+            UserAPI.register(userState)
+              .then(({ data }) => {
+                setSuccess(true)
+                setUserState({ ...userState, first_name: '', last_name: '', username: '', password: '' })
+                setTimeout(() => {
+                  window.location = '/login'
+                }, 2000)
+              })
+              .catch(err => console.error(err))
+          }
+          else {
+            setUsernameExists(true)
+            setUserState({ ...userState, password: '' })
+          }
         })
         .catch(err => console.error(err))
-    }else{
-      console.log("email not valid")
+    }
+    else {
+
+      if (userState.first_name === '') {
+        missingInput.missingFirstName = true
+        setMissingInput({ ...missingInput })
+      }
+
+      if (userState.last_name === '') {
+        missingInput.missingLastName = true
+        setMissingInput({ ...missingInput })
+      }
+
+      if (!(emailFormat.test(userState.username))) {
+        setCorrectFormat(false)
+      }
+
+      if (userState.username === '') {
+        missingInput.missingEmail = true
+        setMissingInput({ ...missingInput })
+      }
+
+      if (userState.password === '') {
+        missingInput.missingPassword = true
+        setMissingInput({ ...missingInput })
+      }
+
     }
    
   }
@@ -52,7 +130,7 @@ const RegisterForm = () => {
     <Form
       className='form'
     >
-
+      {success ? <SuccessMessage /> : <></>}
       <FloatingLabel
         controlId='floatingInput'
         label='👤 First Name'
@@ -65,6 +143,7 @@ const RegisterForm = () => {
           value={userState.first_name}
           onChange={handleInputChange}
         />
+        {missingInput.missingFirstName ? <p className="err mt-2">⚠️ Please enter a your first name</p> : <></>}
       </FloatingLabel>
 
       <FloatingLabel
@@ -79,6 +158,7 @@ const RegisterForm = () => {
           value={userState.last_name}
           onChange={handleInputChange}
         />
+        {missingInput.missingLastName ? <p className="err mt-2">⚠️ Please enter a your last name</p> : <></>}
       </FloatingLabel>
 
       <FloatingLabel
@@ -89,10 +169,12 @@ const RegisterForm = () => {
         <Form.Control
           type='email'
           placeholder='Enter your email'
-          name='email'
+          name='username'
           value={userState.username}
           onChange={handleInputChange}
         />
+        {(missingInput.missingEmail || !correctFormat) ? <p className="err mt-2">⚠️ Please enter a valid email address</p> : <></>}
+        {usernameExists ? <p className="err mt-2">⚠️ This email is already registered</p> : <></>}
       </FloatingLabel>
 
       <FloatingLabel
@@ -107,6 +189,7 @@ const RegisterForm = () => {
           value={userState.password}
           onChange={handleInputChange}
         />
+        {missingInput.missingPassword ? <p className="err mt-2">⚠️ Please enter a password</p> : <></>}
       </FloatingLabel>
 
       <Button

@@ -44,7 +44,6 @@ const SignInForm = () => {
     if (emailFormat.test(userState.username) && userState.email !== '' && userState.password !== '') {
       UserAPI.login(userState)
         .then(({ data: token }) => {
-          console.log(token)
           if (token) {
             localStorage.setItem('token', token)
             setUserState({ ...userState, name: '', email: '', username: '', password: '' })
