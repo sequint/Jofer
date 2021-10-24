@@ -4,6 +4,17 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const { json } = require('express')
 
+router.get('/user/signin', (req, res) => {
+  User.findOne({ username: req.body.username }, (err, user) => {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      res.json(user)
+    }
+  })
+})
+
 // Get current user information.
 router.get('/user', passport.authenticate('jwt'), (req, res) => res.json(req.user))
 
