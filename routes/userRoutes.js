@@ -3,7 +3,6 @@ const { User } = require('../models')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const { json } = require('express')
-const axios = require('axios')
 
 router.get('/user/signin', (req, res) => {
   User.findOne({ username: req.body.username }, (err, user) => {
@@ -21,10 +20,10 @@ router.get('/user', passport.authenticate('jwt'), (req, res) => res.json(req.use
 
 // Create a new user.
 router.post('/users/register', (req, res) => {
-  const { first_name, last_name, username, user_type, company, password, avatar } = req.body
+  const { first_name, last_name, username, user_type, company, password } = req.body
   
   // Use mongoose to create new instance of a user with passpost authentication.
-  User.register(new User({ first_name, last_name, username, user_type, company, avatarColor }), password, err => {
+  User.register(new User({ first_name, last_name, username, user_type, company }), password, err => {
     if (err) {
       res.json({
         err: err,
@@ -34,7 +33,6 @@ router.post('/users/register', (req, res) => {
           username: username,
           user_type: user_type,
           company: company,
-          avatarColor: avatarColor,
           password: req.body.password
         }
       })
@@ -46,8 +44,7 @@ router.post('/users/register', (req, res) => {
           last_name: last_name,
           username: username,
           user_type: user_type,
-          company: company,
-          avatar: avatar
+          company: company
         }
       })
     }
