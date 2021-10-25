@@ -37,7 +37,36 @@ const CreateJob = ({ setParentState }) => {
   }, [])
 
 
-  const handleInputChange = ({ target: { name, value } }) => setJobState({ ...jobState, [name]: value })
+  const handleInputChange = ({ target: { name, value } }) => {
+
+    setMissingInput({
+      missingName: false,
+      missingCompany: false,
+      missingType: false,
+      missingApplicantName: false,
+      missingEmail: false
+    })
+
+    if (name === 'name') {
+      setMissingInput({ ...missingInput, missingName: false })
+    }
+    else if (name === 'company') {
+      setMissingInput({ ...missingInput, missingCompany: false })
+    }
+    else if (name === 'type') {
+      setMissingInput({ ...missingInput, missingType: false })
+    }
+    else if (name === 'applicantName') {
+      setMissingInput({ ...missingInput, missingApplicantName: false })
+    }
+    else if (name === 'email') {
+      setMissingInput({ ...missingInput, missingEmail: false })
+      setCorrectFormat(true)
+    }
+
+    setJobState({ ...jobState, [name]: value })
+
+  }
 
   const handleCreateJob = event => {
 
@@ -47,7 +76,9 @@ const CreateJob = ({ setParentState }) => {
 
     let { name, company, type } = jobState
 
-    setMissingInput({ missingName: false, missingCompany: false, missingType: false })
+    setMissingInput({ missingName: false, missingCompany: false, missingType: false, missingApplicantName: false, missingEmail: false })
+
+    setCorrectFormat(true)
 
     if (name !== '' && company !== '' && type !== '') {
 
@@ -99,7 +130,7 @@ const CreateJob = ({ setParentState }) => {
     event.preventDefault()
 
     setCorrectFormat(true)
-    setMissingInput({ ...missingInput, missingApplicantName: false })
+    setMissingInput({ missingApplicantName: false, missingEmail: false })
 
     const emailFormat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
@@ -123,10 +154,16 @@ const CreateJob = ({ setParentState }) => {
         setMissingInput({ ...missingInput, missingApplicantName: true })
       }
       else {
+
         if (!(emailFormat.test(jobState.email))) {
           setCorrectFormat(false)
         }
-        else {
+        
+        if (jobState.email === '') {
+          setMissingInput({ ...missingInput, missingEmail: true })
+        }
+        
+        if (jobState.applicantName === '') {
           setMissingInput({ ...missingInput, missingApplicantName: true })
         }
       }
@@ -229,7 +266,7 @@ const CreateJob = ({ setParentState }) => {
                   value={jobState.email}
                   onChange={handleInputChange}
                 />
-                {(jobState.email && !correctFormat) ? <p className="err mt-2">⚠️ Please enter a valid email address</p> : <></>}
+                {(missingInput.missingEmail || !correctFormat) ? <p className="err mt-2">⚠️ Please enter a valid email address</p> : <></>}
                 <Button
                   className="mt-4 createBtn"
                   type='submit'

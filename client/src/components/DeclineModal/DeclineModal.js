@@ -149,7 +149,7 @@ const DeclineModal = ({ showState, setParentState, job }) => {
           {declineReasons.reasons ? declineReasons.reasons.map(reason => <li>{reason}</li>) : <></>}
           <hr />
           <h5 className="mt-3">Action Items</h5>
-          <p>Please list a minimum of 3 skill sets the applicant can improve.</p>
+          <p>Please list at least one action item for the applicant to work on.</p>
           <InputGroup className='mb-3 decline'>
             <div>
               <FormControl
