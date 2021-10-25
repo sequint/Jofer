@@ -14,7 +14,7 @@ const AppliedJobs = () => {
 
     UserAPI.getUser()
       .then(({ data }) => {
-        if (data.user_type !== 'applicant') {
+        if (data.user_type !== 'Applicant') {
           window.location = '/home'
         }
       })
