@@ -6,6 +6,11 @@
   font-size: 18px;
 }
 
+.loggedInContainer {
+  display: inline-flex !important;
+}
+
 .avatar {
   height: 40px !important;
+  margin-left: 10px !important;
 }
