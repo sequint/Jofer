@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import JobAPI from '../../utils/JobAPI'
 import UserAPI from '../../utils/UserAPI'
+import './HomeCard.css'
 
 
 const HomeCard = ({ job }) => {
@@ -53,7 +54,7 @@ const HomeCard = ({ job }) => {
           </Card.Text>
           <div className="bttn">
             <Button
-              variant='outline-secondary'
+              className="viewDeclineBtn"
               onClick={handleShow}>
               View Declined Reasons
             </Button>

@@ -60,7 +60,7 @@ const JobCard = ({ job, setParentState }) => {
         <Card.Footer>
           <div className="bttn">
             <Button
-              variant='outline-secondary'
+              className="manageJobBtn"
               onClick={saveToLocal}>
               Manage Job
             </Button>
