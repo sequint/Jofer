@@ -6,14 +6,15 @@ import { useState, useEffect } from 'react'
 import './NavbarElem.css'
 
 const NavbarElem = () => {
-
+  const [user, setUser] = useState({})
   const [isEmployer, setIsEmployer] = useState()
   const IsLoggedIn = localStorage.getItem('token')
   useEffect(() => {
 
-    UserAPI.getUser().then(({ data: { user_type } }) => {
-      console.log(user_type)
-      if (user_type === 'applicant') {
+    UserAPI.getUser().then(({ data }) => {
+      console.log(data)
+      setUser(data)
+      if (data.user_type === 'applicant') {
         setIsEmployer(false)
       } else {
         setIsEmployer(true)
@@ -56,6 +57,8 @@ const NavbarElem = () => {
           {IsLoggedIn
             ? (<Nav.Link className="ms-3 navLink" onClick={handleSignOut} href='/login'>Log Out</Nav.Link>)
             : (<Nav.Link className="ms-3 navLink" href='/login'>Log In</Nav.Link>)}
+          
+          {IsLoggedIn ? <img src={`https://ui-avatars.com/api/?name=${user.first_name}+${user.last_name}&background=random&rounded=true`} alt="avatar" className="avatar" /> : <></>}
 
         </Nav>
       </Navbar.Collapse>

@@ -11,6 +11,7 @@ const User = new Schema({
   },
   user_type: String,
   company: String,
+  avatar: String,
   jobs: [{
     type: Schema.Types.ObjectId,
     ref: 'Job'
