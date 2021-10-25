@@ -122,7 +122,9 @@ let jobReasons = [
   "Not enough knowledge on job",
   "Lack of Javascript skills",
   "Failed tech interview",
-  "No database knowledge"
+  "No database knowledge",
+  "Didn't know SQL",
+  'Needs more work experience'
 ]
 
 let jobActions =[
@@ -136,6 +138,11 @@ let jobActions =[
   'Make your own projects',
   'Learn about time-complexity',
   'Be more prepared',
+  'Gain 1 year of a practical internship',
+  'Needs managerial experience',
+  'Gain experience with core languages',
+  "Learn what Big O notation is"
+  
 
 ]
 
