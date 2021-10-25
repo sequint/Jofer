@@ -5,3 +5,7 @@
 .navLink {
   font-size: 18px;
 }
+
+.avatar {
+  height: 40px !important;
+}
