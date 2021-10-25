@@ -71,6 +71,7 @@ const RegisterForm = () => {
         .then(({ data: token }) => {
 
           if (token === null) {
+            
             UserAPI.register(userState)
               .then(({ data }) => {
                 setSuccess(true)
