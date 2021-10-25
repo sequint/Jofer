@@ -1,6 +1,6 @@
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import logo from '../../assets/jobrejectorlogo.png'
+import logo from '../../assets/JOFER.png'
 import UserAPI from './../../utils/UserAPI'
 import { useState, useEffect } from 'react'
 import './NavbarElem.css'
@@ -39,7 +39,7 @@ const NavbarElem = () => {
         className="ms-3"
         alt=''
         href='/home'>
-        Job Rejector
+        Jofer
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
