@@ -7,6 +7,7 @@ import {Dropdown,Row,Col} from 'react-bootstrap'
 import './NavbarElem.css'
 import { drop } from 'lodash'
 
+
 const NavbarElem = () => {
   const [user, setUser] = useState({})
   const [isEmployer, setIsEmployer] = useState()
