@@ -220,13 +220,14 @@ let jobActions =[
 
 
           }
-    })
-
-
-
 
     })
-    res.json(200)
+
+
+
+
+    })
+    res.json(users)
 
     
     // users.forEach(user => {
