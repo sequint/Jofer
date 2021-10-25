@@ -73,7 +73,6 @@ const SignInForm = () => {
 
   }
 
-  }
 
   return (
     <Form className='form'>
@@ -115,13 +114,6 @@ const SignInForm = () => {
         type='submit style'
         onClick={handleLoginUser}>
         Sign In
-      </Button>
-
-      <Button
-        variant='link'
-        type='button'
-        onClick={handleHome}>
-        Go Home
       </Button>
 
     </Form>
