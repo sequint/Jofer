@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import NavbarElem from '../../components/NavbarElem'
 import PageTitle from '../../components/PageTitle'
 import JobAPI from '../../utils/JobAPI'
-import './Home.css'
 import HomeCard from '../../components/HomeCard'
+import UserAPI from '../../utils/UserAPI'
+import './Home.css'
 
 const Home = () => {
 
@@ -14,8 +15,15 @@ const Home = () => {
   const [filteredJobs, setFilteredJobs] = useState([{
    
   }])
+  const [user, setUser] = useState()
+  UserAPI.getUser()
+    .then(({ data }) => {
+
+      setUser(data)
+    })
 
   useEffect(() => { 
+   
     JobAPI.getAllJobs()
       .then(({ data }) => {
         let jobs = []
@@ -48,6 +56,8 @@ const Home = () => {
       setFilteredJobs(jobs)
     }
 
+   
+
   }, [])
 
   const handleInputChange = ({ target: { value,name } }) => {
@@ -65,14 +75,17 @@ const Home = () => {
           break
     }   
   }
-
+  
+  const displayTitle = _ => {
+    return `Welcome ${user.first_name}`
+  }
 
 
   return (
     <>
       <NavbarElem />
       
-      <PageTitle title='Welcome User' />
+      {user ? <PageTitle title={displayTitle()} /> : <></>}
 
       <input
         type="text"
