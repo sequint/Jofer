@@ -24,15 +24,15 @@ const EmployerForm = () => {
   const handleRegisterUser = event => {
     event.preventDefault()
     if (validateEmail(userState.email)) {
-    UserAPI.register(userState)
-      .then(({ data: token }) => {
-        alert('User Registered!')
-        localStorage.setItem('token', token)
-        setUserState({ ...userState, first_name: '', last_name: '', company: '', email: '', password: '' })
-        window.location = '/login'
-      })
-      .catch(err => console.error(err))
-    }else{
+      UserAPI.register(userState)
+        .then(({ data: token }) => {
+          alert('User Registered!')
+          localStorage.setItem('token', token)
+          setUserState({ ...userState, first_name: '', last_name: '', company: '', email: '', password: '' })
+          window.location = '/login'
+        })
+        .catch(err => console.error(err))
+    } else {
       console.log("email not valid")
     }
   }
@@ -41,91 +41,74 @@ const EmployerForm = () => {
     window.location = '/login'
   }
 
-  const handleHome = () => {
-    window.location = '/'
-  }
-
   return (
-    <Form
-      className='form'
-    >
+    <Form className='form'>
 
       <FloatingLabel
         controlId='floatingInput'
         label='👤 First Name'
-        className='mb-3 col-5 style'
-      >
+        className='mb-3 col-5 style'>
         <Form.Control
           type='text'
           placeholder='Enter your Fist Name'
           name='first_name'
           value={userState.first_name}
-          onChange={handleInputChange}
-        />
+          onChange={handleInputChange} />
       </FloatingLabel>
 
       <FloatingLabel
         controlId='floatingInput'
         label='👥 Last Name'
-        className='mb-3 col-5 style'
-      >
+        className='mb-3 col-5 style'>
         <Form.Control
           type='text'
           placeholder='Enter your Last Name'
           name='last_name'
           value={userState.last_name}
-          onChange={handleInputChange}
-        />
+          onChange={handleInputChange} />
       </FloatingLabel>
 
       <FloatingLabel
         controlId='floatingInput'
         label='🏢 Company'
-        className='mb-3 col-5 style'
-      >
+        className='mb-3 col-5 style'>
         <Form.Control
           type='text'
           placeholder='Enter your Company Name'
           name='company'
           value={userState.company}
-          onChange={handleInputChange}
-        />
+          onChange={handleInputChange} />
       </FloatingLabel>
 
       <FloatingLabel
         controlId='floatingInput'
         label='📧 Email'
-        className='mb-3 col-5 style'
-      >
+        className='mb-3 col-5 style'>
         <Form.Control
           type='email'
           placeholder='Enter your email'
           name='email'
           value={userState.username}
-          onChange={handleInputChange}
-        />
+          onChange={handleInputChange} />
       </FloatingLabel>
 
       <FloatingLabel
         controlId='floatingPassword'
         label='🔐 Password'
-        className='mb-3 col-5 style'
-      >
+        className='mb-3 col-5 style'>
         <Form.Control
           type='password'
           placeholder='Password'
           name='password'
           value={userState.password}
-          onChange={handleInputChange}
-        />
+          onChange={handleInputChange} />
       </FloatingLabel>
 
       <Button
         className='mb-2 col-5 registerBtn'
         variant='primary'
         type='submit'
-        onClick={handleRegisterUser}
-      >
+        onClick={handleRegisterUser}>
         Register
       </Button>
 
@@ -133,17 +116,8 @@ const EmployerForm = () => {
         className='mb-3 toSignIn'
         variant='light'
         type='button'
-        onClick={handleLogin}
-      >
+        onClick={handleLogin}>
         Already have an account? Sign In.
-      </Button>
-
-      <Button
-        variant='link'
-        type='button'
-        onClick={handleHome}
-      >
-        Home Page
       </Button>
 
     </Form>
