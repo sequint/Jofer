@@ -105,8 +105,8 @@ const AppliedJobs = () => {
     <>
       <NavbarElem />
       <PageTitle title='My Jobs' />
-      <row>
-        <div className="filterBtn me-5">
+      <row className="Filter">
+        <div className="filterBtn">
           <DropdownButton
             className='col-2'
             variant="outline"

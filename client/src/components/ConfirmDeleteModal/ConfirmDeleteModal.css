@@ -1,0 +1,9 @@
+.deleteConfirm {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+}
+
+.deleteConfirm:hover {
+  background-color: transparent !important;
+  color: #dc3545 !important;
+}

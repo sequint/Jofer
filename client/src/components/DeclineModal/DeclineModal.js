@@ -124,7 +124,12 @@ const DeclineModal = ({ showState, setParentState, job }) => {
                 onChange={onReasonChange}
               />
             </div>
-            <svg className='addReason ms-4 mb-2' onClick={handleReasonAddClick} fill='none' viewBox='0 0 24 24' height='30px' width='30px'>
+            <svg
+              className='addReason ms-4 mb-2'
+              onClick={handleReasonAddClick}
+              fill='none' viewBox='0 0 24 24'
+              height='30px'
+              width='30px'>
               <path
                 fill='currentColor'
                 fillRule='evenodd'
@@ -156,7 +161,13 @@ const DeclineModal = ({ showState, setParentState, job }) => {
                 onChange={onActionChange}
               />
             </div>
-            <svg className='addReason ms-4 mb-2' onClick={handleActionAddClick} fill='none' viewBox='0 0 24 24' height='30px' width='30px'>
+            <svg
+              className='addReason ms-4 mb-2'
+              onClick={handleActionAddClick}
+              fill='none'
+              viewBox='0 0 24 24'
+              height='30px'
+              width='30px'>
               <path
                 fill='currentColor'
                 fillRule='evenodd'
@@ -175,10 +186,16 @@ const DeclineModal = ({ showState, setParentState, job }) => {
           {declineReasons.actionItems ? declineReasons.actionItems.map(item => <li>{item}</li>) : <></>}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant='warning' onClick={() => handleClose('revert')}>
+          <Button
+            className="revert"
+            onClick={() => handleClose('revert')}>
             Revert Decline Status
           </Button>
-          <Button variant='danger' onClick={() => handleClose('declined')}>Decline</Button>
+          <Button
+            className="declinedCard"
+            onClick={() => handleClose('declined')}>
+            Decline
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

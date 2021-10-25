@@ -1,6 +1,12 @@
+.Filter {
+  display: flex;
+  justify-content: center;
+}
+
 .filterBtn {
   display: grid;
   justify-content: end;
+  width: 500px
 }
 
 #all {

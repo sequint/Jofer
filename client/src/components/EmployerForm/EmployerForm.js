@@ -124,16 +124,11 @@ const EmployerForm = () => {
         missingInput.missingCompany = true
         setMissingInput({ ...missingInput })
       }
-
     }
   }
 
   const handleLogin = () => {
     window.location = '/login'
-  }
-
-  const handleHome = () => {
-    window.location = '/'
   }
 
   return (
@@ -144,8 +139,7 @@ const EmployerForm = () => {
       <FloatingLabel
         controlId='floatingInput'
         label='👤 First Name'
-        className='mb-3 col-5 style'
-      >
+        className='mb-3 col-5 style'>
         <Form.Control
           type='text'
           placeholder='Enter your Fist Name'
@@ -159,8 +153,7 @@ const EmployerForm = () => {
       <FloatingLabel
         controlId='floatingInput'
         label='👥 Last Name'
-        className='mb-3 col-5 style'
-      >
+        className='mb-3 col-5 style'>
         <Form.Control
           type='text'
           placeholder='Enter your Last Name'
@@ -174,8 +167,7 @@ const EmployerForm = () => {
       <FloatingLabel
         controlId='floatingInput'
         label='🏢 Company'
-        className='mb-3 col-5 style'
-      >
+        className='mb-3 col-5 style'>
         <Form.Control
           type='text'
           placeholder='Enter your Company Name'
@@ -189,8 +181,7 @@ const EmployerForm = () => {
       <FloatingLabel
         controlId='floatingInput'
         label='📧 Email'
-        className='mb-3 col-5 style'
-      >
+        className='mb-3 col-5 style'>
         <Form.Control
           type='email'
           placeholder='Enter your email'
@@ -205,8 +196,7 @@ const EmployerForm = () => {
       <FloatingLabel
         controlId='floatingPassword'
         label='🔐 Password'
-        className='mb-3 col-5 style'
-      >
+        className='mb-3 col-5 style'>
         <Form.Control
           type='password'
           placeholder='Password'
@@ -221,8 +211,7 @@ const EmployerForm = () => {
         className='mb-2 col-5 registerBtn'
         variant='primary'
         type='submit'
-        onClick={handleRegisterUser}
-      >
+        onClick={handleRegisterUser}>
         Register
       </Button>
 
@@ -230,17 +219,8 @@ const EmployerForm = () => {
         className='mb-3 toSignIn'
         variant='light'
         type='button'
-        onClick={handleLogin}
-      >
+        onClick={handleLogin}>
         Already have an account? Sign In.
-      </Button>
-
-      <Button
-        variant='link'
-        type='button'
-        onClick={handleHome}
-      >
-        Home Page
       </Button>
 
     </Form>

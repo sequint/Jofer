@@ -73,8 +73,6 @@ const SignInForm = () => {
 
   }
 
-  const handleHome = () => {
-    window.location = '/'
   }
 
   return (
