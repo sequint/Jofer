@@ -13,7 +13,8 @@ const RegisterForm = () => {
     username: '',
     password: '',
     user_type: 'applicant',
-    company: ''
+    company: '',
+    avatarColor: ''
   })
   const [missingInput, setMissingInput] = useState({
     missingFirstName: false,
@@ -24,6 +25,8 @@ const RegisterForm = () => {
   const [correctFormat, setCorrectFormat] = useState(true)
   const [usernameExists, setUsernameExists] = useState(false)
   const [success, setSuccess] = useState(false)
+
+  const colorArray = [ '#8ECAE6', '#219EBC', '#FFB703', '#FB8500' ]
 
   const handleInputChange = ({ target: { name, value } }) => {
 
@@ -71,10 +74,12 @@ const RegisterForm = () => {
         .then(({ data: token }) => {
 
           if (token === null) {
+            let avatarColor = colorArray[Math.floor(Math.random() * colorArray.length)]
+            
             UserAPI.register(userState)
               .then(({ data }) => {
                 setSuccess(true)
-                setUserState({ ...userState, first_name: '', last_name: '', username: '', password: '' })
+                setUserState({ ...userState, first_name: '', last_name: '', username: '', password: '', avatarColor: avatarColor })
                 setTimeout(() => {
                   window.location = '/login'
                 }, 2000)
