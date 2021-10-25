@@ -16,7 +16,7 @@ const NavbarElem = () => {
     UserAPI.getUser().then(({ data }) => {
       console.log(data)
       setUser(data)
-      if (data.user_type === 'applicant') {
+      if (data.user_type === 'Applicant') {
         setIsEmployer(false)
       } else {
         setIsEmployer(true)

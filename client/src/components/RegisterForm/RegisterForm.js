@@ -12,7 +12,7 @@ const RegisterForm = () => {
     last_name: '',
     username: '',
     password: '',
-    user_type: 'applicant',
+    user_type: 'Applicant',
     company: ''
   })
   const [missingInput, setMissingInput] = useState({

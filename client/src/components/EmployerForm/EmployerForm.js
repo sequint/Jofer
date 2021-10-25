@@ -12,7 +12,7 @@ const EmployerForm = () => {
     last_name: '',
     username: '',
     password: '',
-    user_type: 'employer',
+    user_type: 'Employer',
     company: ''
   })
   const [missingInput, setMissingInput] = useState({
