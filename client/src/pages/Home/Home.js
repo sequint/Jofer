@@ -30,7 +30,7 @@ const Home = () => {
         let applicants = []
         data.forEach(job => {
           job.applicants.forEach(applicant => {
-            if (applicant.status == 'Declined') {
+            if (applicant.status === 'Declined') {
               applicants.push(applicant)
             }
           })
