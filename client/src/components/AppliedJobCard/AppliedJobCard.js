@@ -61,7 +61,7 @@ const AppliedJobCard = ({ job, setParentState }) => {
           </Card.Text>
           <div className="bttn">
             <Button
-              variant='outline-secondary'
+              className="viewJobBtn"
               onClick={handleShow}>
               View More
             </Button>

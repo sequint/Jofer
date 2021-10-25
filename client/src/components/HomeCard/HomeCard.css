@@ -1,0 +1,11 @@
+.viewDeclineBtn {
+  color: #023047 !important;
+  background-color: transparent !important;
+  border: #023047 solid 1px !important;
+  text-decoration: none !important;
+}
+
+.viewDeclineBtn:hover {
+  background-color: #FFBA0A !important;
+  border: #FFBA0A solid 1px !important;
+}
