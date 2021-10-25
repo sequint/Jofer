@@ -18,7 +18,6 @@ const ConfirmDeleteModal = ({ job, setParentState }) => {
           setShow(false)
           UserAPI.getUser()
             .then(({ data }) => setParentState(data))
-
         })
 
     } else {

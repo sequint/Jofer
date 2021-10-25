@@ -88,7 +88,7 @@ const Home = () => {
         placeholder="Search department"
         onChange={handleInputChange}
       />
-      {filteredJobs ? filteredJobs.map(job => <HomeCard job={job}></HomeCard>) : <h1>You don't have any posted jobs</h1>}
+      {filteredJobs ? filteredJobs.slice(0).reverse().map(job => <HomeCard job={job}></HomeCard>) : <h1>You don't have any posted jobs</h1>}
     </>
   )
 }

@@ -173,7 +173,7 @@ const CreateJob = ({ setParentState }) => {
                   value={jobState.name}
                   onChange={handleInputChange}
                 />
-                {missingInput.missingName ? <p className="err">⚠️ Please enter a job title</p> : <></>}
+                {missingInput.missingName ? <p className="err mt-2">⚠️ Please enter a job title</p> : <></>}
               </Form.Group>
               <Form.Group
                 className='mb-3'
@@ -187,7 +187,7 @@ const CreateJob = ({ setParentState }) => {
                   value={jobState.company}
                   onChange={handleInputChange}
                 />
-                {missingInput.missingCompany ? <p className="err">⚠️ Please enter a company name</p> : <></>}
+                {missingInput.missingCompany ? <p className="err mt-2">⚠️ Please enter a company name</p> : <></>}
               </Form.Group>
               <Form.Group
                 className='mb-3'
@@ -201,7 +201,7 @@ const CreateJob = ({ setParentState }) => {
                   value={jobState.type}
                   onChange={handleInputChange}
                 />
-                {missingInput.missingType ? <p className="err">⚠️ Please enter a department for the job</p> : <></>}
+                {missingInput.missingType ? <p className="err mt-2">⚠️ Please enter a department for the job</p> : <></>}
               </Form.Group>
               <Form.Group
                 className='mb-3'
@@ -215,7 +215,7 @@ const CreateJob = ({ setParentState }) => {
                   value={jobState.applicantName}
                   onChange={handleInputChange}
                 />
-                {missingInput.missingApplicantName ? <p className="err">⚠️ Please enter an applicant name</p> : <></>}
+                {missingInput.missingApplicantName ? <p className="err mt-2">⚠️ Please enter an applicant name</p> : <></>}
               </Form.Group>
               <Form.Group
                 className='mb-3'
@@ -229,10 +229,9 @@ const CreateJob = ({ setParentState }) => {
                   value={jobState.email}
                   onChange={handleInputChange}
                 />
-                {(jobState.email && !correctFormat) ? <p className="err">⚠️ Please enter a valid email address</p> : <></>}
+                {(jobState.email && !correctFormat) ? <p className="err mt-2">⚠️ Please enter a valid email address</p> : <></>}
                 <Button
-                  className="mt-4"
-                  variant='primary'
+                  className="mt-4 createBtn"
                   type='submit'
                   onClick={handleAddApplicant}
                 >
@@ -251,7 +250,7 @@ const CreateJob = ({ setParentState }) => {
         </Modal.Body>
         <Modal.Footer>
           <Button
-            variant='primary'
+            className="createBtn"
             type='submit'
             onClick={handleCreateJob}
           >
