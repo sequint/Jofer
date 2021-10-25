@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const { response } = require('express')
 const { User, Job } = require('../models')
 
 
@@ -87,6 +88,55 @@ let company = [
   'Snap',
   'Palantir'
 ]
+let jobs = [
+  'Senior Backend Developer',
+  'Sr. Front End Developer',
+  'Back End Developer',
+  'Software Developer',
+  'Digital Web Producer',
+  'Net Developer',
+  'Junior Software Developer',
+  'React Web Developer',
+  'Web Developer',
+  'Jr. Software Developer',
+  'Senior .Net Developer (Back-End)',
+  'Lead Software Engineer',
+  'Engineer Software'
+  
+]
+
+let jobType = [
+  'Engineering',
+  'Software',
+  'Web Design'
+]
+
+let jobReasons = [
+  "Not required skillset",
+  "Didn't Know Ruby",
+  "Didn't Know React",
+  "Lack of experience",
+  "Not the correct fit",
+  "Lack of experience",
+  "Not enough knowledge on job",
+  "Lack of Javascript skills",
+  "Failed tech interview",
+  "No database knowledge"
+]
+
+let jobActions =[
+  'Learn React',
+  'Learn Ruby',
+  'Learn Node',
+  'Learn Java',
+  'Learn Javascript',
+  'Practice Data structures',
+  'Gain more experience',
+  'Make your own projects',
+  'Learn about time-complexity',
+  'Be more prepared',
+
+]
 
 
 
@@ -95,19 +145,28 @@ let company = [
     let users = []
     let password = 'seedPassword'
 
-    last_name.forEach(user => {
+    last_name.forEach(lastName => {
       let randomFirstName = Math.floor(Math.random() * first_name.length)
       let firstName = first_name[randomFirstName]
-      let username = firstName + user + '@seeddata.com'
+      let username = firstName + lastName + '@seeddata.com'
       let companyName = company[Math.floor(Math.random() * company.length)]
-      let jobName ="job"
-      let type = 'jobType'
-      let reason = 'reason'
-      let actionItem = 'action Item'
+      let fullName = firstName + ' ' + lastName
+
+      let jobName = jobs[Math.floor(Math.random() * jobs.length)]
+      let type = jobType[Math.floor(Math.random() * jobType.length)]
+
+      let applicants = Math.floor(Math.random() *3)
+      
+      let reason = []
+      let actionItems = []
+      for (let i = 0; i < 2; i++) {
+        reason.push(jobReasons[Math.floor(Math.random() * jobReasons.length)])
+        actionItems.push(jobActions[Math.floor(Math.random() * jobActions.length)])
+      }
       let employer =
       {
         first_name: firstName,
-        last_name: user,
+        last_name: lastName,
         username: username,
         user_type: 'employer',
         company: companyName,
@@ -119,7 +178,7 @@ let company = [
             err: err,
             req: {
               first_name: first_name,
-              last_name: last_name,
+              last_name: lastName,
               username: username,
               user_type: user_type,
               company: company,
@@ -134,7 +193,15 @@ let company = [
             company: companyName,
             type: type,
             status: 'Declined',
-            applicants: []
+            applicants: [{
+              applicantName: fullName,
+              email: username,
+              status: "Declined",
+              declined: {
+                reasons: reason,
+                actionItems: actionItems
+              }
+            }]
  
               }
           const job =Job.create({ ...jobPosting })
@@ -164,3 +231,5 @@ let company = [
 
 
 module.exports = router
+
+
