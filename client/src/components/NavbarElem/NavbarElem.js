@@ -33,7 +33,7 @@ const NavbarElem = () => {
     if (IsLoggedIn) {
       return (
         <Dropdown>
-          <img src={`https://ui-avatars.com/api/?name=${user.first_name}+${user.last_name}&background=random&rounded=true`} alt="avatar" className="avatar" />
+          <img src={`https://ui-avatars.com/api/?name=${user.first_name}+${user.last_name}&background=random&rounded=true`} alt="avatar" className="ms-4 avatar" />
 
           <Dropdown.Toggle className="userDropToggle" id="dropdown-split-basic" />
 
@@ -83,7 +83,6 @@ const NavbarElem = () => {
 
             {dropdownUser()}
             
-            {/* {IsLoggedIn ? <img src={`https://ui-avatars.com/api/?name=${user.first_name}+${user.last_name}&background=random&rounded=true`} alt="avatar" className="avatar" /> : <></>} */}
           </div>
 
         </Nav>

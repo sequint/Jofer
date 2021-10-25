@@ -24,3 +24,7 @@
 .userDropMenu {
   margin-right: 50px !important;
 }
+
+#basic-navbar-nav {
+  justify-content: flex-end;
+}
