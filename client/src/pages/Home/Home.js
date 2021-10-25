@@ -8,21 +8,15 @@ import './Home.css'
 
 const Home = () => {
 
-
-  const [jobs, setJobs] = useState([{
-
-  }])
-  const [filteredJobs, setFilteredJobs] = useState([{
-
-  }])
+  const [jobs, setJobs] = useState([])
+  const [filteredJobs, setFilteredJobs] = useState([])
   const [user, setUser] = useState()
-  UserAPI.getUser()
-    .then(({ data }) => {
-
-      setUser(data)
-    })
-
+  
   useEffect(() => {
+    UserAPI.getUser()
+      .then(({ data }) => {
+        setUser(data)
+      })
   
     JobAPI.getAllJobs()
       .then(({ data }) => {
@@ -30,7 +24,7 @@ const Home = () => {
         let applicants = []
         data.forEach(job => {
           job.applicants.forEach(applicant => {
-            if (applicant.status == 'Declined') {
+            if (applicant.status === 'Declined') {
               applicants.push(applicant)
             }
           })
