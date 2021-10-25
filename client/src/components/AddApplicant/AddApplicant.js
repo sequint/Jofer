@@ -122,8 +122,6 @@ const AddApplicant = ({ job, setParentState }) => {
       setJobState({ ...jobState, applicants: [] })
       JobAPI.update(job._id, job)
         .then(({ data }) => {
-          console.log("hello")
-
           setParentState(job)
           handleClose()
         })

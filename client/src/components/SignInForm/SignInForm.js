@@ -73,9 +73,6 @@ const SignInForm = () => {
 
   }
 
-  const handleHome = () => {
-    window.location = '/'
-  }
 
   return (
     <Form className='form'>
@@ -93,7 +90,7 @@ const SignInForm = () => {
           onChange={handleInputChange}/>
 
         {(missingInput.missingEmail || !correctFormat) ? <p className="err mt-2">⚠️ Please enter a valid email address</p> : <></>}
-        {!usernameExists ? <p className="err mt-2">⚠️ Email not registered</p> : <></>}
+        
       </FloatingLabel>
 
       <FloatingLabel
@@ -109,6 +106,7 @@ const SignInForm = () => {
           onChange={handleInputChange}/>
 
         {missingInput.missingPassword ? <p className="err mt-2">⚠️ Please enter a password</p> : <></>}
+        {!usernameExists ? <p className="err mt-2">⚠️ Email or password is invalid</p> : <></>}
       </FloatingLabel>
 
       <Button
@@ -116,13 +114,6 @@ const SignInForm = () => {
         type='submit style'
         onClick={handleLoginUser}>
         Sign In
-      </Button>
-
-      <Button
-        variant='link'
-        type='button'
-        onClick={handleHome}>
-        Go Home
       </Button>
 
     </Form>

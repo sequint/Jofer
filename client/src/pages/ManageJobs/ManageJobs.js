@@ -173,6 +173,7 @@ const ManageJobs = () => {
       const items = reorder(filteredApplicants[sInd], source.index, destination.index)
       const newState = [...filteredApplicants]
       newState[sInd] = items
+      console.log('setting new state')
       setState(newState)
       setFilteredApplicants(newState)
     }
@@ -184,17 +185,14 @@ const ManageJobs = () => {
               elem.applicants.forEach((applicant, index) => {
                 if (applicant.email === allInfo.email) {
 
-                  console.log('it was in declined')
                   let reason = applicant.declined.reasons[0]
                   if (reason !== "im not sure why") {
-
-                    console.log("user has been declined already")
                     revertDecline(allInfo)
-
-
-                  } else {
+                  }
+                  else {
                     const result = move(state[sInd], state[dInd], source, destination, sInd, dInd)
 
+                    console.log('setting new state')
                     setState(result)
                     setFilteredApplicants(result)
                   }

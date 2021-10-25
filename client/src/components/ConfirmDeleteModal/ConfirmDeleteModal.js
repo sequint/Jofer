@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import JobAPI from '../../utils/JobAPI'
 import UserAPI from '../../utils/UserAPI'
+import './ConfirmDeleteModal.css'
 
 const ConfirmDeleteModal = ({ job, setParentState }) => {
 
@@ -73,17 +74,11 @@ const ConfirmDeleteModal = ({ job, setParentState }) => {
         </Modal.Body>
         <Modal.Footer>
           <Button
-            variant="danger"
+            className="deleteConfirm"
             type="submit"
             onClick={handleConfirmDelete}>
             Confirm
           </Button>
-          {/* <Button
-            variant="primary"
-            type="submit"
-            onClick={handleClose}>
-            Cancel
-          </Button> */}
         </Modal.Footer>
       </Modal>
     </>

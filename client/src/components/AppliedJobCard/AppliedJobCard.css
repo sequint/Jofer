@@ -23,6 +23,18 @@
   box-shadow: 10px 10px #023047 !important;
 }
 
+.viewJobBtn {
+  color: #023047 !important;
+  background-color: transparent !important;
+  border: #023047 solid 1px !important;
+  text-decoration: none !important;
+}
+
+.viewJobBtn:hover {
+  background-color: #FFBA0A !important;
+  border: #FFBA0A solid 1px !important;
+}
+
 @media screen and (min-width: 575px) {
   .jobCard {
     max-width: 500px;
