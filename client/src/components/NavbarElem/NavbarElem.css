@@ -16,6 +16,15 @@
   margin-left: 10px !important;
 }
 
+.userDropToggle {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.userDropMenu {
+  margin-right: 50px !important;
+}
+
 #basic-navbar-nav {
   justify-content: flex-end;
 }
