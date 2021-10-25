@@ -3,6 +3,7 @@ const { response } = require('express')
 const { User, Job } = require('../models')
 
 
+
 let employer =
 {
   first_name: 'String',
@@ -141,7 +142,7 @@ let jobActions =[
 
 
   // post route to seed users (for each user in users above register a new user)
-  router.post('/users/register', (req, res) => {
+  router.post('/seed/users', (req, res) => {
     let users = []
     let password = 'seedPassword'
 
