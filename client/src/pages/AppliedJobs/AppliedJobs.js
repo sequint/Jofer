@@ -4,7 +4,7 @@ import PageTitle from '../../components/PageTitle'
 import JobAPI from '../../utils/JobAPI'
 import AppliedJobCard from '../../components/AppliedJobCard/AppliedJobCard'
 import UserAPI from '../../utils/UserAPI'
-import DropdownButton from 'react-bootstrap/DropDownButton'
+import {DropdownButton} from 'react-bootstrap'
 import Container from 'react-bootstrap/esm/Container'
 import './AppliedJobs.css'
 
@@ -152,7 +152,7 @@ const AppliedJobs = () => {
       </row>
 
       <Container>
-        {filteredJobs.map(job => <AppliedJobCard job={job} setParentState={setParentState} />)}
+        {filteredJobs.slice(0).reverse().map(job => <AppliedJobCard job={job} setParentState={setParentState} />)}
       </Container>
 
     </>

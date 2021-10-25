@@ -3,37 +3,127 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import UserAPI from '../../utils/UserAPI'
 import FloatingLabel from 'react-bootstrap/esm/FloatingLabel'
+import SuccessMessage from '../SuccessMessage'
 import './EmployerForm.css'
 
 const EmployerForm = () => {
   const [userState, setUserState] = useState({
     first_name: '',
     last_name: '',
-    email: '',
+    username: '',
     password: '',
     user_type: 'employer',
     company: ''
   })
-  function validateEmail(email) {
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  }
+  const [missingInput, setMissingInput] = useState({
+    missingFirstName: false,
+    missingLastName: false,
+    missingEmail: false,
+    missingPassword: false,
+    missingCompany: false
+  })
+  const [correctFormat, setCorrectFormat] = useState(true)
+  const [usernameExists, setUsernameExists] = useState(false)
+  const [success, setSuccess] = useState(false)
 
-  const handleInputChange = ({ target: { name, value } }) => setUserState({ ...userState, [name]: value })
+  const handleInputChange = ({ target: { name, value } }) => {
+
+    if (name === 'first_name') {
+      setMissingInput({ ...missingInput, missingFirstName: false })
+    }
+    else if (name === 'last_name') {
+      setMissingInput({ ...missingInput, missingLastName: false })
+    }
+    else if (name === 'password') {
+      setMissingInput({ ...missingInput, missingPassword: false })
+    }
+    else if (name === 'username') {
+      setMissingInput({ ...missingInput, missingEmail: false })
+      setCorrectFormat(true)
+    }
+    else if (name === 'company') {
+      setMissingInput({ ...missingInput, missingCompany: false })
+    }
+
+    setUserState({ ...userState, [name]: value })
+
+  }
 
   const handleRegisterUser = event => {
     event.preventDefault()
-    if (validateEmail(userState.email)) {
-      UserAPI.register(userState)
+
+    setMissingInput({
+      missingFirstName: false,
+      missingLastName: false,
+      missingEmail: false,
+      missingPassword: false,
+      missingCompany: false
+    })
+    setCorrectFormat(true)
+    setUsernameExists(false)
+
+    const emailFormat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+    if (
+      emailFormat.test(userState.username) &&
+      userState.first_name !== '' &&
+      userState.last_name !== '' &&
+      userState.email !== '' &&
+      userState.password !== '' &&
+      userState.company !== ''
+    ) {
+
+      UserAPI.login(userState)
         .then(({ data: token }) => {
-          alert('User Registered!')
-          localStorage.setItem('token', token)
-          setUserState({ ...userState, first_name: '', last_name: '', company: '', email: '', password: '' })
-          window.location = '/login'
+
+          if (!token) {
+            UserAPI.register(userState)
+              .then(() => {
+                setSuccess(true)
+                setUserState({ ...userState, first_name: '', last_name: '', username: '', password: '', company: '' })
+                setTimeout(() => {
+                  window.location = '/login'
+                }, 2000)
+              })
+              .catch(err => console.error(err))
+          }
+          else {
+            setUsernameExists(true)
+            setUserState({ ...userState, password: '' })
+          }
         })
         .catch(err => console.error(err))
-    } else {
-      console.log("email not valid")
+    }
+    else{
+
+      if (userState.first_name === '') {
+        missingInput.missingFirstName = true
+        setMissingInput({ ...missingInput })
+      }
+
+      if (userState.last_name === '') {
+        missingInput.missingLastName = true
+        setMissingInput({ ...missingInput })
+      }
+
+      if (!(emailFormat.test(userState.username))) {
+        setCorrectFormat(false)
+      }
+
+      if (userState.username === '') {
+        missingInput.missingEmail = true
+        setMissingInput({ ...missingInput })
+      }
+
+      if (userState.password === '') {
+        missingInput.missingPassword = true
+        setMissingInput({ ...missingInput })
+      }
+
+      if (userState.company === '') {
+        missingInput.missingCompany = true
+        setMissingInput({ ...missingInput })
+      }
     }
   }
 
@@ -42,8 +132,10 @@ const EmployerForm = () => {
   }
 
   return (
-    <Form className='form'>
-
+    <Form
+      className='form'
+    >
+      {success ? <SuccessMessage /> : <></>}
       <FloatingLabel
         controlId='floatingInput'
         label='👤 First Name'
@@ -53,7 +145,9 @@ const EmployerForm = () => {
           placeholder='Enter your Fist Name'
           name='first_name'
           value={userState.first_name}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
+        {missingInput.missingFirstName ? <p className="err mt-2">⚠️ Please enter a your first name</p> : <></>}
       </FloatingLabel>
 
       <FloatingLabel
@@ -65,7 +159,9 @@ const EmployerForm = () => {
           placeholder='Enter your Last Name'
           name='last_name'
           value={userState.last_name}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
+        {missingInput.missingLastName ? <p className="err mt-2">⚠️ Please enter a your last name</p> : <></>}
       </FloatingLabel>
 
       <FloatingLabel
@@ -77,7 +173,9 @@ const EmployerForm = () => {
           placeholder='Enter your Company Name'
           name='company'
           value={userState.company}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
+        {missingInput.missingCompany ? <p className="err mt-2">⚠️ Please enter your company name</p> : <></>}
       </FloatingLabel>
 
       <FloatingLabel
@@ -87,9 +185,12 @@ const EmployerForm = () => {
         <Form.Control
           type='email'
           placeholder='Enter your email'
-          name='email'
+          name='username'
           value={userState.username}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
+        {(missingInput.missingEmail || !correctFormat) ? <p className="err mt-2">⚠️ Please enter a valid email address</p> : <></>}
+        {usernameExists ? <p className="err mt-2">⚠️ This email is already registered</p> : <></>}
       </FloatingLabel>
 
       <FloatingLabel
@@ -101,7 +202,9 @@ const EmployerForm = () => {
           placeholder='Password'
           name='password'
           value={userState.password}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
+        {missingInput.missingPassword ? <p className="err mt-2">⚠️ Please enter a password</p> : <></>}
       </FloatingLabel>
 
       <Button

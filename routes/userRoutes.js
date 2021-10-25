@@ -4,13 +4,24 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const { json } = require('express')
 
+router.get('/user/signin', (req, res) => {
+  User.findOne({ username: req.body.username }, (err, user) => {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      res.json(user)
+    }
+  })
+})
+
 // Get current user information.
 router.get('/user', passport.authenticate('jwt'), (req, res) => res.json(req.user))
 
 // Create a new user.
 router.post('/users/register', (req, res) => {
-  const { first_name, last_name, email, user_type, company, password } = req.body
-  const username = email
+  const { first_name, last_name, username, user_type, company, password } = req.body
+  
   // Use mongoose to create new instance of a user with passpost authentication.
   User.register(new User({ first_name, last_name, username, user_type, company }), password, err => {
     if (err) {
