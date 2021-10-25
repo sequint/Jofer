@@ -4,9 +4,14 @@
 }
 
 .navLink {
-  font-size: 18px;
+  font-size: 20px;
+}
+
+.loggedInContainer {
+  display: inline-flex !important;
 }
 
 .avatar {
   height: 40px !important;
+  margin-left: 10px !important;
 }
