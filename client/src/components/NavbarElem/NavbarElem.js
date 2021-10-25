@@ -58,8 +58,7 @@ const NavbarElem = () => {
             {IsLoggedIn
               ? (<Nav.Link className="ms-3 navLink" onClick={handleSignOut} href='/login'>Log Out</Nav.Link>)
               : (<Nav.Link className="ms-3 navLink" href='/login'>Log In</Nav.Link>)}
-            
-            {IsLoggedIn ? <img src={`https://ui-avatars.com/api/?name=${user.first_name}+${user.last_name}&background=random&rounded=true`} alt="avatar" className="avatar" /> : <></>}
+              {IsLoggedIn ? <img src={`https://ui-avatars.com/api/?name=${user.first_name}+${user.last_name}&background=random&rounded=true`} alt="avatar" className="ms-4 avatar" /> : <></>}
           </div>
 
         </Nav>
