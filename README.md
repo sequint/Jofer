@@ -1,5 +1,4 @@
-![ScreenShot](/client/src/assets/JOFER.png)
-# Jofer
+# Jofer ![ScreenShot](/client/src/assets/JOFER.png)
 
 A full MERN Stack application geared toward helping employers and HR departments give their applicants the best application experience possible, while streamlining communication during the hiring process.
 
