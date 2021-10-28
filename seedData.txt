@@ -1,0 +1,191 @@
+[
+    {
+        "first_name": "Noah",
+        "last_name": "SMITH",
+        "username": "NoahSMITH@seeddata.com",
+        "user_type": "employer",
+        "company": "Oracle"
+    },
+    {
+        "first_name": "Charlotte",
+        "last_name": "JOHNSON",
+        "username": "CharlotteJOHNSON@seeddata.com",
+        "user_type": "employer",
+        "company": "Intel"
+    },
+    {
+        "first_name": "Amelia",
+        "last_name": "WILLIAMS",
+        "username": "AmeliaWILLIAMS@seeddata.com",
+        "user_type": "employer",
+        "company": "IBM"
+    },
+    {
+        "first_name": "Charlotte",
+        "last_name": "BROWN",
+        "username": "CharlotteBROWN@seeddata.com",
+        "user_type": "employer",
+        "company": "Foxconn"
+    },
+    {
+        "first_name": "Evelyn",
+        "last_name": "JONES",
+        "username": "EvelynJONES@seeddata.com",
+        "user_type": "employer",
+        "company": "Samsung Electronics"
+    },
+    {
+        "first_name": "Emma",
+        "last_name": "GARCIA",
+        "username": "EmmaGARCIA@seeddata.com",
+        "user_type": "employer",
+        "company": "Oracle"
+    },
+    {
+        "first_name": "Olivia",
+        "last_name": "MILLER",
+        "username": "OliviaMILLER@seeddata.com",
+        "user_type": "employer",
+        "company": "Tesla"
+    },
+    {
+        "first_name": "Charlotte",
+        "last_name": "DAVIS",
+        "username": "CharlotteDAVIS@seeddata.com",
+        "user_type": "employer",
+        "company": "Snap"
+    },
+    {
+        "first_name": "Benjamin",
+        "last_name": "RODRIGUEZ",
+        "username": "BenjaminRODRIGUEZ@seeddata.com",
+        "user_type": "employer",
+        "company": "Airbnb"
+    },
+    {
+        "first_name": "Liam",
+        "last_name": "MARTINEZ",
+        "username": "LiamMARTINEZ@seeddata.com",
+        "user_type": "employer",
+        "company": "Microsoft"
+    },
+    {
+        "first_name": "Benjamin",
+        "last_name": "HERNANDEZ",
+        "username": "BenjaminHERNANDEZ@seeddata.com",
+        "user_type": "employer",
+        "company": "TSMC"
+    },
+    {
+        "first_name": "Charlotte",
+        "last_name": "LOPEZ",
+        "username": "CharlotteLOPEZ@seeddata.com",
+        "user_type": "employer",
+        "company": "Samsung Electronics"
+    },
+    {
+        "first_name": "James",
+        "last_name": "GONZALEZ",
+        "username": "JamesGONZALEZ@seeddata.com",
+        "user_type": "employer",
+        "company": "Tesla"
+    },
+    {
+        "first_name": "Noah",
+        "last_name": "WILSON",
+        "username": "NoahWILSON@seeddata.com",
+        "user_type": "employer",
+        "company": "Intel"
+    },
+    {
+        "first_name": "Olivia",
+        "last_name": "ANDERSON",
+        "username": "OliviaANDERSON@seeddata.com",
+        "user_type": "employer",
+        "company": "Yahoo"
+    },
+    {
+        "first_name": "Charlotte",
+        "last_name": "THOMAS",
+        "username": "CharlotteTHOMAS@seeddata.com",
+        "user_type": "employer",
+        "company": "Tesla"
+    },
+    {
+        "first_name": "Noah",
+        "last_name": "TAYLOR",
+        "username": "NoahTAYLOR@seeddata.com",
+        "user_type": "employer",
+        "company": "IBM"
+    },
+    {
+        "first_name": "Isabella",
+        "last_name": "MOORE",
+        "username": "IsabellaMOORE@seeddata.com",
+        "user_type": "employer",
+        "company": "Samsung Electronics"
+    },
+    {
+        "first_name": "Emma",
+        "last_name": "JACKSON",
+        "username": "EmmaJACKSON@seeddata.com",
+        "user_type": "employer",
+        "company": "Microsoft"
+    },
+    {
+        "first_name": "Charlotte",
+        "last_name": "MARTIN",
+        "username": "CharlotteMARTIN@seeddata.com",
+        "user_type": "employer",
+        "company": "Tesla"
+    },
+    {
+        "first_name": "Emma",
+        "last_name": "LEE",
+        "username": "EmmaLEE@seeddata.com",
+        "user_type": "employer",
+        "company": "Dell Technologies"
+    },
+    {
+        "first_name": "Isabella",
+        "last_name": "PEREZ",
+        "username": "IsabellaPEREZ@seeddata.com",
+        "user_type": "employer",
+        "company": "Microsoft"
+    },
+    {
+        "first_name": "Sophia",
+        "last_name": "THOMPSON",
+        "username": "SophiaTHOMPSON@seeddata.com",
+        "user_type": "employer",
+        "company": "Microsoft"
+    },
+    {
+        "first_name": "Elijah",
+        "last_name": "WHITE",
+        "username": "ElijahWHITE@seeddata.com",
+        "user_type": "employer",
+        "company": "Huawei"
+    },
+    {
+        "first_name": "Alexander",
+        "last_name": "HARRIS",
+        "username": "AlexanderHARRIS@seeddata.com",
+        "user_type": "employer",
+        "company": "Dell Technologies"
+    },
+    {
+        "first_name": "James",
+        "last_name": "SANCHEZ",
+        "username": "JamesSANCHEZ@seeddata.com",
+        "user_type": "employer",
+        "company": "Huawei"
+    },
+    {
+        "first_name": "Olivia",
+        "last_name": "CLARK",
+        "username": "OliviaCLARK@seeddata.com",
+        "user_type": "employer",
+        "company": "TSMC"
+    }
+]
