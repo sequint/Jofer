@@ -12,7 +12,7 @@ const PostedJobs = () => {
     UserAPI.getUser()
       .then(({ data }) => {
         console.log(data)
-        if (data.user_type !== 'employer') {
+        if (data.user_type !== 'Employer') {
           window.location = '/home'
         }else{
 
