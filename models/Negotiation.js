@@ -1,9 +1,9 @@
 const { model, Schema } = require('mongoose')
 
 const Negotiation = new Schema({
-  offer: Integer,
-  counter: Integer,
-  finalSalary: Integer,
+  offer: Number,
+  counter: Number,
+  finalSalary: Number,
   acceptedOffer: false,
   declinedCounter: false,
   job: {
