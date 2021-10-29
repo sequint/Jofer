@@ -340,8 +340,8 @@ const ManageJobs = () => {
       )}
       {showOffer.show === true ? (
         <Negotiator
-          showState={showModal}
-          setParentState={setParentModalState}
+          showState={showOffer}
+          setParentState={setParentOfferShow}
           job={job}
         />
       ) : (
