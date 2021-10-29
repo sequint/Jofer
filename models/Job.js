@@ -16,6 +16,13 @@ const Job = new Schema({
       actionItems: [{
         type: String
       }]
+    },
+    offered: {
+      offer: Number,
+      counter: Number,
+      finalSalary: Number,
+      acceptedOffer: false,
+      declinedCounter: false
     }
   }],
   users: [{
