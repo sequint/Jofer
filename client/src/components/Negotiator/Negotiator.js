@@ -7,7 +7,7 @@ import JobAPI from '../../utils/JobAPI'
 import './Negotiator.css'
 
 const Negotiator = ({ showState, setParentState, job }) => {
-  const [show, setShow] = useState(showState.state)
+  const [show, setShow] = useState(showState.show)
 
   const [ negotiation, setNegotiation ] = useState({
     offer: 0,
