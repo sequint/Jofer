@@ -33,6 +33,11 @@ const Negotiator = ({ showState, setParentState, job }) => {
   // Create an on close function to handle close and to handle actions.
   const handleClose = action => {
 
+    setMissingInput({
+      offer: false,
+      counter: false
+    })
+
     // Save information based on action type based, then close modal.
     switch (action) {
 
@@ -159,7 +164,7 @@ const Negotiator = ({ showState, setParentState, job }) => {
               />
             </div>
 
-            {missingInput.counter ? <p className="err mt-2">⚠️ You have not enter a counter offer.</p> : <></>}
+            {missingInput.counter ? <p className="err mt-2">⚠️ You have not entered a counter offer.</p> : <></>}
           </InputGroup>
 
         </Modal.Body>
