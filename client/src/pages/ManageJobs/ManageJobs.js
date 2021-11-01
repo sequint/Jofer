@@ -9,6 +9,7 @@ import { useState } from 'react'
 import JobAPI from '../../utils/JobAPI'
 import UserAPI from '../../utils/UserAPI'
 import DeclineModal from '../../components/DeclineModal/DeclineModal'
+import Negotiator from '../../components/Negotiator/Negotiator'
 import AddApplicant from '../../components/AddApplicant/AddApplicant'
 import './ManageJobs.css'
 
@@ -30,6 +31,11 @@ const ManageJobs = () => {
 
   const [showModal, setShowModal] = useState({
     state: false,
+    applicant: []
+  })
+  
+  const [ showOffer, setShowOffer ] = useState({
+    show: false,
     applicant: []
   })
 
@@ -167,7 +173,6 @@ const ManageJobs = () => {
       default:
         break
     }
-    console.log(allInfo)
 
     if (sInd === dInd) {
       const items = reorder(filteredApplicants[sInd], source.index, destination.index)
@@ -228,12 +233,16 @@ const ManageJobs = () => {
         const declined = allInfo.draggableId
         const declinedUsers = []
         declinedUsers.push(declined)
-        console.log('no users in declined')
         localStorage.setItem(storage, JSON.stringify(declinedUsers))
 
         // execute modal here, since its the first instance of declined
         setShowModal({ ...showModal, state: true, applicant: allInfo })
       }
+    }
+
+    if (dInd === 3) {
+      setShowOffer({ ...showOffer, show: true, applicant: allInfo })
+      console.log(showOffer)
     }
   }
 
@@ -299,6 +308,9 @@ const ManageJobs = () => {
       }
     }
   }
+
+  const setParentOfferShow = showState => setShowOffer({ ...showOffer, show: showState})
+
   let grid = 1
 
   const getItemStyle = (isDragging, draggableStyle) => ({
@@ -321,6 +333,15 @@ const ManageJobs = () => {
         <DeclineModal
           showState={showModal}
           setParentState={setParentModalState}
+          job={job}
+        />
+      ) : (
+        <></>
+      )}
+      {showOffer.show === true ? (
+        <Negotiator
+          showState={showOffer}
+          setParentState={setParentOfferShow}
           job={job}
         />
       ) : (
