@@ -6,7 +6,7 @@ import FormControl from 'react-bootstrap/FormControl'
 import JobAPI from '../../utils/JobAPI'
 import './Negotiator.css'
 
-const Negotiator = ({ showState, setParentState, job, user }) => {
+const Negotiator = ({ showState, setParentState, job }) => {
   const [show, setShow] = useState(showState.state)
 
   const [ negotiation, setNegotiation ] = useState({
