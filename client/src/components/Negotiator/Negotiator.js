@@ -5,6 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import JobAPI from '../../utils/JobAPI'
 import './Negotiator.css'
+import { ModalBody } from 'react-bootstrap'
 
 const Negotiator = ({ showState, setParentState, job }) => {
   const [show, setShow] = useState(showState.show)
@@ -118,22 +119,11 @@ const Negotiator = ({ showState, setParentState, job }) => {
     }
   }
 
-  return (
-    <>
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop='static'
-        keyboard={false}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-
-        <Modal.Header closeButton>
-          <Modal.Title>Salary Negotiator</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-
+  // Functions for modal display depending on the negotiation state.
+  const getInitialOffer = _ => {
+    return(
+      <>
+        <ModalBody>
           <h5>Offer:</h5>
           <p>Please enter an initial offer below.</p>
           <InputGroup className='mb-3 decline'>
@@ -148,10 +138,28 @@ const Negotiator = ({ showState, setParentState, job }) => {
               />
             </div>
           </InputGroup>
-          {missingInput.offer ? <p className="err mt-2">⚠️ You have not entered an offer.</p> : <></>}
+          { missingInput.offer ? <p className="err mt-2">⚠️ You have not entered an offer.</p> : <></> }
+        </ModalBody>
 
+        <Modal.Footer>
+          <Button
+            variant="primary"
+            onClick={() => handleClose('offer')}>
+            SendOffer
+          </Button>
+        </Modal.Footer>
+      </>
+    )
+  }
+
+  const getCounterOffer = _ => {
+    return(
+      <>
+        <ModalBody>
+          <h5>Origional Offer:</h5>
+          <p>{negotiation.offer}</p>
           <h5>Counter:</h5>
-          <p>If you would like to counter the offer, do so below.</p>
+          <p>If you would like to counter, do so below.</p>
           <InputGroup className='mb-3 decline'>
             <div>
               <FormControl
@@ -166,8 +174,7 @@ const Negotiator = ({ showState, setParentState, job }) => {
 
             {missingInput.counter ? <p className="err mt-2">⚠️ You have not entered a counter offer.</p> : <></>}
           </InputGroup>
-
-        </Modal.Body>
+        </ModalBody>
 
         <Modal.Footer>
           <Button
@@ -175,12 +182,28 @@ const Negotiator = ({ showState, setParentState, job }) => {
             onClick={() => handleClose('counter')}>
             Send Counter
           </Button>
-          <Button
-            variant="primary"
-            onClick={() => handleClose('counter')}>
-            SendOffer
-          </Button>
         </Modal.Footer>
+      </>
+    )
+  }
+
+  return (
+    <>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop='static'
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+
+        <Modal.Header closeButton>
+          <Modal.Title>Salary Negotiator</Modal.Title>
+        </Modal.Header>
+
+        {negotiation.offer === 0 ? getInitialOffer() : <></>}
+        {negotiation.offer > 0 ? getCounterOffer() : <></>}
 
       </Modal>
     </>
