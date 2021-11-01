@@ -52,7 +52,7 @@ const CreateJobForm = ({setParentState}) => {
   
   const handleAddEmail = event => {
     event.preventDefault()
-    console.log("clicked")
+    
     console.log(userState.email)
     const applicant = {
       email: userState.email,
