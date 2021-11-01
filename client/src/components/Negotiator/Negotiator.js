@@ -35,10 +35,12 @@ const Negotiator = ({ showState, setParentState, job }) => {
   return (
     <>
       <Modal show={show} onHide={handleClose}>
+        
         <Modal.Header closeButton>
           <Modal.Title>Salary Negotiator</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+
           <h5>Offer:</h5>
           <p>Please enter an initial offer below.</p>
           <InputGroup className='mb-3 decline'>
@@ -71,7 +73,9 @@ const Negotiator = ({ showState, setParentState, job }) => {
 
             {missingInput.counter ? <p className="err mt-2">⚠️ Please enter at least one declined reason</p> : <></>}
           </InputGroup>
+
         </Modal.Body>
+
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -80,6 +84,7 @@ const Negotiator = ({ showState, setParentState, job }) => {
             Save Changes
           </Button>
         </Modal.Footer>
+
       </Modal>
     </>
   )
