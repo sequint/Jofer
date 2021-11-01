@@ -14,6 +14,7 @@ import AddApplicant from '../../components/AddApplicant/AddApplicant'
 import './ManageJobs.css'
 
 const ManageJobs = () => {
+  const [ currentUser, setCurrentUser ] = useState({})
 
   if (localStorage.getItem("token")) {
 
@@ -22,6 +23,9 @@ const ManageJobs = () => {
         console.log(data)
         if (data.user_type !== 'Employer') {
           window.location = '/home'
+        }
+        else {
+          setCurrentUser(data)
         }
       })
 
@@ -334,6 +338,7 @@ const ManageJobs = () => {
           showState={showModal}
           setParentState={setParentModalState}
           job={job}
+          user={currentUser}
         />
       ) : (
         <></>
