@@ -40,7 +40,7 @@ const ManageJobs = () => {
   
   const [ showOffer, setShowOffer ] = useState({
     show: false,
-    applicant: {}
+    applicant: []
   })
 
   const job = JSON.parse(localStorage.getItem('clickedManageJob'))
