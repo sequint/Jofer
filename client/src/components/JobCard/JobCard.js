@@ -4,17 +4,16 @@ import './JobCard.css'
 import ConfirmDeleteModal from '../ConfirmDeleteModal'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+
 const JobCard = ({ job, setParentState }) => {
-  console.log(job)
 
   const saveToLocal = event => {
     event.preventDefault()
 
     localStorage.setItem('clickedManageJob', JSON.stringify(job))
     window.location = '/managejobs'
+    
   }
-
-
 
   return (
     <div className="cardContainer pb-2">
@@ -69,7 +68,7 @@ const JobCard = ({ job, setParentState }) => {
 
       </Card>
     </div>
-  );
+  )
 }
 
 export default JobCard
