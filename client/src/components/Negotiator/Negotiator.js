@@ -11,6 +11,7 @@ const Negotiator = ({ showState, setParentState, job }) => {
   const [show, setShow] = useState(showState.show)
 
   const [ negotiation, setNegotiation ] = useState({
+    tempOffer: 0,
     offer: 0,
     counter: 0,
     finalSalary: 0,
@@ -25,7 +26,7 @@ const Negotiator = ({ showState, setParentState, job }) => {
 
   // Functions to handle value change of offer and counter.
   const onOfferChange = ({ target: { value } }) => {
-    setNegotiation({ ...negotiation, offer: value})
+    setNegotiation({ ...negotiation, tempOffer: value})
   }
   const onCounterChange = ({ target: { value } }) => {
     setNegotiation({ ...negotiation, offer: value })
@@ -44,11 +45,15 @@ const Negotiator = ({ showState, setParentState, job }) => {
 
       case 'offer':
         
-        if (negotiation.offer > 0) {
+        if (negotiation.tempOffer > 0) {
 
           // Close modal by setting show states to false.
           setShow(false)
           setParentState(false)
+
+          // Set offer to equal temp offer.
+          negotiation.offer = negotiation.tempOffer
+          setNegotiation({ ...negotiation })
 
           // Set job applicant negotiation data.
           JobAPI.getEmployerJobs()
@@ -58,7 +63,7 @@ const Negotiator = ({ showState, setParentState, job }) => {
                   elem.applicants.forEach((applicant, index) => {
                     if (applicant.email === showState.applicant.draggableId) {
                       job.applicants[index].status = "Offered"
-                      job.applicants[index].offered.offer = negotiation.offer
+                      job.applicants[index].offered.offer[0] = negotiation.offer
                       JobAPI.update(job._id, job)
                         .then(({ data }) => console.log(data))
                         .catch(err => console.log(err))
@@ -68,6 +73,9 @@ const Negotiator = ({ showState, setParentState, job }) => {
               })
             })
             .catch(err => console.log(err))
+          
+          // Reset temp offer value.
+          setNegotiation({ ...negotiation, tempOffer: 0 })
 
         }
         else {
@@ -133,7 +141,7 @@ const Negotiator = ({ showState, setParentState, job }) => {
                 placeholder='Enter Decline Reason'
                 aria-label='Decline reason'
                 aria-describedby='basic-addon2'
-                value={negotiation.offer}
+                value={negotiation.tempOffer}
                 onChange={onOfferChange}
               />
             </div>
