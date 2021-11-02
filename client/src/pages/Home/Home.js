@@ -11,13 +11,13 @@ const Home = () => {
   const [jobs, setJobs] = useState([])
   const [filteredJobs, setFilteredJobs] = useState([])
   const [user, setUser] = useState()
-  
+
   useEffect(() => {
     UserAPI.getUser()
       .then(({ data }) => {
         setUser(data)
       })
-  
+
     JobAPI.getAllJobs()
       .then(({ data }) => {
         let jobs = []
@@ -49,7 +49,7 @@ const Home = () => {
       setFilteredJobs(jobs)
     }
 
-   
+
 
   }, [])
 
@@ -68,7 +68,7 @@ const Home = () => {
         break
     }
   }
-  
+
   const displayTitle = _ => {
     return `Welcome ${user.first_name}`
   }
@@ -77,9 +77,9 @@ const Home = () => {
   return (
     <>
       <NavbarElem />
-      
+
       {user ? <PageTitle title={displayTitle()} /> : <></>}
-      
+
       <div>
         <input
           type="text"
