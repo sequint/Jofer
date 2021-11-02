@@ -12,6 +12,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
   const [ negotiation, setNegotiation ] = useState({
     tempOffer: 0,
+    tempCounter: 0,
     offer: [],
     priorCounter: [],
     counter: [],
@@ -44,7 +45,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
     setNegotiation({ ...negotiation, tempOffer: value})
   }
   const onCounterChange = ({ target: { value } }) => {
-    setNegotiation({ ...negotiation, offer: value })
+    setNegotiation({ ...negotiation, tempCounter: value })
   }
 
   // Create an on close function to handle close and to handle actions.
@@ -102,11 +103,15 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
       
       case 'counter':
 
-        if (negotiation.counter > 0) {
+        if (negotiation.tempCounter > 0) {
 
           // Close modal by setting show states to false.
           setShow(false)
           setParentState(false)
+
+          // Set offer to equal temp offer.
+          negotiation.counter = [negotiation.tempCounter]
+          setNegotiation({ ...negotiation })
 
           // Set job applicant negotiation data.
           JobAPI.getEmployerJobs()
@@ -201,7 +206,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                 placeholder='Counter Offer'
                 aria-label='Counter Offer'
                 aria-describedby='basic-addon2'
-                value={negotiation.counter}
+                value={negotiation.tempCounter}
                 onChange={onCounterChange}
               />
             </div>
