@@ -5,26 +5,38 @@ import Button from 'react-bootstrap/Button'
 import JobAPI from '../../utils/JobAPI'
 import UserAPI from '../../utils/UserAPI'
 import ConfirmDeleteModal from '../ConfirmDeleteModal'
+import Negotiator from '../Negotiator/Negotiator'
 import './AppliedJobCard.css'
 
 const AppliedJobCard = ({ job, setParentState }) => {
   const [show, setShow] = useState(false)
-  const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false)
-
   const [declinedReasons, setDeclinedReasons] = useState({
     reasons: [],
     actionItems: []
   })
+  const [showNegotiator, setShowNegotiator] = useState({
+    show: false
+  })
+  
+  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false)
+
+  const handleShowNegotiator = () => {
+    console.log(negotiations)
+    setShowNegotiator({ show: true })
+  }
 
   // Set state vaiable for negotiations.
   const [negotiations, setNegotiations] = useState({
     offer: [],
+    priorCounter: [],
     counter: [],
     finalSalary: [],
     acceptedOffer: [],
     declinedCounter: []
   })
+
+  
 
   useEffect(() => {
     JobAPI.getAllJobs()
@@ -38,6 +50,7 @@ const AppliedJobCard = ({ job, setParentState }) => {
                     setDeclinedReasons({ reasons: applicant.declined.reasons, actionItems: applicant.declined.actionItems })
                     setNegotiations({
                       offer: applicant.offered.offer,
+                      priorCounter: ['40000'],
                       counter: applicant.offered.counter,
                       finalSalary: applicant.offered.finalSalary,
                       acceptedOffer: applicant.offered.acceptedOffer,
@@ -78,12 +91,19 @@ const AppliedJobCard = ({ job, setParentState }) => {
           <div className="bttn">
             <Button
               className="viewJobBtn"
+              onClick={handleShowNegotiator}
+            >
+              See Offer
+            </Button>
+            <Button
+              className="viewJobBtn"
               onClick={handleShow}>
               View More
             </Button>
           </div>
         </Card.Body>
       </Card>
+      {showNegotiator.show ? <Negotiator showState={showNegotiator} setParentState={handleShowNegotiator} job={job} passedNegotiation={negotiations} /> : <></>}
       <Modal
         show={show}
         onHide={handleClose}

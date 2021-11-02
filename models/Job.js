@@ -21,6 +21,9 @@ const Job = new Schema({
       offer: [{
         type: Number
       }],
+      priorCounter: [{
+        type: Number
+      }],
       counter: [{
         type: Number
       }],
