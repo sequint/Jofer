@@ -17,6 +17,15 @@ const AppliedJobCard = ({ job, setParentState }) => {
     actionItems: []
   })
 
+  // Set state vaiable for negotiations.
+  const [negotiations, setNegotiations] = useState({
+    offer: [],
+    counter: [],
+    finalSalary: [],
+    acceptedOffer: [],
+    declinedCounter: []
+  })
+
   useEffect(() => {
     JobAPI.getAllJobs()
       .then(({ data }) => {
@@ -27,6 +36,13 @@ const AppliedJobCard = ({ job, setParentState }) => {
                 elem.applicants.forEach(applicant => {
                   if (applicant.email === data.username) {
                     setDeclinedReasons({ reasons: applicant.declined.reasons, actionItems: applicant.declined.actionItems })
+                    setNegotiations({
+                      offer: applicant.offered.offer,
+                      counter: applicant.offered.counter,
+                      finalSalary: applicant.offered.finalSalary,
+                      acceptedOffer: applicant.offered.acceptedOffer,
+                      declinedOffer: applicant.offered.declinedOffer
+                    })
                   }
                 })
               })
@@ -90,6 +106,8 @@ const AppliedJobCard = ({ job, setParentState }) => {
           {declinedReasons.reasons.length > 0 ? listReasons() : <></>}
           {declinedReasons.reasons.length > 0 ? <p className="mt-3"><strong>Action Items:</strong></p> : <></>}
           {declinedReasons.reasons.length > 0 ? listActionItems() : <></>}
+          {negotiations.offer.length > 0 ? <p className="mt-3"><strong>Initial Offer:</strong></p> : <></>}
+          {negotiations.offer.length > 0 ? negotiations.offer[0] : <></>}
         </Modal.Body>
       </Modal>
     </>
