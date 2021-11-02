@@ -18,11 +18,21 @@ const Job = new Schema({
       }]
     },
     offered: {
-      offer: Number,
-      counter: Number,
-      finalSalary: Number,
-      acceptedOffer: false,
-      declinedCounter: false
+      offer: [{
+        type: Number
+      }],
+      counter: [{
+        type: Number
+      }],
+      finalSalary: [{
+        type: Number
+      }],
+      acceptedOffer: [{
+        type: Boolean
+      }],
+      declinedCounter: [{
+        type: Boolean
+      }]
     }
   }],
   users: [{
