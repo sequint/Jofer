@@ -14,14 +14,12 @@ const PostedJobs = () => {
         console.log(data)
         if (data.user_type !== 'Employer') {
           window.location = '/home'
-        }else{
-
-          
         }
       })
 
-  } else {
-    window.location = "/login";
+  }
+  else {
+    window.location = "/login"
   }
   
   const [user, setUser] = useState()
@@ -29,7 +27,6 @@ const PostedJobs = () => {
   useEffect(() => {
     UserAPI.getUser()
       .then(({ data }) => {  
-        
         setUser(data)
       })
       // .catch(err => window.location = '/auth')
@@ -42,12 +39,7 @@ const PostedJobs = () => {
   const setParentState = (data)=>{
     setUser(data)
   }
-  
-  
 
-  
-  
-  
   return (
     <>
       <NavbarElem />

@@ -1,0 +1,58 @@
+Employers
+
+- Name: Daniel Evergreen
+- Company: Pide Piper
+- Email: daniel.evergreen@pidepiper.ai
+- Password: pass123
+
+- Name: Ray Michaels
+- Company: Far Out Construction
+- Email: ray@foc.com
+- Password: rayman!#
+
+
+Applicants
+
+- Name: Sam Rogers
+- Email: sam.r@gmail.com
+- Password: gimmeeSam$
+
+- Name: Matilda Valquez
+- Email: mvalquez@hotmail.com
+- Password: okay&yes
+
+- Name: Eileen Fischer
+- Email: eileenfischer@gmail.com
+- Password: hello98
+
+- Name: Melissa Goldberg
+- Email: mel.gold@comma.ai
+- Password: melly123
+
+- Name: Sara Yang
+- Email: saya.yang@hotmail.com
+- Password: yangify223
+
+- Name: Roy Ford
+- Email: roy_ford@tesla.com
+- Password: notford123
+
+- Name: Rachel O'Brien
+- Email: rachelOB@gmail.com
+- Password: rayray123!
+
+- Name: Daniel Creg
+- Email: dannycreg@aol.net
+- Password: pass123
+
+- Name: Paul Smith
+- Email: pauly.smith@yahoo.com
+- Password: paulytoo333
+
+- Name: Lucy Lue
+- Email: lucylue@gmail.com
+- Password: lucy123
+
+- Name: Mark Zuckerburg
+- Email: zuckyboy@facebook.com
+- Password: yessir!

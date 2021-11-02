@@ -3,9 +3,8 @@ import Nav from 'react-bootstrap/Nav'
 import logo from '../../assets/JOFER.png'
 import UserAPI from './../../utils/UserAPI'
 import { useState, useEffect } from 'react'
-import {Dropdown,Row,Col} from 'react-bootstrap'
+import { Dropdown } from 'react-bootstrap'
 import './NavbarElem.css'
-import { drop } from 'lodash'
 
 
 const NavbarElem = () => {
@@ -27,7 +26,7 @@ const NavbarElem = () => {
 
   const handleSignOut = () => {
     localStorage.removeItem('token')
-    window.loation = '/login'
+    window.location = '/login'
   }
 
   const dropdownUser = _ => {

@@ -28,6 +28,7 @@ const DeclineModal = ({ showState, setParentState, job }) => {
         console.log('revert clicked')
 
         break
+
       case 'declined':
 
         if (declineReasons.reasons.length > 0 && declineReasons.actionItems.length > 0) {
@@ -51,21 +52,9 @@ const DeclineModal = ({ showState, setParentState, job }) => {
               })
             })
         }
-        else {
-          if (declineReasons.reasons.length < 1 && declineReasons.actionItems.length < 1) {
-            setMissingInput({ reasons: true, actionItems: true })
-          }
-          else {
-            if (declineReasons.reasons.length < 1) {
-              setMissingInput({ ...missingInput, reasons: true })
-            }
-            else {
-              console.log('in missing action items conditional')
-              setMissingInput({ ...missingInput, actionItems: true })
-            }
-          }
-        }
+
         break
+
       default:
         setShow(false)
         setParentState(false, false)
