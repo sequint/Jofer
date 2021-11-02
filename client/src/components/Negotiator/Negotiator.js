@@ -116,6 +116,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                   elem.applicants.forEach((applicant, index) => {
                     if (applicant.email === showState.applicant.draggableId) {
                       job.applicants[index].status = "Offered"
+                      job.applicants[index].offered.priorCounter = job.applicants[index].offered.counter
                       job.applicants[index].offered.counter = negotiation.counter
                       JobAPI.update(job._id, job)
                         .then(({ data }) => console.log(data))
