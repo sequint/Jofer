@@ -50,6 +50,7 @@ const AppliedJobCard = ({ job, setParentState }) => {
                     setDeclinedReasons({ reasons: applicant.declined.reasons, actionItems: applicant.declined.actionItems })
                     setNegotiations({
                       offer: applicant.offered.offer,
+                      priorCounter: ['40000'],
                       counter: applicant.offered.counter,
                       finalSalary: applicant.offered.finalSalary,
                       acceptedOffer: applicant.offered.acceptedOffer,

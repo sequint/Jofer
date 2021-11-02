@@ -153,8 +153,8 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
             <div>
               <FormControl
                 className="col-5 mb-2 me-5"
-                placeholder='Enter Decline Reason'
-                aria-label='Decline reason'
+                placeholder='Initial Offer'
+                aria-label='Initial Offer'
                 aria-describedby='basic-addon2'
                 value={negotiation.tempOffer}
                 onChange={onOfferChange}
@@ -175,20 +175,30 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
     )
   }
 
+  const displayPriorCounter = _ => {
+    return(
+      <>
+        <h5>Counter Offer:</h5>
+        <p>{negotiation.priorCounter}</p>
+      </>
+    )
+  }
+
   const getCounterOffer = _ => {
     return(
       <>
         <ModalBody>
-          <h5>Origional Offer:</h5>
+          <h5>Initial Offer:</h5>
           <p>{negotiation.offer}</p>
+          {negotiation.priorCounter > 0 ? displayPriorCounter() : <></>}
           <h5>Counter:</h5>
           <p>If you would like to counter, do so below.</p>
           <InputGroup className='mb-3 decline'>
             <div>
               <FormControl
                 className="col-5 mb-2 me-5"
-                placeholder='Enter Decline Reason'
-                aria-label='Decline reason'
+                placeholder='Counter Offer'
+                aria-label='Counter Offer'
                 aria-describedby='basic-addon2'
                 value={negotiation.counter}
                 onChange={onCounterChange}
