@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -7,22 +7,37 @@ import JobAPI from '../../utils/JobAPI'
 import './Negotiator.css'
 import { ModalBody } from 'react-bootstrap'
 
-const Negotiator = ({ showState, setParentState, job }) => {
+const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   const [show, setShow] = useState(showState.show)
 
   const [ negotiation, setNegotiation ] = useState({
     tempOffer: 0,
-    offer: 0,
-    counter: 0,
-    finalSalary: 0,
-    acceptedOffer: false,
-    declinedCounter: false
+    offer: [],
+    priorCounter: [],
+    counter: [],
+    finalSalary: [],
+    acceptedOffer: [],
+    declinedCounter: []
   })
 
   const [missingInput, setMissingInput] = useState({
     offer: false,
     counter: false
   })
+
+  // Reset negotiation state if one was passed in.
+  useEffect(() => {
+    if (passedNegotiation) {
+      setNegotiation({
+        offer: passedNegotiation.offer,
+        priorCounter: passedNegotiation.priorCounter,
+        counter: passedNegotiation.counter,
+        finalSalary: passedNegotiation.finalSalary,
+        acceptedOffer: passedNegotiation.acceptedOffer,
+        declinedCounter: passedNegotiation.declinedCounter
+      })
+    }
+  }, [])
 
   // Functions to handle value change of offer and counter.
   const onOfferChange = ({ target: { value } }) => {
@@ -52,7 +67,7 @@ const Negotiator = ({ showState, setParentState, job }) => {
           setParentState(false)
 
           // Set offer to equal temp offer.
-          negotiation.offer = negotiation.tempOffer
+          negotiation.offer = [negotiation.tempOffer]
           setNegotiation({ ...negotiation })
 
           // Set job applicant negotiation data.
@@ -210,8 +225,8 @@ const Negotiator = ({ showState, setParentState, job }) => {
           <Modal.Title>Salary Negotiator</Modal.Title>
         </Modal.Header>
 
-        {negotiation.offer === 0 ? getInitialOffer() : <></>}
-        {negotiation.offer > 0 ? getCounterOffer() : <></>}
+        {negotiation.offer.length === 0 ? getInitialOffer() : <></>}
+        {negotiation.offer.length > 0 ? getCounterOffer() : <></>}
 
       </Modal>
     </>

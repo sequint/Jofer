@@ -22,13 +22,14 @@ const AppliedJobCard = ({ job, setParentState }) => {
   const handleClose = () => setShow(false)
 
   const handleShowNegotiator = () => {
-    console.log('in')
+    console.log(negotiations)
     setShowNegotiator({ show: true })
   }
 
   // Set state vaiable for negotiations.
   const [negotiations, setNegotiations] = useState({
     offer: [],
+    priorCounter: [],
     counter: [],
     finalSalary: [],
     acceptedOffer: [],
@@ -101,7 +102,7 @@ const AppliedJobCard = ({ job, setParentState }) => {
           </div>
         </Card.Body>
       </Card>
-      {showNegotiator.show ? <Negotiator showState={showNegotiator} setParentState={handleShowNegotiator} job={job} /> : <></>}
+      {showNegotiator.show ? <Negotiator showState={showNegotiator} setParentState={handleShowNegotiator} job={job} passedNegotiation={negotiations} /> : <></>}
       <Modal
         show={show}
         onHide={handleClose}
