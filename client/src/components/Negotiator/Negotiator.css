@@ -30,3 +30,14 @@
   background-color: transparent !important;
   color: #dc3545 !important;
 }
+
+.Offer {
+  background-color: #023047 !important;
+}
+
+.Offer:hover {
+  color: #023047 !important;
+  background-color: transparent !important;
+  border: #023047 solid 1px !important;
+  text-decoration: none !important;
+}

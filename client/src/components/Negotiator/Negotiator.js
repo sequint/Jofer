@@ -10,7 +10,7 @@ import { ModalBody } from 'react-bootstrap'
 const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   const [show, setShow] = useState(showState.show)
 
-  const [ negotiation, setNegotiation ] = useState({
+  const [negotiation, setNegotiation] = useState({
     tempOffer: 0,
     offer: [],
     priorCounter: [],
@@ -41,7 +41,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
   // Functions to handle value change of offer and counter.
   const onOfferChange = ({ target: { value } }) => {
-    setNegotiation({ ...negotiation, tempOffer: value})
+    setNegotiation({ ...negotiation, tempOffer: value })
   }
   const onCounterChange = ({ target: { value } }) => {
     setNegotiation({ ...negotiation, offer: value })
@@ -59,7 +59,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
     switch (action) {
 
       case 'offer':
-        
+
         if (negotiation.tempOffer > 0) {
 
           // Close modal by setting show states to false.
@@ -88,7 +88,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
               })
             })
             .catch(err => console.log(err))
-          
+
           // Reset temp offer value.
           setNegotiation({ ...negotiation, tempOffer: 0 })
 
@@ -99,7 +99,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
         }
 
         break
-      
+
       case 'counter':
 
         if (negotiation.counter > 0) {
@@ -144,7 +144,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
   // Functions for modal display depending on the negotiation state.
   const getInitialOffer = _ => {
-    return(
+    return (
       <>
         <ModalBody>
           <h5>Offer:</h5>
@@ -161,14 +161,14 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
               />
             </div>
           </InputGroup>
-          { missingInput.offer ? <p className="err mt-2">⚠️ You have not entered an offer.</p> : <></> }
+          {missingInput.offer ? <p className="err mt-2">⚠️ You have not entered an offer</p> : <></>}
         </ModalBody>
 
         <Modal.Footer>
           <Button
-            variant="primary"
+            className="Offer"
             onClick={() => handleClose('offer')}>
-            SendOffer
+            Send Offer
           </Button>
         </Modal.Footer>
       </>
@@ -176,7 +176,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   }
 
   const displayPriorCounter = _ => {
-    return(
+    return (
       <>
         <h5>Counter Offer:</h5>
         <p>{negotiation.priorCounter}</p>
@@ -185,7 +185,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   }
 
   const getCounterOffer = _ => {
-    return(
+    return (
       <>
         <ModalBody>
           <h5>Initial Offer:</h5>
