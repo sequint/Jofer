@@ -11,6 +11,7 @@ import UserAPI from '../../utils/UserAPI'
 import DeclineModal from '../../components/DeclineModal/DeclineModal'
 import Negotiator from '../../components/Negotiator/Negotiator'
 import AddApplicant from '../../components/AddApplicant/AddApplicant'
+import Button from 'react-bootstrap/Button'
 import './ManageJobs.css'
 
 const ManageJobs = () => {
@@ -332,7 +333,24 @@ const ManageJobs = () => {
 
     // styles we need to apply on draggables
     ...draggableStyle
-  });
+  })
+  const [showNegotiator, setShowNegotiator] = useState({
+    show: false
+  })
+
+  const handleShowNegotiator = (showState, newJobState) => {
+    console.log(newJobState)
+    showNegotiator.show = showState
+    setShowNegotiator({ ...showNegotiator })
+    if (newJobState) {
+      localStorage.setItem('clickedManageJob', JSON.stringify(newJobState))
+      job = newJobState
+      JobAPI.update(job.jobId, job)
+        .then(({ data }) => console.log(data))
+        .catch(err => console.log(err))
+    }
+
+  }
 
   return (
     <div className="manageJobsContainer">
@@ -540,6 +558,12 @@ const ManageJobs = () => {
                                 >
                                   <Card.Body>
                                     {applicant.applicantName}
+                                    <Button
+                                      className="viewJobBtn"
+                                      onClick={() => { setShowOffer({ ...showOffer, show: true })}}
+                                    >
+                                      Offer
+                                    </Button>
                                   </Card.Body>
                                 </div>
                               </Card>
