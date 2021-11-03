@@ -112,19 +112,21 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
           setNegotiation({ ...negotiation })
 
           // Set job applicant negotiation data.
-          JobAPI.getEmployerJobs()
+          JobAPI.getCandidateJobs()
             .then(({ data }) => {
               console.log(data)
-              data.forEach(elem => {
-                if (elem._id === job.jobId) {
-                  console.log('in')
-                  elem.applicants.forEach((applicant, index) => {
-                    if (applicant.email === showState.applicant.draggableId) {
-                      job.applicants[index].status = "Offered"
-                      job.applicants[index].offered.priorCounter = job.applicants[index].offered.counter
-                      job.applicants[index].offered.counter = negotiation.counter
-                      console.log(job)
-                      setParentState(false, job)
+              data.userJobs.forEach(tempJob => {
+                if (tempJob.jobId === job.jobId) {
+                  tempJob.applicants.forEach((applicant, index) => {
+                    if (applicant.email === job.email) {
+                      // job.applicants[index].status = "Offered"
+                      // job.applicants[index].offered.priorCounter = job.applicants[index].offered.counter
+                      // job.applicants[index].offered.counter = negotiation.counter
+
+                      tempJob.applicants[index].offered.priorCounter = tempJob.applicants[index].offered.counter
+
+                      tempJob.applicants[index].offered.counter = negotiation.counter
+                      setParentState(false, tempJob)
                     }
                   })
                 }
