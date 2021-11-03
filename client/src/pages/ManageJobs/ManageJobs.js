@@ -19,7 +19,6 @@ const ManageJobs = () => {
 
     UserAPI.getUser()
       .then(({ data }) => {
-        console.log(data)
         if (data.user_type !== 'Employer') {
           window.location = '/home'
         }
@@ -309,7 +308,10 @@ const ManageJobs = () => {
     }
   }
 
-  const setParentOfferShow = showState => setShowOffer({ ...showOffer, show: showState})
+  const setParentOfferShow = showState => {
+    showOffer.show = showState
+    setShowOffer({ ...showOffer })
+  }
 
   let grid = 1
 
