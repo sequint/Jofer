@@ -239,7 +239,7 @@ const ManageJobs = () => {
       }
     }
 
-    if (dInd === 3) {
+    if (dInd === 3 && sInd !== 2) {
       setShowOffer({ ...showOffer, show: true, applicant: allInfo })
       console.log(showOffer)
     }
