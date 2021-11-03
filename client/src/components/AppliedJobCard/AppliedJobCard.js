@@ -21,9 +21,18 @@ const AppliedJobCard = ({ job, setParentState }) => {
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
 
-  const handleShowNegotiator = () => {
-    console.log(negotiations)
-    setShowNegotiator({ show: true })
+  const handleShowNegotiator = (showState, newJobState) => {
+    console.log(newJobState)
+    showNegotiator.show = showState
+    setShowNegotiator({ ...showNegotiator })
+    if (newJobState) {
+      localStorage.setItem('clickedManageJob', JSON.stringify(newJobState))
+      job = newJobState
+      JobAPI.update(job.jobId, job)
+        .then(({ data }) => console.log(data))
+        .catch(err => console.log(err))
+    }
+
   }
 
   // Set state vaiable for negotiations.
@@ -103,7 +112,13 @@ const AppliedJobCard = ({ job, setParentState }) => {
           </div>
         </Card.Body>
       </Card>
-      {showNegotiator.show ? <Negotiator showState={showNegotiator} setParentState={handleShowNegotiator} job={job} passedNegotiation={negotiations} /> : <></>}
+      {showNegotiator.show ? (
+        <Negotiator
+          showState={showNegotiator}
+          setParentState={handleShowNegotiator}
+          job={job}
+          passedNegotiation={negotiations}
+        />) : <></>}
       <Modal
         show={show}
         onHide={handleClose}
