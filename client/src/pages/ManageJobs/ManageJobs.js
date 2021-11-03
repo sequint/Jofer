@@ -36,7 +36,8 @@ const ManageJobs = () => {
   
   const [ showOffer, setShowOffer ] = useState({
     show: false,
-    applicant: []
+    applicant: [],
+    offered: {}
   })
 
   let job = JSON.parse(localStorage.getItem('clickedManageJob'))
@@ -72,7 +73,6 @@ const ManageJobs = () => {
     setState([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
     setFilteredApplicants([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
     localStorage.setItem('clickedManageJob',JSON.stringify(state))
-
 
   }
 
@@ -240,8 +240,17 @@ const ManageJobs = () => {
       }
     }
 
+    const tempOffered = {
+      offer: [],
+      priorCounter: [],
+      counter: [],
+      finalSalary: [],
+      acceptedOffer: [],
+      declinedCounter: []
+    }
+
     if (dInd === 3 && sInd !== 2) {
-      setShowOffer({ ...showOffer, show: true, applicant: allInfo })
+      setShowOffer({ ...showOffer, show: true, applicant: allInfo, offered: tempOffered })
       console.log(showOffer)
     }
   }
@@ -334,23 +343,6 @@ const ManageJobs = () => {
     // styles we need to apply on draggables
     ...draggableStyle
   })
-  const [showNegotiator, setShowNegotiator] = useState({
-    show: false
-  })
-
-  const handleShowNegotiator = (showState, newJobState) => {
-    console.log(newJobState)
-    showNegotiator.show = showState
-    setShowNegotiator({ ...showNegotiator })
-    if (newJobState) {
-      localStorage.setItem('clickedManageJob', JSON.stringify(newJobState))
-      job = newJobState
-      JobAPI.update(job.jobId, job)
-        .then(({ data }) => console.log(data))
-        .catch(err => console.log(err))
-    }
-
-  }
 
   return (
     <div className="manageJobsContainer">
@@ -368,6 +360,7 @@ const ManageJobs = () => {
           showState={showOffer}
           setParentState={setParentOfferShow}
           job={job}
+          passedNegotiation={showOffer.offered}
         />
       ) : (
         <></>
@@ -560,7 +553,7 @@ const ManageJobs = () => {
                                     {applicant.applicantName}
                                     <Button
                                       className="viewJobBtn"
-                                      onClick={() => { setShowOffer({ ...showOffer, show: true })}}
+                                      onClick={() => { setShowOffer({ ...showOffer, show: true, offered: applicant.offered })}}
                                     >
                                       Offer
                                     </Button>
