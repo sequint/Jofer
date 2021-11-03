@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import emailjs from 'emailjs-com'
 import NavbarElem from '../../components/NavbarElem'
 import PageTitle from '../../components/PageTitle'
 import JobCard from '../../components/JobCard'
@@ -38,6 +39,24 @@ const PostedJobs = () => {
 
   const setParentState = (data)=>{
     setUser(data)
+    
+    let arraySize = data.jobs.length -1
+    if(arraySize>=0){
+
+      data.jobs[arraySize].applicants.forEach(applicant=>{
+        let email = applicant.email
+        let name = applicant.applicantName
+        
+        let connectInfo = {    
+          applicantEmail:email,
+          applicantName: name,
+          company: user.company 
+        }
+        emailjs.send("service_bzw9z2j", "contact_form", connectInfo, "user_74lDawTBgW65Sfcmf8XdP")  
+      })
+      
+    }
+
   }
 
   return (

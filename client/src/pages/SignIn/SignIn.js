@@ -2,14 +2,21 @@ import SignInForm from '../../components/SignInForm'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/Col'
+import logo from '../../image/JOFER.png'
 import './SignIn.css'
 
 const Login = () => {
   return (
     <main className='log'>
       <Container className='login'>
+        <div className="Logo">
+          <img
+            height="180px"
+            src={logo}
+            alt="Jofer Logo" />
+        </div>
         <Row>
-          <h1 className='text-center mb-4 mt-5 Text'>Log In</h1>
+          <h1 className='text-center mb-4 mt-3 Text'>Log In</h1>
           <SignInForm />
         </Row>
         <hr />
