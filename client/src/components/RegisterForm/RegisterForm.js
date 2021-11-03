@@ -70,7 +70,7 @@ const RegisterForm = () => {
       UserAPI.login(userState)
         .then(({ data: token }) => {
 
-          if (token === null) {
+          if (!token) {
             
             UserAPI.register(userState)
               .then(({ data }) => {
