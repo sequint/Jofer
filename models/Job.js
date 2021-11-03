@@ -30,10 +30,22 @@ const Job = new Schema({
       finalSalary: [{
         type: Number
       }],
-      acceptedOffer: [{
+      applicantCountered: [{
         type: Boolean
       }],
-      declinedCounter: [{
+      employerCountered: [{
+        type: Boolean
+      }],
+      applicantAcceptedOffer: [{
+        type: Boolean
+      }],
+      employerAcceptedOffer: [{
+        type: Boolean
+      }],
+      applicantDeclinedCounter: [{
+        type: Boolean
+      }],
+      employerDeclinedCounter: [{
         type: Boolean
       }]
     }
