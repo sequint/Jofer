@@ -41,18 +41,21 @@ const PostedJobs = () => {
     setUser(data)
     
     let arraySize = data.jobs.length -1
-    data.jobs[arraySize].applicants.forEach(applicant=>{
-      let email = applicant.email
-      let name = applicant.applicantName
+    if(arraySize>=0){
 
-      let connectInfo = {    
-        applicantEmail:email,
-        applicantName: name,
-        company: user.company 
-      }
-      emailjs.send("service_bzw9z2j", "contact_form", connectInfo, "user_74lDawTBgW65Sfcmf8XdP")  
-    })
-
+      data.jobs[arraySize].applicants.forEach(applicant=>{
+        let email = applicant.email
+        let name = applicant.applicantName
+        
+        let connectInfo = {    
+          applicantEmail:email,
+          applicantName: name,
+          company: user.company 
+        }
+        emailjs.send("service_bzw9z2j", "contact_form", connectInfo, "user_74lDawTBgW65Sfcmf8XdP")  
+      })
+      
+    }
 
   }
 
