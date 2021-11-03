@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Row from 'react-bootstrap/Row'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import JobAPI from '../../utils/JobAPI'
+import UserAPI from '../../utils/UserAPI'
+import emailjs from 'emailjs-com'
 import './AddApplicant.css'
 
 const AddApplicant = ({ job, setParentState }) => {
@@ -23,6 +25,15 @@ const AddApplicant = ({ job, setParentState }) => {
   })
 
   const [correctFormat, setCorrectFormat] = useState(true)
+
+  const [user, setUser] = useState()
+  useEffect(() => {
+    UserAPI.getUser()
+      .then(({ data }) => {
+        setUser(data)
+      })
+    // .catch(err => window.location = '/auth')
+  }, [])
 
   const handleClose = () => {
     setMissingInput({
@@ -112,6 +123,15 @@ const AddApplicant = ({ job, setParentState }) => {
               actionItems: []
             }
           }
+          let email = applicant.email
+          let name = applicant.applicantName
+
+          let connectInfo = {
+            applicantEmail: email,
+            applicantName: name,
+            company: user.company
+          }
+          emailjs.send("service_bzw9z2j", "contact_form", connectInfo, "user_74lDawTBgW65Sfcmf8XdP")
 
           job.applicants.push(applicant)
         }
