@@ -12,6 +12,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
   const [negotiation, setNegotiation] = useState({
     tempOffer: 0,
+    tempCounter: 0,
     offer: [],
     priorCounter: [],
     counter: [],
@@ -44,7 +45,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
     setNegotiation({ ...negotiation, tempOffer: value })
   }
   const onCounterChange = ({ target: { value } }) => {
-    setNegotiation({ ...negotiation, offer: value })
+    setNegotiation({ ...negotiation, tempCounter: value })
   }
 
   // Create an on close function to handle close and to handle actions.
@@ -64,7 +65,6 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
           // Close modal by setting show states to false.
           setShow(false)
-          setParentState(false)
 
           // Set offer to equal temp offer.
           negotiation.offer = [negotiation.tempOffer]
@@ -78,10 +78,9 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                   elem.applicants.forEach((applicant, index) => {
                     if (applicant.email === showState.applicant.draggableId) {
                       job.applicants[index].status = "Offered"
-                      job.applicants[index].offered.offer[0] = negotiation.offer
-                      JobAPI.update(job._id, job)
-                        .then(({ data }) => console.log(data))
-                        .catch(err => console.log(err))
+                      console.log(negotiation.offer)
+                      job.applicants[index].offered.offer = negotiation.offer
+                      setParentState(false, job)
                     }
                   })
                 }
@@ -102,11 +101,14 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
       case 'counter':
 
-        if (negotiation.counter > 0) {
+        if (negotiation.tempCounter > 0) {
 
           // Close modal by setting show states to false.
           setShow(false)
-          setParentState(false)
+
+          // Set offer to equal temp offer.
+          negotiation.counter = [negotiation.tempCounter]
+          setNegotiation({ ...negotiation })
 
           // Set job applicant negotiation data.
           JobAPI.getEmployerJobs()
@@ -116,10 +118,9 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                   elem.applicants.forEach((applicant, index) => {
                     if (applicant.email === showState.applicant.draggableId) {
                       job.applicants[index].status = "Offered"
+                      job.applicants[index].offered.priorCounter = job.applicants[index].offered.counter
                       job.applicants[index].offered.counter = negotiation.counter
-                      JobAPI.update(job._id, job)
-                        .then(({ data }) => console.log(data))
-                        .catch(err => console.log(err))
+                      setParentState(false, job)
                     }
                   })
                 }
@@ -200,7 +201,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                 placeholder='Counter Offer'
                 aria-label='Counter Offer'
                 aria-describedby='basic-addon2'
-                value={negotiation.counter}
+                value={negotiation.tempCounter}
                 onChange={onCounterChange}
               />
             </div>

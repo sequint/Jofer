@@ -19,7 +19,6 @@ const ManageJobs = () => {
 
     UserAPI.getUser()
       .then(({ data }) => {
-        console.log(data)
         if (data.user_type !== 'Employer') {
           window.location = '/home'
         }
@@ -39,7 +38,7 @@ const ManageJobs = () => {
     applicant: []
   })
 
-  const job = JSON.parse(localStorage.getItem('clickedManageJob'))
+  let job = JSON.parse(localStorage.getItem('clickedManageJob'))
 
   const getReviewApplicants = (job) => {
     return job.applicants.filter(applicant => applicant.status === 'Review')
@@ -309,7 +308,15 @@ const ManageJobs = () => {
     }
   }
 
-  const setParentOfferShow = showState => setShowOffer({ ...showOffer, show: showState})
+  const setParentOfferShow = (showState, newJobState) => {
+    showOffer.show = showState
+    setShowOffer({ ...showOffer })
+    localStorage.setItem('clickedManageJob', JSON.stringify(newJobState))
+    job = newJobState
+    JobAPI.update(job._id, job)
+      .then(({ data }) => console.log(data))
+      .catch(err => console.log(err))
+  }
 
   let grid = 1
 
