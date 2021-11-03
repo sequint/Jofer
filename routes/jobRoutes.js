@@ -28,9 +28,8 @@ router.get('/jobs/emails', passport.authenticate('jwt'), async function (req, re
           status: email.status,
           declineReason: email.declineReason,
           userId: req.user._id,
-          applicants :[]
+          applicants : job.applicants
         })
-        userJobs.applicants = job.applicants
       }
     })
 
