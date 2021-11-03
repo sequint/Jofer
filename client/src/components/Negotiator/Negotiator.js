@@ -65,7 +65,6 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
           // Close modal by setting show states to false.
           setShow(false)
-          setParentState(false)
 
           // Set offer to equal temp offer.
           negotiation.offer = [negotiation.tempOffer]
@@ -81,9 +80,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                       job.applicants[index].status = "Offered"
                       console.log(negotiation.offer)
                       job.applicants[index].offered.offer = negotiation.offer
-                      JobAPI.update(job._id, job)
-                        .then(({ data }) => console.log(data))
-                        .catch(err => console.log(err))
+                      setParentState(false, job)
                     }
                   })
                 }
@@ -108,7 +105,6 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
           // Close modal by setting show states to false.
           setShow(false)
-          setParentState(false)
 
           // Set offer to equal temp offer.
           negotiation.counter = [negotiation.tempCounter]
@@ -124,9 +120,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                       job.applicants[index].status = "Offered"
                       job.applicants[index].offered.priorCounter = job.applicants[index].offered.counter
                       job.applicants[index].offered.counter = negotiation.counter
-                      JobAPI.update(job._id, job)
-                        .then(({ data }) => console.log(data))
-                        .catch(err => console.log(err))
+                      setParentState(false, job)
                     }
                   })
                 }
