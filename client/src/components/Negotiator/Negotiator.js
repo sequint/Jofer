@@ -10,8 +10,9 @@ import { ModalBody } from 'react-bootstrap'
 const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   const [show, setShow] = useState(showState.show)
 
-  const [ negotiation, setNegotiation ] = useState({
+  const [negotiation, setNegotiation] = useState({
     tempOffer: 0,
+    tempCounter: 0,
     offer: [],
     priorCounter: [],
     counter: [],
@@ -41,10 +42,10 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
   // Functions to handle value change of offer and counter.
   const onOfferChange = ({ target: { value } }) => {
-    setNegotiation({ ...negotiation, tempOffer: value})
+    setNegotiation({ ...negotiation, tempOffer: value })
   }
   const onCounterChange = ({ target: { value } }) => {
-    setNegotiation({ ...negotiation, offer: value })
+    setNegotiation({ ...negotiation, tempCounter: value })
   }
 
   // Create an on close function to handle close and to handle actions.
@@ -59,12 +60,11 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
     switch (action) {
 
       case 'offer':
-        
+
         if (negotiation.tempOffer > 0) {
 
           // Close modal by setting show states to false.
           setShow(false)
-          setParentState(false)
 
           // Set offer to equal temp offer.
           negotiation.offer = [negotiation.tempOffer]
@@ -78,17 +78,16 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                   elem.applicants.forEach((applicant, index) => {
                     if (applicant.email === showState.applicant.draggableId) {
                       job.applicants[index].status = "Offered"
-                      job.applicants[index].offered.offer[0] = negotiation.offer
-                      JobAPI.update(job._id, job)
-                        .then(({ data }) => console.log(data))
-                        .catch(err => console.log(err))
+                      console.log(negotiation.offer)
+                      job.applicants[index].offered.offer = negotiation.offer
+                      setParentState(false, job)
                     }
                   })
                 }
               })
             })
             .catch(err => console.log(err))
-          
+
           // Reset temp offer value.
           setNegotiation({ ...negotiation, tempOffer: 0 })
 
@@ -99,14 +98,17 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
         }
 
         break
-      
+
       case 'counter':
 
-        if (negotiation.counter > 0) {
+        if (negotiation.tempCounter > 0) {
 
           // Close modal by setting show states to false.
           setShow(false)
-          setParentState(false)
+
+          // Set offer to equal temp offer.
+          negotiation.counter = [negotiation.tempCounter]
+          setNegotiation({ ...negotiation })
 
           // Set job applicant negotiation data.
           JobAPI.getEmployerJobs()
@@ -116,10 +118,9 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                   elem.applicants.forEach((applicant, index) => {
                     if (applicant.email === showState.applicant.draggableId) {
                       job.applicants[index].status = "Offered"
+                      job.applicants[index].offered.priorCounter = job.applicants[index].offered.counter
                       job.applicants[index].offered.counter = negotiation.counter
-                      JobAPI.update(job._id, job)
-                        .then(({ data }) => console.log(data))
-                        .catch(err => console.log(err))
+                      setParentState(false, job)
                     }
                   })
                 }
@@ -137,14 +138,14 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
       default:
         setShow(false)
-        setParentState(false, false)
+        setParentState(false, job)
         break
     }
   }
 
   // Functions for modal display depending on the negotiation state.
   const getInitialOffer = _ => {
-    return(
+    return (
       <>
         <ModalBody>
           <h5>Offer:</h5>
@@ -161,14 +162,14 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
               />
             </div>
           </InputGroup>
-          { missingInput.offer ? <p className="err mt-2">⚠️ You have not entered an offer.</p> : <></> }
+          {missingInput.offer ? <p className="err mt-2">⚠️ You have not entered an offer</p> : <></>}
         </ModalBody>
 
         <Modal.Footer>
           <Button
-            variant="primary"
+            className="Offer"
             onClick={() => handleClose('offer')}>
-            SendOffer
+            Send Offer
           </Button>
         </Modal.Footer>
       </>
@@ -176,7 +177,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   }
 
   const displayPriorCounter = _ => {
-    return(
+    return (
       <>
         <h5>Counter Offer:</h5>
         <p>{negotiation.priorCounter}</p>
@@ -185,7 +186,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   }
 
   const getCounterOffer = _ => {
-    return(
+    return (
       <>
         <ModalBody>
           <h5>Initial Offer:</h5>
@@ -200,7 +201,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                 placeholder='Counter Offer'
                 aria-label='Counter Offer'
                 aria-describedby='basic-addon2'
-                value={negotiation.counter}
+                value={negotiation.tempCounter}
                 onChange={onCounterChange}
               />
             </div>
