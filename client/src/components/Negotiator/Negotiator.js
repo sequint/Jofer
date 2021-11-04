@@ -16,11 +16,15 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
     tempOffer: 0,
     tempCounter: 0,
     offer: [],
-    priorCounter: [],
-    counter: [],
+    applicantCounter: [],
+    employerCounter: [],
     finalSalary: [],
-    acceptedOffer: [],
-    declinedCounter: []
+    applicantCountered: [],
+    employerCountered: [],
+    applicantAcceptedOffer: [],
+    employerAcceptedOffer: [],
+    applicantDeclinedCounter: [],
+    employerDeclinedCounter: []
   })
 
   const [missingInput, setMissingInput] = useState({
