@@ -561,12 +561,15 @@ const ManageJobs = () => {
                                 >
                                   <Card.Body>
                                     {applicant.applicantName}
-                                    <Button
-                                      className={(applicant.offered.applicantCountered[0] === true && greenBorder) ? 'viewJobBtnGreen' : 'viewJobBtn'}
-                                      onClick={() => { setShowOffer({ ...showOffer, show: true, email:applicant.email, offered: applicant.offered })}}
-                                    >
-                                      Offer
-                                    </Button>
+                                    {(applicant.offered.finalSalary[0] >0) ?
+                                      <> ✅</>
+                                      : <Button
+                                        className={(applicant.offered.applicantCountered[0] === true && greenBorder) ? 'viewJobBtnGreen' : 'viewJobBtn'}
+                                        onClick={() => { setShowOffer({ ...showOffer, show: true, email: applicant.email, offered: applicant.offered }) }}
+                                      >
+                                        Offer
+                                      </Button>
+                                    }
                                   </Card.Body>
                                 </div>
                               </Card>

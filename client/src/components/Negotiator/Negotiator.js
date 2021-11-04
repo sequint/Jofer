@@ -10,13 +10,13 @@ import { ModalBody } from 'react-bootstrap'
 const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   const [show, setShow] = useState(showState.show)
   let offered
-  if(job._id){
+  if (job._id) {
     offered = passedNegotiation.offered
   }
-  else{
+  else {
     offered = passedNegotiation
   }
-  
+
   console.log(passedNegotiation)
   const [negotiation, setNegotiation] = useState({
     tempOffer: 0,
@@ -188,7 +188,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
             console.log('something went wrong')
           }
 
-          
+
 
         }
         else {
@@ -203,6 +203,122 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
         setParentState(false, job)
         break
     }
+  }
+
+  const handleDecline = () => {
+    //set applicant declined offer to true
+    if (job._id) {
+      job.applicants.forEach((applicant, index) => {
+        console.log(applicant.email)
+        console.log(passedNegotiation.email)
+        if (applicant.email === passedNegotiation.email) {
+
+          // Set the jobs applicant counter to input value.
+          job.applicants[index].offered.employerAcceptedOffer[0] = false
+          // Change applicant counter bool to true.
+          job.applicants[index].offered.employerCountered = [false]
+          
+          // Send new data back to parent state and close modal.
+          setParentState(false, job)
+
+        }
+      })
+
+
+      
+    }
+    else if (job.jobId) {
+
+      console.log("Declined")
+
+      negotiation.applicantAcceptedOffer[0] = false
+      negotiation.applicantDeclinedCounter[0] = true
+      setNegotiation({ ...negotiation })
+      JobAPI.getCandidateJobs()
+        .then(({ data }) => {
+          console.log(data)
+          data.userJobs.forEach(tempJob => {
+            if (tempJob.jobId === job.jobId) {
+              tempJob.applicants.forEach((applicant, index) => {
+                if (applicant.email === job.email) {
+
+                  // Set the jobs applicant counter to input value.
+                  tempJob.applicants[index].offered.applicantAcceptedOffer = negotiation.applicantAcceptedOffer
+                  // Insure that employer counter is false.
+                  tempJob.applicants[index].offered.applicantCountered = [false]
+                  // Send new data back to parent state and close modal.
+                  setParentState(false, tempJob)
+
+                }
+              })
+            }
+          })
+        })
+        .catch(err => console.log(err))
+      handleClose()
+    }
+  }
+  const handleAccept = () => {
+    //set applicant accepted offer to true
+
+    if (job._id) {
+      job.applicants.forEach((applicant, index) => {
+        console.log(applicant.email)
+        console.log(passedNegotiation.email)
+        if (applicant.email === passedNegotiation.email) {
+
+          // Set the jobs applicant counter to input value.
+          job.applicants[index].offered.employerAcceptedOffer[0] = true
+          // Change applicant counter bool to true.
+          job.applicants[index].offered.employerCountered = [false]
+          // Insure that employer counter is false.
+          job.applicants[index].offered.finalSalary = negotiation.applicantCounter
+          // Send new data back to parent state and close modal.
+          setParentState(false, job)
+
+        }
+      })
+
+
+
+    }
+    else if (job.jobId) {
+
+      console.log("accept")
+
+      negotiation.applicantAcceptedOffer[0] = true
+      setNegotiation({ ...negotiation })
+      JobAPI.getCandidateJobs()
+        .then(({ data }) => {
+          console.log(data)
+          data.userJobs.forEach(tempJob => {
+            if (tempJob.jobId === job.jobId) {
+              tempJob.applicants.forEach((applicant, index) => {
+                if (applicant.email === job.email) {
+
+                  // Set the jobs applicant counter to input value.
+                  tempJob.applicants[index].offered.applicantAcceptedOffer = negotiation.applicantAcceptedOffer
+                  // Change applicant counter bool to true.
+                  if(negotiation.employerCounter[0]>0){
+                    tempJob.applicants[index].offered.finalSalary = negotiation.employerCounter
+                  }else{
+                    tempJob.applicants[index].offered.finalSalary = negotiation.offer
+                  }
+                  
+                  // Insure that employer counter is false.
+                  tempJob.applicants[index].offered.employerCountered = [false]
+                  // Send new data back to parent state and close modal.
+                  setParentState(false, tempJob)
+
+                }
+              })
+            }
+          })
+        })
+        .catch(err => console.log(err))
+      handleClose()
+    }
+
   }
 
   // Functions for modal display depending on the negotiation state.
@@ -228,6 +344,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
         </ModalBody>
 
         <Modal.Footer>
+          
           <Button
             className="Offer"
             onClick={() => handleClose('offer')}>
@@ -250,7 +367,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
         </>
       )
     }
-    else if(job.jobId) {
+    else if (job.jobId) {
       return (
         <>
           <h5>Employer's Counter Offer:</h5>
@@ -281,13 +398,24 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
               />
             </div>
 
+
             {missingInput.counter ? <p className="err mt-2">⚠️ You have not entered a counter offer.</p> : <></>}
           </InputGroup>
         </ModalBody>
 
         <Modal.Footer>
           <Button
-            variant="secondary"
+            variant="danger"
+            onClick={handleDecline}>
+            Decline Offer
+          </Button>
+          <Button
+            variant="success"
+            onClick={handleAccept}>
+            Accept Offer
+          </Button>
+          <Button
+            className="secondary"
             onClick={() => handleClose('counter')}>
             Send Counter
           </Button>
