@@ -40,6 +40,8 @@ const ManageJobs = () => {
     offered: {}
   })
 
+  const [ greenBorder, setGreenBorder ] = useState(true)
+
   let job = JSON.parse(localStorage.getItem('clickedManageJob'))
 
   const getReviewApplicants = (job) => {
@@ -325,9 +327,10 @@ const ManageJobs = () => {
     }
   }
 
-  const setParentOfferShow = (showState, newJobState) => {
+  const setParentOfferShow = (showState, newJobState, green) => {
     showOffer.show = showState
     setShowOffer({ ...showOffer })
+    setGreenBorder(green)
     localStorage.setItem('clickedManageJob', JSON.stringify(newJobState))
     job = newJobState
     JobAPI.update(job._id, job)
@@ -561,7 +564,7 @@ const ManageJobs = () => {
                                     {(applicant.offered.finalSalary[0] >0) ?
                                       <> ✅</>
                                       : <Button
-                                        className="viewJobBtn"
+                                        className={(applicant.offered.applicantCountered[0] === true && greenBorder) ? 'viewJobBtnGreen' : 'viewJobBtn'}
                                         onClick={() => { setShowOffer({ ...showOffer, show: true, email: applicant.email, offered: applicant.offered }) }}
                                       >
                                         Offer

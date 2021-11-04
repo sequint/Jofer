@@ -35,6 +35,19 @@
   border: #FFBA0A solid 1px !important;
 }
 
+.viewJobBtnGreen {
+  color: #023047 !important;
+  background-color: transparent !important;
+  border: #023047 solid 1px !important;
+  box-shadow: 1px 1px 7px 3px green;
+  text-decoration: none !important;
+}
+
+.viewJobBtnGreen:hover {
+  background-color: #FFBA0A !important;
+  border: #FFBA0A solid 1px !important;
+}
+
 @media screen and (min-width: 575px) {
   .jobCard {
     max-width: 500px;
