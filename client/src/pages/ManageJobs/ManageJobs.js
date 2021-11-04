@@ -558,12 +558,15 @@ const ManageJobs = () => {
                                 >
                                   <Card.Body>
                                     {applicant.applicantName}
-                                    <Button
-                                      className="viewJobBtn"
-                                      onClick={() => { setShowOffer({ ...showOffer, show: true, email:applicant.email, offered: applicant.offered })}}
-                                    >
-                                      Offer
-                                    </Button>
+                                    {(applicant.offered.finalSalary[0] >0) ?
+                                      <> ✅</>
+                                      : <Button
+                                        className="viewJobBtn"
+                                        onClick={() => { setShowOffer({ ...showOffer, show: true, email: applicant.email, offered: applicant.offered }) }}
+                                      >
+                                        Offer
+                                      </Button>
+                                    }
                                   </Card.Body>
                                 </div>
                               </Card>
