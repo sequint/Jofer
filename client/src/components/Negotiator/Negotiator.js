@@ -113,12 +113,13 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
           setShow(false)
           console.log(job)
 
-          // Set offer to equal temp offer.
-          negotiation.counter = [negotiation.tempCounter]
-          setNegotiation({ ...negotiation })
-
           if (job.jobId) {
             console.log('applicant')
+
+            // Set applicant offer to equal temp offer.
+            negotiation.applicantCounter = [negotiation.tempCounter]
+            setNegotiation({ ...negotiation })
+
             // Set job applicant negotiation data.
             JobAPI.getCandidateJobs()
               .then(({ data }) => {
@@ -128,9 +129,8 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                     tempJob.applicants.forEach((applicant, index) => {
                       if (applicant.email === job.email) {
 
-                        tempJob.applicants[index].offered.priorCounter = tempJob.applicants[index].offered.counter
-
                         tempJob.applicants[index].offered.counter = negotiation.counter
+
                         setParentState(false, tempJob)
 
                       }
@@ -142,6 +142,11 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
           }
           else if (job._id) {
             console.log('employer')
+
+            // Set employer offer to equal temp offer.
+            negotiation.employerCounter = [negotiation.tempCounter]
+            setNegotiation({ ...negotiation })
+
             // Set job applicant negotiation data.
             JobAPI.getEmployerJobs()
               .then(({ data }) => {
