@@ -17,6 +17,7 @@ That's where Jofer steps in!  Jofer provides an easy to use job management tool 
 
 - React.js
 - React Beautiful DND
+- Emailjs
 - React-Bootstrap
 - Javascript
 - Node.js
@@ -41,19 +42,20 @@ To install for development purposes, clone this repo into a local folder, then r
   - passport-local
   - passport-local-mongoose
 - Front End
-    - @testing-library/jest-dom
-    - @testing-library/react
-    - @testing-library/user-event
-    - axios
-    - bootstrap
-    - react
-    - react-beautiful-dnd
-    - react-bootstrap
-    - react-dom
-    - react-router-dom
-    - react-scripts
-    - reactstrap
-    - web-vitals
+  - @testing-library/jest-dom
+  - @testing-library/react
+  - @testing-library/user-event
+  - axios
+  - bootstrap
+  - react
+  - react-beautiful-dnd
+  - react-bootstrap
+  - react-dom
+  - react-router-dom
+  - react-scripts
+  - reactstrap
+  - web-vitals
+  - emailjs
 
 ## License
 
