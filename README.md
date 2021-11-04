@@ -73,10 +73,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Future Goals
 
-- Auto Emails
-  - Employers have the option to click a button that sends an automatic email to all applicants to join Jofer to track their job progress (with their email).
-- The Negotiator
-  - Feature that uses company data to automate salary negotiations between employer and applicant once in the offer column.
+- Interactive Applicant Side
+ - Currently the applicants side is view only, except for being able to negotiate their   salary when offered a job.  Our future goal is to build a similar tool that the employer has in job manager, where the applicant can create jobs they have applied to and manage their progress manually (automatic updates if the employer is also on Jofer).
 - End-to-end Application Process
   - Currently our app is scaled down for smaller companies.  We would keep this version for companies with less than 50 employees.  Our next version would be subscription based for larger companies with more applicants.
   - This larger version would be fully automated and end-to-end.  The employer would post the job on our site.  When an applicant applies, they fill out all of the information that the employer needs (skills, history, etc.).
