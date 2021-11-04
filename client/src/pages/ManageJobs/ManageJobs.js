@@ -245,13 +245,15 @@ const ManageJobs = () => {
       applicantCounter: [],
       employerCounter: [],
       finalSalary: [],
-      applicantCountered: [false],
-      employerCountered: [false],
-      applicantAcceptedOffer: [false],
-      employerAcceptedOffer: [false],
-      applicantDeclinedCounter: [false],
-      employerDeclinedCounter: [false]
+      applicantCountered: [],
+      employerCountered: [],
+      applicantAcceptedOffer: [],
+      employerAcceptedOffer: [],
+      applicantDeclinedCounter: [],
+      employerDeclinedCounter: [],
+      email:''
     }
+    tempOffered.email= allInfo.draggableId
 
     if (dInd === 3 && sInd !== 2) {
       console.log(allInfo)
@@ -365,7 +367,7 @@ const ManageJobs = () => {
           showState={showOffer}
           setParentState={setParentOfferShow}
           job={job}
-          passedNegotiation={showOffer.offered}
+          passedNegotiation={showOffer}
         />
       ) : (
         <></>
@@ -558,7 +560,7 @@ const ManageJobs = () => {
                                     {applicant.applicantName}
                                     <Button
                                       className="viewJobBtn"
-                                      onClick={() => { setShowOffer({ ...showOffer, show: true, offered: applicant.offered })}}
+                                      onClick={() => { setShowOffer({ ...showOffer, show: true, email:applicant.email, offered: applicant.offered })}}
                                     >
                                       Offer
                                     </Button>

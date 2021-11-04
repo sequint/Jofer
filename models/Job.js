@@ -18,6 +18,7 @@ const Job = new Schema({
       }]
     },
     offered: {
+      email: String,
       offer: [{
         type: Number
       }],
