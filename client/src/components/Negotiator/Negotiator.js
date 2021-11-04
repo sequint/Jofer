@@ -250,7 +250,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
         </>
       )
     }
-    else {
+    else if(job.jobId) {
       return (
         <>
           <h5>Employer's Counter Offer:</h5>
