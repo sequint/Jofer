@@ -231,17 +231,10 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   }
 
   const displayPriorCounter = _ => {
+    console.log('in display counter')
 
     // Return either the employer or applicant's counter offer depending on who is viewing.
-    if (job.jobId) {
-      return (
-        <>
-          <h5>Employer's Counter Offer:</h5>
-          <p>{negotiation.employerCounter}</p>
-        </>
-      )
-    }
-    else if (job._id) {
+    if (job._id) {
       return (
         <>
           <h5>Applicant's Counter Offer:</h5>
@@ -250,7 +243,12 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
       )
     }
     else {
-      console.log('Something went wrong')
+      return (
+        <>
+          <h5>Employer's Counter Offer:</h5>
+          <p>{negotiation.employerCounter}</p>
+        </>
+      )
     }
 
   }
@@ -261,7 +259,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
         <ModalBody>
           <h5>Initial Offer:</h5>
           <p>{negotiation.offer}</p>
-          {negotiation.applicantCountered[0] || negotiation.employerCountered[0] ? displayPriorCounter() : <></>}
+          {(negotiation.applicantCounter > 0 || negotiation.employerCounter > 0) ? displayPriorCounter() : <></>}
           <p>If you would like to counter this off, do so below.</p>
           <InputGroup className='mb-3 decline'>
             <div>
