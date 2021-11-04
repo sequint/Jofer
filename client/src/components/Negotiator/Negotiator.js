@@ -100,7 +100,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                       // Set jobs offer var to the negotiation offer var.
                       job.applicants[index].offered.offer = negotiation.offer
                       // Send modal close and updated job back to parent component.
-                      setParentState(false, job)
+                      setParentState(false, job, false)
                     }
                   })
                 }
@@ -150,7 +150,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                         // Insure that employer counter is false.
                         tempJob.applicants[index].offered.employerCountered = [false]
                         // Send new data back to parent state and close modal.
-                        setParentState(false, tempJob)
+                        setParentState(false, tempJob, false)
 
                       }
                     })
@@ -179,7 +179,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                 // Insure that employer counter is false.
                 job.applicants[index].offered.applicantCountered = [false]
                 // Send new data back to parent state and close modal.
-                setParentState(false, job)
+                setParentState(false, job, false)
 
               }
             })

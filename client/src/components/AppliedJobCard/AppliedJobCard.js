@@ -17,14 +17,16 @@ const AppliedJobCard = ({ job, setParentState }) => {
   const [showNegotiator, setShowNegotiator] = useState({
     show: false
   })
+  const [greenBorder, setGreenBorder] = useState(true)
   
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
 
-  const handleShowNegotiator = (showState, newJobState) => {
+  const handleShowNegotiator = (showState, newJobState, green) => {
     console.log(newJobState)
     showNegotiator.show = showState
     setShowNegotiator({ ...showNegotiator })
+    setGreenBorder(green)
     if (newJobState) {
       localStorage.setItem('clickedManageJob', JSON.stringify(newJobState))
       job = newJobState
@@ -107,7 +109,7 @@ const AppliedJobCard = ({ job, setParentState }) => {
           </Card.Text>
           <div className="bttn">
             <Button
-              className={negotiations.employerCountered[0] === true ? 'viewJobBtnGreen' : 'viewJobBtn'}
+              className={(negotiations.employerCountered[0] === true && greenBorder) ? 'viewJobBtnGreen' : 'viewJobBtn'}
               onClick={handleShowNegotiator}
             >
               See Offer
