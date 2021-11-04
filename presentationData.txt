@@ -56,3 +56,15 @@ Applicants
 - Name: Mark Zuckerburg
 - Email: zuckyboy@facebook.com
 - Password: yessir!
+
+- Name: Homer Murillo
+- Email: v082o0E5@gmail.com
+- Password: pass123
+
+- Name: Jefferson Koch
+- Email: 1p5FkE0H@hotmail.com
+- Password: pass123
+
+- Name: Sally Espinoza
+- Email: QPQ0569Ytn5Te5o0@gmail.com
+- Password: pass123

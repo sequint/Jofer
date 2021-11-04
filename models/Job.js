@@ -32,22 +32,28 @@ const Job = new Schema({
         type: Number
       }],
       applicantCountered: [{
-        type: Boolean
+        type: Boolean,
+        default: false
       }],
       employerCountered: [{
-        type: Boolean
+        type: Boolean,
+        default: false
       }],
       applicantAcceptedOffer: [{
-        type: Boolean
+        type: Boolean,
+        default: false
       }],
       employerAcceptedOffer: [{
-        type: Boolean
+        type: Boolean,
+        default: false
       }],
       applicantDeclinedCounter: [{
-        type: Boolean
+        type: Boolean,
+        default: false
       }],
       employerDeclinedCounter: [{
-        type: Boolean
+        type: Boolean,
+        default: false
       }]
     }
   }],
