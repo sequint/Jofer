@@ -559,7 +559,7 @@ const ManageJobs = () => {
                                   <Card.Body>
                                     {applicant.applicantName}
                                     <Button
-                                      className="viewJobBtn"
+                                      className={applicant.offered.applicantCountered[0] === true ? 'viewJobBtnGreen' : 'viewJobBtn'}
                                       onClick={() => { setShowOffer({ ...showOffer, show: true, email:applicant.email, offered: applicant.offered })}}
                                     >
                                       Offer

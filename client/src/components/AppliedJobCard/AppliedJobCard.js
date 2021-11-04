@@ -107,7 +107,7 @@ const AppliedJobCard = ({ job, setParentState }) => {
           </Card.Text>
           <div className="bttn">
             <Button
-              className="viewJobBtn"
+              className={negotiations.employerCountered[0] === true ? 'viewJobBtnGreen' : 'viewJobBtn'}
               onClick={handleShowNegotiator}
             >
               See Offer

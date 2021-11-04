@@ -148,7 +148,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                         // Change applicant counter bool to true.
                         tempJob.applicants[index].offered.applicantCountered = [true]
                         // Insure that employer counter is false.
-                        tempJob.applicants[index].offered.emplyerCountered = [false]
+                        tempJob.applicants[index].offered.employerCountered = [false]
                         // Send new data back to parent state and close modal.
                         setParentState(false, tempJob)
 
