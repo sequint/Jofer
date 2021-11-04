@@ -35,11 +35,15 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
     if (passedNegotiation) {
       setNegotiation({
         offer: passedNegotiation.offer,
-        priorCounter: passedNegotiation.priorCounter,
-        counter: passedNegotiation.counter,
+        applicantCounter: passedNegotiation.applicantCounter,
+        employerCounter: passedNegotiation.employerCounter,
         finalSalary: passedNegotiation.finalSalary,
-        acceptedOffer: passedNegotiation.acceptedOffer,
-        declinedCounter: passedNegotiation.declinedCounter
+        applicantCountered: passedNegotiation.applicantCountered,
+        employerCountered: passedNegotiation.employerCountered,
+        applicantAcceptedOffer: passedNegotiation.applicantAcceptedOffer,
+        employerAcceptedOffer: passedNegotiation.employerAcceptedOffer,
+        applicantDeclinedCounter: passedNegotiation.applicantDeclinedCounter,
+        employerDeclinedCounter: passedNegotiation.employerDeclinedCounter
       })
     }
   }, [])
