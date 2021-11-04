@@ -127,7 +127,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                     tempJob.applicants.forEach((applicant, index) => {
                       if (applicant.email === job.email) {
 
-                        tempJob.applicants[index].offered.counter = negotiation.applicantCounter
+                        tempJob.applicants[index].offered.applicantCounter = negotiation.applicantCounter
 
                         setParentState(false, tempJob)
 
@@ -153,7 +153,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
                 console.log(applicant.offered)
 
-                // job.applicants[index].offered.counter = negotiation.applicantCounter
+                // job.applicants[index].offered.employerCounter = negotiation.applicantCounter
 
                 // setParentState(false, job)
 
