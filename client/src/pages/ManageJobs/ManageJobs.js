@@ -245,12 +245,12 @@ const ManageJobs = () => {
       applicantCounter: [],
       employerCounter: [],
       finalSalary: [],
-      applicantCountered: [],
-      employerCountered: [],
-      applicantAcceptedOffer: [],
-      employerAcceptedOffer: [],
-      applicantDeclinedCounter: [],
-      employerDeclinedCounter: []
+      applicantCountered: [false],
+      employerCountered: [false],
+      applicantAcceptedOffer: [false],
+      employerAcceptedOffer: [false],
+      applicantDeclinedCounter: [false],
+      employerDeclinedCounter: [false]
     }
 
     if (dInd === 3 && sInd !== 2) {
