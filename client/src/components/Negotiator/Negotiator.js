@@ -113,24 +113,56 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
           negotiation.counter = [negotiation.tempCounter]
           setNegotiation({ ...negotiation })
 
-          // Set job applicant negotiation data.
-          JobAPI.getCandidateJobs()
-            .then(({ data }) => {
-              console.log(data)
-              data.userJobs.forEach(tempJob => {
-                if (tempJob.jobId === job.jobId) {
-                  tempJob.applicants.forEach((applicant, index) => {
-                    if (applicant.email === job.email) {
-                      tempJob.applicants[index].offered.priorCounter = tempJob.applicants[index].offered.counter
+          if (job.jobId) {
+            console.log('applicant')
+            // Set job applicant negotiation data.
+            JobAPI.getCandidateJobs()
+              .then(({ data }) => {
+                console.log(data)
+                data.userJobs.forEach(tempJob => {
+                  if (tempJob.jobId === job.jobId) {
+                    tempJob.applicants.forEach((applicant, index) => {
+                      if (applicant.email === job.email) {
 
-                      tempJob.applicants[index].offered.counter = negotiation.counter
-                      setParentState(false, tempJob)
-                    }
-                  })
-                }
+                        tempJob.applicants[index].offered.priorCounter = tempJob.applicants[index].offered.counter
+
+                        tempJob.applicants[index].offered.counter = negotiation.counter
+                        setParentState(false, tempJob)
+
+                      }
+                    })
+                  }
+                })
               })
-            })
-            .catch(err => console.log(err))
+              .catch(err => console.log(err))
+          }
+          else if (job._id) {
+            console.log('employer')
+            // Set job applicant negotiation data.
+            JobAPI.getEmployerJobs()
+              .then(({ data }) => {
+                data.forEach(elem => {
+                  if (elem._id === job._id) {
+                    elem.applicants.forEach((applicant, index) => {
+                      if (applicant.email === showState.applicant.draggableId) {
+
+                        job.applicants[index].offered.offer[0] = negotiation.offer
+                        JobAPI.update(job._id, job)
+                          .then(({ data }) => console.log(data))
+                          .catch(err => console.log(err))
+
+                      }
+                    })
+                  }
+                })
+              })
+              .catch(err => console.log(err))
+          }
+          else {
+            console.log('something went wrong')
+          }
+
+          
 
         }
         else {
