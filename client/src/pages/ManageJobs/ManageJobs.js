@@ -36,7 +36,7 @@ const ManageJobs = () => {
   
   const [ showOffer, setShowOffer ] = useState({
     show: false,
-    applicant: [],
+    applicant: {},
     offered: {}
   })
 
@@ -250,6 +250,7 @@ const ManageJobs = () => {
     }
 
     if (dInd === 3 && sInd !== 2) {
+      console.log(allInfo)
       setShowOffer({ ...showOffer, show: true, applicant: allInfo, offered: tempOffered })
       console.log(showOffer)
     }

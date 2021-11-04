@@ -10,8 +10,6 @@ import { ModalBody } from 'react-bootstrap'
 const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   const [show, setShow] = useState(showState.show)
 
-  console.log(passedNegotiation)
-
   const [negotiation, setNegotiation] = useState({
     tempOffer: 0,
     tempCounter: 0,
@@ -129,7 +127,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                     tempJob.applicants.forEach((applicant, index) => {
                       if (applicant.email === job.email) {
 
-                        tempJob.applicants[index].offered.counter = negotiation.counter
+                        tempJob.applicants[index].offered.counter = negotiation.applicantCounter
 
                         setParentState(false, tempJob)
 
@@ -148,24 +146,19 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
             setNegotiation({ ...negotiation })
 
             // Set job applicant negotiation data.
-            JobAPI.getEmployerJobs()
-              .then(({ data }) => {
-                data.forEach(elem => {
-                  if (elem._id === job._id) {
-                    elem.applicants.forEach((applicant, index) => {
-                      if (applicant.email === showState.applicant.draggableId) {
+            job.applicants.forEach((applicant, index) => {
+              console.log(applicant.email)
+              console.log(showState.applicant.draggableId)
+              if (applicant.email === showState.applicant.draggableId) {
 
-                        job.applicants[index].offered.offer[0] = negotiation.offer
-                        JobAPI.update(job._id, job)
-                          .then(({ data }) => console.log(data))
-                          .catch(err => console.log(err))
+                console.log(applicant.offered)
 
-                      }
-                    })
-                  }
-                })
-              })
-              .catch(err => console.log(err))
+                // job.applicants[index].offered.counter = negotiation.applicantCounter
+
+                // setParentState(false, job)
+
+              }
+            })
           }
           else {
             console.log('something went wrong')
