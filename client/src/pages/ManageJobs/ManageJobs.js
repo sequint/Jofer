@@ -334,7 +334,9 @@ const ManageJobs = () => {
     localStorage.setItem('clickedManageJob', JSON.stringify(newJobState))
     job = newJobState
     JobAPI.update(job._id, job)
-      .then(({ data }) => console.log(data))
+      .then(({ data }) => {
+        setParentState(job)
+        console.log(data)})
       .catch(err => console.log(err))
   }
 
@@ -563,12 +565,13 @@ const ManageJobs = () => {
                                     {applicant.applicantName}
                                     {(applicant.offered.finalSalary[0] >0) ?
                                       <> ✅</>
-                                      : <Button
-                                        className={(applicant.offered.applicantCountered[0] === true && greenBorder) ? 'viewJobBtnGreen' : 'viewJobBtn'}
-                                        onClick={() => { setShowOffer({ ...showOffer, show: true, email: applicant.email, offered: applicant.offered }) }}
-                                      >
-                                        Offer
-                                      </Button>
+                                      : (applicant.offered.applicantAcceptedOffer && applicant.offered.applicantAcceptedOffer[0] === false) || (applicant.offered.employerAcceptedOffer[0]===false) ?
+                                        <>❌</>: <Button
+                                          className={(applicant.offered.applicantCountered[0] === true && greenBorder) ? 'viewJobBtnGreen' : 'viewJobBtn'}
+                                          onClick={() => { setShowOffer({ ...showOffer, show: true, email: applicant.email, offered: applicant.offered }) }}
+                                        >
+                                          Offer
+                                        </Button>
                                     }
                                   </Card.Body>
                                 </div>
