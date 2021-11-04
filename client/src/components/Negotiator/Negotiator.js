@@ -9,7 +9,15 @@ import { ModalBody } from 'react-bootstrap'
 
 const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   const [show, setShow] = useState(showState.show)
-  const offered = passedNegotiation.offered
+  let offered
+  if(job._id){
+    offered = passedNegotiation.offered
+  }
+  else{
+    offered = passedNegotiation
+  }
+  
+  console.log(passedNegotiation)
   const [negotiation, setNegotiation] = useState({
     tempOffer: 0,
     tempCounter: 0,
