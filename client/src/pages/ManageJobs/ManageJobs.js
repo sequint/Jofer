@@ -242,11 +242,15 @@ const ManageJobs = () => {
 
     const tempOffered = {
       offer: [],
-      priorCounter: [],
-      counter: [],
+      applicantCounter: [],
+      employerCounter: [],
       finalSalary: [],
-      acceptedOffer: [],
-      declinedCounter: []
+      applicantCountered: [],
+      employerCountered: [],
+      applicantAcceptedOffer: [],
+      employerAcceptedOffer: [],
+      applicantDeclinedCounter: [],
+      employerDeclinedCounter: []
     }
 
     if (dInd === 3 && sInd !== 2) {
