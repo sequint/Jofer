@@ -38,11 +38,15 @@ const AppliedJobCard = ({ job, setParentState }) => {
   // Set state vaiable for negotiations.
   const [negotiations, setNegotiations] = useState({
     offer: [],
-    priorCounter: [],
-    counter: [],
+    applicantCounter: [],
+    employerCounter: [],
     finalSalary: [],
-    acceptedOffer: [],
-    declinedCounter: []
+    applicantCountered: [],
+    employerCountered: [],
+    applicantAcceptedOffer: [],
+    employerAcceptedOffer: [],
+    applicantDeclinedCounter: [],
+    employerDeclinedCounter: []
   })
 
   
