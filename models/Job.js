@@ -21,10 +21,10 @@ const Job = new Schema({
       offer: [{
         type: Number
       }],
-      priorCounter: [{
+      applicantCounter: [{
         type: Number
       }],
-      counter: [{
+      employerCounter: [{
         type: Number
       }],
       finalSalary: [{
