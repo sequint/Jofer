@@ -563,7 +563,7 @@ const ManageJobs = () => {
                                 >
                                   <Card.Body>
                                     {applicant.applicantName}
-                                    {(applicant.offered.finalSalary[0] >0) ?
+                                    {(applicant.offered.finalSalary.length >0) ?
                                       <> ✅</>
                                       : (applicant.offered.applicantAcceptedOffer && applicant.offered.applicantAcceptedOffer[0] === false) || (applicant.offered.employerAcceptedOffer[0]===false) ?
                                         <>❌</>: <Button
