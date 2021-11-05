@@ -9,16 +9,29 @@ import { ModalBody } from 'react-bootstrap'
 
 const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   const [show, setShow] = useState(showState.show)
+  let offered
+  if (job._id) {
+    offered = passedNegotiation.offered
+  }
+  else {
+    offered = passedNegotiation
+  }
 
+  console.log(passedNegotiation)
   const [negotiation, setNegotiation] = useState({
     tempOffer: 0,
     tempCounter: 0,
     offer: [],
-    priorCounter: [],
-    counter: [],
+    applicantCounter: [],
+    employerCounter: [],
     finalSalary: [],
-    acceptedOffer: [],
-    declinedCounter: []
+    applicantCountered: [],
+    employerCountered: [],
+    applicantAcceptedOffer: [],
+    employerAcceptedOffer: [],
+    applicantDeclinedCounter: [],
+    employerDeclinedCounter: [],
+    email: '',
   })
 
   const [missingInput, setMissingInput] = useState({
@@ -28,14 +41,19 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
   // Reset negotiation state if one was passed in.
   useEffect(() => {
-    if (passedNegotiation) {
+    if (offered) {
       setNegotiation({
-        offer: passedNegotiation.offer,
-        priorCounter: passedNegotiation.priorCounter,
-        counter: passedNegotiation.counter,
-        finalSalary: passedNegotiation.finalSalary,
-        acceptedOffer: passedNegotiation.acceptedOffer,
-        declinedCounter: passedNegotiation.declinedCounter
+        offer: offered.offer,
+        applicantCounter: offered.applicantCounter,
+        employerCounter: offered.employerCounter,
+        finalSalary: offered.finalSalary,
+        applicantCountered: offered.applicantCountered,
+        employerCountered: offered.employerCountered,
+        applicantAcceptedOffer: offered.applicantAcceptedOffer,
+        employerAcceptedOffer: offered.employerAcceptedOffer,
+        applicantDeclinedCounter: offered.applicantDeclinedCounter,
+        employerDeclinedCounter: offered.employerDeclinedCounter,
+        email: offered.email
       })
     }
   }, [])
@@ -77,10 +95,12 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
                 if (elem._id === job._id) {
                   elem.applicants.forEach((applicant, index) => {
                     if (applicant.email === showState.applicant.draggableId) {
+                      // Set status to offered.
                       job.applicants[index].status = "Offered"
-                      console.log(negotiation.offer)
+                      // Set jobs offer var to the negotiation offer var.
                       job.applicants[index].offered.offer = negotiation.offer
-                      setParentState(false, job)
+                      // Send modal close and updated job back to parent component.
+                      setParentState(false, job, false)
                     }
                   })
                 }
@@ -107,30 +127,68 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
           setShow(false)
           console.log(job)
 
-          // Set offer to equal temp offer.
-          negotiation.counter = [negotiation.tempCounter]
-          setNegotiation({ ...negotiation })
+          if (job.jobId) {
+            console.log('applicant')
 
-          // Set job applicant negotiation data.
-          JobAPI.getEmployerJobs()
-            .then(({ data }) => {
-              console.log(data)
-              data.forEach(elem => {
-                if (elem._id === job.jobId) {
-                  console.log('in')
-                  elem.applicants.forEach((applicant, index) => {
-                    if (applicant.email === showState.applicant.draggableId) {
-                      job.applicants[index].status = "Offered"
-                      job.applicants[index].offered.priorCounter = job.applicants[index].offered.counter
-                      job.applicants[index].offered.counter = negotiation.counter
-                      console.log(job)
-                      setParentState(false, job)
-                    }
-                  })
-                }
+            // Set applicant offer to equal temp offer.
+            negotiation.applicantCounter = [negotiation.tempCounter]
+            setNegotiation({ ...negotiation })
+
+            // Set job applicant negotiation data.
+            JobAPI.getCandidateJobs()
+              .then(({ data }) => {
+                console.log(data)
+                data.userJobs.forEach(tempJob => {
+                  if (tempJob.jobId === job.jobId) {
+                    tempJob.applicants.forEach((applicant, index) => {
+                      if (applicant.email === job.email) {
+
+                        // Set the jobs applicant counter to input value.
+                        tempJob.applicants[index].offered.applicantCounter = negotiation.applicantCounter
+                        // Change applicant counter bool to true.
+                        tempJob.applicants[index].offered.applicantCountered = [true]
+                        // Insure that employer counter is false.
+                        tempJob.applicants[index].offered.employerCountered = [false]
+                        // Send new data back to parent state and close modal.
+                        setParentState(false, tempJob, false)
+
+                      }
+                    })
+                  }
+                })
               })
+              .catch(err => console.log(err))
+          }
+          else if (job._id) {
+            console.log('employer')
+            console.log(showState)
+            // Set employer offer to equal temp offer.
+            negotiation.employerCounter = [negotiation.tempCounter]
+            setNegotiation({ ...negotiation })
+
+            // Set job applicant negotiation data.
+            job.applicants.forEach((applicant, index) => {
+              console.log(applicant.email)
+              console.log(passedNegotiation.email)
+              if (applicant.email === passedNegotiation.email) {
+
+                // Set the jobs applicant counter to input value.
+                job.applicants[index].offered.employerCounter = negotiation.employerCounter
+                // Change applicant counter bool to true.
+                job.applicants[index].offered.employerCountered = [true]
+                // Insure that employer counter is false.
+                job.applicants[index].offered.applicantCountered = [false]
+                // Send new data back to parent state and close modal.
+                setParentState(false, job, false)
+
+              }
             })
-            .catch(err => console.log(err))
+          }
+          else {
+            console.log('something went wrong')
+          }
+
+
 
         }
         else {
@@ -142,9 +200,125 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
       default:
         setShow(false)
-        setParentState(false, job)
+        setParentState(false, job, true)
         break
     }
+  }
+
+  const handleDecline = () => {
+    //set applicant declined offer to true
+    if (job._id) {
+      job.applicants.forEach((applicant, index) => {
+        console.log(applicant.email)
+        console.log(passedNegotiation.email)
+        if (applicant.email === passedNegotiation.email) {
+
+          // Set the jobs applicant counter to input value.
+          job.applicants[index].offered.employerAcceptedOffer[0] = false
+          // Change applicant counter bool to true.
+          job.applicants[index].offered.employerCountered = [false]
+          
+          // Send new data back to parent state and close modal.
+          setParentState(false, job)
+
+        }
+      })
+
+
+      
+    }
+    else if (job.jobId) {
+
+      console.log("Declined")
+
+      negotiation.applicantAcceptedOffer[0] = false
+      negotiation.applicantDeclinedCounter[0] = true
+      setNegotiation({ ...negotiation })
+      JobAPI.getCandidateJobs()
+        .then(({ data }) => {
+          console.log(data)
+          data.userJobs.forEach(tempJob => {
+            if (tempJob.jobId === job.jobId) {
+              tempJob.applicants.forEach((applicant, index) => {
+                if (applicant.email === job.email) {
+
+                  // Set the jobs applicant counter to input value.
+                  tempJob.applicants[index].offered.applicantAcceptedOffer = negotiation.applicantAcceptedOffer
+                  // Insure that employer counter is false.
+                  tempJob.applicants[index].offered.applicantCountered = [false]
+                  // Send new data back to parent state and close modal.
+                  setParentState(false, tempJob)
+
+                }
+              })
+            }
+          })
+        })
+        .catch(err => console.log(err))
+      handleClose()
+    }
+  }
+  const handleAccept = () => {
+    //set applicant accepted offer to true
+
+    if (job._id) {
+      job.applicants.forEach((applicant, index) => {
+        console.log(applicant.email)
+        console.log(passedNegotiation.email)
+        if (applicant.email === passedNegotiation.email) {
+
+          // Set the jobs applicant counter to input value.
+          job.applicants[index].offered.employerAcceptedOffer[0] = true
+          // Change applicant counter bool to true.
+          job.applicants[index].offered.employerCountered = [false]
+          // Insure that employer counter is false.
+          job.applicants[index].offered.finalSalary = negotiation.applicantCounter
+          // Send new data back to parent state and close modal.
+          setParentState(false, job)
+
+        }
+      })
+
+
+
+    }
+    else if (job.jobId) {
+
+      console.log("accept")
+
+      negotiation.applicantAcceptedOffer[0] = true
+      setNegotiation({ ...negotiation })
+      JobAPI.getCandidateJobs()
+        .then(({ data }) => {
+          console.log(data)
+          data.userJobs.forEach(tempJob => {
+            if (tempJob.jobId === job.jobId) {
+              tempJob.applicants.forEach((applicant, index) => {
+                if (applicant.email === job.email) {
+
+                  // Set the jobs applicant counter to input value.
+                  tempJob.applicants[index].offered.applicantAcceptedOffer = negotiation.applicantAcceptedOffer
+                  // Change applicant counter bool to true.
+                  if(negotiation.employerCounter[0]>0){
+                    tempJob.applicants[index].offered.finalSalary = negotiation.employerCounter
+                  }else{
+                    tempJob.applicants[index].offered.finalSalary = negotiation.offer
+                  }
+                  
+                  // Insure that employer counter is false.
+                  tempJob.applicants[index].offered.employerCountered = [false]
+                  // Send new data back to parent state and close modal.
+                  setParentState(false, tempJob)
+
+                }
+              })
+            }
+          })
+        })
+        .catch(err => console.log(err))
+      handleClose()
+    }
+
   }
 
   // Functions for modal display depending on the negotiation state.
@@ -170,6 +344,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
         </ModalBody>
 
         <Modal.Footer>
+          
           <Button
             className="Offer"
             onClick={() => handleClose('offer')}>
@@ -181,12 +356,26 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   }
 
   const displayPriorCounter = _ => {
-    return (
-      <>
-        <h5>Counter Offer:</h5>
-        <p>{negotiation.priorCounter}</p>
-      </>
-    )
+    console.log('in display counter')
+
+    // Return either the employer or applicant's counter offer depending on who is viewing.
+    if (job._id) {
+      return (
+        <>
+          <h5>Applicant's Counter Offer:</h5>
+          <p>{negotiation.applicantCounter}</p>
+        </>
+      )
+    }
+    else if (job.jobId) {
+      return (
+        <>
+          <h5>Employer's Counter Offer:</h5>
+          <p>{negotiation.employerCounter}</p>
+        </>
+      )
+    }
+
   }
 
   const getCounterOffer = _ => {
@@ -195,9 +384,8 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
         <ModalBody>
           <h5>Initial Offer:</h5>
           <p>{negotiation.offer}</p>
-          {negotiation.priorCounter > 0 ? displayPriorCounter() : <></>}
-          <h5>Counter:</h5>
-          <p>If you would like to counter, do so below.</p>
+          {(negotiation.applicantCounter > 0 || negotiation.employerCounter > 0) ? displayPriorCounter() : <></>}
+          <p>If you would like to counter this off, do so below.</p>
           <InputGroup className='mb-3 decline'>
             <div>
               <FormControl
@@ -210,13 +398,24 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
               />
             </div>
 
+
             {missingInput.counter ? <p className="err mt-2">⚠️ You have not entered a counter offer.</p> : <></>}
           </InputGroup>
         </ModalBody>
 
         <Modal.Footer>
           <Button
-            variant="secondary"
+            variant="danger"
+            onClick={handleDecline}>
+            Decline Offer
+          </Button>
+          <Button
+            variant="success"
+            onClick={handleAccept}>
+            Accept Offer
+          </Button>
+          <Button
+            className="secondary"
             onClick={() => handleClose('counter')}>
             Send Counter
           </Button>

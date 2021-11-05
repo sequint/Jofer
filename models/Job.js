@@ -18,23 +18,42 @@ const Job = new Schema({
       }]
     },
     offered: {
+      email: String,
       offer: [{
         type: Number
       }],
-      priorCounter: [{
+      applicantCounter: [{
         type: Number
       }],
-      counter: [{
+      employerCounter: [{
         type: Number
       }],
       finalSalary: [{
         type: Number
       }],
-      acceptedOffer: [{
-        type: Boolean
+      applicantCountered: [{
+        type: Boolean,
+        default: false
       }],
-      declinedCounter: [{
-        type: Boolean
+      employerCountered: [{
+        type: Boolean,
+        default: false
+      }],
+      applicantAcceptedOffer: [{
+        type: Boolean,
+        default: false
+      }],
+      employerAcceptedOffer: [{
+        type: Boolean,
+        default: false
+      }],
+      applicantDeclinedCounter: [{
+        type: Boolean,
+        default: false
+      }],
+      employerDeclinedCounter: [{
+        type: Boolean,
+        default: false
       }]
     }
   }],

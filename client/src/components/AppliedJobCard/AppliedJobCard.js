@@ -17,14 +17,16 @@ const AppliedJobCard = ({ job, setParentState }) => {
   const [showNegotiator, setShowNegotiator] = useState({
     show: false
   })
+  const [greenBorder, setGreenBorder] = useState(true)
   
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
 
-  const handleShowNegotiator = (showState, newJobState) => {
-    console.log(newJobState)
+  const handleShowNegotiator = (showState, newJobState, green) => {
     showNegotiator.show = showState
     setShowNegotiator({ ...showNegotiator })
+    setGreenBorder(green)
+    console.log(newJobState)
     if (newJobState) {
       localStorage.setItem('clickedManageJob', JSON.stringify(newJobState))
       job = newJobState
@@ -32,17 +34,48 @@ const AppliedJobCard = ({ job, setParentState }) => {
         .then(({ data }) => console.log(data))
         .catch(err => console.log(err))
     }
+    JobAPI.getAllJobs()
+      .then(({ data }) => {
+        data.forEach(elem => {
+          if (elem._id === job.jobId) {
+            UserAPI.getUser()
+              .then(({ data }) => {
+                elem.applicants.forEach(applicant => {
+                  if (applicant.email === data.username) {
+                    setDeclinedReasons({ reasons: applicant.declined.reasons, actionItems: applicant.declined.actionItems })
+                    setNegotiations({
+                      offer: applicant.offered.offer,
+                      applicantCounter: applicant.offered.applicantCounter,
+                      employerCounter: applicant.offered.employerCounter,
+                      finalSalary: applicant.offered.finalSalary,
+                      applicantCountered: applicant.offered.applicantCountered,
+                      employerCountered: applicant.offered.employerCountered,
+                      applicantAcceptedOffer: applicant.offered.applicantAcceptedOffer,
+                      employerAcceptedOffer: applicant.offered.employerAcceptedOffer,
+                      applicantDeclinedCounter: applicant.offered.applicantDeclinedCounter,
+                      employerDeclinedCounter: applicant.offered.employerDeclinedCounter
+                    })
+                  }
+                })
+              })
+          }
+        })
+      })
 
   }
 
   // Set state vaiable for negotiations.
   const [negotiations, setNegotiations] = useState({
     offer: [],
-    priorCounter: [],
-    counter: [],
+    applicantCounter: [],
+    employerCounter: [],
     finalSalary: [],
-    acceptedOffer: [],
-    declinedCounter: []
+    applicantCountered: [],
+    employerCountered: [],
+    applicantAcceptedOffer: [],
+    employerAcceptedOffer: [],
+    applicantDeclinedCounter: [],
+    employerDeclinedCounter: []
   })
 
   
@@ -59,11 +92,15 @@ const AppliedJobCard = ({ job, setParentState }) => {
                     setDeclinedReasons({ reasons: applicant.declined.reasons, actionItems: applicant.declined.actionItems })
                     setNegotiations({
                       offer: applicant.offered.offer,
-                      priorCounter: applicant.offered.priorCounter,
-                      counter: applicant.offered.counter,
+                      applicantCounter: applicant.offered.applicantCounter,
+                      employerCounter: applicant.offered.employerCounter,
                       finalSalary: applicant.offered.finalSalary,
-                      acceptedOffer: applicant.offered.acceptedOffer,
-                      declinedOffer: applicant.offered.declinedOffer
+                      applicantCountered: applicant.offered.applicantCountered,
+                      employerCountered: applicant.offered.employerCountered,
+                      applicantAcceptedOffer: applicant.offered.applicantAcceptedOffer,
+                      employerAcceptedOffer: applicant.offered.employerAcceptedOffer,
+                      applicantDeclinedCounter: applicant.offered.applicantDeclinedCounter,
+                      employerDeclinedCounter: applicant.offered.employerDeclinedCounter
                     })
                   }
                 })
@@ -98,12 +135,13 @@ const AppliedJobCard = ({ job, setParentState }) => {
             <strong>Department: </strong> {job.type}
           </Card.Text>
           <div className="bttn">
-            <Button
-              className="viewJobBtn mb-2"
+            {negotiations.offer.length > 0 ? (negotiations.finalSalary.length >0 || negotiations.employerDeclinedCounter[0]===false|| negotiations.applicantAcceptedOffer[0]===false ) ? <></>: <Button
+              className={((negotiations.employerCountered[0] === true && greenBorder) || (negotiations.offer.length > 0 && greenBorder && negotiations.employerCountered.length === 0)) ? 'viewJobBtnGreen' : 'viewJobBtn'}
               onClick={handleShowNegotiator}
             >
               See Offer
-            </Button>
+            </Button>: <></>}
+            
             <Button
               className="viewJobBtn"
               onClick={handleShow}>
@@ -141,8 +179,9 @@ const AppliedJobCard = ({ job, setParentState }) => {
           {declinedReasons.reasons.length > 0 ? listReasons() : <></>}
           {declinedReasons.reasons.length > 0 ? <p className="mt-3"><strong>Action Items:</strong></p> : <></>}
           {declinedReasons.reasons.length > 0 ? listActionItems() : <></>}
-          {negotiations.offer.length > 0 ? <p className="mt-3"><strong>Initial Offer:</strong></p> : <></>}
-          {negotiations.offer.length > 0 ? negotiations.offer[0] : <></>}
+          {negotiations.employerDeclinedCounter[0] === false || negotiations.applicantAcceptedOffer[0] === false ? <p className="mt-3"><strong>Offer was declined</strong></p> :  negotiations.offer.length > 0 ? negotiations.finalSalary[0] > 0 ? <p className="mt-3"><strong>Final Offer: </strong>{negotiations.finalSalary[0]}</p> : <p className="mt-3"><strong>Initial Offer:  </strong>{negotiations.offer[0]}</p> : <></>    }
+         
+          
         </Modal.Body>
       </Modal>
     </>

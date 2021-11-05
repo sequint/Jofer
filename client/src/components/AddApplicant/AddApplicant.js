@@ -124,11 +124,16 @@ const AddApplicant = ({ job, setParentState }) => {
             },
             offered: {
               offer: [],
-              priorCounter: [],
-              counter: [],
+              applicantCounter: [],
+              employerCounter: [],
               finalSalary: [],
-              acceptedOffer: [],
-              declinedCounter: []
+              applicantCountered: [],
+              employerCountered: [],
+              applicantAcceptedOffer: [],
+              employerAcceptedOffer: [],
+              applicantDeclinedCounter: [],
+              employerDeclinedCounter: [],
+              email: applicant.email,
             }
           }
           let email = applicant.email

@@ -11,6 +11,7 @@ import UserAPI from '../../utils/UserAPI'
 import DeclineModal from '../../components/DeclineModal/DeclineModal'
 import Negotiator from '../../components/Negotiator/Negotiator'
 import AddApplicant from '../../components/AddApplicant/AddApplicant'
+import Button from 'react-bootstrap/Button'
 import './ManageJobs.css'
 
 const ManageJobs = () => {
@@ -35,8 +36,11 @@ const ManageJobs = () => {
   
   const [ showOffer, setShowOffer ] = useState({
     show: false,
-    applicant: []
+    applicant: {},
+    offered: {}
   })
+
+  const [ greenBorder, setGreenBorder ] = useState(true)
 
   let job = JSON.parse(localStorage.getItem('clickedManageJob'))
 
@@ -71,7 +75,6 @@ const ManageJobs = () => {
     setState([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
     setFilteredApplicants([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
     localStorage.setItem('clickedManageJob',JSON.stringify(state))
-
 
   }
 
@@ -239,8 +242,24 @@ const ManageJobs = () => {
       }
     }
 
+    const tempOffered = {
+      offer: [],
+      applicantCounter: [],
+      employerCounter: [],
+      finalSalary: [],
+      applicantCountered: [],
+      employerCountered: [],
+      applicantAcceptedOffer: [],
+      employerAcceptedOffer: [],
+      applicantDeclinedCounter: [],
+      employerDeclinedCounter: [],
+      email:''
+    }
+    tempOffered.email= allInfo.draggableId
+
     if (dInd === 3 && sInd !== 2) {
-      setShowOffer({ ...showOffer, show: true, applicant: allInfo })
+      console.log(allInfo)
+      setShowOffer({ ...showOffer, show: true, applicant: allInfo, offered: tempOffered })
       console.log(showOffer)
     }
   }
@@ -308,13 +327,16 @@ const ManageJobs = () => {
     }
   }
 
-  const setParentOfferShow = (showState, newJobState) => {
+  const setParentOfferShow = (showState, newJobState, green) => {
     showOffer.show = showState
     setShowOffer({ ...showOffer })
+    setGreenBorder(green)
     localStorage.setItem('clickedManageJob', JSON.stringify(newJobState))
     job = newJobState
     JobAPI.update(job._id, job)
-      .then(({ data }) => console.log(data))
+      .then(({ data }) => {
+        setParentState(job)
+        console.log(data)})
       .catch(err => console.log(err))
   }
 
@@ -332,7 +354,7 @@ const ManageJobs = () => {
 
     // styles we need to apply on draggables
     ...draggableStyle
-  });
+  })
 
   return (
     <div className="manageJobsContainer">
@@ -350,6 +372,7 @@ const ManageJobs = () => {
           showState={showOffer}
           setParentState={setParentOfferShow}
           job={job}
+          passedNegotiation={showOffer}
         />
       ) : (
         <></>
@@ -540,6 +563,16 @@ const ManageJobs = () => {
                                 >
                                   <Card.Body>
                                     {applicant.applicantName}
+                                    {(applicant.offered.finalSalary.length >0) ?
+                                      <> ✅</>
+                                      : (applicant.offered.applicantAcceptedOffer && applicant.offered.applicantAcceptedOffer[0] === false) || (applicant.offered.employerAcceptedOffer[0]===false) ?
+                                        <>❌</>: <Button
+                                          className={(applicant.offered.applicantCountered[0] === true && greenBorder) ? 'viewJobBtnGreen' : 'viewJobBtn'}
+                                          onClick={() => { setShowOffer({ ...showOffer, show: true, email: applicant.email, offered: applicant.offered }) }}
+                                        >
+                                          Offer
+                                        </Button>
+                                    }
                                   </Card.Body>
                                 </div>
                               </Card>
