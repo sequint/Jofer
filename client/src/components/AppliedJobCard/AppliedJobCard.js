@@ -186,8 +186,9 @@ const AppliedJobCard = ({ job, setParentState }) => {
           {declinedReasons.reasons.length > 0 ? listReasons() : <></>}
           {declinedReasons.reasons.length > 0 ? <p className="mt-3"><strong>Action Items:</strong></p> : <></>}
           {declinedReasons.reasons.length > 0 ? listActionItems() : <></>}
-          {negotiations.offer.length > 0 ? negotiations.finalSalary[0] > 0 ? <p className="mt-3"><strong>Final Offer: </strong></p>  : <p className="mt-3"><strong>Initial Offer: {negotiations.offer[0]} </strong></p> :<></> }
-          {negotiations.offer.length >0 ? negotiations.finalSalary.length > 0 ? negotiations.finalSalary[0] : negotiations.offer[0] :<></> }
+          {negotiations.employerDeclinedCounter[0] === false || negotiations.applicantAcceptedOffer[0] === false ? <p className="mt-3"><strong>Offer was declined</strong></p> :  negotiations.offer.length > 0 ? negotiations.finalSalary[0] > 0 ? <p className="mt-3"><strong>Final Offer: </strong>{negotiations.finalSalary[0]}</p> : <p className="mt-3"><strong>Initial Offer:  </strong>{negotiations.offer[0]}</p> : <></>    }
+         
+          
         </Modal.Body>
       </Modal>
     </>
