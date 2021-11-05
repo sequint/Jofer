@@ -11,13 +11,14 @@ import AppliedJobs from './pages/AppliedJobs'
 import DeclinedJobs from './pages/DeclinedJobs'
 import Login from './pages/SignIn'
 import EmployerAuth from './pages/EmployerAuth'
+import LandingPage from './pages/LandingPage/LandingPage'
 
 const App = () => {
   return (
     <Router>
       <Switch>
         <Route exact path='/'>
-          <Home />
+          <LandingPage />
         </Route>
         <Route exact path='/home'>
           <Home />

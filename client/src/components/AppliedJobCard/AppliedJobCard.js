@@ -99,7 +99,7 @@ const AppliedJobCard = ({ job, setParentState }) => {
           </Card.Text>
           <div className="bttn">
             <Button
-              className="viewJobBtn"
+              className="viewJobBtn mb-2"
               onClick={handleShowNegotiator}
             >
               See Offer
