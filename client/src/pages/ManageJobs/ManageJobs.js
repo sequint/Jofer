@@ -567,13 +567,45 @@ const ManageJobs = () => {
                                   <Card.Body>
                                     {applicant.applicantName}
                                     {(applicant.offered.finalSalary.length >0) ?
-                                      <> ✅</>
+                                      <>
+                                        <svg
+                                          fill="currentColor"
+                                          viewBox="0 0 16 16"
+                                          height="40px"
+                                          width="40px"
+                                          className="acceptedIcon"
+                                        >
+                                          <path
+                                            fillRule="evenodd"
+                                            fill="green"
+                                            d="M11 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.978-1h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zM6 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0zm6.854.146a.5.5 0 010 .708l-3 3a.5.5 0 01-.708 0l-1.5-1.5a.5.5 0 01.708-.708L12.5 7.793l2.646-2.647a.5.5 0 01.708 0z"
+                                          />
+                                        </svg>
+                                      </>
                                       : (applicant.offered.applicantAcceptedOffer && applicant.offered.applicantAcceptedOffer[0] === false) || (applicant.offered.employerAcceptedOffer[0]===false) ?
-                                        <>❌</>: <Button
-                                          className={(applicant.offered.applicantCountered[0] === true && greenBorder) ? 'viewJobBtnGreen' : 'viewJobBtn'}
+                                        <>
+                                          <svg
+                                            viewBox="0 0 48 48"
+                                            fill="currentColor"
+                                            height="40px"
+                                            width="40px"
+                                            className="acceptedIcon"
+                                          >
+                                            <path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm0 36c-8.84 0-16-7.16-16-16 0-3.7 1.27-7.09 3.37-9.8L33.8 36.63C31.09 38.73 27.7 40 24 40zm12.63-6.2L14.2 11.37C16.91 9.27 20.3 8 24 8c8.84 0 16 7.16 16 16 0 3.7-1.27 7.09-3.37 9.8z" />
+                                          </svg>
+                                        </>
+                                        : <Button
+                                          className={(applicant.offered.applicantCountered[0] === true && greenBorder) ? 'MJviewJobBtnGreen' : 'MJviewJobBtn'}
                                           onClick={() => { setShowOffer({ ...showOffer, show: true, email: applicant.email, offered: applicant.offered }) }}
                                         >
-                                          Offer
+                                          <svg
+                                            viewBox="0 0 24 24"
+                                            fill="currentColor"
+                                            height="25px"
+                                            width="25px"
+                                          >
+                                            <path d="M21.71 8.71c1.25-1.25.68-2.71 0-3.42l-3-3c-1.26-1.25-2.71-.68-3.42 0L13.59 4H11C9.1 4 8 5 7.44 6.15L3 10.59v4l-.71.7c-1.25 1.26-.68 2.71 0 3.42l3 3c.54.54 1.12.74 1.67.74.71 0 1.36-.35 1.75-.74l2.7-2.71H15c1.7 0 2.56-1.06 2.87-2.1 1.13-.3 1.75-1.16 2-2C21.42 14.5 22 13.03 22 12V9h-.59l.3-.29M20 12c0 .45-.19 1-1 1h-1v1c0 .45-.19 1-1 1h-1v1c0 .45-.19 1-1 1h-4.41l-3.28 3.28c-.31.29-.49.12-.6.01l-2.99-2.98c-.29-.31-.12-.49-.01-.6L5 15.41v-4l2-2V11c0 1.21.8 3 3 3s3-1.79 3-3h7v1m.29-4.71L18.59 9H11v2c0 .45-.19 1-1 1s-1-.55-1-1V8c0-.46.17-2 2-2h3.41l2.28-2.28c.31-.29.49-.12.6-.01l2.99 2.98c.29.31.12.49.01.6z" />
+                                          </svg>
                                         </Button>
                                     }
                                   </Card.Body>

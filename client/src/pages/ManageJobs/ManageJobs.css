@@ -10,15 +10,37 @@
   background-color: #8ECAE6 !important;
 }
 
-@media (max-width: 1000px) and (min-width: 200px) {
-  .usrCard {
-    height: 200px;
-    min-height: 200px;
-  }
+.MJviewJobBtn {
+  color: #023047 !important;
+  background-color: transparent !important;
+  height: 50px;
+  width: 50px;
+  border: #023047 solid 1px !important;
+  border-radius: 50% !important;
+  margin: 5px -10px 0px 10px;
+  text-decoration: none !important;
+}
 
-  .column {
-    height: 250px !important;
-  }
+.MJviewJobBtn:hover {
+  background-color: #FFBA0A !important;
+  border: #FFBA0A solid 1px !important;
+}
+
+.MJviewJobBtnGreen {
+  color: #023047 !important;
+  background-color: transparent !important;
+  height: 50px;
+  width: 50px;
+  border: #023047 solid 1px !important;
+  box-shadow: 1px 1px 7px 3px green;
+  border-radius: 50% !important;
+  margin: 5px -10px 0px 10px;
+  text-decoration: none !important;
+}
+
+.MJviewJobBtnGreen:hover {
+  background-color: #FFBA0A !important;
+  border: #FFBA0A solid 1px !important;
 }
 
 .manageJobsContainer {
@@ -48,4 +70,27 @@ ul {
   padding-right: 15px !important;
   padding-top: 20px !important;
   padding-bottom: 10px !important;
+}
+
+.acceptedIcon {
+  margin-left: 10px;
+}
+
+@media (max-width: 1000px) and (min-width: 200px) {
+  .usrCard {
+    height: 200px;
+    min-height: 200px;
+  }
+  .column {
+    height: 250px !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .MJviewJobBtn {
+    margin: 0px !important;
+  }
+  .MJviewJobBtnGreen {
+    margin: 0px !important;
+  }
 }

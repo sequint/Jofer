@@ -41,3 +41,12 @@
   border: #023047 solid 1px !important;
   text-decoration: none !important;
 }
+
+.counterOptions {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.negotiationFooter {
+  margin: auto;
+}

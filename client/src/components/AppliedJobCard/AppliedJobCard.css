@@ -48,6 +48,39 @@
   border: #FFBA0A solid 1px !important;
 }
 
+.viewOffer {
+  color: #023047 !important;
+  background-color: transparent !important;
+  height: 60px;
+  width: 60px;
+  border: #023047 solid 3px !important;
+  border-radius: 50% !important;
+  margin: 0px auto 10px auto !important;
+  text-decoration: none !important;
+}
+
+.viewOffer:hover {
+  background-color: #FFBA0A !important;
+  border: #FFBA0A solid 1px !important;
+}
+
+.viewOfferGreen {
+  color: #023047 !important;
+  background-color: transparent !important;
+  height: 60px;
+  width: 60px;
+  border: #023047 solid 3px !important;
+  box-shadow: 1px 1px 7px 3px green;
+  border-radius: 50% !important;
+  margin: 0px auto 10px auto !important;
+  text-decoration: none !important;
+}
+
+.viewOfferGreen:hover {
+  background-color: #FFBA0A !important;
+  border: #FFBA0A solid 1px !important;
+}
+
 @media screen and (min-width: 575px) {
   .jobCard {
     max-width: 500px;
