@@ -1,0 +1,14 @@
+.bgColor {
+  background-color: #023047 !important;
+}
+
+.gStart {
+  background-color: #FFBA0A !important;
+  color: black !important;
+  border-color: #FFBA0A !important;
+}
+
+.gStart:hover {
+  background-color: #8ECAE6 !important;
+  border-color: #8ECAE6 !important;
+}
