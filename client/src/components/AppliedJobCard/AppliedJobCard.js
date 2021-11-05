@@ -7,6 +7,9 @@ import UserAPI from '../../utils/UserAPI'
 import ConfirmDeleteModal from '../ConfirmDeleteModal'
 import Negotiator from '../Negotiator/Negotiator'
 import './AppliedJobCard.css'
+import currencyFormatter from 'currency-formatter'
+
+
 
 const AppliedJobCard = ({ job, setParentState }) => {
   const [show, setShow] = useState(false)
@@ -179,7 +182,7 @@ const AppliedJobCard = ({ job, setParentState }) => {
           {declinedReasons.reasons.length > 0 ? listReasons() : <></>}
           {declinedReasons.reasons.length > 0 ? <p className="mt-3"><strong>Action Items:</strong></p> : <></>}
           {declinedReasons.reasons.length > 0 ? listActionItems() : <></>}
-          {negotiations.employerDeclinedCounter[0] === false || negotiations.applicantAcceptedOffer[0] === false ? <p className="mt-3"><strong>Offer was declined</strong></p> :  negotiations.offer.length > 0 ? negotiations.finalSalary[0] > 0 ? <p className="mt-3"><strong>Final Offer: </strong>{negotiations.finalSalary[0]}</p> : <p className="mt-3"><strong>Initial Offer:  </strong>{negotiations.offer[0]}</p> : <></>    }
+          {negotiations.employerDeclinedCounter[0] === false || negotiations.applicantAcceptedOffer[0] === false ? <p className="mt-3"><strong>Offer was declined</strong></p> : negotiations.offer.length > 0 ? negotiations.finalSalary[0] > 0 ? <p className="mt-3"><strong>Final Offer: </strong>{currencyFormatter.format(negotiations.finalSalary[0], { locale: 'en-Us' })}</p> : <p className="mt-3"><strong>Initial Offer:  </strong>{currencyFormatter.format(negotiations.offer[0], { locale: 'en-Us' } )}</p> : <></>    }
          
           
         </Modal.Body>
