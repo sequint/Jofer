@@ -15,7 +15,7 @@
   background-color: transparent !important;
   height: 50px;
   width: 50px;
-  border: #023047 solid 3px !important;
+  border: #023047 solid 1px !important;
   border-radius: 50% !important;
   margin: 5px -10px 0px 10px;
   text-decoration: none !important;
@@ -70,6 +70,10 @@ ul {
   padding-right: 15px !important;
   padding-top: 20px !important;
   padding-bottom: 10px !important;
+}
+
+.acceptedIcon {
+  margin-left: 10px;
 }
 
 @media (max-width: 1000px) and (min-width: 200px) {
