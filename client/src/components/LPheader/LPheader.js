@@ -1,4 +1,5 @@
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
 import './LPheader.css'
 
 const LPheader = () => {
@@ -12,11 +13,13 @@ const LPheader = () => {
                 <h1 className="display-5 fw-bolder text-white mb-2">Jofer</h1>
                 <p className="lead text-white-50 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati nemo eius ipsa, ut dolore omnis amet provident corporis, adipisci praesentium nisi! Excepturi accusamus fugit, maiores blanditiis ratione cum facere!</p>
                 <div className="d-grid d-sm-flex justify-content-sm-center">
-                  <Button
-                    className="gStart"
-                    type="button">
-                    <strong>Get Started</strong>
-                  </Button>
+                  <Link to="/login">
+                    <Button
+                      className="gStart"
+                      type="button">
+                      <strong>Get Started</strong>
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
