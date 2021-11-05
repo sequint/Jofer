@@ -442,7 +442,7 @@ const ManageJobs = () => {
             </Col>
             <Col className="column">
               <h2>Interviewed</h2>
-              <Card className="usrCard interviewed">
+              <Card className="usrCard Interviewed">
                 <Droppable droppableId="Interview">
                   {(provided, snapshot) => (
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
