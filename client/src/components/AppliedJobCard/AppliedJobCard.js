@@ -23,7 +23,6 @@ const AppliedJobCard = ({ job, setParentState }) => {
   const handleClose = () => setShow(false)
 
   const handleShowNegotiator = (showState, newJobState, green) => {
-    console.log(newJobState)
     showNegotiator.show = showState
     setShowNegotiator({ ...showNegotiator })
     setGreenBorder(green)
@@ -109,7 +108,7 @@ const AppliedJobCard = ({ job, setParentState }) => {
           </Card.Text>
           <div className="bttn">
             <Button
-              className={(negotiations.employerCountered[0] === true && greenBorder) ? 'viewJobBtnGreen' : 'viewJobBtn'}
+              className={((negotiations.employerCountered[0] === true && greenBorder) || (negotiations.offer.length > 0 && greenBorder && negotiations.employerCountered.length === 0)) ? 'viewJobBtnGreen' : 'viewJobBtn'}
               onClick={handleShowNegotiator}
             >
               See Offer

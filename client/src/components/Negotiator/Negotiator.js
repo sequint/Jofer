@@ -200,7 +200,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
 
       default:
         setShow(false)
-        setParentState(false, job)
+        setParentState(false, job, true)
         break
     }
   }

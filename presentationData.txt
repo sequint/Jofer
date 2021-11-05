@@ -68,3 +68,11 @@ Applicants
 - Name: Sally Espinoza
 - Email: QPQ0569Ytn5Te5o0@gmail.com
 - Password: pass123
+
+- Name: Coleen Ritter
+- Email: jwRxA1Eq@hotmail.com
+- Password: pass123
+
+- Name: Terry Zavala
+- Email: 96o8rgSe@yahoo.com
+- Password: pass123
