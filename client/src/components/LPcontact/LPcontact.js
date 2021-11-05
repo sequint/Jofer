@@ -1,6 +1,8 @@
 const LPcontact = () => {
   return (
-    <section className="bg-light py-5">
+    <section
+      className="bg-light py-5"
+      id="contact">
       <div className="container px-5 my-5 px-5">
         <div className="text-center mb-5">
           <div className="feature bg-gradient rounded-3 mb-3">
@@ -55,8 +57,8 @@ const LPcontact = () => {
                     className="form-control"
                     id="message"
                     type="text"
-                    laceholder="Enter your message here..." 
-                     data-sb-validations="required"></textarea>
+                    laceholder="Enter your message here..."
+                    data-sb-validations="required"></textarea>
                   <label for="message">Message</label>
                   <div
                     lassName="invalid-feedback"
