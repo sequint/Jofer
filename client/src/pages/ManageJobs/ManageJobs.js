@@ -211,6 +211,9 @@ const ManageJobs = () => {
 
 
     }
+    else if(sInd ===3 && dInd ===2){
+      console.log('do nothing')
+    }
     else {
       const result = move(state[sInd], state[dInd], source, destination, sInd, dInd)
 
@@ -219,7 +222,7 @@ const ManageJobs = () => {
     }
 
     // localStorage.setItem('clickedManageJob', JSON.stringify(elem))
-    if (dInd === 2) {
+    if (dInd === 2 && sInd !==3) {
       const storage = 'declined' + job._id
       const declined = allInfo.draggableId
       const declinedUsers = JSON.parse(localStorage.getItem(storage))
