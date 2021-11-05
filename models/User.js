@@ -13,7 +13,7 @@ const User = new Schema({
   company: String,
   skills: [{
     type: String
-  }]
+  }],
   avatar: String,
   jobs: [{
     type: Schema.Types.ObjectId,
