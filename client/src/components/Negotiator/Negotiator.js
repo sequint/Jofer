@@ -6,6 +6,7 @@ import FormControl from 'react-bootstrap/FormControl'
 import JobAPI from '../../utils/JobAPI'
 import './Negotiator.css'
 import { ModalBody } from 'react-bootstrap'
+import currencyFormatter from 'currency-formatter'
 
 const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
   const [show, setShow] = useState(showState.show)
@@ -363,7 +364,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
       return (
         <>
           <h5>Applicant's Counter Offer:</h5>
-          <p>{negotiation.applicantCounter}</p>
+          <p>{currencyFormatter.format(negotiation.applicantCounter, { locale: 'en-Us' })}</p>
         </>
       )
     }
@@ -371,7 +372,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
       return (
         <>
           <h5>Employer's Counter Offer:</h5>
-          <p>{negotiation.employerCounter}</p>
+          <p>{currencyFormatter.format(negotiation.employerCounter, { locale: 'en-Us' }) }</p>
         </>
       )
     }
@@ -383,7 +384,7 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
       <>
         <ModalBody>
           <h5>Initial Offer:</h5>
-          <p>{negotiation.offer}</p>
+          <p>{currencyFormatter.format(negotiation.offer, { locale: 'en-Us' })}</p>
           {(negotiation.applicantCounter > 0 || negotiation.employerCounter > 0) ? displayPriorCounter() : <></>}
           <p>If you would like to counter this off, do so below.</p>
           <InputGroup className='mb-3 decline'>
