@@ -10,14 +10,58 @@ import './SkillsFilter.css'
 const SkillsFilter = () => {
   // Define all state variables for the component.
   const [ show, setShow ] = useState(false)
+  const [skillState, setSkillState] = useState({
+    skill: '',
+    allSkills: [],
+    missingSkill: false,
+    missingAllSkills: false
+  })
 
   // Show and close modal handlers.
   // Modal show handlers.
   const handleClose = () => {
     // Reset all states and close the modal.
+    setSkillState({
+      skill: '',
+      allSkills: [],
+      missingSkill: false,
+      missingAllSkills: false
+    })
     setShow(false)
   }
   const handleShow = () => setShow(true)
+
+  // Input type handler.
+  const handleInputChange = ({ target: { value } }) => {
+    // Reset missing skill property to false.
+    skillState.missingSkill = false
+    setSkillState({ ...skillState })
+    // Set skill state to the target value.
+    setSkillState({ ...skillState, skill: value })
+  }
+
+  // Adding skill to local array handler.
+  const handleAddSkill = event => {
+    if (event) { event.preventDefault() }
+
+    // If there is a skill in the input, push it into all skills and clear skill state.
+    if (skillState.skill !== '') {
+      skillState.allSkills.push(skillState.skill)
+      setSkillState({ ...skillState, skill: '', missingAllSkills: false })
+    }
+    // Otherwise, set the missing skill state to true.
+    else {
+      setSkillState({ ...skillState, missingSkill: true })
+    }
+
+  }
+
+  const handleBulkDecline = event => {
+    if (event) { event.preventDefault() }
+
+    console.log('bulk decline')
+
+  }
 
   return(
     <>
@@ -43,7 +87,7 @@ const SkillsFilter = () => {
         centered>
         <Modal.Header closeButton>
           <Modal.Title>
-            Add Skills
+            Skills Filter
           </Modal.Title>
         </Modal.Header>
 
@@ -86,9 +130,9 @@ const SkillsFilter = () => {
             className="createBtn"
             variant='primary'
             type='submit'
-            onClick={handleAddAllSkills}
+            onClick={handleBulkDecline}
           >
-            Add New Skills
+            Bulk Filter & Decline
           </Button>
         </Modal.Footer>
 
