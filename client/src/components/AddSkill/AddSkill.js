@@ -56,6 +56,7 @@ const AddSkill = () => {
 
   }
 
+  // Handler to update db with new skills added.
   const handleAddAllSkills = event => {
     if (event) { event.preventDefault() }
 
@@ -68,8 +69,24 @@ const AddSkill = () => {
       setSkillState({ ...skillState })
     }
     else {
-      // Send update request for the loged in user to add all skills state to skills in db.
-      UserAPI.updateUser({ skills: skillState.allSkills }).then(({ data }) => console.log(data))
+
+      // Get the current user's information.
+      UserAPI.getUser()
+        .then(({ data }) => {
+          // If there is a response with user data, create a temp variable to store it.
+          let tempUser = data
+          console.log(tempUser)
+          console.log(skillState.allSkills)
+          // Loop through allskills and push each new skill into user skills array.
+          skillState.allSkills.forEach(tempSkill => {
+            tempUser.skills.push(tempSkill) 
+          })
+          console.log(tempUser)
+          // Send update to the db for the user with new skills array.
+          UserAPI.updateUser(tempUser).then(({ data }) => console.log(data))
+        })
+        .catch(err => console.log(err))
+
       // Close the modal.
       handleClose()
     }

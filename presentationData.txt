@@ -76,3 +76,7 @@ Applicants
 - Name: Terry Zavala
 - Email: 96o8rgSe@yahoo.com
 - Password: pass123
+
+- Name: Ricardo Steele
+- Email: 31puDQln@gmail.com
+- Password: pass123

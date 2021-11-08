@@ -51,10 +51,9 @@ router.post('/users/login', (req, res) => {
 // Route to find a user by id and update their information.
 router.put('/users', passport.authenticate('jwt'), async function (req, res) {
   // Find user by id then set the passed in changes, and store response into a variable.
-  const updatedUser = await User.findByIdAndUpdate(req.user._id, { $set: req.body })
+  await User.findByIdAndUpdate(req.user._id, { $set: req.body })
   // Console log any errors, otherwise send back updated user data.
-  if (err) { console.log(err) }
-  res.json(updatedUser)
+  res.sendStatus(200)
 })
 
 module.exports = router

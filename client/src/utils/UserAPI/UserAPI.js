@@ -11,11 +11,11 @@ const UserAPI = {
   // Create property that uses axios request to register a user.
   register: user => axios.post('/api/users/register', user),
   login: user => axios.post('/api/users/login', user),
-  updateUser: updatedUser => axios.put('/api/users', {
+  updateUser: updatedUser => axios.put('/api/users', updatedUser, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
-  }, updatedUser)
+  })
 }
 
 export default UserAPI
