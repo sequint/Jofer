@@ -5,6 +5,7 @@ import {
   Row,
   Form
 } from 'react-bootstrap'
+import UserAPI from '../../utils'
 import './AddSkill.css'
 
 const AddSkill = ({ setParentState }) => {
@@ -40,6 +41,12 @@ const AddSkill = ({ setParentState }) => {
       setSkillState({ ...skillState, missingSkill: true })
     }
 
+  }
+
+  const handleAddAllSkills = event => {
+    if (event) { event.preventDefault() }
+    // Send update request for the loged in user to add all skills state to skills in db.
+    UserAPI.updateUser(skillState.allSkills).then(({ data }) => console.log(data))
   }
 
   return(
@@ -106,7 +113,7 @@ const AddSkill = ({ setParentState }) => {
             className="createBtn"
             variant='primary'
             type='submit'
-            onClick={handleAddAllApplicants}
+            onClick={handleAddAllSkills}
           >
             Add New Skills
           </Button>
