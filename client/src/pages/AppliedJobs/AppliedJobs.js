@@ -276,9 +276,6 @@ const AppliedJobs = () => {
     <>
       <NavbarElem/>
       <PageTitle title='My Jobs' />
-      
-
-     
       <Container className="manageJobContainer">
         <AddApplicantJob
           setParentState={setParentState}
