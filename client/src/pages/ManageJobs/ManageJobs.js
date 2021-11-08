@@ -11,6 +11,7 @@ import UserAPI from '../../utils/UserAPI'
 import DeclineModal from '../../components/DeclineModal/DeclineModal'
 import Negotiator from '../../components/Negotiator/Negotiator'
 import AddApplicant from '../../components/AddApplicant/AddApplicant'
+import SkillsFilter from '../../components/SkillsFilter/SkillsFilter'
 import Button from 'react-bootstrap/Button'
 import './ManageJobs.css'
 
@@ -386,12 +387,13 @@ const ManageJobs = () => {
         type="text"
         name="filter"
         className="filter"
-        placeholder="Filter Applicants"
+        placeholder="Filter by name"
         onChange={handleInputChange}
       />
       <Container className="manageJobContainer">
         <DragDropContext onDragEnd={onDragEnd}>
           <Row>
+            <SkillsFilter />
             <AddApplicant job={job} setParentState={setParentState} />
             <Col className="column">
               <h2>Review</h2>
