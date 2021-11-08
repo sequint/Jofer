@@ -23,6 +23,25 @@ const AddSkill = ({ setParentState }) => {
   // Input type handler.
   const handleInputChange = ({ target: { value } }) => setSkillState({ ...skillState, skill: value })
 
+  // Adding skill to local array handler.
+  const handleAddSkill = event => {
+    if (event) { event.preventDefault() }
+
+    // Reset missing skill property to false.
+    setSkillState({ ...skillState, missingSkill: false })
+
+    // If there is a skill in the input, push it into all skills and clear skill state.
+    if (skillState.skill !== '') {
+      skillState.allSkills.push(skillState.skill)
+      setSkillState({ ...skillState, skill: '' })
+    }
+    // Otherwise, set the missing skill state to true.
+    else {
+      setSkillState({ ...skillState, missingSkill: true })
+    }
+
+  }
+
   return(
     <>
       <div
@@ -67,7 +86,7 @@ const AddSkill = ({ setParentState }) => {
                 className="mt-3 createBtn"
                 variant='primary'
                 type='submit'
-                onClick={handleAddApplicant}
+                onClick={handleAddSkill}
               >
                 Add Skill
               </Button>
