@@ -19,7 +19,16 @@ const AddSkill = () => {
   })
 
   // Modal show handlers.
-  const handleClose = () => setShow(false)
+  const handleClose = () => {
+    // Reset all states and close the modal.
+    setSkillState({
+      skill: '',
+      allSkills: [],
+      missingSkill: false,
+      missingAllSkills: false
+    })
+    setShow(false)
+  } 
   const handleShow = () => setShow(true)
 
   // Input type handler.
