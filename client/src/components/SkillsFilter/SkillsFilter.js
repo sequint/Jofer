@@ -66,24 +66,51 @@ const SkillsFilter = ({ job, setParentState }) => {
       UserAPI.getUserByEmail(applicant.email)
         .then(({ data }) => {
 
-          // Create a counter variable to count the amount of matching skills.
+          // Create a counter variable to count the amount of matching skills
           let counter = 0
+          // Create a prior counter variable to know if a match was found in nested loop.
+          let priorCounter = counter
+          // Create an array to hold missing skills for an applicant.
+          let missingSkills = []
 
-          // Loop through the applicants skills array as parent loop.
-          data.skills.forEach(skill => {
-            // Loop through all skill state as child loop to match with each skill.
-            skillState.allSkills.forEach(desiredSkill => { 
+          // Loop through all skill state as child loop to match with each skill.
+          skillState.allSkills.forEach(desiredSkill => {
+            // Loop through the applicants skills array as parent loop.
+            data.skills.forEach(skill => { 
+              // If a skill match, increment the counter.
               if (desiredSkill.toUpperCase() === skill.toUpperCase() ) {
-                console.log('match')
                 counter += 1
               }
             })
+
+            // If the counter is equal to the prior counter,
+            // push the desired skill into missingSkills.
+            if (priorCounter === counter) {
+              missingSkills.push(desiredSkill)
+              console.log(missingSkills)
+            }
+
+            // Set prior counter to counter again.
+            priorCounter = counter
+            console.log(missingSkills)
+
           })
 
           // If counter is equal to the length of all skills state set status to interview.
-          // Otherwise, set status to declined.
-          counter === skillState.allSkills.length ? applicant.status = 'Interview' : applicant.status = 'Declined'
-          console.log(applicant.status)
+          if (counter === skillState.allSkills.length) {
+            applicant.status = 'Interview'
+          }
+          // Otherwise, set status to declined, and give reasons.
+          else {
+            // Set status to declined.
+            applicant.status = 'Declined'
+            console.log(missingSkills)
+            // Loop through the missing skills array and set the reasons and actionItems.
+            missingSkills.forEach(missingSkill => {
+              applicant.declined.reasons.push(`No experience in ${missingSkill} listed.`)
+              applicant.declined.actionItems.push(`Gain more experience in ${missingSkill}.`)
+            })
+          }
 
           // Update the db with new job information.
           JobAPI.update(job._id, job)
