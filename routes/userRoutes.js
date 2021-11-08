@@ -9,7 +9,6 @@ router.get('/user', passport.authenticate('jwt'), (req, res) => res.json(req.use
 
 // Get a user's information by their email.
 router.get('/users/:email', (req, res) => {
-  console.log(req.params.email)
   User.findOne({ username: req.params.email }, (err, docs) => {
     if (err) { res.json(err) }
     else { res.json(docs) }
