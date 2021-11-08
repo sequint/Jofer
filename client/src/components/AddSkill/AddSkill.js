@@ -10,20 +10,18 @@ import './AddSkill.css'
 const AddSkill = ({ setParentState }) => {
   // Define all state variables for the component.
   const [show, setShow] = useState(false)
-  const [ skillState, setSkillState ] = useState('')
-  const [missingInput, setMissingInput] = useState({
+  const [ skillState, setSkillState ] = useState({
+    skill: '',
+    allSkills: [],
     missingSkill: false
   })
-
-  // Components variables.
-  let allSkills = []
 
   // Modal show handlers.
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
   // Input type handler.
-  const handleInputChange = ({ target: { value } }) => setSkillState(value)
+  const handleInputChange = ({ target: { value } }) => setSkillState({ ...skillState, skill: value })
 
   return(
     <>
@@ -63,7 +61,7 @@ const AddSkill = ({ setParentState }) => {
                   value={skillState}
                   onChange={handleInputChange}
                 />
-                {missingInput.missingApplicantName ? <p className="err mt-2">⚠️ Please enter a name</p> : <></>}
+                {skillState.missingSkill ? <p className="err mt-2">⚠️ Please enter a skill</p> : <></>}
               </Form.Group>
               <Button
                 className="mt-3 createBtn"
@@ -71,7 +69,7 @@ const AddSkill = ({ setParentState }) => {
                 type='submit'
                 onClick={handleAddApplicant}
               >
-                Add Applicant
+                Add Skill
               </Button>
             </Form>
           </Row>
@@ -80,11 +78,11 @@ const AddSkill = ({ setParentState }) => {
 
           <Row>
             <h3>Skills</h3>
-            {jobState ? jobState.applicants.map(({ applicantName }) => <li>{applicantName}</li>) : <></>}
+            {skillState.allSkills.length > 0 ? skillState.allSkills.map(skill => <li>{skill}</li>) : <></>}
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          {missingInput.missingApplicants ? <p className="err me-4">⚠️ No skills added yet</p> : <></>}
+          {skillState.allSkills.length > 0 ? <p className="err me-4">⚠️ No skills added yet</p> : <></>}
           <Button
             className="createBtn"
             variant='primary'
