@@ -186,23 +186,34 @@ const ManageJobs = () => {
       setFilteredApplicants(newState)
     }
     else if (sInd === 2) {
+     
       JobAPI.getEmployerJobs()
         .then(({ data }) => {
           data.forEach(elem => {
             if (elem._id === job._id) {
+              console.log(elem._id)
+              
               elem.applicants.forEach((applicant, index) => {
-                if (applicant.email === allInfo.email) {
-
-                  let reason = applicant.declined.reasons[0]
-                  if (reason !== "im not sure why") {
-                    revertDecline(allInfo)
+               
+                if (applicant.email === allInfo.draggableId) {
+                  let reason = applicant.declined.reasons
+                  if (reason.length > 0 ) {
+                    
+                    // revertDecline(allInfo) 
+                    console.log('reverting')
                   }
                   else {
                     const result = move(state[sInd], state[dInd], source, destination, sInd, dInd)
-
+                    const storage = 'declined' + job._id
+                    const declined = allInfo.draggableId
+                    const declinedUsers = JSON.parse(localStorage.getItem(storage))
+                    if (declinedUsers) {
+                      const flag = declinedUsers.filter(email => email !== declined)
+                      localStorage.setItem(storage, JSON.stringify(flag))
                     console.log('setting new state')
                     setState(result)
                     setFilteredApplicants(result)
+                    }
                   }
                 }
               })
@@ -215,6 +226,7 @@ const ManageJobs = () => {
     else if(sInd ===3 && dInd ===2){
       console.log('do nothing')
     }
+    
     else {
       const result = move(state[sInd], state[dInd], source, destination, sInd, dInd)
 
