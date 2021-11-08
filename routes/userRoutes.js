@@ -7,6 +7,15 @@ const { json } = require('express')
 // Get current user information.
 router.get('/user', passport.authenticate('jwt'), (req, res) => res.json(req.user))
 
+// Get a user's information by their email.
+router.get('/users/:email', (req, res) => {
+  console.log(req.params.email)
+  User.findOne({ username: req.params.email }, (err, docs) => {
+    if (err) { res.json(err) }
+    else { res.json(docs) }
+  })
+})
+
 // Create a new user.
 router.post('/users/register', (req, res) => {
   const { first_name, last_name, username, user_type, company, password } = req.body
