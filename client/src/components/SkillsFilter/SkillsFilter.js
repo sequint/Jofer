@@ -6,9 +6,10 @@ import {
   Form
 } from 'react-bootstrap'
 import UserAPI from '../../utils/UserAPI'
+import JobAPI from '../../utils/JobAPI'
 import './SkillsFilter.css'
 
-const SkillsFilter = ({ job }) => {
+const SkillsFilter = ({ job, setParentState }) => {
   // Define all state variables for the component.
   const [ show, setShow ] = useState(false)
   const [skillState, setSkillState] = useState({
@@ -60,15 +61,14 @@ const SkillsFilter = ({ job }) => {
   const handleBulkDecline = event => {
     if (event) { event.preventDefault() }
 
-    // Create a counter variable to count the amount of matching skills.
-    
-
     // Loop through job applicants and get their information with their email.
     job.applicants.forEach(applicant => {
       UserAPI.getUserByEmail(applicant.email)
         .then(({ data }) => {
+
+          // Create a counter variable to count the amount of matching skills.
           let counter = 0
-          console.log(data)
+
           // Loop through the applicants skills array as parent loop.
           data.skills.forEach(skill => {
             // Loop through all skill state as child loop to match with each skill.
@@ -79,20 +79,27 @@ const SkillsFilter = ({ job }) => {
               }
             })
           })
-          console.log(counter)
-          console.log(skillState.allSkills.length)
+
+          // If counter is equal to the length of all skills state set status to interview.
+          // Otherwise, set status to declined.
           counter === skillState.allSkills.length ? applicant.status = 'Interview' : applicant.status = 'Declined'
           console.log(applicant.status)
 
+          // Update the db with new job information.
+          JobAPI.update(job._id, job)
+            .then(({ data }) => console.log(data))
+            .catch(err => console.log(err))
+
+          // Set manage jobs state with new job information.
+          setParentState(job)
+
         })
         .catch(err => console.log(err))
-      
-      // If counter is equal to the length of all skills state set status to interview.
-      // Otherwise, set status to declined.
      
     })
-    console.log(job)
 
+    // Close the modal.
+    handleClose()
   }
 
   return(
