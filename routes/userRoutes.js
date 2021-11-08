@@ -7,6 +7,12 @@ const { json } = require('express')
 // Get current user information.
 router.get('/user', passport.authenticate('jwt'), (req, res) => res.json(req.user))
 
+// Get a user's information by their id.
+router.get('/users/:id', async function (req, res) {
+  const foundUser = await User.findById(req.params._id)
+  res.json(foundUser)
+})
+
 // Create a new user.
 router.post('/users/register', (req, res) => {
   const { first_name, last_name, username, user_type, company, password } = req.body
