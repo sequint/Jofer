@@ -60,11 +60,19 @@ const SkillsFilter = ({ job }) => {
   const handleBulkDecline = event => {
     if (event) { event.preventDefault() }
 
-    // Loop through job applicants and get their information with their id.
+    // Loop through job applicants and get their information with their email.
     job.applicants.forEach(applicant => {
-      console.log(applicant)
       UserAPI.getUserByEmail(applicant.email)
-        .then(({ data }) => console.log(data))
+        .then(({ data }) => {
+          console.log(data)
+          // Loop through the applicants skills array as parent loop.
+          data.skills.forEach(skill => {
+            // Loop through all skill state as child loop to match with each skill.
+            skillState.allSkills.forEach(desiredSkill => {
+              if (desiredSkill === skill) { console.log(desiredSkill) }
+            })
+          })
+        })
         .catch(err => console.log(err))
     })
 
