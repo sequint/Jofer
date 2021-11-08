@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Button,
   Modal,
@@ -18,12 +18,27 @@ const AddSkill = () => {
     missingAllSkills: false
   })
 
+  useEffect(() => {
+    UserAPI.getUser()
+      .then(({ data }) => {
+        // If there is a response with user data, create a temp variable to store it.
+        let tempUser = data
+        tempUser.skills.forEach(tempSkill => {
+          skillState.allSkills.push(tempSkill)
+          setSkillState({ ...skillState})
+        })
+      })
+      .catch(err => console.log(err))
+
+    // .catch(err => window.location = '/auth')
+  }, [])
+  
+
   // Modal show handlers.
   const handleClose = () => {
     // Reset all states and close the modal.
-    setSkillState({
+    setSkillState({...skillState,
       skill: '',
-      allSkills: [],
       missingSkill: false,
       missingAllSkills: false
     })
@@ -75,6 +90,7 @@ const AddSkill = () => {
         .then(({ data }) => {
           // If there is a response with user data, create a temp variable to store it.
           let tempUser = data
+          tempUser.skills = []
           console.log(tempUser)
           console.log(skillState.allSkills)
           // Loop through allskills and push each new skill into user skills array.
