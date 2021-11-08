@@ -22,14 +22,17 @@ const AddSkill = () => {
   const handleShow = () => setShow(true)
 
   // Input type handler.
-  const handleInputChange = ({ target: { value } }) => setSkillState({ ...skillState, skill: value })
+  const handleInputChange = ({ target: { value } }) => {
+    // Reset missing skill property to false.
+    skillState.missingSkill = false
+    setSkillState({ ...skillState })
+    // Set skill state to the target value.
+    setSkillState({ ...skillState, skill: value })
+  }
 
   // Adding skill to local array handler.
   const handleAddSkill = event => {
     if (event) { event.preventDefault() }
-
-    // Reset missing skill property to false.
-    setSkillState({ ...skillState, missingSkill: false })
 
     // If there is a skill in the input, push it into all skills and clear skill state.
     if (skillState.skill !== '') {
@@ -57,7 +60,7 @@ const AddSkill = () => {
           className="col-2 CreateJobBtn"
           varient="outline-secondary"
           onClick={handleShow}>
-          Add a Job
+          Add Skills
         </Button>
       </div>
 
