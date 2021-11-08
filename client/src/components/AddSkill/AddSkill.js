@@ -10,7 +10,8 @@ import './AddSkill.css'
 const AddSkill = ({ setParentState }) => {
   // Define all state variables for the component.
   const [show, setShow] = useState(false)
-  const [ skillState, setSkillState ] = useState([])
+  const [ skillState, setSkillState ] = useState('')
+  const [ allSkills, setAllSkills ] = useState([])
   const [missingInput, setMissingInput] = useState({
     missingSkill: false
   })
@@ -39,7 +40,7 @@ const AddSkill = ({ setParentState }) => {
         centered>
         <Modal.Header closeButton>
           <Modal.Title>
-            Add Additional Applicants
+            Add Skills
           </Modal.Title>
         </Modal.Header>
 
@@ -47,13 +48,13 @@ const AddSkill = ({ setParentState }) => {
           <Row>
             <Form>
               <Form.Group className='mb-3' controlId='applicantName'>
-                <Form.Label>Applicant Name</Form.Label>
+                <Form.Label>Skill Name</Form.Label>
                 <Form.Control
                   className="gray"
                   type='text'
                   placeholder='Enter candidates name'
                   name='applicantName'
-                  value={jobState.applicantName}
+                  value={skillState}
                   onChange={handleInputChange}
                 />
                 {missingInput.missingApplicantName ? <p className="err mt-2">⚠️ Please enter a name</p> : <></>}
