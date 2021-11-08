@@ -9,8 +9,6 @@ import Negotiator from '../Negotiator/Negotiator'
 import './AppliedJobCard.css'
 import currencyFormatter from 'currency-formatter'
 
-
-
 const AppliedJobCard = ({ job, setParentState }) => {
   const [show, setShow] = useState(false)
   const [declinedReasons, setDeclinedReasons] = useState({
@@ -81,8 +79,6 @@ const AppliedJobCard = ({ job, setParentState }) => {
     employerDeclinedCounter: []
   })
 
-  
-
   useEffect(() => {
     JobAPI.getAllJobs()
       .then(({ data }) => {
@@ -115,8 +111,6 @@ const AppliedJobCard = ({ job, setParentState }) => {
 
   const listReasons = _ => declinedReasons.reasons.map(reason => <li>{reason}</li>)
   const listActionItems = _ => declinedReasons.actionItems.map(item => <li>{item}</li>)
-
-
 
   return (
     <>

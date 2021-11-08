@@ -50,3 +50,15 @@
 .negotiationFooter {
   margin: auto;
 }
+
+.declineBtn:hover {
+  fill: red;
+}
+
+.acceptBtn:hover {
+  fill: green;
+}
+
+.counterBtn:hover {
+  fill: #219EBC;
+}
