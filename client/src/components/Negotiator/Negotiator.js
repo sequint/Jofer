@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import JobAPI from '../../utils/JobAPI'
 import './Negotiator.css'
 import { ModalBody } from 'react-bootstrap'
@@ -405,59 +406,74 @@ const Negotiator = ({ showState, setParentState, job, passedNegotiation }) => {
         </ModalBody>
 
         <Modal.Footer className="negotiationFooter">
-          <Button
-            variant="counterOptions"
-            onClick={handleDecline}>
-            <svg
-              viewBox="0 0 48 48"
-              fill="gray"
-              height="40px"
-              width="40px"
-              className="declineBtn"
-            >
-              <path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm0 36c-8.84 0-16-7.16-16-16 0-3.7 1.27-7.09 3.37-9.8L33.8 36.63C31.09 38.73 27.7 40 24 40zm12.63-6.2L14.2 11.37C16.91 9.27 20.3 8 24 8c8.84 0 16 7.16 16 16 0 3.7-1.27 7.09-3.37 9.8z" />
-            </svg>
-          </Button>
-          <Button
-            variant="counterOptions"
-            onClick={handleAccept}>
-            <svg
-              fill="gray"
-              viewBox="0 0 16 16"
-              height="40px"
-              width="40px"
-              className="acceptBtn"
-            >
-              <path
-                fillRule="evenodd"
-                d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z"
-              />
-              <path
-                fillRule="evenodd"
-                d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z"
-              />
-            </svg>
-          </Button>
-          <Button
-            className="counterOptions"
-            onClick={() => handleClose('counter')}>
-            <svg
-              fill="gray"
-              viewBox="0 0 16 16"
-              height="40px"
-              width="40px"
-              className="counterBtn"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
-              />
-              <path
-                fillRule="evenodd"
-                d="M4 8a.5.5 0 00.5.5h5.793l-2.147 2.146a.5.5 0 00.708.708l3-3a.5.5 0 000-.708l-3-3a.5.5 0 10-.708.708L10.293 7.5H4.5A.5.5 0 004 8z"
-              />
-            </svg>
-          </Button>
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip id="button-tooltip-2">Decline Offer</Tooltip>}
+          >
+            <Button
+              variant="counterOptions"
+              onClick={handleDecline}>
+              <svg
+                viewBox="0 0 48 48"
+                fill="gray"
+                height="40px"
+                width="40px"
+                className="declineBtn"
+              >
+                <path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm0 36c-8.84 0-16-7.16-16-16 0-3.7 1.27-7.09 3.37-9.8L33.8 36.63C31.09 38.73 27.7 40 24 40zm12.63-6.2L14.2 11.37C16.91 9.27 20.3 8 24 8c8.84 0 16 7.16 16 16 0 3.7-1.27 7.09-3.37 9.8z" />
+              </svg>
+            </Button>
+          </OverlayTrigger>
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip id="button-tooltip-2">Accept Offer</Tooltip>}
+          >
+            <Button
+              variant="counterOptions"
+              onClick={handleAccept}>
+              <svg
+                fill="gray"
+                viewBox="0 0 16 16"
+                height="40px"
+                width="40px"
+                className="acceptBtn"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z"
+                />
+                <path
+                  fillRule="evenodd"
+                  d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z"
+                />
+              </svg>
+            </Button>
+          </OverlayTrigger>
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip id="button-tooltip-2">Send Counter Offer</Tooltip>}
+          >
+            <Button
+              className="counterOptions"
+              onClick={() => handleClose('counter')}>
+              <svg
+                fill="gray"
+                viewBox="0 0 16 16"
+                height="40px"
+                width="40px"
+                className="counterBtn"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
+                />
+                <path
+                  fillRule="evenodd"
+                  d="M4 8a.5.5 0 00.5.5h5.793l-2.147 2.146a.5.5 0 00.708.708l3-3a.5.5 0 000-.708l-3-3a.5.5 0 10-.708.708L10.293 7.5H4.5A.5.5 0 004 8z"
+                />
+              </svg>
+            </Button>
+          </OverlayTrigger>
         </Modal.Footer>
       </>
     )
