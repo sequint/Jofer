@@ -11,6 +11,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import CreateJob from '../../components/CreateJobModal'
+import AddSkill from '../../components/AddSkill'
 import AddApplicantJob from '../../components/AddApplicantJob'
 import './AppliedJobs.css'
 
@@ -276,13 +277,11 @@ const AppliedJobs = () => {
     <>
       <NavbarElem/>
       <PageTitle title='My Jobs' />
-      
-
-     
       <Container className="manageJobContainer">
         <AddApplicantJob
           setParentState={setParentState}
         />
+        <AddSkill />
         <DragDropContext onDragEnd={onDragEnd}>
           <Row>
             
