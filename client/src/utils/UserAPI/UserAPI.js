@@ -16,7 +16,6 @@ const UserAPI = {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
   })
-    .then(({ data }) => console.log(data))
 }
 
 export default UserAPI
