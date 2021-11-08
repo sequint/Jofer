@@ -38,7 +38,7 @@ const AddSkill = () => {
     // If there is a skill in the input, push it into all skills and clear skill state.
     if (skillState.skill !== '') {
       skillState.allSkills.push(skillState.skill)
-      setSkillState({ ...skillState, skill: '' })
+      setSkillState({ ...skillState, skill: '', missingAllSkills: false })
     }
     // Otherwise, set the missing skill state to true.
     else {
@@ -50,14 +50,21 @@ const AddSkill = () => {
   const handleAddAllSkills = event => {
     if (event) { event.preventDefault() }
 
+    // Reset missing all skills.
+    setSkillState({ ...skillState, missingAllSkills: false })
+
     // If all skills array in empty, set all skills missing bool to true.
     if (skillState.allSkills.length === 0) {
       skillState.missingAllSkills = true
       setSkillState({ ...skillState })
     }
+    else {
+      // Send update request for the loged in user to add all skills state to skills in db.
+      UserAPI.updateUser({ skills: skillState.allSkills }).then(({ data }) => console.log(data))
+      // Close the modal.
+      handleClose()
+    }
 
-    // Send update request for the loged in user to add all skills state to skills in db.
-    UserAPI.updateUser(skillState.allSkills).then(({ data }) => console.log(data))
   }
 
   return(
