@@ -14,7 +14,8 @@ const AddSkill = () => {
   const [ skillState, setSkillState ] = useState({
     skill: '',
     allSkills: [],
-    missingSkill: false
+    missingSkill: false,
+    missingAllSkills: false
   })
 
   // Modal show handlers.
@@ -48,6 +49,13 @@ const AddSkill = () => {
 
   const handleAddAllSkills = event => {
     if (event) { event.preventDefault() }
+
+    // If all skills array in empty, set all skills missing bool to true.
+    if (skillState.allSkills.length === 0) {
+      skillState.missingAllSkills = true
+      setSkillState({ ...skillState })
+    }
+
     // Send update request for the loged in user to add all skills state to skills in db.
     UserAPI.updateUser(skillState.allSkills).then(({ data }) => console.log(data))
   }
@@ -111,7 +119,7 @@ const AddSkill = () => {
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          {skillState.allSkills.length > 0 ? <p className="err me-4">⚠️ No skills added yet</p> : <></>}
+          {skillState.missingAllSkills > 0 ? <p className="err me-4">⚠️ No skills added yet</p> : <></>}
           <Button
             className="createBtn"
             variant='primary'
