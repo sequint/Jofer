@@ -5,10 +5,10 @@ import {
   Row,
   Form
 } from 'react-bootstrap'
-import UserAPI from '../../utils'
+import UserAPI from '../../utils/UserAPI'
 import './AddSkill.css'
 
-const AddSkill = ({ setParentState }) => {
+const AddSkill = () => {
   // Define all state variables for the component.
   const [show, setShow] = useState(false)
   const [ skillState, setSkillState ] = useState({
@@ -84,7 +84,7 @@ const AddSkill = ({ setParentState }) => {
                   type='text'
                   placeholder='Enter a skill'
                   name='skill'
-                  value={skillState}
+                  value={skillState.skill}
                   onChange={handleInputChange}
                 />
                 {skillState.missingSkill ? <p className="err mt-2">⚠️ Please enter a skill</p> : <></>}
