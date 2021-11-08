@@ -223,7 +223,7 @@ const ManageJobs = () => {
 
 
     }
-    else if(sInd ===3 && dInd ===2){
+    else if(sInd ===3 && dInd !==3){
       console.log('do nothing')
     }
     
