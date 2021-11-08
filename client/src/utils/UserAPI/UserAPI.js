@@ -8,6 +8,8 @@ const UserAPI = {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
   }),
+  // Function that gets a user by their id.
+  getUserById: userId => axios.get(`/api/users/${userId}`),
   // Create property that uses axios request to register a user.
   register: user => axios.post('/api/users/register', user),
   login: user => axios.post('/api/users/login', user),
