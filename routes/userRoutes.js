@@ -7,10 +7,13 @@ const { json } = require('express')
 // Get current user information.
 router.get('/user', passport.authenticate('jwt'), (req, res) => res.json(req.user))
 
-// Get a user's information by their id.
-router.get('/users/:id', async function (req, res) {
-  const foundUser = await User.findById(req.params._id)
-  res.json(foundUser)
+// Get a user's information by their email.
+router.get('/users/:email', (req, res) => {
+  console.log(req.params.email)
+  User.findOne({ username: req.params.email }, (err, docs) => {
+    if (err) { res.json(err) }
+    else { res.json(docs) }
+  })
 })
 
 // Create a new user.

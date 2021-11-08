@@ -5,6 +5,7 @@ import {
   Row,
   Form
 } from 'react-bootstrap'
+import UserAPI from '../../utils/UserAPI'
 import './SkillsFilter.css'
 
 const SkillsFilter = ({ job }) => {
@@ -59,7 +60,13 @@ const SkillsFilter = ({ job }) => {
   const handleBulkDecline = event => {
     if (event) { event.preventDefault() }
 
-    
+    // Loop through job applicants and get their information with their id.
+    job.applicants.forEach(applicant => {
+      console.log(applicant)
+      UserAPI.getUserByEmail(applicant.email)
+        .then(({ data }) => console.log(data))
+        .catch(err => console.log(err))
+    })
 
   }
 

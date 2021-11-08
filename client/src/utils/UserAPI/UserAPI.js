@@ -9,7 +9,7 @@ const UserAPI = {
     }
   }),
   // Function that gets a user by their id.
-  getUserById: userId => axios.get(`/api/users/${userId}`),
+  getUserByEmail: userEmail => axios.get(`/api/users/${userEmail}`),
   // Create property that uses axios request to register a user.
   register: user => axios.post('/api/users/register', user),
   login: user => axios.post('/api/users/login', user),
