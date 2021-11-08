@@ -393,7 +393,7 @@ const ManageJobs = () => {
       <Container className="manageJobContainer">
         <DragDropContext onDragEnd={onDragEnd}>
           <Row>
-            <SkillsFilter />
+            <SkillsFilter job={job} />
             <AddApplicant job={job} setParentState={setParentState} />
             <Col className="column">
               <h2>Review</h2>

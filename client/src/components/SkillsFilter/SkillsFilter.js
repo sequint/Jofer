@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap'
 import './SkillsFilter.css'
 
-const SkillsFilter = () => {
+const SkillsFilter = ({ job }) => {
   // Define all state variables for the component.
   const [ show, setShow ] = useState(false)
   const [skillState, setSkillState] = useState({
@@ -59,7 +59,7 @@ const SkillsFilter = () => {
   const handleBulkDecline = event => {
     if (event) { event.preventDefault() }
 
-    console.log('bulk decline')
+    
 
   }
 
