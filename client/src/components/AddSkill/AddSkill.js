@@ -77,8 +77,10 @@ const AddSkill = () => {
           let tempUser = data
           console.log(tempUser)
           console.log(skillState.allSkills)
-          // Push new skills into the user's skills array property.
-          tempUser.skills.push(skillState.allSkills)
+          // Loop through allskills and push each new skill into user skills array.
+          skillState.allSkills.forEach(tempSkill => {
+            tempUser.skills.push(tempSkill) 
+          })
           console.log(tempUser)
           // Send update to the db for the user with new skills array.
           UserAPI.updateUser(tempUser).then(({ data }) => console.log(data))
