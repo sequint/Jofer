@@ -63,16 +63,19 @@ const SkillsFilter = ({ job, setParentState }) => {
 
     // Loop through job applicants and get their information with their email.
     job.applicants.forEach(applicant => {
-      UserAPI.getUserByEmail(applicant.email)
-        .then(({ data }) => {
+      
+      if(applicant.status ==='Review'){
 
+        UserAPI.getUserByEmail(applicant.email)
+        .then(({ data }) => {
+          
           // Create a counter variable to count the amount of matching skills
           let counter = 0
           // Create a prior counter variable to know if a match was found in nested loop.
           let priorCounter = counter
           // Create an array to hold missing skills for an applicant.
           let missingSkills = []
-
+          
           // Loop through all skill state as child loop to match with each skill.
           skillState.allSkills.forEach(desiredSkill => {
             // Loop through the applicants skills array as parent loop.
@@ -82,20 +85,20 @@ const SkillsFilter = ({ job, setParentState }) => {
                 counter += 1
               }
             })
-
+            
             // If the counter is equal to the prior counter,
             // push the desired skill into missingSkills.
             if (priorCounter === counter) {
               missingSkills.push(desiredSkill)
               console.log(missingSkills)
             }
-
+            
             // Set prior counter to counter again.
             priorCounter = counter
             console.log(missingSkills)
-
+            
           })
-
+          
           // If counter is equal to the length of all skills state set status to interview.
           if (counter === skillState.allSkills.length) {
             applicant.status = 'Interview'
@@ -111,21 +114,25 @@ const SkillsFilter = ({ job, setParentState }) => {
               applicant.declined.actionItems.push(`Gain more experience in ${missingSkill}.`)
             })
           }
-
+          
           // Update the db with new job information.
           JobAPI.update(job._id, job)
-            .then(({ data }) => console.log(data))
-            .catch(err => console.log(err))
-
+          .then(({ data }) => console.log(data))
+          .catch(err => console.log(err))
+          
           // Set manage jobs state with new job information.
           setParentState(job)
-
+          
         })
         .catch(err => console.log(err))
-     
-    })
-
-    // Close the modal.
+        
+      }else{
+        // Set manage jobs state with new job information.
+        setParentState(job)
+      }
+      })
+      
+      // Close the modal.
     handleClose()
   }
 
