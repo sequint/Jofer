@@ -11,13 +11,19 @@ const AddSkill = ({ setParentState }) => {
   // Define all state variables for the component.
   const [show, setShow] = useState(false)
   const [ skillState, setSkillState ] = useState('')
-  const [ allSkills, setAllSkills ] = useState([])
   const [missingInput, setMissingInput] = useState({
     missingSkill: false
   })
 
+  // Components variables.
+  let allSkills = []
+
+  // Modal show handlers.
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
+
+  // Input type handler.
+  const handleInputChange = ({ target: { value } }) => setSkillState(value)
 
   return(
     <>
@@ -52,33 +58,21 @@ const AddSkill = ({ setParentState }) => {
                 <Form.Control
                   className="gray"
                   type='text'
-                  placeholder='Enter candidates name'
-                  name='applicantName'
+                  placeholder='Enter a skill'
+                  name='skill'
                   value={skillState}
                   onChange={handleInputChange}
                 />
                 {missingInput.missingApplicantName ? <p className="err mt-2">⚠️ Please enter a name</p> : <></>}
               </Form.Group>
-              <Form.Group className='mb-3' controlId='email'>
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  className="gray"
-                  type='text'
-                  placeholder='Enter candidates email'
-                  name='email'
-                  value={jobState.email}
-                  onChange={handleInputChange}
-                />
-                {(missingInput.missingEmail || !correctFormat) ? <p className="err mt-2">⚠️ Please enter a valid email address</p> : <></>}
-                <Button
-                  className="mt-3 createBtn"
-                  variant='primary'
-                  type='submit'
-                  onClick={handleAddApplicant}
-                >
-                  Add Applicant
-                </Button>
-              </Form.Group>
+              <Button
+                className="mt-3 createBtn"
+                variant='primary'
+                type='submit'
+                onClick={handleAddApplicant}
+              >
+                Add Applicant
+              </Button>
             </Form>
           </Row>
 
