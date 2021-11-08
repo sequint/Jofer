@@ -60,6 +60,9 @@ const SkillsFilter = ({ job }) => {
   const handleBulkDecline = event => {
     if (event) { event.preventDefault() }
 
+    // Create a counter variable to count the amount of matching skills.
+    let counter = 0
+
     // Loop through job applicants and get their information with their email.
     job.applicants.forEach(applicant => {
       UserAPI.getUserByEmail(applicant.email)
@@ -68,13 +71,23 @@ const SkillsFilter = ({ job }) => {
           // Loop through the applicants skills array as parent loop.
           data.skills.forEach(skill => {
             // Loop through all skill state as child loop to match with each skill.
-            skillState.allSkills.forEach(desiredSkill => {
-              if (desiredSkill === skill) { console.log(desiredSkill) }
+            skillState.allSkills.forEach(desiredSkill => { 
+              if (desiredSkill === skill) {
+                console.log('match')
+                counter += 1
+              }
             })
           })
         })
         .catch(err => console.log(err))
+      
+      // If counter is equal to the length of all skills state set status to interview.
+      // Otherwise, set status to declined.
+      console.log(counter)
+      console.log(skillState.allSkills.length)
+      counter === skillState.allSkills.length ? applicant.status = 'Interview' : applicant.status = 'Declined'
     })
+    console.log(job)
 
   }
 
