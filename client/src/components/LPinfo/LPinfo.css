@@ -1,3 +1,11 @@
 .infoContainer {
   background-color: #f8f9fa !important;
 }
+
+.featuresList {
+  list-style-type: none;
+}
+
+.featuresLiItem {
+  margin-left: -15px;
+}
