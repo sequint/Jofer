@@ -6,20 +6,6 @@ const LPinfo = () => {
         id="#about">
         <div className="container px-5 my-5">
           <div className="row gx-5">
-
-            <div className="col-lg-4 mb-5 mb-lg-0">
-              <div className="feature bg-gradient rounded-3 mb-3">
-                <svg 
-                xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" 
-                className="bi bi-person-circle" viewBox="0 0 16 16">
-                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                </svg>
-              </div>
-              <h2 className="h4 fw-bolder">Applicant</h2>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae eveniet praesentium dolor voluptas earum ea porro iure facilis nam perferendis reiciendis itaque unde libero fugit in commodi, deserunt odio sunt?</p>
-            </div>
-
             <div className="col-lg-4 mb-5 mb-lg-0">
               <div className="feature bg-gradient rounded-3 mb-3">
                 <svg 
@@ -31,8 +17,22 @@ const LPinfo = () => {
                 </svg>
               </div>
               <h2 className="h4 fw-bolder">Employer</h2>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae eveniet praesentium dolor voluptas earum ea porro iure facilis nam perferendis reiciendis itaque unde libero fugit in commodi, deserunt odio sunt?</p>
+              <p>Whether you are a small business, mid-market, or corporate firm - managing the application process is no easy task, especially when you want to ensure a good expereience for applicants putting in the work to apply for a job. Jofer offers employers an easy to use solution, to communicating where applicants are at in the job process.  Employers can easily drag and drop applicants into different status categories, or filter by requirements for firms handling higher volumes.</p>
             </div>
+
+            <div className="col-lg-4 mb-5 mb-lg-0">
+              <div className="feature bg-gradient rounded-3 mb-3">
+                <svg 
+                xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" 
+                className="bi bi-person-circle" viewBox="0 0 16 16">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                </svg>
+              </div>
+              <h2 className="h4 fw-bolder">Applicant</h2>
+              <p>Easily track your job status here! Jofer offers applicants the ability to see in real time, employers updates on there status.  If an applicant unfortuantely gets declined, they can see a list of reasons and some action items about what they can do to be more competitive in the future - so say goodbye to the mysterious auto decline email leaving you wondering what you did wrong!</p>
+            </div>
+
 
             <div className="col-lg-4 mb-5 mb-lg-0">
               <div className="feature bg-gradient rounded-3 mb-3">
