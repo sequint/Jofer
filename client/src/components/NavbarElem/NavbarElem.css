@@ -23,6 +23,8 @@
 
 .userDropMenu {
   margin-right: 50px !important;
+  border-top-right-radius: 0% !important;
+  box-shadow: 1px 1px 5px rgba(129, 129, 129, 0.733)
 }
 
 #basic-navbar-nav {
