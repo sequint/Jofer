@@ -1,8 +1,10 @@
+import './LPinfo.css'
+
 const LPinfo = () => {
   return (
     <>
       <section
-        className="py-5 border-bottom"
+        className="py-5 border-bottom infoContainer"
         id="#about">
         <div className="container px-5 my-5">
           <div className="row gx-5">
@@ -17,7 +19,7 @@ const LPinfo = () => {
                 </svg>
               </div>
               <h2 className="h4 fw-bolder">Employer</h2>
-              <p>Whether you are a small business, mid-market, or corporate firm - managing the application process is no easy task, especially when you want to ensure a good expereience for applicants putting in the work to apply for a job. Jofer offers employers an easy to use solution, to communicating where applicants are at in the job process.  Employers can easily drag and drop applicants into different status categories, or filter by requirements for firms handling higher volumes.</p>
+              <p>Whether you are a small business, mid-market, or corporate firm - managing the application process is no easy task, especially when you want to ensure a good expereience for applicants putting in the work to apply for a job. Jofer offers employers an easy to use solution, to communicate where applicants are at in the job process.  Employers can easily drag and drop applicants into different status categories, or filter by requirements for firms handling higher volumes.</p>
             </div>
 
             <div className="col-lg-4 mb-5 mb-lg-0">
