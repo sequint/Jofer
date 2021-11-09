@@ -1,4 +1,37 @@
+import emailjs from 'emailjs-com'
+import { useState } from 'react'
+
+
+
+
 const LPcontact = () => {
+
+
+  const [connectInfo, setConnectInfo] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+  
+  const handleInputChange = ({ target: { name, value } }) => setConnectInfo({ ...connectInfo, [name]: value })
+
+
+
+  const handleSubmit = event => {
+    event.preventDefault()
+
+    if(connectInfo.name !=='' && connectInfo.email !=='' && connectInfo.message !== ''){
+
+      
+      emailjs.send("service_bzw9z2j", "contact", connectInfo, "user_74lDawTBgW65Sfcmf8XdP")
+      
+      
+      setConnectInfo({ email: '', name: '', message: '' })
+      console.log(connectInfo)
+    }
+    console.log(connectInfo)
+
+  }
   return (
     <section
       className="bg-light py-5"
@@ -24,8 +57,10 @@ const LPcontact = () => {
               <div className="form-floating mb-3">
                 <input
                   className="form-control mb-2"
-                  id="name"
+                  name="name"
+                  value={connectInfo.name}
                   type="text"
+                  onChange={handleInputChange}
                   placeholder="Enter your name..." data-sb-validations="required" />
                 <label for="name">Full name</label>
                 <div
@@ -36,8 +71,10 @@ const LPcontact = () => {
 
                 <div className="form-floating mb-3">
                   <input className="form-control"
-                    id="email"
+                    name="email"
+                    value={connectInfo.email}
                     type="email"
+                    onChange={handleInputChange}
                     placeholder="name@example.com" data-sb-validations="required,email" />
                   <label for="email">Email address</label>
                   <div
@@ -55,13 +92,15 @@ const LPcontact = () => {
                 <div className="form-floating mb-3">
                   <textarea
                     className="form-control"
-                    id="message"
+                    name="message"
+                    value={connectInfo.message}
                     type="text"
+                    onChange={handleInputChange}
                     laceholder="Enter your message here..."
                     data-sb-validations="required"></textarea>
                   <label for="message">Message</label>
                   <div
-                    lassName="invalid-feedback"
+                    className="invalid-feedback"
                     data-sb-feedback="message:required">
                     A message is required.
                   </div>
@@ -71,7 +110,9 @@ const LPcontact = () => {
                   <button
                     className="btn btn-primary btn-lg"
                     id="submitButton"
+                    onClick={handleSubmit}
                     type="submit">
+                    
                     Submit
                   </button>
                 </div>
