@@ -20,7 +20,7 @@ const LPnav = () => {
 
               <Nav.Link
                 className="navLink"
-                href="#home">
+                href="/home">
                 Home
               </Nav.Link>
 
