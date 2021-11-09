@@ -24,6 +24,7 @@ const AppliedJobCard = ({ job, setParentState }) => {
   const handleClose = () => setShow(false)
 
   const handleShowNegotiator = (showState, newJobState, green) => {
+    setParentState()
     showNegotiator.show = showState
     setShowNegotiator({ ...showNegotiator })
     setGreenBorder(green)
