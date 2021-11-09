@@ -531,7 +531,7 @@ const AppliedJobs = () => {
           </DropdownButton>
         </div>
       </row>
-      <Container>
+      <Container className="jobCardContainer">
         {filteredJobs.slice(0).reverse().map(job => <AppliedJobCard job={job} setParentState={setParentState} />)}
       </Container>
 
