@@ -73,9 +73,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Future Goals
 
-- Interactive Applicant Side
- - Currently the applicants side is view only, except for being able to negotiate their   salary when offered a job.  Our future goal is to build a similar tool that the employer has in job manager, where the applicant can create jobs they have applied to and manage their progress manually (automatic updates if the employer is also on Jofer).
-- End-to-end Application Process
-  - Currently our app is scaled down for smaller companies.  We would keep this version for companies with less than 50 employees.  Our next version would be subscription based for larger companies with more applicants.
-  - This larger version would be fully automated and end-to-end.  The employer would post the job on our site.  When an applicant applies, they fill out all of the information that the employer needs (skills, history, etc.).
-  - Then the employer will be able to filter applicants in the managed job tool in bulk, and decline applicants in groups, but still automate decline reasons that are individual to the applicants so that this app can be used at scale.
+- A single UI on applicant side between jobs the applicant creates and jobs employers post.
+  - Currently A drag and drop feature is available to manage jobs where employers don't use Jofer and jobs posted by employers are listed below.  Future state goals are to combine the two, where job updates from employers are managed in the drag and drop feature from the applicant side.
+- When an applicant creates an account the are promted to fill out a digital resume, and have the ability to update it (skills, experience, etc.) via a profile page.
+- Ability for employers to post jobs, and have posted jobs be on the home page for applicants to scroll through, solidifying end-to-end application process through Jofer.
+- Incorporate AI into decline process to learn applicants resume, and compare it to what the employer is looking for to give even more custom decline responses.
+- Incorporate more automation into the salary negotiator to allow an alogorythm to handle negoatiations based on company data.
+- Set an alert if an applicant has been in the review stage for too long.
