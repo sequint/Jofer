@@ -7,6 +7,7 @@ const LPnav = () => {
     <>
       <Navbar
         className="Nav"
+        fixed="top"
         variant="dark"
         expand="lg">
         <div className="container px-5">
@@ -20,7 +21,7 @@ const LPnav = () => {
 
               <Nav.Link
                 className="navLink"
-                href="/home">
+                href="#home">
                 Home
               </Nav.Link>
 

@@ -30,7 +30,7 @@ const LPteam = () => {
                 alt="Gilberto R."
                 height="200px" />
               <h5 className="mt-4">Gilberto R.</h5>
-              <p class="font-weight-light mb-0">"Something really cool here"</p>
+              <p class="font-weight-light mb-0"> I have been coding since 2019 when I decided to take a leap and try  out a Udacity Nanodegree course. I am a recent graduate of UC Irvine's Full Stack Development Bootcamp focused on the Mern Stack.</p>
             </div>
           </div>
           <div className="col-lg-4">
