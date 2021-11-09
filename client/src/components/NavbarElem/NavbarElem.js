@@ -26,7 +26,7 @@ const NavbarElem = () => {
 
   const handleSignOut = () => {
     localStorage.removeItem('token')
-    window.location = '/login'
+    window.location = '/'
   }
 
   const dropdownUser = _ => {

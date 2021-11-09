@@ -1,14 +1,32 @@
 .bgColor {
   background-color: #023047 !important;
+  min-height: 100vh;
 }
 
 .gStart {
   background-color: #FFBA0A !important;
   color: black !important;
   border-color: #FFBA0A !important;
+  box-shadow: 5px 5px #8ecae6;
 }
 
 .gStart:hover {
-  background-color: #8ECAE6 !important;
+  background-color: #8ecae6 !important;
   border-color: #8ECAE6 !important;
+  box-shadow: 10px 10px #FFBA0A;
+}
+
+@media screen and (min-width: 575px) {
+  .landingTitle {
+    font-size: 100px !important;
+    padding-top: 100px !important;
+  }
+  .landingText {
+    font-size: 30px !important;
+  }
+  .gStart {
+    height: 50px;
+    width: 150px;
+    font-size: 18px;
+  }
 }
