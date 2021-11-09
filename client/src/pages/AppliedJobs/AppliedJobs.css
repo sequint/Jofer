@@ -37,3 +37,14 @@
 .jobCardContainer {
   padding-bottom: 50px;
 }
+
+@media (max-width: 1000px) and (min-width: 200px) {
+  .usrCard {
+    height: 200px;
+    min-height: 200px;
+    max-width:175px;
+  }
+  .column {
+    height: 250px !important;
+  }
+}
