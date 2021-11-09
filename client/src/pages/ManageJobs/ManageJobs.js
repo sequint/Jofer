@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'
 import PageTitle from '../../components/PageTitle'
 import Card from 'react-bootstrap/Card'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import JobAPI from '../../utils/JobAPI'
 import UserAPI from '../../utils/UserAPI'
 import DeclineModal from '../../components/DeclineModal/DeclineModal'
@@ -45,6 +45,20 @@ const ManageJobs = () => {
 
   let job = JSON.parse(localStorage.getItem('clickedManageJob'))
 
+  useEffect(() => {
+
+    JobAPI.getEmployerJobs()
+      .then(({ data }) => {
+        data.forEach(elem => {
+          if (elem._id === job._id) {
+            localStorage.setItem('clickedManageJob', JSON.stringify(elem))
+          }
+        })
+      })
+    
+  
+  }, [])
+
   const getReviewApplicants = (job) => {
     return job.applicants.filter(applicant => applicant.status === 'Review')
   }
@@ -68,10 +82,10 @@ const ManageJobs = () => {
   const [filteredApplicants, setFilteredApplicants] = useState([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
 
   const setParentState = (state) => {
-    const reviewApplicants = getReviewApplicants(job)
-    const interviewApplicants = getInterviewApplicants(job)
-    const declinedApplicants = getDeclineApplicants(job)
-    const offeredApplicants = getOfferApplicants(job)
+    const reviewApplicants = getReviewApplicants(state)
+    const interviewApplicants = getInterviewApplicants(state)
+    const declinedApplicants = getDeclineApplicants(state)
+    const offeredApplicants = getOfferApplicants(state)
 
     setState([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
     setFilteredApplicants([reviewApplicants, interviewApplicants, declinedApplicants, offeredApplicants])
