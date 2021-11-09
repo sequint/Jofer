@@ -5,7 +5,10 @@ import './LPheader.css'
 const LPheader = () => {
   return (
     <>
-      <header className="bgColor py-5">
+      <header 
+      className="bgColor py-5"
+      id='home'
+      >
         <div className="container px-5">
           <div className="row gx-5 justify-content-center">
             <div className="col-lg-2"></div>
