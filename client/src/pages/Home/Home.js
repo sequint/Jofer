@@ -91,7 +91,7 @@ const Home = () => {
         <input
           type="text"
           name="filterDepartment"
-          className="filter"
+          className="filter mb-4"
           placeholder="Search department"
           onChange={handleInputChange} />
       </div>
