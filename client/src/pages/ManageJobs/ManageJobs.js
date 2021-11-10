@@ -43,7 +43,13 @@ const ManageJobs = () => {
 
   const [ greenBorder, setGreenBorder ] = useState(true)
 
+  const [ jobSet, setJobSet ] = useState(false)
+
   let job = JSON.parse(localStorage.getItem('clickedManageJob'))
+
+  if (jobSet) {
+    job = JSON.parse(localStorage.getItem('clickedManageJob'))
+  }
 
   useEffect(() => {
 
@@ -51,6 +57,7 @@ const ManageJobs = () => {
       .then(({ data }) => {
         data.forEach(elem => {
           if (elem._id === job._id) {
+            setJobSet(true)
             localStorage.setItem('clickedManageJob', JSON.stringify(elem))
           }
         })
