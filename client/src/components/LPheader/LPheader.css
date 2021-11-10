@@ -1,4 +1,6 @@
 .bgColor {
+  display: flex;
+  align-items: center;
   background-color: #023047 !important;
   min-height: 100vh;
 }

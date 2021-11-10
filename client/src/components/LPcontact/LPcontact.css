@@ -1,0 +1,18 @@
+.Submit {
+  text-decoration: none;
+  background-color: #023047 !important;
+  box-shadow: 5px 5px #8ECAE6 !important;
+  width: 300px !important;
+  border-radius: 10px !important;
+  -webkit-border-radius: 10px !important;
+  -moz-border-radius: 10px !important;
+  -ms-border-radius: 10px !important;
+  -o-border-radius: 10px !important;
+}
+
+.Submit:hover {
+  color: #8ECAE6 !important;
+  background-color: transparent !important;
+  border: #8ECAE6 solid 2px !important;
+  box-shadow: 10px 10px #023047 !important;
+}
