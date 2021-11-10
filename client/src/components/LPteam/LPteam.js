@@ -19,7 +19,8 @@ const LPteam = () => {
                 alt="Steven Q."
                 height="200px" />
               <h5 className="mt-4">Steven Q.</h5>
-              <p class="font-weight-light mb-0">"Something really cool here"</p>
+              <p class="font-weight-light mb-3">I have been coding since 2013 when I took my first C++ class.  I am a recent graduate of UC Irvine's Full Stack Development Bootcamp focused on the Mern Stack.</p>
+              <p class="font-weight-light mb-0">Prior to diving into Software Development full time I was in the finance industry where I saw an immediate need to re-invent the way we approach business with technology.  My passion lies in making outdated process new, clean, and effeciant with modern tools and technologies.</p>
             </div>
           </div>
           <div className="col-lg-4">
