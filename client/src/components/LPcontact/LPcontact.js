@@ -1,8 +1,6 @@
 import emailjs from 'emailjs-com'
 import { useState } from 'react'
-
-
-
+import './LPcontact.css'
 
 const LPcontact = () => {
 
@@ -12,7 +10,7 @@ const LPcontact = () => {
     email: '',
     message: ''
   })
-  
+
   const handleInputChange = ({ target: { name, value } }) => setConnectInfo({ ...connectInfo, [name]: value })
 
 
@@ -20,12 +18,12 @@ const LPcontact = () => {
   const handleSubmit = event => {
     event.preventDefault()
 
-    if(connectInfo.name !=='' && connectInfo.email !=='' && connectInfo.message !== ''){
+    if (connectInfo.name !== '' && connectInfo.email !== '' && connectInfo.message !== '') {
 
-      
+
       emailjs.send("service_bzw9z2j", "contact", connectInfo, "user_74lDawTBgW65Sfcmf8XdP")
-      
-      
+
+
       setConnectInfo({ email: '', name: '', message: '' })
       console.log(connectInfo)
     }
@@ -106,13 +104,12 @@ const LPcontact = () => {
                   </div>
                 </div>
 
-                <div className="d-grid">
+                <div className="d-grid justify-content-center">
                   <button
-                    className="btn btn-primary btn-lg"
+                    className="btn btn-lg Submit text-white"
                     id="submitButton"
                     onClick={handleSubmit}
                     type="submit">
-                    
                     Submit
                   </button>
                 </div>

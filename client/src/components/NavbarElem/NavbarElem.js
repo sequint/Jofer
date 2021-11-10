@@ -48,7 +48,7 @@ const NavbarElem = () => {
                 <Dropdown.Header>{user.user_type}</Dropdown.Header>
                 <Dropdown.Divider/>
                 <Dropdown.Item
-                  href='/login'
+                  href='/'
                   onClick={handleSignOut}>Log Out</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

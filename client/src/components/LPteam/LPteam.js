@@ -41,7 +41,10 @@ const LPteam = () => {
                 alt="Minh N."
                 height="200px" />
               <h5 className="mt-4">Minh N.</h5>
-              <p class="font-weight-light mb-0">"Something really cool here"</p>
+              <div>
+                <p>UC Irvine's Full Stack Development Bootcamp Graduate</p>
+                <p>"Jofer is a great application for applicants to keep track of their jobs and employers to manage their applied applicants"</p>
+              </div>
             </div>
           </div>
         </div>
