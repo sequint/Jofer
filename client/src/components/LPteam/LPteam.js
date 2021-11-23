@@ -6,7 +6,7 @@ import './LPteam.css'
 const LPteam = () => {
   return (
     <section
-      className="text-center bg-light pt-5 pb-5 border-bottom"
+      className="text-center pt-5 pb-5 border-bottom"
       id="team">
       <div className="container">
         <h2 className="mb-5">Meet the Team</h2>
@@ -44,7 +44,7 @@ const LPteam = () => {
               <h5 className="mt-4">Minh N.</h5>
               <div>
                 <p>UC Irvine's Full Stack Development Bootcamp Graduate</p>
-                <p>"Jofer is a great application for applicants to keep track of their jobs and employers to manage their applied applicants"</p>
+                <p>"Time is a social construct, we collectively create the meaning of time. It has no predetermined meaning until we give it meaning"</p>
               </div>
             </div>
           </div>
